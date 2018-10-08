@@ -1,0 +1,9 @@
+Moderatore/Cartomante: il direttore della sessione di gioco
+Personaggio non giocante (PNG): un personaggio interno alla storia controllato dal Moderatore
+Sessione (di gioco): un periodo di tempo (reale) in cui i Giocatori e il Moderatore si riuniscono per giocare Sine Requie
+Giocatore: partecipante alla sessione di gioco
+Personaggio giocante (PG): personaggio utilizzato da un Giocatore
+Sopravvissuto: Personaggio giocante
+Test (abilità): una prova relativa ad un'abilità il cui esito richiede l'estrazione di un Arcano Maggiore o di un Arcano Minore
+Arcano Maggiore: i tarocchi classici
+Arcano Minore: le carte da poker
