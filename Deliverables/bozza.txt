@@ -7,8 +7,7 @@ Eventi: 1. Gigi siede alla scrivania nella sua stanza, apre un browser web e va 
 						Gigi compila i campi del form con: il proprio nome, il proprio cognome, la sua e-mail, il nickname da usare all'interno del sito,
 						e setta la password. Dopodiché clicca sul pulsante "Registrati".
 				3. Gigi viene indirizzato alla homepage di Sine Charta con il login già effettuato.
-				4. Riceve una mail di benvenuto.
-
+				4. Riceve una mail di benvenuto dal sistema.
 ____________________________________________________________________________
 Nome scenario: Acquisto manuale
 
@@ -20,19 +19,23 @@ Scrittura storia
 Nome scenario: Creazione del gruppo di gioco
 Attori partecipanti: Gino:Giocatore, Gigi:Giocatore, Giulia:Giocatore, Marco:Moderatore
 
-Eventi: 1. Marco è alla ricerca di persone con cui giocare a Sine Requie.
-				2.
-				3.
+Eventi: 1. Marco è alla ricerca di persone con cui giocare a Sine Requie e decide di chiedere a Gino, Gigi e Giulia.
+				2. I tre proprongono di creare un gruppo virtuale su Sine Charta.
+				3. Marco accede alla sua area come Moderatore e istanzia una nuova storia, alla quale invita
 				4.
 
 
 
 Creazione pg
 Nome scenario: Creazione del personaggio giocante
-Attori partecipanti: Dino:Giocatore.
+Attori partecipanti: Dino:Giocatore, Marco:Moderatore.
+marco accede, poi marco invita, poi dino accede e vede l'invito, poi dino Accetta
 
-Eventi: 1.Dino
-				2.
+Eventi: 1. Marco il moderatore della sessione accede alla sua area utente, e dopo la creazione della sessione invia gli inviti per la partecipazione alla sessione di gioco.
+				2. Dino effettua l'accesso alla sua area e riceve la notifica dell'invito, prende visione della sessione di gioco e accetta l'invito inviato da Marco.
+				3. Una
+
+				1. Marco si trova per caso a casa sua e si caca il cazzo, quindi decide di entrare su sine charta e creare una sessione di gioco. Una volta creata la sessione invita gli altri
 
 
 ----__________________________-----________________________-----__________________
@@ -48,14 +51,6 @@ Eventi: 1. Marco dà inizio alla sessione di gioco, a casa sua, dove si trovano 
 				4. Eseguono dei test sulle abilità o caratteristiche dei propri personaggi, al fine di superare
 					ognuna delle prove sottoposte da Marco.
 				5. Al termine della sessione di gioco, Marco salva tutti i suoi appunti.
-
-
-
-
-
-Feedback
-
-
 
 ____________________________________________________________________________
 
