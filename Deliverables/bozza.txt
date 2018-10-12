@@ -1,0 +1,49 @@
+Nome scenario: Registrazione
+Attori partecipanti: Gigi
+
+Eventi: 1. Gigi apre il sito di Sine Charta e si registra per poterlo utilizzare
+	2. Gigi inserisce tutte le informazioni personali nei campi di testo e preme invio per completare la registrazione.
+	3. Gigi viene indirizzato alla homepage di Sine Charta con il login già effettuato.
+	4. Riceve una mail di benvenuto.
+
+____________________________________________________________________________
+Nome scenario: Acquisto manuale
+
+
+____________________________________________________________________________
+Validazione manuale
+
+
+
+
+Nome scenario: Accesso all'area utente
+Attori: Gigi
+
+
+Scrittura storia
+
+Creazione npc
+
+Creazione del gruppo di gioco
+
+Bacheca
+
+Creazione pg
+
+	->Guida alla creazione
+
+Sessione di gioco
+
+Feedback
+
+
+
+
+Giocatore accede  [info(creato_da)]: info pg(giocatore), info storia(moderatore), info manuale(sito uff), feedback(giocatore), messaggio bacheca (moderatore)
+Moderatore accede: storia(mod), info pg(giocatore), info png(mod), messaggio bacheca(mod), feedback(moderatore), ____
+Amministratore accede: info moderatore(moderatore), feedback(giocatore, moderatore), ___
+
+Giocatore modifica: scheda pg
+Moderatore modifica: storia, scheda png
+Admin rimuove: messaggio bacheca, 
+
