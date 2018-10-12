@@ -1,43 +1,63 @@
-Nome scenario: Registrazione
+Nome scenario: Registrazione utente
 Attori partecipanti: Gigi
 
-Eventi: 1. Gigi apre il sito di Sine Charta e si registra per poterlo utilizzare
-	2. Gigi inserisce tutte le informazioni personali nei campi di testo e preme invio per completare la registrazione.
-	3. Gigi viene indirizzato alla homepage di Sine Charta con il login già effettuato.
-	4. Riceve una mail di benvenuto.
+Eventi: 1. Gigi siede alla scrivania nella sua stanza, apre un browser web e va sul sito di Sine Charta, dopodichè clicca sul bottone "Registrati"
+						per attivare la procedura di "Registrazione utente" nel sistema.
+				2. Gigi ora si trova in una pagina in cui bisogna inserire i propri dati personali per completare la registrazione.
+						Gigi compila i campi del form con: il proprio nome, il proprio cognome, la sua e-mail, il nickname da usare all'interno del sito,
+						e setta la password. Dopodiché clicca sul pulsante "Registrati".
+				3. Gigi viene indirizzato alla homepage di Sine Charta con il login già effettuato.
+				4. Riceve una mail di benvenuto.
 
 ____________________________________________________________________________
 Nome scenario: Acquisto manuale
 
-
 ____________________________________________________________________________
-Validazione manuale
-
-
-
-
-Nome scenario: Accesso all'area utente
-Attori: Gigi
-
 
 Scrittura storia
 
-Creazione npc
 
-Creazione del gruppo di gioco
+Nome scenario: Creazione del gruppo di gioco
+Attori partecipanti: Gino:Giocatore, Gigi:Giocatore, Giulia:Giocatore, Marco:Moderatore
 
-Bacheca
+Eventi: 1. Marco è alla ricerca di persone con cui giocare a Sine Requie.
+				2.
+				3.
+				4.
+
+
 
 Creazione pg
+Nome scenario: Creazione del personaggio giocante
+Attori partecipanti: Dino:Giocatore.
 
-	->Guida alla creazione
+Eventi: 1.Dino
+				2.
 
-Sessione di gioco
+
+----__________________________-----________________________-----__________________
+
+Nome scenario: Sessione di gioco
+Attori partecipanti: Gigi:Giocatore, Giuliano:Giocatore, Giuseppe:Giocatore, Marco:Moderatore
+
+Eventi: 1. Marco dà inizio alla sessione di gioco, a casa sua, dove si trovano anche Gigi, Giuliano e Giuseppe.
+				2. Marco comincia a raccontare la storia alla quale partecipano i personaggi degli altri giocatori
+					e nel frattempo accede alla sua area riservata, dove ha memorizzato tutti i suoi appunti.
+				3. Anche Gigi, Giuliano e Giuseppe accedono ognuno rispettivamente alla propria area sul sito,
+					dove possono visualizzare le schede del loro personaggio.
+				4. Eseguono dei test sulle abilità o caratteristiche dei propri personaggi, al fine di superare
+					ognuna delle prove sottoposte da Marco.
+				5. Al termine della sessione di gioco, Marco salva tutti i suoi appunti.
+
+
+
+
 
 Feedback
 
 
 
+____________________________________________________________________________
 
 Giocatore accede  [info(creato_da)]: info pg(giocatore), info storia(moderatore), info manuale(sito uff), feedback(giocatore), messaggio bacheca (moderatore)
 Moderatore accede: storia(mod), info pg(giocatore), info png(mod), messaggio bacheca(mod), feedback(moderatore), ____
@@ -45,5 +65,4 @@ Amministratore accede: info moderatore(moderatore), feedback(giocatore, moderato
 
 Giocatore modifica: scheda pg
 Moderatore modifica: storia, scheda png
-Admin rimuove: messaggio bacheca, 
-
+Admin rimuove: messaggio bacheca,
