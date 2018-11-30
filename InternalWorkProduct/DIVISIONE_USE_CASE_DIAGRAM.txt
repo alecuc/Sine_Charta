@@ -11,8 +11,7 @@ Francesco:
 8	FormatoPassErrato
 9	RecuperoPassword
 10	RecuperoUsername
-11	RegistrazioneUtente
-12	MischiaMazzo
+11	MischiaMazzo
 
 Alessio:
 1	CreazionePersonaggio
@@ -37,4 +36,5 @@ Raf:
 8	AggiuntaFerita
 9	MortePG
 10	CuraFerita
-11	EstrazioneCarta	
+11	EstrazioneCarta
+12	RegistrazioneUtente	
