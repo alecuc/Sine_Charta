@@ -12,7 +12,7 @@ Francesco:
 9	RecuperoPassword
 10	RecuperoUsername
 11	RegistrazioneUtente
-
+12	MischiaMazzo
 
 Alessio:
 1	CreazionePersonaggio
@@ -21,10 +21,9 @@ Alessio:
 4	InizioSessione
 5	VisualizzazioneKeyword
 6	ModificaSessione
-7	EstrazioneCarta
-8	AggiuntaEquipaggiamento
-9	RimozioneEquipaggiamento
-10	AggiuntaEquipaggiamento
+7	GestioneNPC
+8	GestioneChiamata
+
 
 
 Raf:
@@ -33,9 +32,9 @@ Raf:
 3	AccettaInviti	
 4	ConsultaSchedaPG
 5	ModificaCaratteristiche
-6	MischiaMazzo
-7	GestioneNPC
-8	GestioneChiamata
-9	AggiuntaFerita
-10	MortePG
-11	CuraFerita
+6	AggiuntaEquipaggiamento
+7	RimozioneEquipaggiamento
+8	AggiuntaFerita
+9	MortePG
+10	CuraFerita
+11	EstrazioneCarta	
