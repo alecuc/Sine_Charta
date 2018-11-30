@@ -20,8 +20,8 @@ Alessio:
 4	InizioSessione
 5	VisualizzazioneKeyword
 6	ModificaSessione
-7	GestioneNPC
-8	GestioneChiamata
+7	GestioneNPC +
+8	GestioneChiamata +
 
 
 
@@ -36,5 +36,5 @@ Raf:
 8	AggiuntaFerita
 9	MortePG
 10	CuraFerita
-11	EstrazioneCarta
+11	EstrazioneCarta +
 12	RegistrazioneUtente	
