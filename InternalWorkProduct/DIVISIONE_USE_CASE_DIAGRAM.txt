@@ -9,8 +9,8 @@ Francesco:
 6	EliminaProfilo +
 7	FormatoEmailErrato +
 8	FormatoPassErrato +
-9	RecuperoPassword
-10	RecuperoUsername
+9	RecuperoPassword +
+10	RecuperoUsername +
 11	MischiaMazzo +
 
 Alessio:
