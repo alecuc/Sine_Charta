@@ -14,25 +14,25 @@ Francesco:
 11	MischiaMazzo +
 
 Alessio:
-1	CreazionePersonaggio
+1	CreazionePersonaggio +
 2	ScritturaSessione +
 3	AggiuntaKeyword	+
 4	InizioSessione +
 5	VisualizzazioneKeyword +
 6	ModificaSessione +
-7	GestioneNPC +
+7	GestioneNPC 
 8	GestioneChiamata +
 
 
 
 Raf:
-1	CrezioneStoria
-2	InvioInviti
-3	AccettaInviti	
-4	ConsultaSchedaPG
-5	ModificaCaratteristiche
-6	AggiuntaEquipaggiamento
-7	RimozioneEquipaggiamento
+1	CrezioneStoria +
+2	InvioInviti +
+3	AccettaInviti +	
+4	ConsultaSchedaPG +
+5	ModificaCaratteristiche +
+6	AggiuntaEquipaggiamento +
+7	RimozioneEquipaggiamento 
 8	AggiuntaFerita
 9	MortePG
 10	CuraFerita
