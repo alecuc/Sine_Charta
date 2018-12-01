@@ -17,7 +17,7 @@ Alessio:
 1	CreazionePersonaggio
 2	ScritturaSessione
 3	AggiuntaKeyword	
-4	InizioSessione
+4	InizioSessione +
 5	VisualizzazioneKeyword
 6	ModificaSessione
 7	GestioneNPC +
