@@ -32,9 +32,9 @@ Raf:
 4	ConsultaSchedaPG +
 5	ModificaCaratteristiche +
 6	AggiuntaEquipaggiamento +
-7	RimozioneEquipaggiamento 
-8	AggiuntaFerita
-9	MortePG
-10	CuraFerita
+7	RimozioneEquipaggiamento +
+8	AggiuntaFerita +
+9	MortePG 
+10	CuraFerita + 
 11	EstrazioneCarta +
 12	RegistrazioneUtente	
