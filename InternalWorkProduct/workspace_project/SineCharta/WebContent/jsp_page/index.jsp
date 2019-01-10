@@ -9,6 +9,6 @@
 <body>
 
 <jsp:include page="loginForm.jsp"></jsp:include>
-
+<h1>Ciao</h1>
 </body>
 </html>
