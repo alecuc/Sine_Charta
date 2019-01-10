@@ -15,8 +15,8 @@
 
 
 <div class="jumbotron text-center" style="margin-bottom:0">
-  <h1>Sine Charta</h1>
-  <p>Pagina personale</p> 
+ <img alt="logo" src="../images/logo_principal.png" style="width: 35%;">
+ <h3>Welcome</h3>
 </div>
 
 <jsp:include page="navigationbar.jsp"></jsp:include>
@@ -26,7 +26,7 @@
     <div class="col-sm-4">
       <h2>*NOME UTENTE*</h2>
       <h5>Photo of me:</h5>
-      <div class="fakeimg"><img src="../images/USER-LOGO.png" style="width: 50%;">
+      <div class="fakeimg"><img src="../images/mini_logo.jpg" style="width: 50%;">
       </div>
       <p>Informazioni giocatore.</p>
       <h3>Some Links</h3>

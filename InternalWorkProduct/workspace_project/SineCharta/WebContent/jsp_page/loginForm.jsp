@@ -34,7 +34,7 @@
               </div>
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" style="background-color: #212529; border-color: red;">Sign in</button>             
               </form> 
-              <a href="#">Registrati</a>   
+              <a href="registrationPage.jsp">Registrati</a>   
               <br>
               <a href="homeUser.jsp">pagina utente (link provvisorio)</a>         
           </div>

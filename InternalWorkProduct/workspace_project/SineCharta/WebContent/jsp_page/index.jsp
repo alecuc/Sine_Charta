@@ -7,8 +7,9 @@
 <title>Sine Charta</title>
 </head>
 <body>
-
+<img alt="logo" src="../images/logo_principal.png" style="width: 20%; float: left; padding: 1%; margin: 2%; position: absolute">
 <jsp:include page="loginForm.jsp"></jsp:include>
-<h1>Ciao</h1>
+
+<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
