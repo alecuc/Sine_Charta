@@ -4,83 +4,130 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
 </head>
 <body>
-
-
-<div class="m-t-3"></div>
-
-<footer class="mainfooter" role="contentinfo">
- 
-  <div class="footer-middle">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3 col-sm-6">
-        <!--Column1-->
-    
-      </div>
-      <div class="col-md-3 col-sm-6">
-        <!--Column1-->
-        <div class="footer-pad">
-          <h4>Popular Services</h4>
-          <ul class="list-unstyled">
-            <li><a href="#"></a></li>
-            <li><a href="#">Payment Center</a></li>
-            <li><a href="#">Contact Directory</a></li>
-            <li><a href="#">Forms</a></li>
-            <li><a href="#">News and Updates</a></li>
-            <li><a href="#">FAQs</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6">
-        <!--Column1-->
-        <div class="footer-pad">
-          <h4>Website Information</h4>
-          <ul class="list-unstyled">
-            <li><a href="#">Website Tutorial</a></li>
-            <li><a href="#">Accessibility</a></li>
-            <li><a href="#">Disclaimer</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">FAQs</a></li>
-            <li><a href="#">Webmaster</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-3 col-sm-6">
-        <!--Column1-->
-        <div class="footer-pad">
-          <h4>Popular Departments</h4>
-          <ul class="list-unstyled">
-            <li><a href="#">Parks and Recreation</a></li>
-            <li><a href="#">Public Works</a></li>
-            <li><a href="#">Police Department</a></li>
-            <li><a href="#">Fire</a></li>
-            <li><a href="#">Mayor and City Council</a></li>
-            <li>
-              <a href="#"></a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12">
-          <!--Footer Bottom-->
-          <p class="text-xs-center">&copy; Copyright 2018/2019 - Università degli studi di Salerno - Progetto Ingegneria del Software - Sine Charta</p>
-        </div>
-      </div>
-    </div>
-  </div>
+<footer class="card-footer">
+<div class="container-fluid" style="text-align: center;">
+  <div class="row">
+    <div class="col" style="background-color:#212529;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aboutModal" style="background-color: #212529; border-color: #212529;">
+  		  About</button></div>
+    <div class="col" style="background-color: #212529;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#helpModal" style="background-color: #212529; border-color: #212529;">
+  		  Help</button></div>
+    <div class="col" style="background-color: #212529;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#faqModal" style="background-color: #212529; border-color: #212529;">
+  		  FAQ</button></div>
+ </div>
+</div>
 </footer>
+
+<div class="modal" id="aboutModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"><b>About</b></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <p>Progetto sviluppato per il corso di Ingegneria del Software.</p>
+        <p>A cura di: </p>
+        <ul>
+        	<li>Vitiello Raffaele</li>
+        	<li>Cuccurullo Alessio</li>
+        	<li>Giuliano Francesco</li>
+        </ul>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="helpModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"><b>Help</b></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+        <p>Contattaci:		<a href="mailto:SineCharta@mail.com?subject=Oggetto%20del%20messaggio">Invia una mail!!</a></p>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="faqModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"><b>FAQ</b></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <!-- Modal body -->
+      <div class="modal-body">
+    		<div class="container">
+			  <div id="accordion">
+			    <div class="card">
+			      <div class="card-header">
+			        <a class="card-link" data-toggle="collapse" href="#collapseOne" style="color: red;">
+			          Che cos'è Sine Charta?
+			        </a>
+			      </div>
+			      <div id="collapseOne" class="collapse" data-parent="#accordion">
+			        <div class="card-body">
+			        <p><em>Sine Charta</em> è un'applicazione web per la gestione virtuale di <em>Sine Requie</em> Sine Requie è un gioco di ruolo horror italiano, scritto da Matteo Cortini e Leonardo Moretti e pubblicato nel 2003 nella sua prima edizione da RosePoison. La seconda edizione è stata prodotta da Asterion Press prende il nome di Sine Requie Anno XIII. </p>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="card">
+			      <div class="card-header">
+			        <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo" style="color: red;">
+			        Come funziona Sine Charta?
+			      </a>
+			      </div>
+			      <div id="collapseTwo" class="collapse" data-parent="#accordion">
+			        <div class="card-body">
+			          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+			        </div>
+			      </div>
+			    </div>
+			    <div class="card">
+			      <div class="card-header">
+			        <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree" style="color: red;">
+			          A chi è rivolto?
+			        </a>
+			      </div>
+			      <div id="collapseThree" class="collapse" data-parent="#accordion">
+			        <div class="card-body">
+			          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+			        </div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

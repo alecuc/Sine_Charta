@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -12,9 +12,12 @@
 <title>Registrazione</title>
 </head>
 <body>
-<a href="index.jsp">link Home provvisorio</a>
+<a href="index.jsp" style="position: absolute; color: red;"><img alt="home" src="../images/mini_logo.jpg" style="width: 15%; margin: 5%;">HOME</a>
 <div class="container">
-    <form class="form-horizontal" role="form" method="POST" action="/register">
+	<div class="text-center">
+  		<img src="../images/logo_principal.png" class="rounded" alt="logo" style="width: 20%; padding: 1%;">
+	</div>
+    <form class="form-horizontal" role="form" method="POST" action="/register" style="border: 1px solid red; padding: 3%; border-radius: 1%">
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
@@ -122,12 +125,9 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
+            <div class="text-center">
                 <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Register</button>
             </div>
-        </div>
     </form>
 </div>
 

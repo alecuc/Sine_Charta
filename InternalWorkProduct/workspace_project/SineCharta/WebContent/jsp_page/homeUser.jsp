@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="../css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -15,7 +15,7 @@
 
 
 <div class="jumbotron text-center" style="margin-bottom:auto; background-color: white;">
-<img alt="logo" src="../images/logo_principal.png" style="width: 20%;">
+<img alt="logo" src="../images/logo_principal.png" style="width: 15rem;">
 </div>
 
 <jsp:include page="navigationbar.jsp"></jsp:include>
@@ -62,7 +62,7 @@
   </div>
 </div>
 
-<div class="jumbotron text-center" style="margin-bottom:0">
+<div class="jumbotron text-center" style="margin-bottom:0;">
   <p>Sine Charta Project</p>
 </div>
 
