@@ -14,9 +14,8 @@
 <body>
 
 
-<div class="jumbotron text-center" style="margin-bottom:0">
- <img alt="logo" src="../images/logo_principal.png" style="width: 35%;">
- <h3>Welcome</h3>
+<div class="jumbotron text-center" style="margin-bottom:auto; background-color: white;">
+<img alt="logo" src="../images/logo_principal.png" style="width: 20%;">
 </div>
 
 <jsp:include page="navigationbar.jsp"></jsp:include>
