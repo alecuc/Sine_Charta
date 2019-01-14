@@ -61,12 +61,18 @@ public class UserModel implements UserModelI<User>{
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-
+		
 		String insertSQL = "INSERT INTO " + UserModel.TABLE_NAME
-				+ " (USERNAME, PASSWORD, EMAIL, NAME, SURNAME) VALUES (?, ?, ?, ?, ?)";
-
+				+ " (USERNAME, PASSWORD, EMAIL, NOME, COGNOME, RUOLO) VALUES (?, ?, ?, ?, ?, 'utenteModeratore')";
+		
 		try {
+			System.out.println("Sono prima della query");
+
 			connection = DriverManagerConnectionPool.getConnection();
+			
+			System.out.println("Sono DOPO della query");
+
+			System.out.println("sono pre prepared");
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, user.getUsername());
 			preparedStatement.setString(2, user.getPassword());

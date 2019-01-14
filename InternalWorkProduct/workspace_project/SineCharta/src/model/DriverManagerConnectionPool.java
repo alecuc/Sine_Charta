@@ -20,14 +20,14 @@ public class DriverManagerConnectionPool {
 	
 	private static synchronized Connection createDBConnection() throws SQLException {
 		Connection newConnection = null;
-		String ip = "db4free.net";
+	/*	String ip = "db4free.net";
 		String port = "3306";
-		String db = "sine_charta_db";
-		String username = "sineadmin";
-		String password = "SinePassword";
-
-		newConnection = DriverManager.getConnection("jdbc:mysql://"+ ip+":"+ port+"/"+db, username, password);
-
+		String db = "sine_charta_db";*/
+		String username = "sql7274119";
+		String password = "bR7ZUVIv9b";
+		String url = "jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7274119";
+		newConnection = DriverManager.getConnection(url, username, password);
+	
 		newConnection.setAutoCommit(false);
 		return newConnection;
 	}

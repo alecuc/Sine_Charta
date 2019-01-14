@@ -42,24 +42,26 @@ public class UsersCotrol extends HttpServlet {
 	
 
 		PrintWriter out = response.getWriter();
-		String username = request.getParameter("username");
 
 		String action = request.getParameter("action");
 
 		try {
 				if(action.equalsIgnoreCase("register")) {
-					
+					System.out.println("strunz");;
+					String username = request.getParameter("username");
 					String name = request.getParameter("name");
 					String surname = request.getParameter("surname");
 					String email = request.getParameter("email");
 					String password = request.getParameter("password");
 					
 					if(username.isEmpty() || password.isEmpty() || name.isEmpty() || surname.isEmpty() || email.isEmpty()) {
-						
-						RequestDispatcher rd = request.getRequestDispatcher("registrationPage.jsp");
+						System.out.println("babab");
+
+						RequestDispatcher rd = request.getRequestDispatcher("../testForm.jsp");
 						out.println("<font color=red>Please fill all the fields</font>");
 						rd.forward(request, response);
 					}
+					System.out.println("kldbvib");
 					usr.setUsername(username);
 					usr.setPassword(password);
 					usr.setName(name);
@@ -68,7 +70,7 @@ public class UsersCotrol extends HttpServlet {
 					user.doSave(usr);	
 			
 				System.out.println("successfully inserted");
-				RequestDispatcher rd = request.getRequestDispatcher("jsp_pages/index.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("testForm.jsp");
 				System.out.println("OK");
 				rd.forward(request, response);
 				}
