@@ -44,16 +44,13 @@ create table Storia(
 
 drop table if exists Sessione;
 create table Sessione(
-	Numero int default 1,
+	Numero int,
     Contenuto varchar(100),
     Username varchar(15),
     primary key(Numero),
     foreign key(Username) references utenteRegistrato(Username) on delete cascade
 	);
     
-
-
-
 drop table if exists Oggetti;
 create table Oggetti(
 	Nom varchar(30),
@@ -61,18 +58,20 @@ create table Oggetti(
     Costo int not null,
     Nome varchar(30),
     Cognome varchar(30),
-    primary key(Nome),
+    primary key(Nom),
     foreign key(Nome,Cognome) references Personaggio(Nome,Cognome) on delete cascade
 );
 
 drop table if exists Armi;
 create table Armi(
+	Id int default 1,
 	Tipo enum('Pistola','Mitra','Fucile'),
     Modello varchar(15) not null,
     Danno int,
     Abilità int,
     Munizione varchar(10) not null,
-    Ricarica int
+    Ricarica int,
+    primary key(Id)
 );
 
 drop table if exists Realizza;
@@ -93,5 +92,11 @@ create table Crea(
     foreign key(Numero) references Sessione(Numero)
 );
 
-
-	
+drop table if exists èInvitato;
+create table èInvitato(
+	Username varchar(15) not null,
+    Titolo varchar(30),
+    primary key(Username, Titolo),
+    foreign key(Username) references utenteregistrato(Username),
+    foreign key(Titolo) references Storia(Titolo)
+	);
