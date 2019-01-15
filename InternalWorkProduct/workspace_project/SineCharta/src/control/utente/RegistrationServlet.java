@@ -74,14 +74,7 @@ public class RegistrationServlet extends HttpServlet {
 				System.out.println("OK");
 				rd.forward(request, response);
 				
-				} else if(action.equalsIgnoreCase("login")) {
-					
-					
-					
-				} else if(action.equalsIgnoreCase("logout")) {
-					
-					
-				}
+				} 
 		 } catch(SQLException e) {
 			 e.printStackTrace();
 			 HttpSession session = request.getSession();

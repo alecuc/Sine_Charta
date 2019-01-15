@@ -1,5 +1,5 @@
 package beans;
 
-public class Story {
+public class Arma {
 
 }
