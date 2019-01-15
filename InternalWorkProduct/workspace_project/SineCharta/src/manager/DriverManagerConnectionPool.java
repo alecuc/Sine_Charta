@@ -20,9 +20,15 @@ public class DriverManagerConnectionPool {
 	
 	private static synchronized Connection createDBConnection() throws SQLException {
 		Connection newConnection = null;
-		String username = "sql7274119";
+		
+		/*****AmazonAWS Database*****/
+		String username = "SineMaster";
+		String password = "SinePassword";
+		String url = "jdbc:mysql://sinechartadb.c4mcoif2kbyp.us-east-2.rds.amazonaws.com:3306/dbSineCharta";
+		/*old DB*/
+		/*String username = "sql7274119";
 		String password = "bR7ZUVIv9b";
-		String url = "jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7274119";
+		String url = "jdbc:mysql://sql7.freemysqlhosting.net:3306/sql7274119";*/
 		newConnection = DriverManager.getConnection(url, username, password);
 	
 		newConnection.setAutoCommit(false);
