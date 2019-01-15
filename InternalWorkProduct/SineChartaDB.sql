@@ -23,7 +23,6 @@ create table Personaggio(
     Nazionalità varchar(20),
     TaroccoDominante varchar(30),
     Caratteristiche int,
-    Abilità varchar(50) not null,
     Risoluzione int not null,
     Ferite char(2) not null,
     Username varchar(15) not null,
