@@ -1,4 +1,4 @@
-package control;
+package control.utente;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,7 +20,7 @@ import model.UserModel;
  * Servlet implementation class UsersCotrol
  */
 @WebServlet("/UsersCotrol")
-public class UsersCotrol extends HttpServlet {
+public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -30,7 +30,7 @@ public class UsersCotrol extends HttpServlet {
 	static UserModelI<User> user = new UserModel();
 	User usr = new User();
 	
-    public UsersCotrol() {
+    public RegistrationServlet() {
         super();
     }
 
@@ -57,7 +57,7 @@ public class UsersCotrol extends HttpServlet {
 					if(username.isEmpty() || password.isEmpty() || name.isEmpty() || surname.isEmpty() || email.isEmpty()) {
 						System.out.println("babab");
 
-						RequestDispatcher rd = request.getRequestDispatcher("../testForm.jsp");
+						RequestDispatcher rd = request.getRequestDispatcher("../jsp_page/registrationPage.jsp");
 						out.println("<font color=red>Please fill all the fields</font>");
 						rd.forward(request, response);
 					}
@@ -70,9 +70,17 @@ public class UsersCotrol extends HttpServlet {
 					user.doSave(usr);	
 			
 				System.out.println("successfully inserted");
-				RequestDispatcher rd = request.getRequestDispatcher("testForm.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/jsp_page/index.jsp");
 				System.out.println("OK");
 				rd.forward(request, response);
+				
+				} else if(action.equalsIgnoreCase("login")) {
+					
+					
+					
+				} else if(action.equalsIgnoreCase("logout")) {
+					
+					
 				}
 		 } catch(SQLException e) {
 			 e.printStackTrace();
