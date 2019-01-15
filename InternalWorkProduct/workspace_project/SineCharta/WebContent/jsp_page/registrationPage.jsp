@@ -26,7 +26,7 @@
   			<img src="../images/logo-scritta.png" class="rounded" alt="logo" style="width: 95%; margin-left: 5rem;">
   		</div>
 	</div>
-    <form class="form-horizontal" method="post" action="Registration" style="border: 1px solid red; padding: 3%; border-radius: 1%">
+    <form class="form-horizontal" method="post" action="../RegistrazioneServlet" style="border: 1px solid red; padding: 3%; border-radius: 1%">
     	<input type="hidden" name="action" value="register">
         <div class="row">
             <div class="col-md-3"></div>
