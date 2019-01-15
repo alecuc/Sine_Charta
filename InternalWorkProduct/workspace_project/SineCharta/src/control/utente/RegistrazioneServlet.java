@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.User;
 import interfaces.UserModelI;
-import model.UserModel;
+import manager.UsersManager;
 /**
  * Servlet implementation class RegistrazioneServlet
  */
@@ -26,7 +26,7 @@ public class RegistrazioneServlet extends HttpServlet {
      * @see HttpServlet#HttpServlet()
      */
 	
-	static UserModelI<User> user = new UserModel();
+	static UserModelI<User> user = new UsersManager();
 	User usr = new User();
 	
     public RegistrazioneServlet() {
