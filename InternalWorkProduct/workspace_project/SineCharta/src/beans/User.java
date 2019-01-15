@@ -10,28 +10,10 @@ public class User implements Cloneable, Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String name, surname, email, username, password;
-	public enum role{utenteModeratore,utenteGiocatore};  
-	private role ruolo;
+	
 	
 	public User() {
-		this.ruolo = role.utenteGiocatore;
 	}
-
-	/**
-	 * @return the ruolo
-	 */
-	public role getRuolo() {
-		return ruolo;
-	}
-
-
-	/**
-	 * @param ruolo the ruolo to set
-	 */
-	public void setRuolo(role ruolo) {
-		this.ruolo = ruolo;
-	}
-
 
 
 
