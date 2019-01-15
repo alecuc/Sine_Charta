@@ -2,7 +2,7 @@ package beans;
 
 import java.io.Serializable;
 
-public class Oggetto implements Cloneable, Serializable{
+public class Oggetto implements Serializable{
 
 	/**
 	 * 
