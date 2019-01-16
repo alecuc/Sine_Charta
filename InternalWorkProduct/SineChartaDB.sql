@@ -1,12 +1,12 @@
-drop database sinecharta;
+drop database dbSineCharta;
 
-create database sinecharta;
-use sinecharta;
+create database dbSineCharta;
+use dbSineCharta;
 
 drop table if exists utenteRegistrato;
 create table utenteRegistrato(
 	Username varchar(15) not null,
-    Password varchar(15) not null,
+    Password varchar(40) not null,
     EMail varchar(30) not null,
     Nome varchar(50) not null,
     Cognome varchar(50) not null,
@@ -30,6 +30,15 @@ create table Personaggio(
     foreign key(Username) references utenteRegistrato(Username) on delete cascade
     );
     
+drop table if exists Abilità;
+create table Abilità(
+	Identificativo varchar(30),
+    Valore int,
+    Nome varchar(30),
+    Cognome varchar(30),
+    primary key(Identificativo),
+    foreign key(Nome,Cognome) references Personaggio(Nome,Cognome) on delete cascade
+	); 
 drop table if exists Storia;
 create table Storia(
 	Titolo varchar(50),
@@ -67,7 +76,6 @@ create table Armi(
 	Tipo enum('Pistola','Mitra','Fucile'),
     Modello varchar(15) not null,
     Danno int,
-    Abilità int,
     Munizione varchar(10) not null,
     Ricarica int,
     primary key(Id)
@@ -94,8 +102,8 @@ create table Crea(
 drop table if exists èInvitato;
 create table èInvitato(
 	Username varchar(15) not null,
-    Titolo varchar(30),
+    Titolo varchar(50),
     primary key(Username, Titolo),
-    foreign key(Username) references utenteregistrato(Username),
+    foreign key(Username) references utenteRegistrato(Username),
     foreign key(Titolo) references Storia(Titolo)
 	);
