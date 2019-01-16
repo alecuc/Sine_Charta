@@ -12,9 +12,14 @@ public class User implements Cloneable, Serializable{
 	private String name, surname, email, username, password;
 	
 	
-	public User() {
+	public User(String username, String email) {
+		setUsername(username);
+		setEmail(email);
 	}
-
+	
+	public User() {
+		
+	}
 
 
 	/**

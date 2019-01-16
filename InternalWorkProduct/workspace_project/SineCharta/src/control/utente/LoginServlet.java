@@ -2,7 +2,6 @@ package control.utente;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import manager.UsersManager;
 import beans.User;
-import interfaces.UserModelI;
 /**
  * Servlet implementation class LoginServlet
  */
@@ -21,7 +19,7 @@ import interfaces.UserModelI;
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
      
-	static UserModelI<User> user = new UsersManager();
+	static UsersManager user = new UsersManager();
     /**
      * @see HttpServlet#HttpServlet()
      */
