@@ -54,8 +54,10 @@ create table Sessione(
 	Numero int,
     Contenuto varchar(100),
     Username varchar(15),
+    Titolo varchar(50),
     primary key(Numero),
-    foreign key(Username) references utenteRegistrato(Username) on delete cascade
+    foreign key(Username) references utenteRegistrato(Username) on delete cascade,
+    foreign key(Titolo) references Storia(Titolo)
 	);
     
 drop table if exists Keyword;
