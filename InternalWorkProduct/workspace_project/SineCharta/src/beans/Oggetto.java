@@ -12,7 +12,9 @@ public class Oggetto implements Serializable{
 	 * 
 	 */
 	private String nome;
-	private double peso, prezzo;
+	private double peso, costo;
+	private int quantita;
+
 	
 	public Oggetto() {
 		
@@ -49,15 +51,23 @@ public class Oggetto implements Serializable{
 	/**
 	 * @return the prezzo
 	 */
-	public double getPrezzo() {
-		return prezzo;
+	public double getCosto() {
+		return costo;
 	}
 
 	/**
 	 * @param prezzo the prezzo to set
 	 */
-	public void setPrezzo(double prezzo) {
-		this.prezzo = prezzo;
+	public void setCosto(double costo) {
+		this.costo = costo;
+	}
+
+	public int getQuantita() {
+		return quantita;
+	}
+
+	public void setQuantita(int quantita) {
+		this.quantita = quantita;
 	}
 
 	

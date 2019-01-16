@@ -47,7 +47,8 @@ public class LoginServlet extends HttpServlet {
 		}else {
 			
 			try {
-				User usr = new User();
+				User usr = user.doRetrieveByKey(username);
+				
 				if(usr.getPassword().equals(password)) {
 					System.out.println("Login successfull.");
 					session.setAttribute("username", username);
@@ -60,6 +61,9 @@ public class LoginServlet extends HttpServlet {
 			}catch (NullPointerException e) {
 				System.out.println("User not found exception.");
 				response.sendRedirect("jsp_page/index.jsp");
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		
