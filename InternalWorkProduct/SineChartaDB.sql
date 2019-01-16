@@ -19,7 +19,7 @@ drop table if exists Personaggio;
 create table Personaggio(
 	Nome varchar(30),
     Cognome varchar(30),
-    Età int not null,
+    Età int not null default 1,
     Nazionalità varchar(20),
     TaroccoDominante varchar(30),
     Caratteristiche int,
@@ -58,6 +58,15 @@ create table Sessione(
     primary key(Numero),
     foreign key(Username) references utenteRegistrato(Username) on delete cascade
 	);
+    
+drop table if exists Keyword;
+create table Keyword(
+	Chiave varchar(50),
+    Descrizione varchar(500),
+    Titolo varchar(50),
+    primary key(Chiave,Descrizione),
+    foreign key(Titolo) references Storia(Titolo)
+    );
     
 drop table if exists Oggetti;
 create table Oggetti(
@@ -109,3 +118,4 @@ create table èInvitato(
     foreign key(Username) references utenteRegistrato(Username),
     foreign key(Titolo) references Storia(Titolo)
 	);
+    
