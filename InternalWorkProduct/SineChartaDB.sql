@@ -61,12 +61,12 @@ create table Sessione(
     
 drop table if exists Oggetti;
 create table Oggetti(
-	Nom varchar(30),
+	NomeOggetto varchar(30),
     Peso int not null,
     Costo int not null,
     Nome varchar(30),
     Cognome varchar(30),
-    primary key(Nom),
+    primary key(NomeOggetto),
     foreign key(Nome,Cognome) references Personaggio(Nome,Cognome) on delete cascade
 );
 
@@ -78,7 +78,9 @@ create table Armi(
     Danno int,
     Munizione varchar(10) not null,
     Ricarica int,
-    primary key(Id)
+	NomeOggetto varchar(30),
+    primary key(Id),
+    foreign key (NomeOggetto) references Oggetti(NomeOggetto) on delete cascade
 );
 
 drop table if exists Realizza;
