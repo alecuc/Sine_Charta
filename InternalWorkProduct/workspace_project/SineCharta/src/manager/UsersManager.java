@@ -27,14 +27,17 @@ public class UsersManager implements UserModelI<User>{
 			System.out.println("doRetrieveByKey: " + preparedStatement.toString());
 			
 			ResultSet rs = preparedStatement.executeQuery();
-			
+			System.out.println("doRetrieveByKey: " + preparedStatement.toString());
+
 			while(rs.next()) {
-				bean.setUsername(rs.getString("username"));
-				bean.setPassword(rs.getString("password"));
-				bean.setName(rs.getString("name"));
-				bean.setSurname(rs.getString("surname"));
-				bean.setEmail(rs.getString("email"));
+				bean.setUsername(rs.getString("Username"));
+				bean.setPassword(rs.getString("Password"));
+				bean.setEmail(rs.getString("EMail"));
+				bean.setName(rs.getString("Nome"));
+				bean.setSurname(rs.getString("Cognome"));
+				bean.setRuolo(rs.getString("Ruolo"));
 			}
+			
 		}
 		finally {
 			try {
@@ -66,13 +69,8 @@ public class UsersManager implements UserModelI<User>{
 				+ " (USERNAME, PASSWORD, EMAIL, NOME, COGNOME, RUOLO) VALUES (?, md5(?), ?, ?, ?, 'utenteModeratore')";
 		
 		try {
-			System.out.println("Sono prima della query");
-
 			connection = DriverManagerConnectionPool.getConnection();
-			
-			System.out.println("Sono DOPO della query");
 
-			System.out.println("sono pre prepared");
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, user.getUsername());
 			preparedStatement.setString(2, user.getPassword());

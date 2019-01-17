@@ -1,8 +1,9 @@
 package control.utente;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,37 +35,33 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		String usernameInput = request.getParameter("username");
+		String passwordInput = request.getParameter("password");
 		HttpSession session = request.getSession();
 		
-		if(username.isEmpty() || password.isEmpty()) {
-			response.sendRedirect("jsp_page/index.jsp");
-			out.println("Username or password is empty.");
-		}else {
-			
-			try {
-				User usr = new User();
-				if(usr.getPassword().equals(password)) {
-					System.out.println("Login successful.");
-					session.setAttribute("username", username);
-					response.sendRedirect("jsp_page/homeUser.jsp");
-				}else {
-					System.out.println("Password error.");
-					response.sendRedirect("jsp_page/index.jsp");
-				}
-						
-			}catch (NullPointerException e) {
-				System.out.println("User not found exception.");
-				response.sendRedirect("jsp_page/index.jsp");
-			}
-		}
 		
-		
-		
-	}
+		try {
+			User utenteLogin= user.doRetrieveByKey(usernameInput);
 
+			String password= utenteLogin.getPassword();
+
+			if (passwordInput.equals(password)) {
+				session.setAttribute("username", usernameInput);
+				/*
+				 * TODO: METTERE COME ATTRIBUTO DI SESSIONE:
+				 * -STORIE A CUI PARTECIPO
+				 *
+				 */
+				
+				response.sendRedirect("jsp_page/homeUser.jsp");
+			}
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+		
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

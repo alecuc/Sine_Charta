@@ -9,7 +9,8 @@ public class User implements Cloneable, Serializable{
 	 * Variabili di istanza di User.
 	 */
 	private static final long serialVersionUID = 1L;
-	private String name, surname, email, username, password;
+	private String name, surname, email, username, password,ruolo;
+	
 	
 
 	public User() {
@@ -86,6 +87,15 @@ public class User implements Cloneable, Serializable{
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getRuolo() {
+		return ruolo;
+	}
+
+	public void setRuolo(String ruolo) {
+		// TODO Auto-generated method stub
+		this.ruolo= ruolo;
 	}
 	
 	
