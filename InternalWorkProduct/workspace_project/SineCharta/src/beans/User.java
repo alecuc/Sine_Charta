@@ -11,12 +11,7 @@ public class User implements Cloneable, Serializable{
 	private static final long serialVersionUID = 1L;
 	private String name, surname, email, username, password;
 	
-	
-	public User(String username, String email) {
-		setUsername(username);
-		setEmail(email);
-	}
-	
+
 	public User() {
 		
 	}

@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 			try {
 				User usr = new User();
 				if(usr.getPassword().equals(password)) {
-					System.out.println("Login successfull.");
+					System.out.println("Login successful.");
 					session.setAttribute("username", username);
 					response.sendRedirect("jsp_page/homeUser.jsp");
 				}else {
