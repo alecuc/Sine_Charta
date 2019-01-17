@@ -167,7 +167,6 @@ public class EquipManager {
 
 	
 	public void aggiornaOggetto(Oggetto oggetto) throws SQLException {
-		// TODO Auto-generated method stub
 		
 	}
 
