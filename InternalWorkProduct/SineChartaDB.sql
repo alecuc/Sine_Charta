@@ -17,7 +17,7 @@ create table utenteRegistrato(
 
 drop table if exists Personaggio;
 create table Personaggio(
-	Id int default 1 not null,
+	Id int auto_increment  not null,
 	Nome varchar(30),
     Cognome varchar(30),
     Età int not null default 1,
@@ -26,7 +26,7 @@ create table Personaggio(
     Caratteristiche int,
     Risoluzione int not null,
     Ferite char(2) not null,
-    Username varchar(15) not null,
+    Username varchar(15),
     primary key(Id),
     foreign key(Username) references utenteRegistrato(Username) on delete cascade
     );
@@ -35,7 +35,7 @@ drop table if exists Abilità;
 create table Abilità(
 	Identificativo varchar(30),
     Valore int,
-    Id int not null,
+    Id int ,
     primary key(Identificativo),
     foreign key(Id) references Personaggio(Id) on delete cascade
 	); 
@@ -44,14 +44,14 @@ create table Storia(
 	Titolo varchar(50),
     Descrizione varchar(500),
     Ambientazione enum('Terre Perdute','Quarto Reich','Soviet','Sanctum Imperum'),
-    Id int not null,
+    Id int ,
 	primary key(Titolo),
     foreign key(Id) references Personaggio(Id) on delete cascade
     );
 
 drop table if exists Sessione;
 create table Sessione(
-	Numero int,
+	Numero int auto_increment, 
     Contenuto varchar(100),
     Username varchar(15),
     Titolo varchar(50),
@@ -62,10 +62,11 @@ create table Sessione(
     
 drop table if exists Keyword;
 create table Keyword(
+	id int auto_increment,
 	Chiave varchar(50),
     Descrizione varchar(500),
     Titolo varchar(50),
-    primary key(Chiave,Descrizione),
+    primary key(id),
     foreign key(Titolo) references Storia(Titolo)
     );
     
@@ -75,14 +76,14 @@ create table Oggetti(
     Peso int not null,
     Costo int not null,
     Quantita int default 1 not null,
-    Id int default 1 not null,
+    Id int default 1,
     primary key(NomeOggetto),
     foreign key(Id) references Personaggio(Id) on delete cascade
 );
 
 drop table if exists Armi;
 create table Armi(
-	Id int default 1,
+	Id int auto_increment,
 	Tipo enum('Pistola','Mitra','Fucile'),
     Modello varchar(15) not null,
     Danno int,
@@ -119,4 +120,7 @@ create table èInvitato(
     foreign key(Username) references utenteRegistrato(Username),
     foreign key(Titolo) references Storia(Titolo)
 	);
-    
+ 
+ 
+ 
+ 
