@@ -9,10 +9,17 @@ import beans.Oggetto;
 
 public class EquipManager {
 
-	
+	/**
+	 * Nomi delle tabelle all''interno del database che vengono utilizzate.
+	 */
 	private static final String TABLE_NAME_OGGETTI = "Oggetti";
 	private static final String TABLE_NAME_ARMI = "Armi";
 	
+	/**
+	 * Metodo che ritorna un oggetto in base a id dell'input
+	 * @param idOggetto= id dell'oggetto 
+	 * @return un oggetto selezionato
+	 */
 	public Oggetto getOggettoId(int idOggetto) throws SQLException {
 
 		Connection connection = null;
@@ -48,6 +55,12 @@ public class EquipManager {
 		
 	}
 
+	/**
+	 * Metodo che ritorna una collezione di oggetti in base al tipo dell'oggetto dato in input
+	 * @param tipoOggetto= il tipo dell'oggetto (Es. arma, armatura, materiali ecc..)
+	 * @return una collezione di oggetti di quel tipo specifico
+	 */
+	
 	public Collection<Oggetto> getListaOggettiTipo(String tipoOggetto) throws SQLException{
 		
 		Connection connection = null;
@@ -87,6 +100,14 @@ public class EquipManager {
 		
 	}
 	
+	
+	/**
+	 * Metodo che ritorna tutta una collezione di oggetti che sono equipaggiati da un personaggio specifico.
+	 * @param order= ordine in cui vengono selezionati
+	 * @param idPersonaggio= id personaggio a cui sono associati gli oggetti
+	 * @return una lista di oggetti ordinata del personaggio
+	 */
+
 	public Collection<Oggetto> getListaOggettiPG(String order, int idPersonaggio) throws SQLException {
 
 		Connection connection = null;
@@ -131,11 +152,17 @@ public class EquipManager {
 		
 	}
 
+	/**
+	 * Metodo che inserisce un oggetto ad un personaggio.
+	 * @param oggetto= è l'oggetto da inserire.
+	 * @param idPersonaggio= è l'identificativo del personaggio a cui aggiungere l'oggetto.
+	 * @throws SQLException= eccezione per eventuale query di inserimento errata.
+	 */
 	public void inserisciOggetto(Oggetto oggetto, int idPersonaggio) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
+		String tmpnome = oggetto.getNome();
 		String insertSQL = "INSERT INTO " + EquipManager.TABLE_NAME_OGGETTI
 				+ " (NOMEOGGETTO, PESO, COSTO, QUANTITA, ID) VALUES (?, ?, ?, ?, "+idPersonaggio+")";
 		
@@ -150,9 +177,14 @@ public class EquipManager {
 			preparedStatement.setString(4, String.valueOf(oggetto.getQuantita()));
 			
 			
-			System.out.println("doSave: "+ preparedStatement.toString());
+			System.out.println("inserisciOggetto: "+ preparedStatement.toString());
 			preparedStatement.executeUpdate();
 
+			if(tmpnome.equalsIgnoreCase("arma")) {
+				
+				
+			}
+			
 			connection.commit();
 		} finally {
 			try {
@@ -165,15 +197,32 @@ public class EquipManager {
 		
 	}
 
-	
-	public void aggiornaOggetto(Oggetto oggetto) throws SQLException {
+	/**
+	 * Metodo che rimuove un oggetto in base a ID del personaggio a cui è associato
+	 * @param id= del personaggio a cui viene rimosso l'oggetto
+	 * @return un valore diverso da 0 per conferma dell'avvenuta eliminazione
+	 */
+	public boolean rimuoviOggetto(int idPG) throws SQLException {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String deletoObj = "DELETE FROM "+TABLE_NAME_OGGETTI+" WHERE ID = ?";
 		
-	}
-
-	
-	public boolean rimuoviOggetto(int id) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			ps = connection.prepareStatement(deletoObj);
+			ps.setInt(1, idPG);
+			System.out.println("rimuoviOggetto: " + ps.toString());
+			result = ps.executeUpdate();
+			connection.commit();
+		}finally {
+			try {
+				if(ps!=null) ps.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+		return (result != 0);
 	}
 	
 	
