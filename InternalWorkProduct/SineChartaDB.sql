@@ -25,7 +25,7 @@ create table Personaggio(
     TaroccoDominante varchar(30),
     Caratteristiche int,
     Risoluzione int not null,
-    Ferite char(2) not null,
+    Ferite varchar(10),
     Username varchar(15),
     primary key(Id),
     foreign key(Username) references utenteRegistrato(Username) on delete cascade
