@@ -7,7 +7,7 @@
 		<div class="card card-signin">
 			<div class="card-body">
 				<h5 class="card-title text-center">Login</h5>
-				<form class="form-signin" method="post" action="../LoginServlet">
+				<form class="form-signin">
 					<div class="row">
 						<div class="col-md-3 field-label-responsive">
 							<label for="username">Username:</label>
