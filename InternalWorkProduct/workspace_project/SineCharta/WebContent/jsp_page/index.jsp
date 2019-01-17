@@ -22,8 +22,8 @@
 			style="width: 15rem;">
 	</div>
 
-	
-      <div class="container-fluid bg-cont">
+	<div>
+      <div class="container-fluid bg-cont card">
         <div class="row">
           <div class="col-sm-6">
              <jsp:include page="loginForm.jsp"></jsp:include>
@@ -36,7 +36,8 @@
         </div>
         
       </div>
-     	<jsp:include page="footer.jsp"></jsp:include>
+     </div>
+          	<jsp:include page="footer.jsp"></jsp:include>
      
         </div>
 

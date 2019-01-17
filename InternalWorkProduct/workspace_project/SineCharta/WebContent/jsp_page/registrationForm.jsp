@@ -4,8 +4,7 @@
 <html>
 <body>
 
-	<div class="card">
-		<div class="card-body">
+	<div class="col mx-auto">
 			<h5 class="card-title text-center">Registrati</h5>
 			<form method="post" action="../RegistrazioneServlet"
 				name="formRegistration">
@@ -118,6 +117,6 @@
 				</div>
 			</form>
 		</div>
-	</div>
+
 
 </body>

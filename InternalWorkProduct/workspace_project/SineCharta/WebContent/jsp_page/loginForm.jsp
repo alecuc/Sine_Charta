@@ -4,8 +4,6 @@
 <html>
 <body>
 	<div class="col mx-auto">
-		<div class="card card-signin">
-			<div class="card-body">
 				<h5 class="card-title text-center">Login</h5>
 				<form class="form-signin" method="post" action="../LoginServlet">
 					<div class="row">
@@ -52,7 +50,5 @@
 				</form>
 				<br> <a href="homeUser.jsp">pagina utente (link provvisorio)</a>
 			</div>
-		</div>
-	</div>
 </body>
 </html>
