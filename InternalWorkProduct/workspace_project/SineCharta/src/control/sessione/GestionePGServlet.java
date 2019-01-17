@@ -2,6 +2,8 @@ package control.sessione;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +22,7 @@ import manager.EquipManager;
 public class GestionePGServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-	EquipManager euipaggiamento = new EquipManager();
+	EquipManager equipaggiamento = new EquipManager();
 	Oggetto oggetto = new Oggetto();
 	
     /**
@@ -35,6 +37,8 @@ public class GestionePGServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		HttpSession session = request.getSession();
+		ArrayList<Oggetto> listaOggetti = (ArrayList<Oggetto>) session.getAttribute("listaOggettiPG");
 		String action = request.getParameter("action");
 		
 		try {
@@ -47,20 +51,33 @@ public class GestionePGServlet extends HttpServlet {
 				oggetto.setPeso(Double.parseDouble(peso));
 				oggetto.setCosto(Double.parseDouble(costo));
 				
-				euipaggiamento.inserisciOggetto(oggetto,Integer.parseInt(request.getParameter("idPG")));
+				equipaggiamento.inserisciOggetto(oggetto,Integer.parseInt(request.getParameter("idPG")));
 				
 				System.out.println("Oggetto inserito.");
-				response.sendRedirect("#");
+				response.sendRedirect("/*PAGINA PERSONAGGIO*/");
 			}
-			
-			if(action.equalsIgnoreCase("rimuoviOggetto")) {
+			/*  DA COMPLETARE    */
+			else if(action.equalsIgnoreCase("rimuoviOggetto")) {
+				int idPG = Integer.parseInt(request.getParameter("idPG"));
+				
+				equipaggiamento.rimuoviOggetto(idPG);
 				
 				
+				
+			}else if(action.equalsIgnoreCase("listaOggettiPg")) {
+				Collection<Oggetto> listaOggettiPg = equipaggiamento.getListaOggettiPG("Peso",  Integer.parseInt(request.getParameter("idPG")));
+				
+			}else if(action.equalsIgnoreCase("aggArma")) {
+				
+				
+			}else if(action.equalsIgnoreCase("rimuoviArma")) {
+				
+			}else if(action.equalsIgnoreCase("listaArmiPg")) {
 				
 			}
+			/* DA COMPLETARE*/
 		} catch(SQLException e) {
 			e.printStackTrace();
-			HttpSession session = request.getSession();
 			session.setAttribute("InsertError", "inserimento errato");
 			response.sendRedirect("#");
 		}

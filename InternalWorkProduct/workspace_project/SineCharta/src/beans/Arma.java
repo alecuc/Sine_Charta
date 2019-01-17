@@ -12,12 +12,18 @@ public class Arma extends Oggetto{
 	private enum tipo{pistola, mitra,fucile};
 	private tipo miaArma;
 	
-	
+	/**
+	 * 
+	 * 
+	 */
 	public Arma() {
 		super();
 	}
 
-	
+	/**
+	 * Metodi per settare il tipo di arma.
+	 * 
+	 */
 	public void setFucile(){
 		this.miaArma = tipo.fucile;
 	}
@@ -30,10 +36,13 @@ public class Arma extends Oggetto{
 		this.miaArma = tipo.mitra;
 	}
 	
-	public tipo getArma() {
+	public tipo getTipoArma() {
 		return this.miaArma;
 	}
 	
+	public String toStringArma() {
+		return getTipoArma().toString();
+	}
 	/**
 	 * @return the modello
 	 */

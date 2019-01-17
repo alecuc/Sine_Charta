@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import beans.Arma;
 import beans.Oggetto;
 
 
@@ -162,9 +163,8 @@ public class EquipManager {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		String tmpnome = oggetto.getNome();
 		String insertSQL = "INSERT INTO " + EquipManager.TABLE_NAME_OGGETTI
-				+ " (NOMEOGGETTO, PESO, COSTO, QUANTITA, ID) VALUES (?, ?, ?, ?, "+idPersonaggio+")";
+				+ " (NOMEOGGETTO, PESO, COSTO, QUANTITA, ID) VALUES (?, ?, ?, ?, "+"'"+idPersonaggio+"'"+")";
 		
 		try {
 			
@@ -180,10 +180,7 @@ public class EquipManager {
 			System.out.println("inserisciOggetto: "+ preparedStatement.toString());
 			preparedStatement.executeUpdate();
 
-			if(tmpnome.equalsIgnoreCase("arma")) {
-				
-				
-			}
+			
 			
 			connection.commit();
 		} finally {
@@ -196,7 +193,7 @@ public class EquipManager {
 		}
 		
 	}
-
+	
 	/**
 	 * Metodo che rimuove un oggetto in base a ID del personaggio a cui è associato
 	 * @param id= del personaggio a cui viene rimosso l'oggetto
@@ -226,5 +223,137 @@ public class EquipManager {
 	}
 	
 	
+	
+	/**
+	 * Metodo per inserire un arma al personaggio
+	 * @param armaDaInserire= un tipo di arma
+	 * @throws SQLException 
+	 * 
+	 */
+	public void inserisciArma(Arma armaDaInserire) throws SQLException {
+	
+		Connection connection = null;
+		PreparedStatement ps = null;
+		String insertSQL = "INSERT INTO " + TABLE_NAME_ARMI + " (ID, TIPO, MODELLO, DANNO, MUNIZIONE, RICARICA, NOMEOGGETTO)"
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
+		
+		try {
+
+			connection = DriverManagerConnectionPool.getConnection();
+
+			ps = connection.prepareStatement(insertSQL);
+			ps.setInt(1, armaDaInserire.getId());
+			ps.setString(2, armaDaInserire.toStringArma());
+			ps.setString(3, armaDaInserire.getModello());
+			ps.setInt(4, armaDaInserire.getDanno());
+			ps.setString(5, armaDaInserire.getMunizione());
+			ps.setInt(6, armaDaInserire.getRicarica());
+			ps.setString(7, armaDaInserire.getNome());
+			
+			
+			System.out.println("inserisciArma: "+ ps.toString());
+			ps.executeUpdate();
+
+
+
+			connection.commit();
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+
+	}
+
+	/**
+	 * Metodo per avere tutta la lista di armi di uno specifico personaggio
+	 * @param order= ordine in cui vengono mostrati
+	 * @param idPersonaggio= id del personaggio a cui sono associate le armi
+	 * @return la lista delle armi del personaggio
+	 */
+	
+	public Collection<Arma> getListaArmiPG(String order, int idPersonaggio) throws SQLException {
+
+		Connection connection = null;
+		PreparedStatement ps = null;
+		
+		Collection<Arma> armi = new LinkedList<Arma>();
+		
+		String selectSQL = "SELECT * FROM " + EquipManager.TABLE_NAME_ARMI + "WHERE ID = " + "'" + idPersonaggio + "'";
+		
+		if(order != null && !order.equals("")) {
+			selectSQL += " ORDER BY " + order;
+		}
+		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			ps = connection.prepareStatement(selectSQL);
+			System.out.println("getListaArmiiPG: " + ps.toString());
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Arma bean = new Arma();
+				bean.setId(rs.getInt("Id"));
+				String arma = rs.getString("Tipo");
+				if(arma.equalsIgnoreCase("pistola")) {
+					bean.setPistola();
+				}else if(arma.equalsIgnoreCase("mitra")) {
+					bean.setMitra();
+				} else bean.setFucile();
+				bean.setModello(rs.getString("Modello"));
+				bean.setDanno(rs.getInt("Danno"));
+				bean.setMunizione(rs.getString("Munizione"));
+				bean.setRicarica(rs.getInt("Ricarica"));
+				bean.setNome(rs.getString("NomeOggetto"));
+				
+				
+				armi.add(bean);
+			}
+		
+		} finally {
+			try {
+				if(ps != null)
+					ps.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		  }
+		
+		return armi;
+		
+	}
+	
+	/**
+	 * Metedo per rimuovere un arma da un personaggio
+	 * @param id= id del personaggio a cui è associata l'arma
+	 * @return conferma dell'eliminazione dell'arma del personaggio
+	 */
+	public boolean deleteArma(int id) throws SQLException{
+		Connection connection = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String deleteArma = "DELETE FROM "+TABLE_NAME_ARMI+" WHERE ID = ?";
+		
+		try {
+			connection = DriverManagerConnectionPool.getConnection();
+			ps = connection.prepareStatement(deleteArma);
+			ps.setInt(1, id);
+			System.out.println("rimuoviArma: " + ps.toString());
+			result = ps.executeUpdate();
+			connection.commit();
+		}finally {
+			try {
+				if(ps!=null) ps.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(connection);
+			}
+		}
+		return (result != 0);
+	}
 
 }
