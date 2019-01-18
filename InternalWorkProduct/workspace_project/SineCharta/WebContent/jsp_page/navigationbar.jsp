@@ -11,6 +11,7 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+
 </head>
 <body>
 
@@ -60,8 +61,7 @@
 			</ul>
 		</div>
 		<form action="../LogoutServlet" method="post">
-			<button type="submit" id="logout" class="btn-dark btn">
-				Logout</button>
+			<button type="submit" id="logout" class="btn-dark btn">Logout</button>
 		</form>
 	</nav>
 
