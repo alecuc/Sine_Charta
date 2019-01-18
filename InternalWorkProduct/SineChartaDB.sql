@@ -40,12 +40,49 @@ create table Personaggio(
     Mira int,
     Karma int,
     Risoluzione int not null,
-    Ferite varchar(10),
+    Salute int,
+    FeriteTesta varchar(5),
+    FeriteTorso varchar(5),
+    FeriteBraccia varchar(5),
+    FeriteGambe varchar(5),
     Username varchar(15),
     primary key(Id),
     foreign key(Username) references utenteRegistrato(Username) on delete cascade
     );
     
+ drop table if exists Mazzo;
+ create table Mazzo(
+	Tipo enum('Poker','Tarocco'),
+    num_rimaste int,
+	Username varchar(15), 
+    primary key(Tipo),
+    foreign key (Username) references utenteRegistrato(Username)
+	);
+
+drop table if exists CartaDaPoker;
+create table CartaDaPoker(
+	Valore int,
+    Descrizione varchar(30),
+    Tipo enum('Poker','Tarocco'),
+    primary key (Valore),
+    foreign key (Tipo) references Mazzo(Tipo)
+    );    
+
+drop table if exists Tarocco;
+create table Tarocco(
+	Numero int,
+    Descrizione varchar(100),
+    Descrizione_Dominante varchar(100),
+    Valore_Cuori int,
+    Valore_Quadri int,
+    Valore_Fiori int,
+    Valore_Picche int,
+    Tipo enum('Poker','Tarocco'),
+    primary key (Numero),
+    foreign key (Tipo) references Mazzo(Tipo)
+    );    
+
+
 drop table if exists Abilità;
 create table Abilità(
 	Identificativo varchar(30),
