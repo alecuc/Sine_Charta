@@ -23,7 +23,12 @@
 <div class="container" style="margin-top:30px">
   <div class="row">
     <div class="col-sm-4">
-      <h2>*NOME UTENTE*</h2>
+      <h2><%=session.getAttribute("username")%></h2>
+      <%
+		if (session.getAttribute("username") == null) {
+			response.sendRedirect("error.jsp");
+		}
+	%>
       <h5>Photo of me:</h5>
       <div class="fakeimg"><img src="../images/mini_logo.jpg" style="width: 50%;">
       </div>
