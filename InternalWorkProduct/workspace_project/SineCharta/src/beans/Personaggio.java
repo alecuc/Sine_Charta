@@ -10,7 +10,7 @@ public class Personaggio implements Serializable{
 	private static final long serialVersionUID = -3995688470791211026L;
 	
 	String nome, cognome, nazionalita, taroccoDominante,ferite,username;
-	int age, risoluzione, id;
+	int age, salute, risoluzione, id;
 	
 	
 	/*Caratteristiche del personaggio*/
@@ -319,6 +319,19 @@ public class Personaggio implements Serializable{
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
+	/**
+	 * @return the salute
+	 */
+	public int getSalute() {
+		return salute;
+	}
+	/**
+	 * @param salute the salute to set
+	 */
+	public void setSalute(int salute) {
+		this.salute = salute;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -326,13 +339,14 @@ public class Personaggio implements Serializable{
 	public String toString() {
 		return "Personaggio [nome=" + nome + ", cognome=" + cognome + ", nazionalita=" + nazionalita
 				+ ", taroccoDominante=" + taroccoDominante + ", ferite=" + ferite + ", username=" + username + ", age="
-				+ age + ", risoluzione=" + risoluzione + ", id=" + id + ", intuito=" + intuito + ", memoria=" + memoria
-				+ ", percezione=" + percezione + ", volonta=" + volonta + ", aspetto=" + aspetto + ", comando="
-				+ comando + ", creativita=" + creativita + ", socievolezza=" + socievolezza + ", coordinazione="
-				+ coordinazione + ", destrManuale=" + destrManuale + ", forzaFisica=" + forzaFisica + ", mira=" + mira
-				+ ", affinOcculta=" + affinOcculta + ", distDaMorte=" + distDaMorte + ", equilibrMentale="
-				+ equilibrMentale + ", karma=" + karma + "]";
+				+ age + ", salute=" + salute + ", risoluzione=" + risoluzione + ", id=" + id + ", intuito=" + intuito
+				+ ", memoria=" + memoria + ", percezione=" + percezione + ", volonta=" + volonta + ", aspetto="
+				+ aspetto + ", comando=" + comando + ", creativita=" + creativita + ", socievolezza=" + socievolezza
+				+ ", coordinazione=" + coordinazione + ", destrManuale=" + destrManuale + ", forzaFisica=" + forzaFisica
+				+ ", mira=" + mira + ", affinOcculta=" + affinOcculta + ", distDaMorte=" + distDaMorte
+				+ ", equilibrMentale=" + equilibrMentale + ", karma=" + karma + "]";
 	}
+	
 	
 	
 	
