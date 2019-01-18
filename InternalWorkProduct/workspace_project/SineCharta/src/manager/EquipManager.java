@@ -234,21 +234,21 @@ public class EquipManager {
 	
 		Connection connection = null;
 		PreparedStatement ps = null;
-		String insertSQL = "INSERT INTO " + TABLE_NAME_ARMI + " (ID, TIPO, MODELLO, DANNO, MUNIZIONE, RICARICA, NOMEOGGETTO)"
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
+		String insertSQL = "INSERT INTO " + TABLE_NAME_ARMI + " (TIPO, MODELLO, DANNO, MUNIZIONE, RICARICA, NOMEOGGETTO)"
+				+ "VALUES (?, ?, ?, ?, ?, ?)";
 		
 		try {
 
 			connection = DriverManagerConnectionPool.getConnection();
 
 			ps = connection.prepareStatement(insertSQL);
-			ps.setInt(1, armaDaInserire.getId());
-			ps.setString(2, armaDaInserire.toStringArma());
-			ps.setString(3, armaDaInserire.getModello());
-			ps.setInt(4, armaDaInserire.getDanno());
-			ps.setString(5, armaDaInserire.getMunizione());
-			ps.setInt(6, armaDaInserire.getRicarica());
-			ps.setString(7, armaDaInserire.getNome());
+		
+			ps.setString(1, armaDaInserire.toStringArma());
+			ps.setString(2, armaDaInserire.getModello());
+			ps.setInt(3, armaDaInserire.getDanno());
+			ps.setString(4, armaDaInserire.getMunizione());
+			ps.setInt(5, armaDaInserire.getRicarica());
+			ps.setString(6, armaDaInserire.getNome());
 			
 			
 			System.out.println("inserisciArma: "+ ps.toString());

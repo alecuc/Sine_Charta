@@ -9,8 +9,8 @@ public class Personaggio implements Serializable{
 	 */
 	private static final long serialVersionUID = -3995688470791211026L;
 	
-	String nome, cognome, nazionalita, taroccoDominante,ferite,username;
-	int age, salute, risoluzione, id;
+	String nome, cognome, nazionalita, taroccoDominante, username, feritaTesta, feritaBraccia, feritaTorso, feritaGambe;
+	int age, salute, risoluzione, id, idStoria;
 	
 	
 	/*Caratteristiche del personaggio*/
@@ -295,18 +295,7 @@ public class Personaggio implements Serializable{
 	public void setKarma(int karma) {
 		this.karma = karma;
 	}
-	/**
-	 * @return the ferite
-	 */
-	public String getFerite() {
-		return ferite;
-	}
-	/**
-	 * @param ferite the ferite to set
-	 */
-	public void setFerite(String ferite) {
-		this.ferite = ferite;
-	}
+
 	/**
 	 * @return the username
 	 */
@@ -332,20 +321,85 @@ public class Personaggio implements Serializable{
 	public void setSalute(int salute) {
 		this.salute = salute;
 	}
+	/**
+	 * @return the feritaTesta
+	 */
+	public String getFeritaTesta() {
+		return feritaTesta;
+	}
+	/**
+	 * @param feritaTesta the feritaTesta to set
+	 */
+	public void setFeritaTesta(String feritaTesta) {
+		this.feritaTesta = feritaTesta;
+	}
+	/**
+	 * @return the feritaBraccia
+	 */
+	public String getFeritaBraccia() {
+		return feritaBraccia;
+	}
+	/**
+	 * @param feritaBraccia the feritaBraccia to set
+	 */
+	public void setFeritaBraccia(String feritaBraccia) {
+		this.feritaBraccia = feritaBraccia;
+	}
+	/**
+	 * @return the feritaTorso
+	 */
+	public String getFeritaTorso() {
+		return feritaTorso;
+	}
+	/**
+	 * @param feritaTorso the feritaTorso to set
+	 */
+	public void setFeritaTorso(String feritaTorso) {
+		this.feritaTorso = feritaTorso;
+	}
+	/**
+	 * @return the feritaGambe
+	 */
+	public String getFeritaGambe() {
+		return feritaGambe;
+	}
+	/**
+	 * @param feritaGambe the feritaGambe to set
+	 */
+	public void setFeritaGambe(String feritaGambe) {
+		this.feritaGambe = feritaGambe;
+	}
+	/**
+	 * @return the idStoria
+	 */
+	public int getIdStoria() {
+		return idStoria;
+	}
+	/**
+	 * @param idStoria the idStoria to set
+	 */
+	public void setIdStoria(int idStoria) {
+		this.idStoria = idStoria;
+	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "Personaggio [nome=" + nome + ", cognome=" + cognome + ", nazionalita=" + nazionalita
-				+ ", taroccoDominante=" + taroccoDominante + ", ferite=" + ferite + ", username=" + username + ", age="
-				+ age + ", salute=" + salute + ", risoluzione=" + risoluzione + ", id=" + id + ", intuito=" + intuito
-				+ ", memoria=" + memoria + ", percezione=" + percezione + ", volonta=" + volonta + ", aspetto="
-				+ aspetto + ", comando=" + comando + ", creativita=" + creativita + ", socievolezza=" + socievolezza
-				+ ", coordinazione=" + coordinazione + ", destrManuale=" + destrManuale + ", forzaFisica=" + forzaFisica
-				+ ", mira=" + mira + ", affinOcculta=" + affinOcculta + ", distDaMorte=" + distDaMorte
-				+ ", equilibrMentale=" + equilibrMentale + ", karma=" + karma + "]";
+				+ ", taroccoDominante=" + taroccoDominante + ", username=" + username + ", feritaTesta=" + feritaTesta
+				+ ", feritaBraccia=" + feritaBraccia + ", feritaTorso=" + feritaTorso + ", feritaGambe=" + feritaGambe
+				+ ", age=" + age + ", salute=" + salute + ", risoluzione=" + risoluzione + ", id=" + id + ", idStoria="
+				+ idStoria + ", intuito=" + intuito + ", memoria=" + memoria + ", percezione=" + percezione
+				+ ", volonta=" + volonta + ", aspetto=" + aspetto + ", comando=" + comando + ", creativita="
+				+ creativita + ", socievolezza=" + socievolezza + ", coordinazione=" + coordinazione + ", destrManuale="
+				+ destrManuale + ", forzaFisica=" + forzaFisica + ", mira=" + mira + ", affinOcculta=" + affinOcculta
+				+ ", distDaMorte=" + distDaMorte + ", equilibrMentale=" + equilibrMentale + ", karma=" + karma + "]";
 	}
+	
+	
+	
+	
 	
 	
 	
