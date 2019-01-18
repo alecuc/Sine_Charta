@@ -7,9 +7,6 @@ public class testBeans {
 		
 		Personaggio pg = new Personaggio();
 		
-		pg.setAbility("fuoco", 5);
-		pg.getAbility();
-		System.out.println("klsdjhvleb");
 		
 		
 		

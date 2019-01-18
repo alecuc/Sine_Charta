@@ -1,165 +1,342 @@
 package beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Iterator;
 
-public class Personaggio implements Cloneable, Serializable{
+public class Personaggio implements Serializable{
 	
 	/**
 	 * Serializable class ID
 	 */
 	private static final long serialVersionUID = -3995688470791211026L;
 	
-	String nome, cognome, nazionalita;
-	int age, caratteristiche;
-	private Abilita abi = new Abilita();
-	private ArrayList<Abilita> ability = new ArrayList<Abilita>();
+	String nome, cognome, nazionalita, taroccoDominante,ferite,username;
+	int age, risoluzione, id;
 	
-	class Abilita{
-		private String nome;
-		private int valore;
-		 
-		public Abilita() {
-			
-		}
-		public Abilita(String n, int val) {
-			this.nome=n;
-			this.valore=val;
-			
-		}
-
-		/**
-		 * @return the nome
-		 */
-		public String getNome() {
-			return nome;
-		}
-
-		/**
-		 * @param nome the nome to set
-		 */
-		public void setNome(String nome) {
-			this.nome = nome;
-		}
-
-		/**
-		 * @return the valore
-		 */
-		public int getValore() {
-			return valore;
-		}
-
-		/**
-		 * @param valore the valore to set
-		 */
-		public void setValore(int valore) {
-			this.valore = valore;
-		}
-		
-		public String toString() {
-			return getClass().getName()+"[Nome= "+nome+", Valore= "+valore+"];";
-		}
 	
-		
-		
+	/*Caratteristiche del personaggio*/
+	int intuito, memoria, percezione, volonta, aspetto, comando, creativita, socievolezza,
+			coordinazione, destrManuale, forzaFisica, mira, affinOcculta,
+			distDaMorte, equilibrMentale, karma;
+	
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 	
-	public Personaggio() {
-		
-		
-	}
-
-	public void setAbility(String nome, int val) {
-		abi.setNome(nome);
-		abi.setValore(val);
-		ability.add(abi);
-	}
-	
-	
-	public void getAbility() {
-		Iterator<Abilita> itr = ability.iterator();
-		while(itr.hasNext()) {
-			Abilita tmp = itr.next();
-			System.out.println(tmp.toString());		}
-	}
 	/**
 	 * @return the nome
 	 */
 	public String getNome() {
 		return nome;
 	}
-
 	/**
 	 * @param nome the nome to set
 	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	/**
 	 * @return the cognome
 	 */
 	public String getCognome() {
 		return cognome;
 	}
-
 	/**
 	 * @param cognome the cognome to set
 	 */
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
-
 	/**
 	 * @return the nazionalita
 	 */
 	public String getNazionalita() {
 		return nazionalita;
 	}
-
 	/**
 	 * @param nazionalita the nazionalita to set
 	 */
 	public void setNazionalita(String nazionalita) {
 		this.nazionalita = nazionalita;
 	}
-
+	/**
+	 * @return the taroccoDominante
+	 */
+	public String getTaroccoDominante() {
+		return taroccoDominante;
+	}
+	/**
+	 * @param taroccoDominante the taroccoDominante to set
+	 */
+	public void setTaroccoDominante(String taroccoDominante) {
+		this.taroccoDominante = taroccoDominante;
+	}
 	/**
 	 * @return the age
 	 */
 	public int getAge() {
 		return age;
 	}
-
 	/**
 	 * @param age the age to set
 	 */
 	public void setAge(int age) {
 		this.age = age;
 	}
-
 	/**
-	 * @return the caratteristiche
+	 * @return the risoluzione
 	 */
-	public int getCaratteristiche() {
-		return caratteristiche;
+	public int getRisoluzione() {
+		return risoluzione;
 	}
-
 	/**
-	 * @param caratteristiche the caratteristiche to set
+	 * @param risoluzione the risoluzione to set
 	 */
-	public void setCaratteristiche(int caratteristiche) {
-		this.caratteristiche = caratteristiche;
+	public void setRisoluzione(int risoluzione) {
+		this.risoluzione = risoluzione;
 	}
-
-	public void setAbilita(Abilita a) {
-		ability.add(a);
+	/**
+	 * @return the intuito
+	 */
+	public int getIntuito() {
+		return intuito;
+	}
+	/**
+	 * @param intuito the intuito to set
+	 */
+	public void setIntuito(int intuito) {
+		this.intuito = intuito;
+	}
+	/**
+	 * @return the memoria
+	 */
+	public int getMemoria() {
+		return memoria;
+	}
+	/**
+	 * @param memoria the memoria to set
+	 */
+	public void setMemoria(int memoria) {
+		this.memoria = memoria;
+	}
+	/**
+	 * @return the percezione
+	 */
+	public int getPercezione() {
+		return percezione;
+	}
+	/**
+	 * @param percezione the percezione to set
+	 */
+	public void setPercezione(int percezione) {
+		this.percezione = percezione;
+	}
+	/**
+	 * @return the volonta
+	 */
+	public int getVolonta() {
+		return volonta;
+	}
+	/**
+	 * @param volonta the volonta to set
+	 */
+	public void setVolonta(int volonta) {
+		this.volonta = volonta;
+	}
+	/**
+	 * @return the aspetto
+	 */
+	public int getAspetto() {
+		return aspetto;
+	}
+	/**
+	 * @param aspetto the aspetto to set
+	 */
+	public void setAspetto(int aspetto) {
+		this.aspetto = aspetto;
+	}
+	/**
+	 * @return the comando
+	 */
+	public int getComando() {
+		return comando;
+	}
+	/**
+	 * @param comando the comando to set
+	 */
+	public void setComando(int comando) {
+		this.comando = comando;
+	}
+	/**
+	 * @return the creativita
+	 */
+	public int getCreativita() {
+		return creativita;
+	}
+	/**
+	 * @param creativita the creativita to set
+	 */
+	public void setCreativita(int creativita) {
+		this.creativita = creativita;
+	}
+	/**
+	 * @return the socievolezza
+	 */
+	public int getSocievolezza() {
+		return socievolezza;
+	}
+	/**
+	 * @param socievolezza the socievolezza to set
+	 */
+	public void setSocievolezza(int socievolezza) {
+		this.socievolezza = socievolezza;
+	}
+	/**
+	 * @return the coordinazione
+	 */
+	public int getCoordinazione() {
+		return coordinazione;
+	}
+	/**
+	 * @param coordinazione the coordinazione to set
+	 */
+	public void setCoordinazione(int coordinazione) {
+		this.coordinazione = coordinazione;
+	}
+	/**
+	 * @return the destrManuale
+	 */
+	public int getDestrManuale() {
+		return destrManuale;
+	}
+	/**
+	 * @param destrManuale the destrManuale to set
+	 */
+	public void setDestrManuale(int destrManuale) {
+		this.destrManuale = destrManuale;
+	}
+	/**
+	 * @return the forzaFisica
+	 */
+	public int getForzaFisica() {
+		return forzaFisica;
+	}
+	/**
+	 * @param forzaFisica the forzaFisica to set
+	 */
+	public void setForzaFisica(int forzaFisica) {
+		this.forzaFisica = forzaFisica;
+	}
+	/**
+	 * @return the mira
+	 */
+	public int getMira() {
+		return mira;
+	}
+	/**
+	 * @param mira the mira to set
+	 */
+	public void setMira(int mira) {
+		this.mira = mira;
+	}
+	/**
+	 * @return the affinOcculta
+	 */
+	public int getAffinOcculta() {
+		return affinOcculta;
+	}
+	/**
+	 * @param affinOcculta the affinOcculta to set
+	 */
+	public void setAffinOcculta(int affinOcculta) {
+		this.affinOcculta = affinOcculta;
+	}
+	/**
+	 * @return the distDaMorte
+	 */
+	public int getDistDaMorte() {
+		return distDaMorte;
+	}
+	/**
+	 * @param distDaMorte the distDaMorte to set
+	 */
+	public void setDistDaMorte(int distDaMorte) {
+		this.distDaMorte = distDaMorte;
+	}
+	/**
+	 * @return the equilibrMentale
+	 */
+	public int getEquilibrMentale() {
+		return equilibrMentale;
+	}
+	/**
+	 * @param equilibrMentale the equilibrMentale to set
+	 */
+	public void setEquilibrMentale(int equilibrMentale) {
+		this.equilibrMentale = equilibrMentale;
+	}
+	/**
+	 * @return the karma
+	 */
+	public int getKarma() {
+		return karma;
+	}
+	/**
+	 * @param karma the karma to set
+	 */
+	public void setKarma(int karma) {
+		this.karma = karma;
+	}
+	/**
+	 * @return the ferite
+	 */
+	public String getFerite() {
+		return ferite;
+	}
+	/**
+	 * @param ferite the ferite to set
+	 */
+	public void setFerite(String ferite) {
+		this.ferite = ferite;
+	}
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Personaggio [nome=" + nome + ", cognome=" + cognome + ", nazionalita=" + nazionalita
+				+ ", taroccoDominante=" + taroccoDominante + ", ferite=" + ferite + ", username=" + username + ", age="
+				+ age + ", risoluzione=" + risoluzione + ", id=" + id + ", intuito=" + intuito + ", memoria=" + memoria
+				+ ", percezione=" + percezione + ", volonta=" + volonta + ", aspetto=" + aspetto + ", comando="
+				+ comando + ", creativita=" + creativita + ", socievolezza=" + socievolezza + ", coordinazione="
+				+ coordinazione + ", destrManuale=" + destrManuale + ", forzaFisica=" + forzaFisica + ", mira=" + mira
+				+ ", affinOcculta=" + affinOcculta + ", distDaMorte=" + distDaMorte + ", equilibrMentale="
+				+ equilibrMentale + ", karma=" + karma + "]";
 	}
 	
-	public Abilita getAbilita(int n) {
-		Abilita ab = ability.get(n);
-		return ab;
-	}
+	
+	
+	
+	
 	
 }
