@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package beans;
 
 import java.io.Serializable;
@@ -84,3 +85,10 @@ public class Storia implements Serializable{
 	
 
 }
+=======
+package beans;
+
+public class Storia {
+
+}
+>>>>>>> fraBranch
