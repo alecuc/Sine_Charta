@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <jsp:include page="head.jsp"></jsp:include>
+<script src="../js/creazioneActions.js"></script>
 <title>Crea personaggio</title>
 </head>
 <body>

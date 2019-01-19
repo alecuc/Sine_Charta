@@ -39,8 +39,6 @@ public class RegistrazioneServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		PrintWriter out = response.getWriter();
-
 		String action = request.getParameter("action");
 
 		try {
@@ -52,14 +50,6 @@ public class RegistrazioneServlet extends HttpServlet {
 					String email = request.getParameter("email");
 					String password = request.getParameter("password");
 					
-					if(username.isEmpty() || password.isEmpty() || name.isEmpty() || surname.isEmpty() || email.isEmpty()) {
-						System.out.println("babab");
-
-						RequestDispatcher rd = request.getRequestDispatcher("../jsp_page/registrationPage.jsp");
-						out.println("<font color=red>Please fill all the fields</font>");
-						rd.forward(request, response);
-					}
-					System.out.println("kldbvib");
 					usr.setUsername(username);
 					usr.setPassword(password);
 					usr.setName(name);
