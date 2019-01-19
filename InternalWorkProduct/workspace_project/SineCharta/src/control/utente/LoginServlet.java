@@ -1,6 +1,9 @@
 package control.utente;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -42,22 +45,45 @@ public class LoginServlet extends HttpServlet {
 		
 		try {
 			User utenteLogin= user.doRetrieveByKey(usernameInput);
-
+			
 			String password= utenteLogin.getPassword();
 
-			if (passwordInput.equals(password)) {
+			/*if (utenteLogin.getUsername()==null) {
+				response.sendRedirect("jsp_page/login404.jsp");
+			}*/
+			
+			
+				String passEncr = passwordInput;
+				if (passwordInput != null) {
+				    MessageDigest md = MessageDigest.getInstance("MD5"); 
+				    md.update(passwordInput.getBytes());
+				    BigInteger hash = new BigInteger(1, md.digest());
+				    passEncr = hash.toString(16);
+				    while (passEncr.length() < 32) {
+				    	passEncr = "0" + passEncr;
+				    }
+				}	
+				
+				
+			if (passEncr.equals(password)) {
 				session.setAttribute("username", usernameInput);
 				/*
 				 * TODO: METTERE COME ATTRIBUTO DI SESSIONE:
 				 * -STORIE A CUI PARTECIPO
-				 *
 				 */
-				
 				response.sendRedirect("jsp_page/homeUser.jsp");
-			}
+			} else {
 			
+			System.out.println("OH NON SONO UGUALI LE DUE PASSWORD");
+			response.sendRedirect("jsp_page/loginErrorePassword.jsp");
+			}
 
 		} catch (SQLException e) {
+			e.printStackTrace();
+
+
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -78,8 +78,6 @@ public class UsersManager implements UserModelI<User>{
 			preparedStatement.setString(4, user.getName());
 			preparedStatement.setString(5, user.getSurname());
 			
-
-			System.out.println("doSave: "+ preparedStatement.toString());
 			preparedStatement.executeUpdate();
 
 			connection.commit();
