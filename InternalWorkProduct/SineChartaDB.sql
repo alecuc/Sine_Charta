@@ -5,7 +5,7 @@ use dbSineCharta;
 
 drop table if exists utenteRegistrato;
 create table utenteRegistrato(
-	Username varchar(15) not null unique,
+	Username varchar(15) binary not null unique,
     Password varchar(40) not null,
     EMail varchar(30) not null unique,
     Nome varchar(50) not null,
@@ -53,7 +53,7 @@ create table Personaggio(
     FeriteTorso varchar(5),
     FeriteBraccia varchar(5),
     FeriteGambe varchar(5),
-    Username varchar(15),
+    Username varchar(15) binary not null,
     IdStory int,
     primary key(IdPG),
     foreign key(Username) references utenteRegistrato(Username) on delete cascade,
@@ -64,7 +64,7 @@ drop table if exists Sessione;
 create table Sessione(
 	Numero int auto_increment, 
     Contenuto varchar(100),
-    Username varchar(15),
+    Username varchar(15) binary not null ,
     IdStory int,
     primary key(Numero,Username, IdStory),
     foreign key(Username) references utenteRegistrato(Username) on delete cascade,
@@ -107,7 +107,7 @@ create table Oggetti(
 
 drop table if exists ha;
 create table ha(
-	Username varchar(15),
+	Username varchar(15) binary not null ,
     IdStory int,
     flag boolean,
     primary key (Username, IdStory),
