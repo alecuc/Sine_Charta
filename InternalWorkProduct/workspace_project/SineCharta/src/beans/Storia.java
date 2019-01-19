@@ -1,6 +1,8 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Storia implements Serializable{
 	
@@ -10,12 +12,26 @@ public class Storia implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private int id;
-	private String titolo, descrizione, ambientazione;
+	private String titolo, descrizione, ambientazione, username;
+	private Set<Personaggio> personaggi;
+	
+	
+	
 	
 	public Storia() {
-		
+		personaggi = new HashSet<Personaggio>();
 	}
 
+	public void addPersonaggio(Personaggio pg) {
+		personaggi.add(pg);
+		pg.setStoria(this);
+	}
+	
+	public void rimuoviPG(Personaggio pg) {
+		personaggi.remove(pg);
+		pg.setStoria(null);
+	}
+	
 	/**
 	 * @return the id
 	 */
@@ -72,15 +88,37 @@ public class Storia implements Serializable{
 		this.ambientazione = ambientazione;
 	}
 
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * @param username the username to set
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "Storia [id=" + id + ", titolo=" + titolo + ", descrizione=" + descrizione + ", ambientazione="
-				+ ambientazione + "]";
+				+ ambientazione + ", username=" + username + "]";
 	}
 	
 	
 
+<<<<<<< HEAD
 }
+=======
+	
+	
+	
+
+}
+>>>>>>> raffoBranch

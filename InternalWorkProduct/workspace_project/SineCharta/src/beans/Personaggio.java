@@ -1,6 +1,9 @@
 package beans;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
+
 
 public class Personaggio implements Serializable{
 	
@@ -9,14 +12,41 @@ public class Personaggio implements Serializable{
 	 */
 	private static final long serialVersionUID = -3995688470791211026L;
 	
-	String nome, cognome, nazionalita, taroccoDominante, username, feritaTesta, feritaBraccia, feritaTorso, feritaGambe;
-	int age, salute, risoluzione, id, idStoria;
-	
+	private String nome, cognome, nazionalita, taroccoDominante, username, feritaTesta, feritaBraccia, feritaTorso, feritaGambe;
+	private int age, salute, risoluzione, id, idStoria;
+	private Set<Oggetto> oggetti;
+	private Storia storia;
 	
 	/*Caratteristiche del personaggio*/
-	int intuito, memoria, percezione, volonta, aspetto, comando, creativita, socievolezza,
+	private int intuito, memoria, percezione, volonta, aspetto, comando, creativita, socievolezza,
 			coordinazione, destrManuale, forzaFisica, mira, affinOcculta,
 			distDaMorte, equilibrMentale, karma;
+	
+	
+	
+	public Personaggio() {
+		oggetti = new HashSet<Oggetto>();
+	}
+	
+	public void setStoria(Storia unaStoria) {
+		if(storia != unaStoria) {
+			Storia oldStory = storia;
+			storia = unaStoria;
+			if(unaStoria != null) unaStoria.addPersonaggio(this);
+			if(oldStory != null) oldStory.rimuoviPG(this);
+		}
+	}
+	
+	public void aggiungiOggetto(Oggetto obj) {
+		oggetti.add(obj);
+		obj.setOggettPG(this);
+	}
+	
+	public void rimuoviOggetto(Oggetto obj) {
+		oggetti.remove(obj);
+		obj.setOggettPG(null);
+	}
+
 	
 	/**
 	 * @return the id
