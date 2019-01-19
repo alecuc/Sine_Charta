@@ -5,7 +5,7 @@ use dbSineCharta;
 
 drop table if exists utenteRegistrato;
 create table utenteRegistrato(
-	Username varchar(15) not null unique,
+	Username varchar(15) binary not null unique,
     Password varchar(40) not null,
     EMail varchar(30) not null unique,
     Nome varchar(50) not null,
@@ -16,19 +16,19 @@ create table utenteRegistrato(
     
 drop table if exists Storia;
 create table Storia(
-	Id int auto_increment,
-	Titolo varchar(50),
+	IdStory int auto_increment,
+	Nome varchar(50),
     Descrizione varchar(500),
     Ambientazione enum('Terre Perdute','Quarto Reich','Soviet','Sanctum Imperum'),
-	primary key(Id)
+	primary key(IdStory)
     );
     
 drop table if exists Personaggio;
 create table Personaggio(
-	Id int auto_increment,
+	IdPG int auto_increment,
 	Nome varchar(30),
     Cognome varchar(30),
-    Età int not null default 1,
+    Età int,
     Nazionalità varchar(20),
     TaroccoDominante varchar(30),
     Intuito int,
@@ -47,134 +47,70 @@ create table Personaggio(
     Socievolezza int,
     Mira int,
     Karma int,
-    Risoluzione int not null,
+    Risoluzione int,
     Salute int,
     FeriteTesta varchar(5),
     FeriteTorso varchar(5),
     FeriteBraccia varchar(5),
     FeriteGambe varchar(5),
-    Username varchar(15),
-    Ide int,
-    primary key(Id),
+    Username varchar(15) binary not null,
+    IdStory int,
+    primary key(IdPG),
     foreign key(Username) references utenteRegistrato(Username) on delete cascade,
-    foreign key(Ide) references Storia(Id) on delete cascade
+    foreign key(IdStory) references Storia(IdStory) on delete cascade
     );
     
- drop table if exists Mazzo;
- create table Mazzo(
-	Tipo enum('Poker','Tarocco'),
-    num_rimaste int,
-	Username varchar(15), 
-    primary key(Tipo),
-    foreign key (Username) references utenteRegistrato(Username)
-	);
-
-drop table if exists CartaDaPoker;
-create table CartaDaPoker(
-	Valore int auto_increment,
-    Descrizione varchar(30),
-    Tipo enum('Poker','Tarocco'),
-    primary key (Valore),
-    foreign key (Tipo) references Mazzo(Tipo)
-    );    
-
-drop table if exists Tarocco;
-create table Tarocco(
-	Numero int auto_increment,
-    Descrizione varchar(100),
-    Descrizione_Dominante varchar(100),
-    Valore_Cuori int,
-    Valore_Quadri int,
-    Valore_Fiori int,
-    Valore_Picche int,
-    Tipo enum('Poker','Tarocco'),
-    primary key (Numero),
-    foreign key (Tipo) references Mazzo(Tipo)
-    );    
-
-
-drop table if exists Abilità;
-create table Abilità(
-	Identificativo varchar(30),
-    Valore int,
-    Id int ,
-    primary key(Identificativo),
-    foreign key(Id) references Personaggio(Id) on delete cascade
-	); 
-
-
 drop table if exists Sessione;
 create table Sessione(
 	Numero int auto_increment, 
     Contenuto varchar(100),
-    Username varchar(15),
-    Id int,
-    primary key(Numero),
+    Username varchar(15) binary not null ,
+    IdStory int,
+    primary key(Numero,Username, IdStory),
     foreign key(Username) references utenteRegistrato(Username) on delete cascade,
-    foreign key(Id) references Storia(Id) on delete cascade
+    foreign key(IdStory) references Storia(IdStory) on delete cascade
 	);
     
+drop table if exists Abilità;
+create table Abilità(
+	Nome varchar(30),
+    Valore int,
+    IdPG int ,
+    primary key(Nome),
+    foreign key(IdPG) references Personaggio(IdPG) on delete cascade
+	); 
+
+
+
 drop table if exists Keyword;
 create table Keyword(
-	id int auto_increment,
+	idKeyword int auto_increment,
 	Chiave varchar(50),
     Descrizione varchar(500),
-    Ide int,
-    primary key(id),
-    foreign key(Ide) references Storia(Id) on delete cascade
+    Numero int,
+    primary key(idKeyword),
+    foreign key(Numero) references Sessione(Numero) on delete cascade
     );
     
 drop table if exists Oggetti;
 create table Oggetti(
-	NomeOggetto varchar(30),
+	IdOggetto int auto_increment,
+    NomeOggetto varchar(30),
     Peso int not null,
     Costo int not null,
     Quantita int default 1 not null,
-    Id int default 1,
-    primary key(NomeOggetto),
-    foreign key(Id) references Personaggio(Id) on delete cascade
+    IdPG int default 1,
+    primary key(IdOggetto),
+    foreign key(IdPG) references Personaggio(IdPG) on delete cascade
 );
 
-drop table if exists Armi;
-create table Armi(
-	Id int auto_increment,
-	Tipo enum('Pistola','Mitra','Fucile'),
-    Modello varchar(15) not null,
-    Danno int,
-    Munizione varchar(10) not null,
-    Ricarica int,
-	NomeOggetto varchar(30),
-    primary key(Id),
-    foreign key (NomeOggetto) references Oggetti(NomeOggetto) on delete cascade
-);
 
-drop table if exists Realizza;
-create table Realizza(
-	Username varchar(15) not null,
-	Id int,
-    primary key(Username, Id),
-    foreign key(Username) references utenteRegistrato(Username),
-    foreign key(Id) references Storia(Id) on delete cascade
+drop table if exists ha;
+create table ha(
+	Username varchar(15) binary not null ,
+    IdStory int,
+    flag boolean,
+    primary key (Username, IdStory),
+    foreign key(Username) references utenteRegistrato(Username) on delete cascade,
+    foreign key(IdStory) references Storia(IdStory) on delete cascade
     );
-    
-drop table if exists Crea;
-create table Crea(
-	Username varchar(15) not null,
-    Numero int,
-    primary key(Username, Numero),
-    foreign key(Username) references utenteRegistrato(Username),
-    foreign key(Numero) references Sessione(Numero) on delete cascade
-);
-
-drop table if exists èInvitato;
-create table èInvitato(
-	Username varchar(15) not null,
-    Id int,
-    primary key(Username, Id),
-    foreign key(Username) references utenteRegistrato(Username),
-    foreign key(Id) references Storia(Id) on delete cascade
-	);
- 
- 
- 
- 
