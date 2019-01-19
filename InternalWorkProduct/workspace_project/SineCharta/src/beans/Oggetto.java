@@ -14,12 +14,27 @@ public class Oggetto implements Serializable{
 	private String nome;
 	private double peso, costo;
 	private int quantita, id_oggetto;
-
+	private Personaggio pg;
+	private Arma arma;
+	
 	
 	public Oggetto() {
+		arma = new Arma(this);
+	}
+	
+	public Arma getArma() {
+		return arma;
+	}
+	
+	public void setPG(Personaggio newpg) {
+		if(pg != newpg) {
+			Personaggio old = pg;
+			pg = newpg;
+			if(newpg != null) newpg.aggiungiOggetto(this);
+			if(old != null) old.rimuoviOggetto(this);
+		}
 		
 	}
-
 	
 	
 	/**
@@ -89,6 +104,8 @@ public class Oggetto implements Serializable{
 	public void setQuantita(int quantita) {
 		this.quantita = quantita;
 	}
+
+
 
 	
 	

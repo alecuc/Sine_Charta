@@ -11,7 +11,7 @@ public class Arma extends Oggetto{
 	private int danno, ricarica;
 	private enum tipo{pistola, mitra,fucile};
 	private tipo miaArma;
-	
+	private Oggetto oggetto;
 	/**
 	 * 
 	 * 
@@ -20,6 +20,13 @@ public class Arma extends Oggetto{
 		super();
 	}
 
+	public Arma(Oggetto obj) {
+		this.oggetto = obj;
+	}
+	
+	public Oggetto getOggetto() {
+		return oggetto;
+	}
 	/**
 	 * Metodi per settare il tipo di arma.
 	 * 

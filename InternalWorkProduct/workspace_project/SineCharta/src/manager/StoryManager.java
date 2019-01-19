@@ -19,12 +19,12 @@ public class StoryManager {
 	 * @param idStoria= identificativo della storia
 	 * @return la storia a cui si riferisce idStoria
 	 */
-	public Storia getStoria(int idStoria) throws SQLException{
+	public Storia getStoria(int idStoria, String username) throws SQLException{
 		
 		Connection con = null;
 		PreparedStatement ps = null;
 		Storia storia = new Storia();
-		String selectStoria = "SELECT * FROM "+TABLE_NAME_STORIA+" WHERE ID = ?";
+		String selectStoria = "SELECT * FROM "+TABLE_NAME_STORIA+" WHERE ID = ? AND USERNAME = ?";
 		
 		try {
 			con = DriverManagerConnectionPool.getConnection();
@@ -37,6 +37,7 @@ public class StoryManager {
 				storia.setTitolo(rs.getString("Titolo"));
 				storia.setDescrizione(rs.getString("Descrizione"));
 				storia.setAmbientazione(rs.getString("Ambientazione"));
+				storia.setUsername(rs.getString("Username"));
 			}
 			
 		}finally {
@@ -55,7 +56,7 @@ public class StoryManager {
 	 * Metodo che carica la lista delle storie di un Utente moderatore 
 	 * @return lista di tutte le storie associate alla username
 	 */
-	public Collection<Storia> listaStorie(/*USERNAME dell'utente*/) throws SQLException{
+	public Collection<Storia> listaStorie(String username) throws SQLException{
 		
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -65,7 +66,7 @@ public class StoryManager {
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(storieUtente);
-			ps.setString(1, "USERNAME");
+			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
 			System.out.println("listaStorie: " + ps.toString());
 			
@@ -77,7 +78,7 @@ public class StoryManager {
 				storia.setTitolo(rs.getString("Titolo"));
 				storia.setDescrizione(rs.getString("Descrizione"));
 				storia.setAmbientazione(rs.getString("Ambientazione"));
-				
+				storia.setUsername(rs.getString("Username"));
 				storie.add(storia);
 			}
 		}finally {
@@ -130,16 +131,17 @@ public class StoryManager {
 	 * @param idStoria= identificativo della storia da eliminare
 	 * @return risultato dell'avvenuta eliminazione
 	 */
-	public boolean eliminaStoria(int idStoria) throws SQLException{
+	public boolean eliminaStoria(int idStoria, String username) throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
-		String eliminaStoria = "DELETE FROM " + TABLE_NAME_STORIA + " WHERE ID = ?";
+		String eliminaStoria = "DELETE FROM " + TABLE_NAME_STORIA + " WHERE ID = ? AND USERNAME = ?";
 		
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(eliminaStoria);
 			ps.setInt(1, idStoria);
+			ps.setString(2,	username);
 			result = ps.executeUpdate();
 			System.out.println("eliminaStoria: " + ps.toString());
 			con.commit();
