@@ -5,8 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Successo!</title>
-        <meta http-equiv="refresh" content="5; url=index.jsp" />
-        <link rel="stylesheet" href="../css/bootstrap.min.css">
+<jsp:include page="head.jsp"></jsp:include>
 </head>
 <body>
 <div class="container bg-cont">

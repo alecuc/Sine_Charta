@@ -4,11 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
+<jsp:include page="head.jsp"></jsp:include>
 <title>Personal Page</title>
 </head>
 <body>
@@ -43,7 +39,7 @@
           <a class="nav-link" href="#">Modifica credenziali</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link" href="creazionePG.jsp">Crea pg (provvisorio)</a>
         </li>
         <li class="nav-item">
           <a class="nav-link disabled" href="#">Disabled</a>
