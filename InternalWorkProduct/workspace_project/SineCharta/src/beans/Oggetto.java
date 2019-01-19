@@ -26,7 +26,7 @@ public class Oggetto implements Serializable{
 		return arma;
 	}
 	
-	public void setPG(Personaggio newpg) {
+	public void setOggettPG(Personaggio newpg) {
 		if(pg != newpg) {
 			Personaggio old = pg;
 			pg = newpg;
