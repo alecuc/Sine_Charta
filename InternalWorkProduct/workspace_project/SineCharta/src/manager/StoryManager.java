@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package manager;
 
 import java.sql.Connection;
@@ -158,10 +157,3 @@ public class StoryManager {
 	
 	
 }
-=======
-package manager;
-
-public class StoryManager {
-
-}
->>>>>>> fraBranch
