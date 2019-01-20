@@ -8,4 +8,14 @@
     <resource-env-ref-name>jdbc/sql7274119</resource-env-ref-name>
     <resource-env-ref-type>javax.sql.DataSource</resource-env-ref-type>
   </resource-env-ref>
+  <error-page>
+    <!-- Missing resource -->
+    <error-code>404</error-code>
+    <location>/jsp_page/error404.jsp</location>
+</error-page>
+<error-page>
+    <!-- Uncaught exception -->
+    <error-code>500</error-code>
+    <location>/jsp_page/error500.jsp</location>
+</error-page>
 </web-app>

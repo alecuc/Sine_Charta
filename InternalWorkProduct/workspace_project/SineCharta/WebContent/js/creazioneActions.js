@@ -78,18 +78,30 @@ $(document).ready(function(){
 		$('#dealQuadri').prop('disabled',false);
 		$('#dealFiori').prop('disabled',false);
 		$('#dealPicche').prop('disabled',false);
-		$('#confCar').prop('disabled',false);
+		$('#confermaPunti').prop('disabled',false);
 	});
 
-	$('#confCar').click(function(){
+	
+/*	$('#confPunti').click(function(){
 		$(this).prop('disabled',true);
 		$('#dealCuori').prop('disabled',true);
 		$('#dealQuadri').prop('disabled',true);
 		$('#dealFiori').prop('disabled',true);
 		$('#dealPicche').prop('disabled',true);
 		$('#setCar').prop('disabled',false);
+		$('#confCar').prop('disabled',false);
 	});
-
+//	*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	var countDom=1;
 	var countCuori=1;

@@ -113,12 +113,4 @@ public class Storia implements Serializable{
 	
 	
 
-<<<<<<< HEAD
 }
-=======
-	
-	
-	
-
-}
->>>>>>> raffoBranch
