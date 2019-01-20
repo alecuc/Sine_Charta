@@ -25,16 +25,15 @@ create table Storia(
     
 drop table if exists Personaggio;
 create table Personaggio(
-	IdPG int auto_increment,
 	Nome varchar(30),
     Cognome varchar(30),
-    Età int,
-    Nazionalità varchar(20),
+    Eta int,
+    Nazionalita varchar(20),
     TaroccoDominante varchar(30),
     Intuito int,
     Aspetto int,
     Coordinazione int,
-    AffinitàOcculta int,
+    AffinitaOcculta int,
     Memoria int,
     Comando int,
     DestrezzaManuale int,
@@ -43,7 +42,7 @@ create table Personaggio(
     Creatività int,
     ForzaFisica int,
     EquilibrioMentale int,
-    Volontà int,
+    Volonta int,
     Socievolezza int,
     Mira int,
     Karma int,
@@ -55,7 +54,7 @@ create table Personaggio(
     FeriteGambe varchar(5),
     Username varchar(15) binary not null,
     IdStory int,
-    primary key(IdPG),
+    primary key(Username,IdStory),
     foreign key(Username) references utenteRegistrato(Username) on delete cascade,
     foreign key(IdStory) references Storia(IdStory) on delete cascade
     );
@@ -71,13 +70,15 @@ create table Sessione(
     foreign key(IdStory) references Storia(IdStory) on delete cascade
 	);
     
-drop table if exists Abilità;
+drop table if exists Abilita;
 create table Abilità(
 	Nome varchar(30),
     Valore int,
-    IdPG int ,
+    Username varchar(15) binary not null,
+    IdStory int,
     primary key(Nome),
-    foreign key(IdPG) references Personaggio(IdPG) on delete cascade
+    foreign key(Username) references Personaggio(Username) on delete cascade,
+    foreign key(IdStory) references Personaggio(IdStory) on delete cascade
 	); 
 
 
@@ -99,13 +100,15 @@ create table Oggetti(
     Peso int not null,
     Costo int not null,
     Quantita int default 1 not null,
-    IdPG int default 1,
+    Username varchar(15) binary not null,
+    IdStory int,
     primary key(IdOggetto),
-    foreign key(IdPG) references Personaggio(IdPG) on delete cascade
+    foreign key(Username) references Personaggio(Username) on delete cascade,
+    foreign key(IdStory) references Personaggio(IdStory) on delete cascade
 );
 
 
-drop table if exists ha;
+drop table if exists listaStoria;
 create table ha(
 	Username varchar(15) binary not null ,
     IdStory int,
