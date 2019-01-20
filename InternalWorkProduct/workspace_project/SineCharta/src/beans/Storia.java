@@ -111,14 +111,5 @@ public class Storia implements Serializable{
 				+ ambientazione + ", username=" + username + "]";
 	}
 	
-	
-
-<<<<<<< HEAD
 }
-=======
-	
-	
-	
 
-}
->>>>>>> raffoBranch
