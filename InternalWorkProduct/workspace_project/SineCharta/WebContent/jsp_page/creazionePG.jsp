@@ -75,7 +75,7 @@
 			<div class="col-8">
 
 				<img src="../images/cardPlaceholder.png" id="mazzo" class="col-4">
-				<img src="../images/cardPlaceholder.png" id="mazzo" class="col-4">
+				<img src="../images/cardPlaceholder.png" id="estratta" class="col-4">
 
 			</div>
 
@@ -106,7 +106,7 @@
 	<br>
 	<br>
 
-	<!-- ESTRAZIONE CARATTERISTICHE -->
+	<!-- ESTRAZIONE PUNTI CARATTERISTICHE -->
 
 	<div class="container card p-2" id="caratteristiche">
 		<div class="row">
@@ -144,10 +144,9 @@
 					style="background-color: #212529; border-color: red;"
 					id="dealPicche" disabled>Estrai nuova</button>
 				<br>
-				<button class="btn btn-dark"
-					style="background-color: #212529; border-color: red;" id="confCar"
-					disabled>Conferma</button>
-
+				<button class="btn btn-dark mb-2"
+					style="background-color: #212529; border-color: red;"
+					id="confermaPunti" disabled>Conferma punti</button>
 			</div>
 		</div>
 	</div>
@@ -160,80 +159,166 @@
 
 	<!-- TABELLA SELEZIONE CARATTERISTICHE -->
 
-
 	<fieldset id="setCar" class="container" disabled>
 		<table class="table table-dark">
 			<tbody>
 				<tr>
+
+					<th><label>CUORI - Rimasti: </label></th>
+					<th><label id="cuoriRimasti">xx</label></th>
+					<th><label>QUADRI - Rimasti: </label></th>
+					<th><label id="quadriRimasti">xx</label></th>
+					<th><label>FIORI - Rimasti: </label></th>
+					<th><label id="fioriRimasti">xx</label></th>
+					<th><label>PICCHE - Rimasti: </label></th>
+					<th><label id="piccheRimasti">xx</label></th>
+
+				</tr>
+				<tr>
 					<td><label>Intuito: </label></td>
 					<td><input type="number" name="quantity" min="1" max="6"
 						value="1"></td>
-
-					<td><label>Memoria: </label></td>
+					<td><label>Aspetto: </label></td>
 					<td><input type="number" name="quantity" min="1" max="6"
 						value="1"></td>
-					<td><label>Percezione: </label></td>
+					<td><label>Coordinazione: </label></td>
 					<td><input type="number" name="quantity" min="1" max="6"
 						value="1"></td>
-					<td><label>Volontà:</label></td>
+					<td><label>Affinità occulta:</label></td>
 					<td><input type="number" name="quantity" min="1" max="6"
 						value="1"></td>
-					<td><label>Punti rimasti:</label><label id="quadriRimasti">x</label></td>
 				</tr>
 				<tr>
-					<td><label>Aspetto:</label></td>
+					<td><label>Memoria:</label></td>
 					<td><input type="number" name="quantity" min="1" max="6"
 						value="1"></td>
 					<td><label>Comando:</label></td>
 					<td><input type="number" name="quantity" min="1" max="6"
 						value="1"></td>
-					<td><label>Creatività:</label></td>
+					<td><label>Destrezza manuale:</label></td>
 					<td><input type="number" name="quantity" min="1" max="6"
 						value="1"></td>
-					<td><label>Socievolezza: </label></td>
+					<td><label>Distanza dalla morte: </label></td>
 					<td><input type="number" name="quantity" min="1" max="6"
 						value="1"></td>
-					<td><label>Punti rimasti: </label><label id="quadriRimasti">x</label></td>
 				</tr>
 				<tr>
-					<td><label>Coordinazione:</label></td>
+					<td><label>Percezione:</label></td>
 					<td><input type="number" name="quantity" min="1" max="6"
 						value="1"></td>
-					<td><label>Destrezza manuale:</label></td>
+					<td><label>Creatività:</label></td>
 					<td><input type="number" name="quantity" min="1" max="6"
 						value="1"></td>
 					<td><label>Forza fisica:</label></td>
 					<td><input type="number" name="quantity" min="1" max="6"
 						value="1"></td>
-					<td><label>Mira: </label></td>
+					<td><label>Equilibrio mentale: </label></td>
 					<td><input type="number" name="quantity" min="1" max="6"
 						value="1"></td>
-					<td><label>Punti rimasti: </label><label id="quadriRimasti">x</label></td>
 				</tr>
 				<tr>
-					<td><label>Affinità occulta:</label></td>
+					<td><label>Volontà:</label></td>
 					<td><input type="number" name="quantity" min="1" max="6"
 						value="1"></td>
-					<td><label>Dist. dalla morte:</label></td>
+					<td><label>Socievolezza:</label></td>
 					<td><input type="number" name="quantity" min="1" max="6"
 						value="1"></td>
-					<td><label>Equilibrio mentale:</label></td>
+					<td><label>Mira:</label></td>
 					<td><input type="number" name="quantity" min="1" max="6"
 						value="1"></td>
 					<td><label>Karma: </label></td>
 					<td><input type="number" name="quantity" min="1" max="6"
 						value="1"></td>
-					<td><label>Punti rimasti: </label><label id="quadriRimasti">x</label></td>
 				</tr>
 			</tbody>
 		</table>
-		<form action="riepilogoPG.jsp">
-			<button class="btn btn-dark mb-2 mx-1"
-				style="background-color: #212529; border-color: red;">COMPLETA
-				CREAZIONE PG</button>
-		</form>
-	</fieldset>
 
+	</fieldset>
+	<button class="btn btn-dark mb-2 mx-1"
+		style="background-color: #212529; border-color: red;" id="confCar"
+		disabled>CONFERMA CARATTERISTICHE</button>
+	<br>
+	<br>
+	<br>
+
+
+
+
+	<div class="container">
+		<h2 class="card-title">
+			PUNTI ABILITÀ TOTALI: <label id="totAbi">XX</label>
+		</h2>
+	</div>
+	<fieldset id="setAbi" class="container" disabled>
+		<table class="table table-dark">
+			<tbody>
+				<tr>
+
+					<th><label>ABILITÀ</label></th>
+					<th><label>CARATTERISTICA</label></th>
+					<th><label>PUNTI ABILITÀ</label></th>
+					<th><label>TOTALE</label></th>
+
+				</tr>
+				<tr>
+					<td><label>abi</label></td>
+
+					<td><label>car</label></td>
+
+					<td><input type="number" name="quantity" min="1" max="6"
+						value="1"></td>
+
+					<td><label>tot</label></td>
+				</tr>
+				<tr>
+					<td><label>abi</label></td>
+
+					<td><label>car</label></td>
+
+					<td><input type="number" name="quantity" min="1" max="6"
+						value="1"></td>
+
+					<td><label>tot</label></td>
+				</tr>
+				<tr>
+					<td><label>abi</label></td>
+
+					<td><label>car</label></td>
+
+					<td><input type="number" name="quantity" min="1" max="6"
+						value="1"></td>
+
+					<td><label>tot</label></td>
+				</tr>
+				<tr>
+					<td><label>abi</label></td>
+
+					<td><label>car</label></td>
+
+					<td><input type="number" name="quantity" min="1" max="6"
+						value="1"></td>
+
+					<td><label>tot</label></td>
+				</tr>
+				<tr>
+					<td><label>abi</label></td>
+
+					<td><label>car</label></td>
+
+					<td><input type="number" name="quantity" min="1" max="6"
+						value="1"></td>
+
+					<td><label>tot</label></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</fieldset>
+	<form action="riepilogoPG.jsp">
+		<button class="btn btn-dark mb-2 mx-1"
+			style="background-color: #212529; border-color: red;" id="completa"
+			disabled>COMPLETA CREAZIONE PG</button>
+	</form>
 	<br>
 	<br>
 	<br>
