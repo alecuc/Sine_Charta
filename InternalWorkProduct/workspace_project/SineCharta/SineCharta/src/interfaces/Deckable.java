@@ -1,9 +1,14 @@
 package interfaces;
 
+
+import beans.Tarocco;
+
 public interface Deckable {
 	
-	public Object estrai();
-	public void mischia();
+	public String estraiPoker();
+	public Tarocco estraiTarocco();
+	public void mischiaPoker();
+	public void mischiaTarocco();
 	
 	
 
