@@ -1,0 +1,14 @@
+package beans;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class NemicoTest {
+
+	@Test
+	public void test() {
+		fail("Not yet implemented");
+	}
+
+}
