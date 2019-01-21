@@ -82,7 +82,7 @@ $(document).ready(function(){
 	});
 
 	
-/*	$('#confPunti').click(function(){
+	$('#confermaPunti').click(function(){
 		$(this).prop('disabled',true);
 		$('#dealCuori').prop('disabled',true);
 		$('#dealQuadri').prop('disabled',true);
@@ -91,16 +91,13 @@ $(document).ready(function(){
 		$('#setCar').prop('disabled',false);
 		$('#confCar').prop('disabled',false);
 	});
-//	*/
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	$('#confCar').click(function(){
+		$(this).prop('disabled',true);
+		$('#setCar').prop('disabled',true);
+		$('#setAbi').prop('disabled',false);
+		$('#completa').prop('disabled',false);
+	});
 	
 	
 	var countDom=1;
@@ -112,10 +109,19 @@ $(document).ready(function(){
 	$('#dealDom').click(function(){
 		countDom++;
 		/**
-		 * ESTRAI TAROCCO DOMINANTE
-		 * 
+		 * ESTRAI TAROCCO DOMINANTE:
+		 * 	 SETTA L'IMMAGINE DI #TDOM
+		 * 	 SETTA LA DESCRIZIONE DI #TDOM
 		 * */
 
+		$("#tDom").animate({width:'toggle'},350);
+		
+		//QUESTO DEVE CAMBIARE IN BASE A QUELLA ESTRATTA
+		$("#tDom").attr("src","../images/cardPlaceholder2.png");
+		
+		
+		$("#tDom").animate({width:'toggle'},350);
+		
 		if(countDom==3){
 			$('#dealDom').prop('disabled',true);
 		}
@@ -126,8 +132,12 @@ $(document).ready(function(){
 		countCuori++;
 		/**
 		 * ESTRAI CUORI
+		 * SETTA IL VALORE E L'IMMAGINE
 		 * 
 		 * */
+		$("#tarCuori").animate({width:'toggle'},350);
+		$("#tarCuori").attr("src","../images/cardPlaceholder2.png");
+		$("#tarCuori").animate({width:'toggle'},350);
 
 		if(countCuori==3){
 			$('#dealCuori').prop('disabled',true);
@@ -139,9 +149,13 @@ $(document).ready(function(){
 		countQuadri++;
 		/**
 		 * ESTRAI QUADRI
+		 * SETTA IL VALORE E L'IMMAGINE
 		 * 
 		 * */
-
+		$("#tarQuadri").animate({width:'toggle'},350);
+		$("#tarQuadri").attr("src","../images/cardPlaceholder2.png");
+		$("#tarQuadri").animate({width:'toggle'},350);
+		
 		if(countQuadri==3){
 			$('#dealQuadri').prop('disabled',true);
 		}
@@ -152,8 +166,12 @@ $(document).ready(function(){
 		countFiori++;
 		/**
 		 * ESTRAI FIORI
+		 * SETTA IL VALORE E L'IMMAGINE
 		 * 
 		 * */
+		$("#tarFiori").animate({width:'toggle'},350);
+		$("#tarFiori").attr("src","../images/cardPlaceholder2.png");
+		$("#tarFiori").animate({width:'toggle'},350);
 
 		if(countFiori==3){
 			$('#dealFiori').prop('disabled',true);
@@ -165,8 +183,12 @@ $(document).ready(function(){
 		countPicche++;
 		/**
 		 * ESTRAI PICCHE
+		 * SETTA IL VALORE E L'IMMAGINE
 		 * 
-		 * */
+		 * */		
+		$("#tarPicche").animate({width:'toggle'},350);
+		$("#tarPicche").attr("src","../images/cardPlaceholder2.png");
+		$("#tarPicche").animate({width:'toggle'},350);
 
 		if(countPicche==3){
 			$('#dealPicche').prop('disabled',true);

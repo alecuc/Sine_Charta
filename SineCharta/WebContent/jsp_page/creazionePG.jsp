@@ -56,11 +56,10 @@
 			</div>
 			<label><input type="radio" name="sesso" value="uomo"
 				id="PGuomo">Uomo</label> <label><input type="radio"
-				name="sesso" value="donna" id="PGdonna"> Donna</label> <br>
-
+				name="sesso" value="donna" id="PGdonna"> Donna</label>
+			<button class="btn btn-dark"
+				style="background-color: #212529; border-color: red;" id="confGen">Conferma</button>
 		</form>
-		<button class="btn btn-dark"
-			style="background-color: #212529; border-color: red;" id="confGen">Conferma</button>
 	</div>
 
 	<br>
@@ -75,7 +74,7 @@
 			<div class="col-8">
 
 				<img src="../images/cardPlaceholder.png" id="mazzo" class="col-4">
-				<img src="../images/cardPlaceholder.png" id="estratta" class="col-4">
+				<img src="../images/cardPlaceholder.png" id="tDom" class="col-4">
 
 			</div>
 
@@ -112,33 +111,46 @@
 		<div class="row">
 			<br> <br> <br>
 			<div class="col-3">
-				<img src="../images/cardPlaceholder.png" id="tarCuori" class="mb-2"><br>
+				<img src="../images/cardPlaceholder.png" id="tarCuori" class="mb-2">
+
+
+			</div>
+			<div class="col-3">
+				<img src="../images/cardPlaceholder.png" id="tarQuadri" class="mb-2">
+
+			</div>
+			<div class="col-3">
+				<img src="../images/cardPlaceholder.png" id="tarFiori" class="mb-2">
+
+			</div>
+			<div class="col-3">
+				<img src="../images/cardPlaceholder.png" id="tarPicche" class="mb-2">
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-3">
 				<label>Valore cuori: </label><label id="valCuori">X</label><br>
 				<button class="btn btn-dark mb-2"
 					style="background-color: #212529; border-color: red;"
 					id="dealCuori" disabled>Estrai nuova</button>
-
 			</div>
+
 			<div class="col-3">
-				<img src="../images/cardPlaceholder.png" id="tarQuadri" class="mb-2"><br>
 				<label>Valore quadri: </label><label id="valQuadri">X</label><br>
 				<button class="btn btn-dark mb-2"
 					style="background-color: #212529; border-color: red;"
 					id="dealQuadri" disabled>Estrai nuova</button>
-				<br>
-
 			</div>
+
 			<div class="col-3">
-				<img src="../images/cardPlaceholder.png" id="tarFiori" class="mb-2"><br>
 				<label>Valore fiori: </label><label id="valFiori">X</label><br>
 				<button class="btn btn-dark mb-2"
 					style="background-color: #212529; border-color: red;"
 					id="dealFiori" disabled>Estrai nuova</button>
-				<br>
-
 			</div>
+
 			<div class="col-3">
-				<img src="../images/cardPlaceholder.png" id="tarPicche" class="mb-2"><br>
 				<label>Valore picche: </label><label id="valPicche">X</label><br>
 				<button class="btn btn-dark mb-2"
 					style="background-color: #212529; border-color: red;"
@@ -148,6 +160,7 @@
 					style="background-color: #212529; border-color: red;"
 					id="confermaPunti" disabled>Conferma punti</button>
 			</div>
+
 		</div>
 	</div>
 
@@ -158,85 +171,86 @@
 	<br>
 
 	<!-- TABELLA SELEZIONE CARATTERISTICHE -->
+	<div class="container">
+		<fieldset id="setCar" class="container" disabled>
+			<table class="table table-dark">
+				<tbody>
+					<tr>
 
-	<fieldset id="setCar" class="container" disabled>
-		<table class="table table-dark">
-			<tbody>
-				<tr>
+						<th><label>CUORI - Rimasti: </label></th>
+						<th><label id="cuoriRimasti">xx</label></th>
+						<th><label>QUADRI - Rimasti: </label></th>
+						<th><label id="quadriRimasti">xx</label></th>
+						<th><label>FIORI - Rimasti: </label></th>
+						<th><label id="fioriRimasti">xx</label></th>
+						<th><label>PICCHE - Rimasti: </label></th>
+						<th><label id="piccheRimasti">xx</label></th>
 
-					<th><label>CUORI - Rimasti: </label></th>
-					<th><label id="cuoriRimasti">xx</label></th>
-					<th><label>QUADRI - Rimasti: </label></th>
-					<th><label id="quadriRimasti">xx</label></th>
-					<th><label>FIORI - Rimasti: </label></th>
-					<th><label id="fioriRimasti">xx</label></th>
-					<th><label>PICCHE - Rimasti: </label></th>
-					<th><label id="piccheRimasti">xx</label></th>
+					</tr>
+					<tr>
+						<td><label>Intuito: </label></td>
+						<td><input type="number" name="quantity" min="1" max="6"
+							value="1"></td>
+						<td><label>Aspetto: </label></td>
+						<td><input type="number" name="quantity" min="1" max="6"
+							value="1"></td>
+						<td><label>Coordinazione: </label></td>
+						<td><input type="number" name="quantity" min="1" max="6"
+							value="1"></td>
+						<td><label>Affinità occulta:</label></td>
+						<td><input type="number" name="quantity" min="1" max="6"
+							value="1"></td>
+					</tr>
+					<tr>
+						<td><label>Memoria:</label></td>
+						<td><input type="number" name="quantity" min="1" max="6"
+							value="1"></td>
+						<td><label>Comando:</label></td>
+						<td><input type="number" name="quantity" min="1" max="6"
+							value="1"></td>
+						<td><label>Destrezza manuale:</label></td>
+						<td><input type="number" name="quantity" min="1" max="6"
+							value="1"></td>
+						<td><label>Distanza dalla morte: </label></td>
+						<td><input type="number" name="quantity" min="1" max="6"
+							value="1"></td>
+					</tr>
+					<tr>
+						<td><label>Percezione:</label></td>
+						<td><input type="number" name="quantity" min="1" max="6"
+							value="1"></td>
+						<td><label>Creatività:</label></td>
+						<td><input type="number" name="quantity" min="1" max="6"
+							value="1"></td>
+						<td><label>Forza fisica:</label></td>
+						<td><input type="number" name="quantity" min="1" max="6"
+							value="1"></td>
+						<td><label>Equilibrio mentale: </label></td>
+						<td><input type="number" name="quantity" min="1" max="6"
+							value="1"></td>
+					</tr>
+					<tr>
+						<td><label>Volontà:</label></td>
+						<td><input type="number" name="quantity" min="1" max="6"
+							value="1"></td>
+						<td><label>Socievolezza:</label></td>
+						<td><input type="number" name="quantity" min="1" max="6"
+							value="1"></td>
+						<td><label>Mira:</label></td>
+						<td><input type="number" name="quantity" min="1" max="6"
+							value="1"></td>
+						<td><label>Karma: </label></td>
+						<td><input type="number" name="quantity" min="1" max="6"
+							value="1"></td>
+					</tr>
+				</tbody>
+			</table>
 
-				</tr>
-				<tr>
-					<td><label>Intuito: </label></td>
-					<td><input type="number" name="quantity" min="1" max="6"
-						value="1"></td>
-					<td><label>Aspetto: </label></td>
-					<td><input type="number" name="quantity" min="1" max="6"
-						value="1"></td>
-					<td><label>Coordinazione: </label></td>
-					<td><input type="number" name="quantity" min="1" max="6"
-						value="1"></td>
-					<td><label>Affinità occulta:</label></td>
-					<td><input type="number" name="quantity" min="1" max="6"
-						value="1"></td>
-				</tr>
-				<tr>
-					<td><label>Memoria:</label></td>
-					<td><input type="number" name="quantity" min="1" max="6"
-						value="1"></td>
-					<td><label>Comando:</label></td>
-					<td><input type="number" name="quantity" min="1" max="6"
-						value="1"></td>
-					<td><label>Destrezza manuale:</label></td>
-					<td><input type="number" name="quantity" min="1" max="6"
-						value="1"></td>
-					<td><label>Distanza dalla morte: </label></td>
-					<td><input type="number" name="quantity" min="1" max="6"
-						value="1"></td>
-				</tr>
-				<tr>
-					<td><label>Percezione:</label></td>
-					<td><input type="number" name="quantity" min="1" max="6"
-						value="1"></td>
-					<td><label>Creatività:</label></td>
-					<td><input type="number" name="quantity" min="1" max="6"
-						value="1"></td>
-					<td><label>Forza fisica:</label></td>
-					<td><input type="number" name="quantity" min="1" max="6"
-						value="1"></td>
-					<td><label>Equilibrio mentale: </label></td>
-					<td><input type="number" name="quantity" min="1" max="6"
-						value="1"></td>
-				</tr>
-				<tr>
-					<td><label>Volontà:</label></td>
-					<td><input type="number" name="quantity" min="1" max="6"
-						value="1"></td>
-					<td><label>Socievolezza:</label></td>
-					<td><input type="number" name="quantity" min="1" max="6"
-						value="1"></td>
-					<td><label>Mira:</label></td>
-					<td><input type="number" name="quantity" min="1" max="6"
-						value="1"></td>
-					<td><label>Karma: </label></td>
-					<td><input type="number" name="quantity" min="1" max="6"
-						value="1"></td>
-				</tr>
-			</tbody>
-		</table>
-
-	</fieldset>
-	<button class="btn btn-dark mb-2 mx-1"
-		style="background-color: #212529; border-color: red;" id="confCar"
-		disabled>CONFERMA CARATTERISTICHE</button>
+		</fieldset>
+		<button class="btn btn-dark mb-2 mx-1 float-right"
+			style="background-color: #212529; border-color: red;" id="confCar"
+			disabled>CONFERMA CARATTERISTICHE</button>
+	</div>
 	<br>
 	<br>
 	<br>
@@ -248,7 +262,6 @@
 		<h2 class="card-title">
 			PUNTI ABILITÀ TOTALI: <label id="totAbi">XX</label>
 		</h2>
-	</div>
 	<fieldset id="setAbi" class="container" disabled>
 		<table class="table table-dark">
 			<tbody>
@@ -315,10 +328,12 @@
 
 	</fieldset>
 	<form action="riepilogoPG.jsp">
-		<button class="btn btn-dark mb-2 mx-1"
+		<button class="btn btn-dark mb-2 mx-1 float-right"
 			style="background-color: #212529; border-color: red;" id="completa"
 			disabled>COMPLETA CREAZIONE PG</button>
 	</form>
+		</div>
+	
 	<br>
 	<br>
 	<br>
