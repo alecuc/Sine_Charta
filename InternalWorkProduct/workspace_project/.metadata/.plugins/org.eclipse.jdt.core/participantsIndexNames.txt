@@ -1,5 +1,0 @@
-INDEX VERSION 1.131
-C:\Users\utente\Documents\GitHub\Sine_Charta\InternalWorkProduct\workspace_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3181583606.index
-\SineCharta\src
-C:\Users\utente\Documents\GitHub\Sine_Charta\InternalWorkProduct\workspace_project\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\1946467266.index
-\SineCharta\src
