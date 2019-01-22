@@ -1,9 +1,7 @@
 package beans;
 
 public class Nemico {
-<<<<<<< HEAD
 
-=======
 	
 	/**
 	 * Rappresenta la classe Nemico o NPC 
@@ -73,5 +71,5 @@ public class Nemico {
 		this.attacco = attacco;
 	}
  
->>>>>>> Develop
+
 }
