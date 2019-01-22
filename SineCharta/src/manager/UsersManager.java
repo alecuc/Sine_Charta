@@ -1,6 +1,8 @@
 package manager;
 import java.util.Collection;
 
+import beans.Personaggio;
+
 import beans.User;
 
 import java.sql.*;
@@ -52,6 +54,20 @@ public class UsersManager implements UserModelI<User>{
 		return bean;
 
 	}
+
+
+	public void aggiungiPGUser(String username, int idStoria)throws SQLException {
+			User utentePG = new User();	
+			UsersManager user = new UsersManager();
+			PersonaggioManager pgM = new PersonaggioManager();
+			Personaggio pgUtente = pgM.getPersonaggioByUtente(idStoria, username);
+
+			
+			utentePG = user.doRetrieveByKey(username);
+			utentePG.aggiungiPG(pgUtente);
+		
+	}
+	
 
 	@Override
 	public Collection<User> doRetrieveAll(String order) throws SQLException {

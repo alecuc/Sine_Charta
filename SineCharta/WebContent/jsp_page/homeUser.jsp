@@ -47,7 +47,7 @@
       </ul>
       <hr class="d-sm-none">
     </div>
-       
+
     <div class="col-sm-8">
    	 <div class ="container">
     	  <h2>Lista delle storie attive</h2>

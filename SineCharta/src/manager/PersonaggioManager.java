@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import beans.Personaggio;
+import beans.User;
 
 public class PersonaggioManager {
 	
@@ -19,7 +20,7 @@ public class PersonaggioManager {
 	 * @param idPG= valore id del personaggio
 	 * @return il personaggio con tutte le informazioni
 	 */
-	public Personaggio getPersonaggioByStory(int idStoria, String username) throws SQLException{
+	public Personaggio getPersonaggioByUtente(int idStoria, String username) throws SQLException{
 		
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -75,6 +76,9 @@ public class PersonaggioManager {
 		}
 		return personaggio;
 	}
+	
+	
+	
 	
 	/**
 	 * Metodo per avere una lista di PG
@@ -154,10 +158,10 @@ public class PersonaggioManager {
 		Connection con = null;
 		PreparedStatement ps = null;
 		
-		String aggiungiPG = "INSERT INTO "+ TABLE_NAME_PG+" (NOME, COGNOME, ET‡, NAZIONALIT‡, TAROCCODOMINANTE, "
-				+ "INTUITO, ASPETTO, COORDINAZIONE, AFFINIT‡OCCULTA, MEMORIA, COMANDO, DESTREZZAMANUALE, DISTANZADALLAMORTE,"
-				+ " PERCEZIONE, CREATIVIT‡, FORZAFISICA, EQUILIBRIOMENTALE, VOLONT‡, SOCIEVOLEZZA, MIRA, KARMA, RISOLUZIONE, "
-				+ "SALUTE, FERITETESTA, FERITETORSO, FERITEBRACCIA, FERITEGAMBE, USERNAME, IDE) "
+		String aggiungiPG = "INSERT INTO "+ TABLE_NAME_PG+" (NOME, COGNOME, ETA, NAZIONALITA, TAROCCODOMINANTE, "
+				+ "INTUITO, ASPETTO, COORDINAZIONE, AFFINITAOCCULTA, MEMORIA, COMANDO, DESTREZZAMANUALE, DISTANZADALLAMORTE,"
+				+ " PERCEZIONE, CREATIVIT‡, FORZAFISICA, EQUILIBRIOMENTALE, VOLONTA, SOCIEVOLEZZA, MIRA, KARMA, RISOLUZIONE, "
+				+ "SALUTE, FERITETESTA, FERITETORSO, FERITEBRACCIA, FERITEGAMBE, USERNAME, IDSTORY) "
 				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
 		try {
@@ -210,6 +214,7 @@ public class PersonaggioManager {
 			System.out.println("creaPersonaggio: " + ps.toString());
 			ps.executeUpdate();
 			
+			
 			con.commit();
 			
 		}finally {
@@ -220,7 +225,13 @@ public class PersonaggioManager {
 			}
 		}
 	}
-	
+
+	public void setUserForPG(String username, int idStoria) throws SQLException{
+		 UsersManager user = new UsersManager();
+		 User utente = user.doRetrieveByKey(username);
+		 Personaggio pg = this.getPersonaggioByUtente(idStoria, username);
+		 pg.setUser(utente);
+	}
 	
 	/**
 	 * Metodo per aggiornare le ferite del personaggio
@@ -255,16 +266,17 @@ public class PersonaggioManager {
 		}
 	}
 	
-	public boolean eliminaPG(int idPG) throws SQLException{
+	public boolean eliminaPG(int idStoria, String username) throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
-		String eliminaPG = "DELETE FROM " + TABLE_NAME_PG + " WHERE ID = ?";
+		String eliminaPG = "DELETE FROM " + TABLE_NAME_PG + " WHERE IDSTORY = ? AND USERNAME = ?";
 		
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(eliminaPG);
-			ps.setInt(1, idPG);
+			ps.setInt(1, idStoria);
+			ps.setString(2, username);
 			result = ps.executeUpdate();
 			System.out.println("eliminaPG: " + ps.toString());
 			con.commit();
