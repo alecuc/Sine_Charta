@@ -6,7 +6,6 @@ import java.util.LinkedList;
 
 import beans.Oggetto;
 import beans.Personaggio;
-import beans.PersonaggioTest;
 
 
 public class EquipManager {
