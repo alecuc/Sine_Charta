@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import beans.Personaggio;
+import beans.SessioneDiGioco;
 import beans.Storia;
 import beans.User;
 
@@ -181,6 +182,17 @@ public class StoryManager {
 		Personaggio pg = pgM.getPersonaggioByUtente(idStory, user);
 		Storia storia = this.getStoria(idStory, user);
 		storia.addPersonaggio(pg);
+	}
+	
+	public void aggiungiSessioneallaStoria(int numero, String username, int idStory) throws SQLException{
+		
+		Storia storia = new Storia();
+		StoryManager stry = new StoryManager(); 
+		SessioneManager ssnM = new SessioneManager();
+		SessioneDiGioco ssn = ssnM.prendereSessione(numero, username, idStory);
+		
+		storia = stry.getStoria(idStory, username);
+		storia.aggiungiSessione(ssn);
 	}
 	
 }
