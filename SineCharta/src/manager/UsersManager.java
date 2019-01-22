@@ -51,6 +51,11 @@ public class UsersManager implements UserModelI<User>{
 		 }
 		}
 		
+		/**
+		 * 1.istanziare uno StoryManager
+		 * 2.collection<storie> storie = storyManager.listaStorie(username);
+		 * 3.aggiungere al user bean la lista delle storie
+		 */
 		return bean;
 
 	}
