@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="head.jsp"></jsp:include>
+<link rel="stylesheet" href="../../css/bootstrap.min.css">
 <meta charset="UTF-8">
 <title>OOPS</title>
 </head>
@@ -13,10 +13,10 @@
 
 
 	<%
-		if (session.getAttribute("username") == null) {
+		if (session.getAttribute("user") == null) {
 			%>
 	<h3 class="card-title">
-		Clicca <a href="index.jsp">qui</a> per tornare alla pagina iniziale.
+		Clicca <a href="../index.jsp">qui</a> per tornare alla pagina iniziale.
 	</h3>
 
 
@@ -25,7 +25,7 @@
 		%>
 
 	<h3 class="card-title">
-		Clicca <a href="homeUser.jsp">qui</a> per tornare alla tua pagina
+		Clicca <a href="../homeUser.jsp">qui</a> per tornare alla tua pagina
 		personale.
 	</h3>
 	<%

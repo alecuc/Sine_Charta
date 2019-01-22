@@ -60,7 +60,7 @@ public class RegistrazioneServlet extends HttpServlet {
 				System.out.println("successfully inserted");
 			//	RequestDispatcher rd = request.getRequestDispatcher("/jsp_page/index.jsp");
 				System.out.println("OK");
-				response.sendRedirect("jsp_page/index.jsp");
+				response.sendRedirect("jsp_page/regSuccess.jsp");
 				//rd.forward(request, response);
 				
 				} 

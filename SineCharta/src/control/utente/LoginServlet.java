@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
 				
 				
 			if (passEncr.equals(password)) {
-				session.setAttribute("username", usernameInput);
+				session.setAttribute("user", utenteLogin);
 				/*
 				 * TODO: METTERE COME ATTRIBUTO DI SESSIONE:
 				 * -STORIE A CUI PARTECIPO

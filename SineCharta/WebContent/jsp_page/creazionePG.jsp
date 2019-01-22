@@ -4,14 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="head.jsp"></jsp:include>
+<jsp:include page="navigationbar.jsp"></jsp:include>
 <script src="../js/creazioneActions.js"></script>
 <title>Crea personaggio</title>
 </head>
 <body>
+	
 	<%
-		if (session.getAttribute("username") == null) {
-			response.sendRedirect("error.jsp");
+		if (session.getAttribute("user") == null) {
+			response.sendRedirect("error/error.jsp");
 		}
 	%>
 	<h1 class="card-title">Crea il tuo personaggio</h1>

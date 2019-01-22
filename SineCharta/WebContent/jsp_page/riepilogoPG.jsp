@@ -5,7 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <jsp:include page="head.jsp"></jsp:include>
+
+<%@page import="beans.User" %>
 <%@page import="beans.Personaggio"%>
+<%@page import="beans.Abilita"%>
+<%@page import="java.util.Collection"%>
 <%@page import="manager.PersonaggioManager"%>
 <title>Riepilogo</title>
 
@@ -16,17 +20,26 @@
 
 	<%
 		Personaggio pg = new Personaggio();
-		if (session.getAttribute("username") == null // ||session.getAttribute("storia") == null
+		if (session.getAttribute("user") == null // ||session.getAttribute("storia") == null
 		) {
 			response.sendRedirect("error.jsp");
 		} else {
 			PersonaggioManager pgm = new PersonaggioManager();
-			//pg= pgm.getPersonaggioByStory(session.getAttribute("storia"), session.getAttribute("username"));
+			Collection <Abilita> abList;
+		//	AbilitaManager abm= new AbilitaManager();
+		//	abList= abm.listaAbilita(pg.getUsername(), pg.getIdStoria());
+			
 		}
 	%>
 	<div class="container">
+		<br>
+		<h2 class="card-title text-center">IL TUO PERSONAGGIO È COMPLETO!
+			ECCO IL RIEPILOGO</h2>
+		<br>
 		<div class="row">
-			<div class="col-10">
+			<div class="col-12">
+				<br>
+				<h4 class=" card-title">LE TUE GENERALITÀ</h4>
 				<table class="table table-dark">
 					<tbody>
 						<tr>
@@ -47,129 +60,114 @@
 		</div>
 
 		<div class="row">
-			<div class="col-10">
+			<div class="col-12">
+				<br>
+				<h4 class=" card-title">LE TUE CARATTERISTICHE</h4>
 				<table class="table table-dark">
 					<tbody>
 						<tr>
 
 							<th><label>CUORI</label></th>
-							<th><label>QUADRI</label></th>
-							<th><label>FIORI</label></th>
-							<th><label>PICCHE</label></th>
+							<th></th>
+							<th class="border-left"><label>QUADRI</label></th>
+							<th></th>
+							<th class="border-left"><label>FIORI</label></th>
+							<th></th>
+							<th class="border-left"><label>PICCHE</label></th>
+							<th></th>
 
 						</tr>
 						<tr>
-							<td><label>Intuito:<%=pg.getIntuito()%></label></td>
-
-							<td><label>Aspetto:<%=pg.getAspetto()%>
-							</label></td>
-
-							<td><label>Coordinazione: <%=pg.getCoordinazione()%></label></td>
-
-							<td><label>Affinità occulta: <%=pg.getAffinOcculta()%></label></td>
-
+							<td><label>Intuito:</label></td>
+							<td><%=pg.getIntuito()%></td>
+							<td class="border-left"><label>Aspetto:</label></td>
+							<td><%=pg.getAspetto()%></td>
+							<td class="border-left"><label>Coordinazione:</label></td>
+							<td><%=pg.getCoordinazione()%></td>
+							<td class="border-left"><label>Affinità occulta:</label></td>
+							<td><%=pg.getAffinOcculta()%></td>
 						</tr>
 						<tr>
-							<td><label>Memoria: <%=pg.getMemoria()%></label></td>
-
-							<td><label>Comando: <%=pg.getComando()%></label></td>
-
-							<td><label>Destrezza manuale: <%=pg.getDestrManuale()%></label></td>
-
-							<td><label>Distanza dalla morte: <%=pg.getDistDaMorte()%></label></td>
+							<td><label>Memoria:</label></td>
+							<td><%=pg.getMemoria()%></td>
+							<td class="border-left"><label>Comando:</label></td>
+							<td><%=pg.getComando()%></td>
+							<td class="border-left"><label>Destrezza manuale:</label></td>
+							<td><%=pg.getDestrManuale()%></td>
+							<td class="border-left"><label>Distanza dalla morte:</label></td>
+							<td><%=pg.getDistDaMorte()%></td>
 						<tr>
-							<td><label>Percezione: <%=pg.getPercezione()%></label></td>
-
-							<td><label>Creatività: <%=pg.getCreativita()%></label></td>
-
-							<td><label>Forza fisica: <%=pg.getForzaFisica()%></label></td>
-
-							<td><label>Equilibrio mentale: <%=pg.getEquilibrMentale()%></label></td>
-
+							<td><label>Percezione: </label></td>
+							<td><%=pg.getPercezione()%></td>
+							<td class="border-left"><label>Creatività:</label></td>
+							<td><%=pg.getCreativita()%></td>
+							<td class="border-left"><label>Forza fisica: </label></td>
+							<td><%=pg.getForzaFisica()%></td>
+							<td class="border-left"><label>Equilibrio mentale: </label></td>
+							<td><%=pg.getEquilibrMentale()%></td>
 						</tr>
 						<tr>
-							<td><label>Volontà: <%=pg.getVolonta()%></label></td>
-
-							<td><label>Socievolezza: <%=pg.getSocievolezza()%></label></td>
-
-							<td><label>Mira: <%=pg.getMira()%></label></td>
-
-							<td><label>Karma: <%=pg.getKarma()%></label></td>
-
+							<td><label>Volontà: </label></td>
+							<td><%=pg.getVolonta()%></td>
+							<td class="border-left"><label>Socievolezza: </label></td>
+							<td><%=pg.getSocievolezza()%></td>
+							<td class="border-left"><label>Mira: </label></td>
+							<td><%=pg.getMira()%></td>
+							<td class="border-left"><label>Karma: </label></td>
+							<td><%=pg.getKarma()%></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-10">
+			<div class="col-12">
+
+				<br>
+				<h4 class=" card-title">LE TUE ABILITÀ</h4>
 				<table class="table table-dark">
 					<tbody>
 						<tr>
+							<%
+							User utente= (User)session.getAttribute("user");
 
-							<th><label>ABILITÀ</label></th>
-							<th><label>CARATTERISTICA</label></th>
-							<th><label>PUNTI ABILITÀ</label></th>
-							<th><label>TOTTALE</label></th>
+							
+							
+								out.print("<div class=\"table-responsive\">");
 
-						</tr>
-						<tr>
-							<td><label>abi</label></td>
+								out.print("<table class=\"table table-dark\" id=\"tabellaAbilita\">");
+								out.print("<thead>");
+								out.print("<tr>");
+								out.print("<th scope=\"col\">Abilità</th>");
+								out.print("<th scope=\"col\">Caratteristica</th>");
+								out.print("<th scope=\"col\">Punti abilità</th>");
+								out.print("<th scope=\"col\">Totale</th>");
+								out.print("</tr>");
+								out.print("</thead>");
+								out.print("<tbody>");
 
-							<td><label>car</label></td>
+			/*					for (Abilita st : abList) {
 
-							<td><label>pa</label></td>
+									out.print("<tr>");
+									out.print("<form method=\"post\" action=\"../GiocaServlet\">");
+									out.print("<td class=\"td-prod\">" + "</td>");
+									out.print("<td class=\"td-prod\">" + pg.getNome() + " " + pg.getCognome() + "</td>");
+									out.print(
+											"<button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Gioca</button>");
+									out.print("</tr>");
 
-							<td><label>tot</label></td>
-						</tr>
-						<tr>
-							<td><label>abi</label></td>
-
-							<td><label>car</label></td>
-
-							<td><label>pa</label></td>
-
-							<td><label>tot</label></td>
-						</tr>
-						<tr>
-							<td><label>abi</label></td>
-
-							<td><label>car</label></td>
-
-							<td><label>pa</label></td>
-
-							<td><label>tot</label></td>
-						</tr>
-						<tr>
-							<td><label>abi</label></td>
-
-							<td><label>car</label></td>
-
-							<td><label>pa</label></td>
-
-							<td><label>tot</label></td>
-						</tr>
-						<tr>
-							<td><label>abi</label></td>
-
-							<td><label>car</label></td>
-
-							<td><label>pa</label></td>
-
-							<td><label>tot</label></td>
-						</tr>
-					</tbody>
+								}// */
+							
+								
+							
+							%>
+						</tbody>
 				</table>
 			</div>
-			<div class="col-2">
-				<h3 class="card-title">
-					Per tornare alla tua pagina personale, clicca <a
-						href="homeUser.jsp">qui.</a>
-				</h3>
-
-			</div>
+			<h3 class="card-title">
+				Per tornare alla tua pagina personale, clicca <a href="homeUser.jsp">qui.</a>
+			</h3>
 		</div>
 	</div>
-
 </body>
 </html>
