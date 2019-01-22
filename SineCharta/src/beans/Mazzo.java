@@ -7,6 +7,11 @@ import java.util.Iterator;
 import interfaces.Deckable;
 
 
+<<<<<<< HEAD
+
+public class Mazzo implements Deckable{
+	
+=======
 /**
  * Rappresenta il mazzo di SineCharta, viene istanziato sia il mazzo da poker che il 
  * mazzo di tarocchi
@@ -18,6 +23,7 @@ public class Mazzo implements Deckable{
 	/**
 	 * attributi della classe mazzo.
 	 */
+>>>>>>> Develop
 	ArrayList<Tarocco> mazzoTarocco = new ArrayList<Tarocco>();
 	ArrayList<Tarocco> mazzoSupporto = new ArrayList<Tarocco>();
 	
@@ -32,10 +38,13 @@ public class Mazzo implements Deckable{
 	int n = SUITS.length * RANKS.length;
 	String[] deckPoker = new String[n];
 	
+<<<<<<< HEAD
+=======
 	/**
 	 * costruttore di mazzo, viene istanziato il mazzo di carte da poker e 
 	 * il mazzo di tarocchi.
 	 */
+>>>>>>> Develop
 	public Mazzo() {
 		
 	  	for (int i = 0 ; i < RANKS.length; i++) {
@@ -90,21 +99,29 @@ public class Mazzo implements Deckable{
     	mazzoTarocco.add(matto);
     	Collections.shuffle(mazzoTarocco);	
 	}	
+<<<<<<< HEAD
+	//metodo che permetti di estrarre la prima carta dal mazzo da Poker
+=======
 	/**
 	 * metodo che permette di estrarre la prima carta dal mazzo da Poker
 	 * override del metodo dell'interfaccia Deckable
 	 * @return la prima carta del mazzo di Poker
 	 */
+>>>>>>> Develop
 	@Override
 	public String estraiPoker() {
 		return deckPoker[--n];
 	}
 
+<<<<<<< HEAD
+	//metodo che permetti di estrarre la prima carta dal mazzo dei Tarocchi
+=======
 	/**
 	 * metodo che permette di estrarre la prima carta dal mazzo dei Tarocchi
 	 * override del metodo dell'interfaccia Deckable
 	 * @return il Tarocco estratto
 	 */
+>>>>>>> Develop
 	@Override
 	public Tarocco estraiTarocco() {
 							
@@ -115,10 +132,15 @@ public class Mazzo implements Deckable{
 		
 	}
 
+<<<<<<< HEAD
+	//metodo che permette di mischiare il mazzo di carte da Poker
+	@Override
+=======
 	/**
 	 * metodo che permette di mischiare il mazzo di carte da Poker
 	 *  override del metodo dell'interfaccia Deckable
 	 */
+>>>>>>> Develop
 	public void mischiaPoker() {
 		for (int i = 0; i < n; i++) {
             int r = i + (int) (Math.random() * (n-i));
@@ -126,12 +148,18 @@ public class Mazzo implements Deckable{
             deckPoker[r] = deckPoker[i];
             deckPoker[i] = temp;
         }
+<<<<<<< HEAD
+		}
+
+	//metodo che permette di mischiare il mazzo di Tarocchi
+=======
 	}
 
 	/**
 	 * metodo che permette di mischiare il mazzo di Tarocchi
 	 * override del metodo dell'interfaccia Deckable
 	 */
+>>>>>>> Develop
 	@Override
 	public void mischiaTarocco() {
 		
@@ -146,10 +174,13 @@ public class Mazzo implements Deckable{
 		
 	}
 	
+<<<<<<< HEAD
+=======
 	/**
 	 * metodo che restituisce la dimensione del mazzo dei Tarocchi
 	 * @return la lunghezza del mazzo dei tarocchi
 	 */
+>>>>>>> Develop
 	public int size() {
 		
 		int n = mazzoTarocco.size();
