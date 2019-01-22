@@ -47,20 +47,32 @@
       </ul>
       <hr class="d-sm-none">
     </div>
+
     <div class="col-sm-8">
-      <h2>TITLE HEADING</h2>
-      <h5>Title description, Dec 7, 2017</h5>
-      <div class="fakeimg">Fake Image</div>
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
-      <br>
-      <h2>TITLE HEADING</h2>
-      <h5>Title description, Sep 2, 2017</h5>
-      <div class="fakeimg">Fake Image</div>
-      <p>Some text..</p>
-      <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+   	 <div class ="container">
+    	  <h2>Lista delle storie attive</h2>
+    		<table class ="table table-bordered">
+    			<thead>
+    				<tr>
+    					<th>Storie </th>
+    					<th>Gioca</th>
+    				</tr>
+    		    </thead>
+    	   		 <tbody>
+    	    		<tr>
+    	    			<td>Storia 1 - Pg1</td>
+    	    			<td><button type="submit" class ="btn btn-primary">Gioca </button></td>
+    	    			</tr>
+    	    		<tr>
+    	    			<td>Storia 2 - Pg2</td>
+    	    			<td>Gioca</td>
+    	    		</tr>
+    	    	</tbody>	
+    		</table>
+    	</div>
     </div>
-  </div>
+    
+</div>
 </div>
 
 <div class="jumbotron text-center" style="margin-bottom:0;">
