@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import beans.Oggetto;
 import beans.Personaggio;
 import beans.Storia;
 import beans.User;
@@ -237,6 +238,20 @@ public class PersonaggioManager {
 		 User utente = user.doRetrieveByKey(username);
 		 Personaggio pg = this.getPersonaggioByUtente(idStoria, username);
 		 pg.setUser(utente);
+	}
+	
+	/**
+	 * Metodo per aggiunger un oggetto al personaggio che comunica con EquipManager
+	 * @param idOggetto= identificativo dell'oggetto da inserie.
+	 * @param idStoria= riferimento della storia a cui partecipa il personaggio.
+	 * @param username= identificativo dell'utente che ha il personaggio a cui aggiungere l'oggetto.
+	 */
+	public void setOggettoPG(int idOggetto, int idStoria, String username)throws SQLException {
+		Personaggio pg = new Personaggio();
+		pg = this.getPersonaggioByUtente(idStoria, username);
+		EquipManager equip = new EquipManager();
+		Oggetto oggetto = equip.getOggettoId(idOggetto);
+		pg.aggiungiOggetto(oggetto);
 	}
 	
 	/**
