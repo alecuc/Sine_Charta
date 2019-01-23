@@ -56,7 +56,7 @@ public class AbilitaManager {
 	/**
 	 * Metodo che ritorna una collezione di abilita in base al personaggio associato all'utente
 	 * @param username= identificativo dell'utente 
-	 * @param idStoria= identificativo della storia in cui è presente il personaggio
+	 * @param idStoria= identificativo della storia in cui ï¿½ presente il personaggio
 	 * @return lista abilita del pg
 	 */
 	public Collection<Abilita> getListaAbilitaByPG(String username, int idStoria) throws SQLException{
@@ -100,7 +100,7 @@ public class AbilitaManager {
 	}
 	
 	/**
-	 * Metodo che aggiunge un personaggio ad una abilità
+	 * Metodo che aggiunge un personaggio ad una abilitï¿½
 	 * @param username= identificativo dell'utente a cui appartiene il personaggio
 	 * @param idStoria= identificativo della storia a cui partecipa il personaggio
 	 * @param nome= identificativo dell'abilita
