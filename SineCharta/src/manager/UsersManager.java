@@ -1,5 +1,8 @@
 package manager;
 import java.util.Collection;
+import java.util.Iterator;
+
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import beans.Personaggio;
 import beans.Storia;
@@ -22,7 +25,7 @@ public class UsersManager implements UserModelI<User>{
 		PreparedStatement preparedStatement = null;
 		
 		User bean = new User();
-		String selectSql = "SELECT * FROM " + UsersManager.TABLE_NAME + " WHERE Username = ?";
+		String selectSql = "SELECT * FROM " + UsersManager.TABLE_NAME + " WHERE Username = ?;";
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -38,6 +41,7 @@ public class UsersManager implements UserModelI<User>{
 				bean.setName(rs.getString("Nome"));
 				bean.setSurname(rs.getString("Cognome"));
 				bean.setRuolo(rs.getString("Ruolo"));
+				
 			}
 			
 		}
@@ -51,6 +55,15 @@ public class UsersManager implements UserModelI<User>{
 		 }
 		}
 		
+		StoryManager storyM = new StoryManager();
+		Collection<Storia> listaStoria = storyM.listaStorie(bean.getUsername());
+		if(listaStoria.size()>0) {
+			Iterator<Storia> it = listaStoria.iterator();
+			while(it.hasNext()) {
+				Storia storia = (Storia) it.next();
+		//		this.aggiungiStoriaUser(storia.getId(), bean.getUsername());
+			}
+		}
 		return bean;
 
 	}
@@ -77,12 +90,12 @@ public class UsersManager implements UserModelI<User>{
 	 * @param idStoria= identificativo della storia da aggiungere
 	 * @param username= utente a cui viene inserita una storia.
 	 */
-	public void aggiungiStoriaUser(int idStoria, String username) throws SQLException{
+/*	public void aggiungiStoriaUser(int idStoria, String username) throws SQLException{
 		User utente = this.doRetrieveByKey(username);
 		StoryManager storyM = new StoryManager();
-		Storia storia = storyM.getStoria(idStoria, username);
+		Storia storia = storyM.getStoria(username);
 		utente.aggiungiStoria(storia);
-	}
+	}*/
 	
 	
 	

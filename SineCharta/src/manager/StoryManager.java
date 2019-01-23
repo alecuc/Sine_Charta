@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import beans.HaTable;
 import beans.Personaggio;
 import beans.SessioneDiGioco;
 import beans.Storia;
@@ -14,6 +16,7 @@ import beans.User;
 
 public class StoryManager {
 
+	private static final String TABLE_NAME_HA = "ha";
 	private static final String TABLE_NAME_STORIA = "Storia";
 	
 	
@@ -22,38 +25,49 @@ public class StoryManager {
 	 * @param idStoria= identificativo della storia
 	 * @return la storia a cui si riferisce idStoria
 	 */
-	public Storia getStoria(int idStoria, String username) throws SQLException{
+	public Collection<Storia> getStoria(String username) throws SQLException{
 		
 		Connection con = null;
 		PreparedStatement ps = null;
-		Storia storia = new Storia();
-		String selectStoria = "SELECT * FROM "+TABLE_NAME_STORIA+" WHERE ID = ? AND USERNAME = ?";
+		Collection<Storia> storieutente = new LinkedList<Storia>();
+		HaTable table = new HaTable();
+		String selectStoria = "SELECT * FROM "+TABLE_NAME_STORIA+" NATURAL JOIN "+TABLE_NAME_HA+" WHERE USERNAME = ?";
 		
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(selectStoria);
-			ps.setInt(1, idStoria);
+			
+			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				storia.setId(rs.getInt("Id"));
-				storia.setTitolo(rs.getString("Titolo"));
+				Storia storia = new Storia();
+				
+				table.setIdStoria(rs.getInt("IdStory"));
+				table.setUsername(rs.getString("Username"));
+				table.setFlagModeratore(rs.getBoolean("flag"));
+				
+				storia.setId(rs.getInt("IdStory"));
+				storia.setTitolo(rs.getString("Nome"));
 				storia.setDescrizione(rs.getString("Descrizione"));
 				storia.setAmbientazione(rs.getString("Ambientazione"));
-				storia.setUsername(rs.getString("Username"));
+				storia.setUsername(table.getUsername());
+				
+				
+				storieutente.add(storia);
 			}
 			
 		}finally {
 			try {
-				
+				if(ps!=null) ps.close();
 			}finally {
-				
+				DriverManagerConnectionPool.releaseConnection(con);
 			}
 		}
 		
-		return storia;
+		return storieutente;
 	}
-	
+		
 	
 	/**
 	 * Metodo che carica la lista delle storie di un Utente moderatore 
@@ -64,7 +78,7 @@ public class StoryManager {
 		Connection con = null;
 		PreparedStatement ps = null;
 		Collection<Storia> storie = new LinkedList<Storia>();
-		String storieUtente = "SELECT * FROM "+TABLE_NAME_STORIA+" WHERE USERNAME = ?";
+		String storieUtente = "SELECT * FROM "+TABLE_NAME_STORIA+" WHERE Username = ?";
 		
 		try {
 			con = DriverManagerConnectionPool.getConnection();
@@ -166,8 +180,8 @@ public class StoryManager {
 	public void setUserModeratoreForStory(String username, int idStoria)throws SQLException {
 		UsersManager user = new UsersManager();
 		User utenteModeratore = user.doRetrieveByKey(username);
-		Storia storia = this.getStoria(idStoria, username);
-		storia.setUtenteModeratore(utenteModeratore);
+//		Storia storia = this.getStoria(username);
+		//storia.setUtenteModeratore(utenteModeratore);
 		
 	}
 	
@@ -180,8 +194,8 @@ public class StoryManager {
 	public void setPgForStory(String user, int idStory)throws SQLException {
 		PersonaggioManager pgM = new PersonaggioManager();
 		Personaggio pg = pgM.getPersonaggioByUtente(idStory, user);
-		Storia storia = this.getStoria(idStory, user);
-		storia.addPersonaggio(pg);
+	//	Storia storia = this.getStoria(user);
+	//	storia.addPersonaggio(pg);
 	}
 	
 	public void aggiungiSessioneallaStoria(int numero, String username, int idStory) throws SQLException{
@@ -191,8 +205,10 @@ public class StoryManager {
 		SessioneManager ssnM = new SessioneManager();
 		SessioneDiGioco ssn = ssnM.prendereSessione(numero, username, idStory);
 		
-		storia = stry.getStoria(idStory, username);
+		//storia = stry.getStoria(username);
 		storia.aggiungiSessione(ssn);
 	}
+	
+	
 	
 }

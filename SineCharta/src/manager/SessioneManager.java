@@ -86,14 +86,14 @@ public class SessioneManager {
 	 * @param idStoria l'id della storia a cui legare la sessione
 	 * @throws SQLException
 	 */
-	public void aggiungiStoriaAllaSessione (int numero, String Username, int idStoria) throws SQLException{
+/*	public void aggiungiStoriaAllaSessione (int numero, String Username, int idStoria) throws SQLException{
 		
 		StoryManager storiaManager = new StoryManager();
 		Storia story = storiaManager.getStoria(idStoria, Username);
 		SessioneDiGioco ssn = this.prendereSessione(numero, Username, numero);
 		ssn.setStoriaSessione(story);
 				
-	}
+	}*/
 	
 	/**
 	 * Metodo che carica la collezione di sessioni di una storia
