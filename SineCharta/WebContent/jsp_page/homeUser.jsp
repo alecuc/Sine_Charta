@@ -73,10 +73,12 @@
 
 
 			<% 
+			
 			User utente= (User)session.getAttribute("user");
+			
+			//StoryManager stm= new StoryManager(); 
 			Collection <Storia> stList;
-			StoryManager stm= new StoryManager();
-			stList= stm.listaStorie(utente.getUsername());
+			stList= (Collection<Storia>)session.getAttribute("listaStorie");
 			
 			Personaggio pg;
 			PersonaggioManager pgm= new PersonaggioManager();
