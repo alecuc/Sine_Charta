@@ -2,7 +2,6 @@ package manager;
 import java.util.Collection;
 
 import beans.Personaggio;
-import beans.Storia;
 import beans.User;
 
 import java.sql.*;
@@ -12,9 +11,7 @@ public class UsersManager implements UserModelI<User>{
 
 	private static final String TABLE_NAME = "utenteRegistrato";
 
-	/**
-	 * Metodo per ottenere un utente tramite la sua username.
-	 */
+	
 	@Override
 	public User doRetrieveByKey(String user) throws SQLException {
 		
@@ -28,6 +25,8 @@ public class UsersManager implements UserModelI<User>{
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSql);
 			preparedStatement.setString(1, user);
+			System.out.println("doRetrieveByKey: " + preparedStatement.toString());
+			
 			ResultSet rs = preparedStatement.executeQuery();
 			System.out.println("doRetrieveByKey: " + preparedStatement.toString());
 
@@ -55,12 +54,6 @@ public class UsersManager implements UserModelI<User>{
 
 	}
 
-	/**
-	 * Metodo che che comunica con PersonaggioManager ed aggiunge un personaggio all'utente.
-	 * @param username= utente a cui è associato il personaggio.
-	 * @param idStoria= identificativo della storia a cui è associato il personaggio.
-	 * @throws SQLException
-	 */
 	public void aggiungiPGUser(String username, int idStoria)throws SQLException {
 			User utentePG = new User();	
 			UsersManager user = new UsersManager();
@@ -70,22 +63,8 @@ public class UsersManager implements UserModelI<User>{
 			
 			utentePG = user.doRetrieveByKey(username);
 			utentePG.aggiungiPG(pgUtente);
+		
 	}
-	
-	/**
-	 * Metodo che comunica con StoryManager per aggiunger una storia ad un utente
-	 * @param idStoria= identificativo della storia da aggiungere
-	 * @param username= utente a cui viene inserita una storia.
-	 */
-	public void aggiungiStoriaUser(int idStoria, String username) throws SQLException{
-		User utente = this.doRetrieveByKey(username);
-		StoryManager storyM = new StoryManager();
-		Storia storia = storyM.getStoria(idStoria, username);
-		utente.aggiungiStoria(storia);
-	}
-	
-	
-	
 	
 	@Override
 	public Collection<User> doRetrieveAll(String order) throws SQLException {
