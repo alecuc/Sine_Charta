@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import beans.Oggetto;
+import beans.Personaggio;
 
 
 public class EquipManager {
@@ -97,6 +98,20 @@ public class EquipManager {
 		return oggetti;
 		
 		
+	}
+	
+	/**
+	 * Metodo che aggiunge un personaggio ad un oggetto
+	 * @param username= identificativo dell'utente a cui appartiene il personaggio
+	 * @param idStoria= identificativo della storia a cui partecipa il personaggio
+	 * @param idOggetto= identificativo dell'oggetto a cui è associato il personaggio
+	 */
+	public void aggiugiPGaOggetto(String username, int idStoria, int idOggetto)throws SQLException {
+		Personaggio pg = new Personaggio();
+		PersonaggioManager pgM = new PersonaggioManager();
+		pg = pgM.getPersonaggioByUtente(idStoria, username);
+		Oggetto oggetto = this.getOggettoId(idOggetto);
+		oggetto.setOggettPG(pg);
 	}
 	
 	

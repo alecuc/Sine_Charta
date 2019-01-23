@@ -7,7 +7,10 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import beans.Personaggio;
+import beans.SessioneDiGioco;
 import beans.Storia;
+import beans.User;
 
 public class StoryManager {
 
@@ -155,7 +158,41 @@ public class StoryManager {
 		
 		return (result != 0);
 	}
+	/**
+	 * Metodo per aggiungere un utente moderatore alla storia creata.
+	 * @param username= identificativo del moderatore
+	 * @param idStoria= identificativo della storia
+	 */
+	public void setUserModeratoreForStory(String username, int idStoria)throws SQLException {
+		UsersManager user = new UsersManager();
+		User utenteModeratore = user.doRetrieveByKey(username);
+		Storia storia = this.getStoria(idStoria, username);
+		storia.setUtenteModeratore(utenteModeratore);
+		
+	}
 	
 	
+	/**
+	 * Metodo per assegnare un personaggio ad una Storia.
+	 * @param username= identificativo del moderatore
+	 * @param idStoria= identificativo della storia
+	 */
+	public void setPgForStory(String user, int idStory)throws SQLException {
+		PersonaggioManager pgM = new PersonaggioManager();
+		Personaggio pg = pgM.getPersonaggioByUtente(idStory, user);
+		Storia storia = this.getStoria(idStory, user);
+		storia.addPersonaggio(pg);
+	}
+	
+	public void aggiungiSessioneallaStoria(int numero, String username, int idStory) throws SQLException{
+		
+		Storia storia = new Storia();
+		StoryManager stry = new StoryManager(); 
+		SessioneManager ssnM = new SessioneManager();
+		SessioneDiGioco ssn = ssnM.prendereSessione(numero, username, idStory);
+		
+		storia = stry.getStoria(idStory, username);
+		storia.aggiungiSessione(ssn);
+	}
 	
 }

@@ -111,14 +111,6 @@
 	%>
 
 
-
-		</div>
-	</div>
-
-	<div class="jumbotron text-center" style="margin-bottom: 0;">
-		<p>Sine Charta Project</p>
-	</div>
-
-
+</div>
 </body>
 </html>

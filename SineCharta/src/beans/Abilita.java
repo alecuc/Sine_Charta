@@ -55,20 +55,6 @@ public class Abilita implements Serializable{
 		this.valore = valore;
 	}
 
-	/**
-	 * @return the pgConAbilita
-	 */
-	public Personaggio getPgConAbilita() {
-		return pgConAbilita;
-	}
-
-	/**
-	 * @param pgConAbilita the pgConAbilita to set
-	 */
-	public void setPgConAbilita(Personaggio pgConAbilita) {
-		this.pgConAbilita = pgConAbilita;
-	}
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

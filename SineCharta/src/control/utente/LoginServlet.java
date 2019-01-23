@@ -64,10 +64,14 @@ public class LoginServlet extends HttpServlet {
 				
 				
 			if (passEncr.equals(password)) {
+
 				session.setAttribute("user", utenteLogin);
+
+				
+
 				/*
-				 * TODO: METTERE COME ATTRIBUTO DI SESSIONE:
-				 * -STORIE A CUI PARTECIPO
+				 * caricare in sessione la lista delle storie
+				 * 
 				 */
 				response.sendRedirect("jsp_page/homeUser.jsp");
 			} else {

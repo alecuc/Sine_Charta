@@ -432,7 +432,7 @@ public class Personaggio implements Serializable{
 				+ comando + ", creativita=" + creativita + ", socievolezza=" + socievolezza + ", coordinazione="
 				+ coordinazione + ", destrManuale=" + destrManuale + ", forzaFisica=" + forzaFisica + ", mira=" + mira
 				+ ", affinOcculta=" + affinOcculta + ", distDaMorte=" + distDaMorte + ", equilibrMentale="
-				+ equilibrMentale + ", karma=" + karma + ", ability=" + ability + ", utenteDelPG=" + utenteDelPG + "]";
+				+ equilibrMentale + ", karma=" + karma + ", ability=" + ability + ", utenteDelPG=" + utenteDelPG.toString() + "]";
 	}
 
 	
