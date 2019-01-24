@@ -31,17 +31,17 @@
 	<div class="container" style="margin-top: 30px">
 		<div class="row">
 			<div class="col-sm-4">
-				<% if (session.getAttribute("user") == null) {
-			response.sendRedirect("error/error.jsp");
-		} else {
-		User utente= (User)session.getAttribute("user");
-		
-		%>
-				<h2><%= utente.getUsername() %></h2>
+				<%
+					if (session.getAttribute("user") == null) {
+						response.sendRedirect("error/error.jsp");
+					} else {
+						User utente = (User) session.getAttribute("user");
+				%>
+				<h2><%=utente.getUsername()%></h2>
 
 				<%
-		}
-    %>
+					}
+				%>
 
 
 				<h5>Photo of me:</h5>
@@ -70,55 +70,57 @@
 		NOME_STORIA - NOME_PG - 	PULSANTE_GIOCA
 		il nome		- il nome -	   il pulsante che
 		della storia- del pg  - carica la pagina del pg	 -->
+			<div class="table-responsive">
+				<table class=" table table-dark" id="tabellaStorie">
+					<thead>
+						<tr>
+							<th>Nome Storia</th>
+							<th>Nome Personaggio</th>
+							<th></th>
+						</tr>
+					</thead>
+
+					<tbody>
+
+					</tbody>
 
 
-			<% 
-			User utente= (User)session.getAttribute("user");
-			Collection <Storia> stList;
-			StoryManager stm= new StoryManager();
-			stList= stm.listaStorie(utente.getUsername());
-			
-			Personaggio pg;
-			PersonaggioManager pgm= new PersonaggioManager();
-			if(!stList.isEmpty()){ 
-	
-		out.print("<div class=\"table-responsive\">");
-		
-		out.print("<table class=\"table table-dark\" id=\"tabellaStorie\">");
-		out.print("<thead>");
-		out.print("<tr>");
-	    out.print("<th scope=\"col\">Nome Storia</th>");
-	    out.print("<th scope=\"col\">Nome Personaggio</th>");
-		out.print("<th scope=\"col\"></th>");
-		out.print("</tr>");
-		out.print("</thead>");
-		out.print("<tbody>");
-	
-		for(Storia st: stList){
-			
-			pg= pgm.getPersonaggioByUtente(st.getId(), utente.getUsername());
-			
-			out.print("<tr>");
-			out.print("<form method=\"post\" action=\"../GiocaServlet\">");
-			out.print("<td class=\"td-prod\">"+ st.getTitolo() +"</td>");
-			out.print("<td class=\"td-prod\">"+ pg.getNome() +" "+ pg.getCognome()+"</td>");
-			out.print("<button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Gioca</button>");
-			out.print("</form>");
-			out.print("</tr>");
-		
-		}
-	} 
-	%>
+				</table>
+			</div>
 
+			<%
+				User utente = (User) session.getAttribute("user");
+				Collection<Storia> stList = (Collection<Storia>) session.getAttribute("listastorie");
+				
+				
+				if (!stList.isEmpty()) {
+
+					out.print("<div class=\"table-responsive\">");
+
+					out.print("<table class=\"table table-dark\" id=\"tabellaStorie\">");
+					out.print("<thead>");
+					out.print("<tr>");
+					out.print("<th scope=\"col\">Nome Storia</th>");
+					out.print("<th scope=\"col\"></th>");
+					out.print("</tr>");
+					out.print("</thead>");
+					out.print("<tbody>");
+
+					for (Storia st : stList) {
+						out.print("<tr>");
+						out.print("<form method=\"post\" action=\"../GiocaServlet\">");
+						out.print("<td class=\"td-prod\">" + st.getTitolo() + "</td>");
+						out.print("<button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Gioca</button>");
+						out.print("</form>");
+						out.print("</tr>");
+
+					}
+				}
+			%>
 
 
 		</div>
 	</div>
-
-	<div class="jumbotron text-center" style="margin-bottom: 0;">
-		<p>Sine Charta Project</p>
-	</div>
-
 
 </body>
 </html>

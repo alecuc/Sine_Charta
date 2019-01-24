@@ -10,7 +10,6 @@
 <%@page import="beans.Personaggio"%>
 <%@page import="beans.Abilita"%>
 <%@page import="java.util.Collection"%>
-<%@page import="manager.PersonaggioManager"%>
 <title>Riepilogo</title>
 
 </head>
@@ -20,15 +19,12 @@
 
 	<%
 		Personaggio pg = new Personaggio();
-		if (session.getAttribute("user") == null // ||session.getAttribute("storia") == null
+		if ((session.getAttribute("user") == null)||session.getAttribute("personaggio")==null
 		) {
 			response.sendRedirect("error.jsp");
-		} else {
-			PersonaggioManager pgm = new PersonaggioManager();
-			Collection <Abilita> abList;
-		//	AbilitaManager abm= new AbilitaManager();
-		//	abList= abm.listaAbilita(pg.getUsername(), pg.getIdStoria());
-			
+		}
+		else{
+			pg= (Personaggio)session.getAttribute("personaggio");	
 		}
 	%>
 	<div class="container">
@@ -131,7 +127,9 @@
 							<%
 							User utente= (User)session.getAttribute("user");
 
-							
+							Collection <Abilita> abList;
+							AbilitaManager abm= new AbilitaManager();
+							abList= abm.getListaAbilitaByPG(pg.getUsername(), pg.getIdStoria());
 							
 								out.print("<div class=\"table-responsive\">");
 
@@ -139,26 +137,21 @@
 								out.print("<thead>");
 								out.print("<tr>");
 								out.print("<th scope=\"col\">Abilità</th>");
-								out.print("<th scope=\"col\">Caratteristica</th>");
 								out.print("<th scope=\"col\">Punti abilità</th>");
 								out.print("<th scope=\"col\">Totale</th>");
 								out.print("</tr>");
 								out.print("</thead>");
 								out.print("<tbody>");
 
-			/*					for (Abilita st : abList) {
+								for (Abilita ab : abList) {
 
 									out.print("<tr>");
-									out.print("<form method=\"post\" action=\"../GiocaServlet\">");
-									out.print("<td class=\"td-prod\">" + "</td>");
-									out.print("<td class=\"td-prod\">" + pg.getNome() + " " + pg.getCognome() + "</td>");
-									out.print(
-											"<button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Gioca</button>");
+									out.print("<td>" +ab.getNome()+ "</td>");
+									out.print("<td>" + ab.getValore() + "</td>");
+									out.print("<td>" + "</td>");
 									out.print("</tr>");
 
 								}// */
-							
-								
 							
 							%>
 						</tbody>
