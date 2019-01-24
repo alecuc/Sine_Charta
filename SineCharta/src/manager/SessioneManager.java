@@ -1,5 +1,12 @@
 package manager;
 
+import java.sql.*;
+import java.util.Collection;
+import java.util.LinkedList;
+
+import beans.Keyword;
+import beans.SessioneDiGioco;
+
 public class SessioneManager {
 
 	private static final String TABLE_NAME = "Sessione";
