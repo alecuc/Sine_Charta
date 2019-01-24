@@ -5,6 +5,9 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.Iterator;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import manager.StoryManager;
 import manager.UsersManager;
+import beans.Storia;
 import beans.User;
 /**
  * Servlet implementation class LoginServlet
@@ -42,8 +47,8 @@ public class LoginServlet extends HttpServlet {
 		
 		
 		try {
-			User utenteLogin= user.doRetrieveByKey(usernameInput);
 			
+			User utenteLogin= user.doRetrieveByKey(usernameInput);
 			String password= utenteLogin.getPassword();
 
 			/*if (utenteLogin.getUsername()==null) {
@@ -65,6 +70,23 @@ public class LoginServlet extends HttpServlet {
 				
 			if (passEncr.equals(password)) {
 				session.setAttribute("user", utenteLogin);
+
+
+				StoryManager strmng = new StoryManager();
+				Storia storia = new Storia();
+				UsersManager usrmng = new UsersManager();
+				Collection<Storia> listaStorie = strmng.listaStorie(usernameInput);
+				
+				while(listaStorie.size() > 0) {
+					Iterator<Storia> it = listaStorie.iterator();
+					storia = it.next();
+					usrmng.aggiungiStoriaUser(storia.getId(), utenteLogin.getUsername());
+					strmng.setUserModeratoreForStory(utenteLogin.getUsername(), storia.getId());
+					listaStorie.remove(storia);
+				}
+				
+				session.setAttribute("listaStorie", listaStorie);
+
 				/*
 				 * TODO: METTERE COME ATTRIBUTO DI SESSIONE:
 				 * -STORIE A CUI PARTECIPO
@@ -73,7 +95,7 @@ public class LoginServlet extends HttpServlet {
 			} else {
 			
 			System.out.println("OH NON SONO UGUALI LE DUE PASSWORD");
-			response.sendRedirect("jsp_page/loginErrorePassword.jsp");
+			response.sendRedirect("jsp_page/error/loginErrorePassword.jsp");
 			}
 
 		} catch (SQLException e) {
