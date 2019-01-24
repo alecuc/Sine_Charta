@@ -20,41 +20,41 @@ public class PersonaggioManager {
 	 * @param idPG= valore id del personaggio
 	 * @return il personaggio con tutte le informazioni
 	 */
-	public Personaggio getPersonaggioByUtente(int idStoria, String username) throws SQLException{
+	public Personaggio getPersonaggioByUtente(User user) throws SQLException{
 		
 		Connection connection = null;
 		PreparedStatement ps = null;
 		Personaggio personaggio = new Personaggio();
-		String selectSQL = "SELECT * FROM "+PersonaggioManager.TABLE_NAME_PG+" WHERE IDSTORY = ? AND USERNAME = ?";
+		String selectSQL = "SELECT * FROM "+PersonaggioManager.TABLE_NAME_PG+" WHERE USERNAME = ?";
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(selectSQL);
-			ps.setInt(1, idStoria);
-			ps.setString(2, username);
+			ps.setString(1, user.getUsername());
 			System.out.println("getPersonaggio: " + ps.toString());
 			
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
+				personaggio.setUsername(rs.getString("Username"));
 				personaggio.setNome(rs.getString("Nome"));
 				personaggio.setCognome(rs.getString("Cognome"));
-				personaggio.setAge(rs.getInt("Et‡"));
-				personaggio.setNazionalita(rs.getString("Nazionalit‡"));
+				personaggio.setAge(rs.getInt("Eta"));
+				personaggio.setNazionalita(rs.getString("Nazionalita"));
 				personaggio.setTaroccoDominante(rs.getString("TaroccoDominante"));
 				personaggio.setIntuito(rs.getInt("Intuito"));
 				personaggio.setAspetto(rs.getInt("Aspetto"));
 				personaggio.setCoordinazione(rs.getInt("Coordinazione"));
-				personaggio.setAffinOcculta(rs.getInt("Affinit‡Occulta"));
+				personaggio.setAffinOcculta(rs.getInt("AffinitaOcculta"));
 				personaggio.setMemoria(rs.getInt("Memoria"));
 				personaggio.setComando(rs.getInt("Comando"));
 				personaggio.setDestrManuale(rs.getInt("DestrezzaManuale"));
 				personaggio.setDistDaMorte(rs.getInt("DistanzaDallaMorte"));
 				personaggio.setPercezione(rs.getInt("Percezione"));
-				personaggio.setCreativita(rs.getInt("Creativit‡"));
+				personaggio.setCreativita(rs.getInt("Creativita"));
 				personaggio.setForzaFisica(rs.getInt("ForzaFisica"));
 				personaggio.setEquilibrMentale(rs.getInt("EquilibrioMentale"));
-				personaggio.setVolonta(rs.getInt("Volont‡"));
+				personaggio.setVolonta(rs.getInt("Volonta"));
 				personaggio.setSocievolezza(rs.getInt("Socievolezza"));
 				personaggio.setMira(rs.getInt("Mira"));
 				personaggio.setKarma(rs.getInt("Karma"));
@@ -63,7 +63,9 @@ public class PersonaggioManager {
 				personaggio.setFeritaBraccia(rs.getString("FeriteBraccia"));
 				personaggio.setFeritaTorso(rs.getString("FeriteTorso"));
 				personaggio.setFeritaGambe(rs.getString("FeriteGambe"));
-			}
+				personaggio.setUser(user);
+				//personaggio.setStoria(unaStoria);
+			} 
 			
 		}finally {
 				try {
@@ -77,51 +79,50 @@ public class PersonaggioManager {
 		return personaggio;
 	}
 	
-	
-	
-	
+		
 	/**
-	 * Metodo per avere una lista di PG
+	 * Metodo per avere una lista di PG di un utente
 	 * @return una lista di PG
 	 * @throws SQLException
 	 */
 	
-	public Collection<Personaggio> listaPG(int idStoria) throws SQLException{
+	public Collection<Personaggio> listaPG(User user) throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		
 		Collection<Personaggio> personaggi = new LinkedList<Personaggio>();
 	
-		String tuttiPG = "SELECT * FROM "+ TABLE_NAME_PG+ " WHERE IDE = ?";
+		String tuttiPG = "SELECT * FROM "+ TABLE_NAME_PG+ " WHERE USERNAME = ?";
 		
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(tuttiPG);
-			ps.setInt(1, idStoria);
+			ps.setString(1, user.getUsername());
 			ResultSet rs = ps.executeQuery();
-			
+			System.out.println("lista pers"+ps.toString());
 			while(rs.next()) {
 				
 				Personaggio personaggio = new Personaggio();
 				
+				personaggio.setUsername(rs.getString("Username"));
 				personaggio.setNome(rs.getString("Nome"));
 				personaggio.setCognome(rs.getString("Cognome"));
-				personaggio.setAge(rs.getInt("Et‡"));
-				personaggio.setNazionalita(rs.getString("Nazionalit‡"));
+				personaggio.setAge(rs.getInt("Eta"));
+				personaggio.setNazionalita(rs.getString("Nazionalita"));
 				personaggio.setTaroccoDominante(rs.getString("TaroccoDominante"));
 				personaggio.setIntuito(rs.getInt("Intuito"));
 				personaggio.setAspetto(rs.getInt("Aspetto"));
 				personaggio.setCoordinazione(rs.getInt("Coordinazione"));
-				personaggio.setAffinOcculta(rs.getInt("Affinit‡Occulta"));
+				personaggio.setAffinOcculta(rs.getInt("AffinitaOcculta"));
 				personaggio.setMemoria(rs.getInt("Memoria"));
 				personaggio.setComando(rs.getInt("Comando"));
 				personaggio.setDestrManuale(rs.getInt("DestrezzaManuale"));
 				personaggio.setDistDaMorte(rs.getInt("DistanzaDallaMorte"));
 				personaggio.setPercezione(rs.getInt("Percezione"));
-				personaggio.setCreativita(rs.getInt("Creativit‡"));
+				personaggio.setCreativita(rs.getInt("Creativita"));
 				personaggio.setForzaFisica(rs.getInt("ForzaFisica"));
 				personaggio.setEquilibrMentale(rs.getInt("EquilibrioMentale"));
-				personaggio.setVolonta(rs.getInt("Volont‡"));
+				personaggio.setVolonta(rs.getInt("Volonta"));
 				personaggio.setSocievolezza(rs.getInt("Socievolezza"));
 				personaggio.setMira(rs.getInt("Mira"));
 				personaggio.setKarma(rs.getInt("Karma"));
@@ -129,9 +130,8 @@ public class PersonaggioManager {
 				personaggio.setFeritaTesta(rs.getString("FeriteTesta"));
 				personaggio.setFeritaBraccia(rs.getString("FeriteBraccia"));
 				personaggio.setFeritaTorso(rs.getString("FeriteTorso"));
-				personaggio.setFeritaGambe(rs.getString("FeriteGambe"));
-				personaggio.setIdStoria(rs.getInt("Ide"));
-				
+				personaggio.setFeritaGambe(rs.getString("FeriteGambe"));				
+				personaggio.setUser(user);
 				personaggi.add(personaggio);
 			}
 		}finally {
@@ -160,7 +160,7 @@ public class PersonaggioManager {
 		
 		String aggiungiPG = "INSERT INTO "+ TABLE_NAME_PG+" (NOME, COGNOME, ETA, NAZIONALITA, TAROCCODOMINANTE, "
 				+ "INTUITO, ASPETTO, COORDINAZIONE, AFFINITAOCCULTA, MEMORIA, COMANDO, DESTREZZAMANUALE, DISTANZADALLAMORTE,"
-				+ " PERCEZIONE, CREATIVIT‡, FORZAFISICA, EQUILIBRIOMENTALE, VOLONTA, SOCIEVOLEZZA, MIRA, KARMA, RISOLUZIONE, "
+				+ " PERCEZIONE, CREATIVITA, FORZAFISICA, EQUILIBRIOMENTALE, VOLONTA, SOCIEVOLEZZA, MIRA, KARMA, RISOLUZIONE, "
 				+ "SALUTE, FERITETESTA, FERITETORSO, FERITEBRACCIA, FERITEGAMBE, USERNAME, IDSTORY) "
 				+ "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		
@@ -226,12 +226,7 @@ public class PersonaggioManager {
 		}
 	}
 
-	public void setUserForPG(String username, int idStoria) throws SQLException{
-		 UsersManager user = new UsersManager();
-		 User utente = user.doRetrieveByKey(username);
-		 Personaggio pg = this.getPersonaggioByUtente(idStoria, username);
-		 pg.setUser(utente);
-	}
+
 	
 	/**
 	 * Metodo per aggiornare le ferite del personaggio

@@ -1,7 +1,8 @@
 package manager;
 import java.util.Collection;
-import java.util.Iterator;
-
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.Set;
 
 import beans.Personaggio;
 import beans.Storia;
@@ -14,7 +15,10 @@ public class UsersManager implements UserModelI<User>{
 
 	private static final String TABLE_NAME = "utenteRegistrato";
 
-	
+	/* Metodo per caricare un utente
+	 * (non-Javadoc)
+	 * @see interfaces.UserModelI#doRetrieveByKey(java.lang.String)
+	 */
 	@Override
 	public User doRetrieveByKey(String user) throws SQLException {
 		
@@ -28,7 +32,6 @@ public class UsersManager implements UserModelI<User>{
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSql);
 			preparedStatement.setString(1, user);
-			System.out.println("doRetrieveByKey: " + preparedStatement.toString());
 			
 			ResultSet rs = preparedStatement.executeQuery();
 			System.out.println("doRetrieveByKey: " + preparedStatement.toString());
@@ -40,9 +43,11 @@ public class UsersManager implements UserModelI<User>{
 				bean.setName(rs.getString("Nome"));
 				bean.setSurname(rs.getString("Cognome"));
 				bean.setRuolo(rs.getString("Ruolo"));
+				bean.aggiungiListaStorie(aggiungiStorieUser(bean));
+				bean.aggiungiListaPG(aggiungiListaPGUser(bean));
+					
 				
-			}
-			
+			}			
 		}
 		finally {
 			try {
@@ -52,55 +57,85 @@ public class UsersManager implements UserModelI<User>{
 		 finally {
 			DriverManagerConnectionPool.releaseConnection(connection);
 		 }
-		}
 		
-		StoryManager storyM = new StoryManager();
-		Collection<Storia> listaStoria = storyM.listaStorie(bean.getUsername());
-		if(listaStoria.size()>0) {
-			Iterator<Storia> it = listaStoria.iterator();
-			while(it.hasNext()) {
-				Storia storia = (Storia) it.next();
-		//		this.aggiungiStoriaUser(storia.getId(), bean.getUsername());
-			}
 		}
 		return bean;
-
 	}
 
-	public void aggiungiPGUser(String username, int idStoria)throws SQLException {
-			User utentePG = new User();	
-			UsersManager user = new UsersManager();
-			PersonaggioManager pgM = new PersonaggioManager();
-			Personaggio pgUtente = pgM.getPersonaggioByUtente(idStoria, username);
 
+	
+	/***************************************OK*************************************************************
+	 * 		Metodo che comunica con PersonaggioManager per aggiungere una lista di personaggio all'utente *											  *
+	 * @param username= identificativo dell'utente								                          *
+	 * @return				Lista dei personaggi associati all'utente			                          *
+	 ******************************************************************************************************/
+	private Set<Personaggio> aggiungiListaPGUser(User user)throws SQLException {
 			
-			utentePG = user.doRetrieveByKey(username);
-			utentePG.aggiungiPG(pgUtente);
-		
+			PersonaggioManager pgM = new PersonaggioManager();
+			Collection<Personaggio> listaPG = pgM.listaPG(user);
+			if(listaPG!=null) {
+				Set<Personaggio> pgUtente = new HashSet<Personaggio>(listaPG);
+				return pgUtente;
+			}else return null;
 	}
 	
 
-	/**
-	 * Metodo che comunica con StoryManager per aggiunger una storia ad un utente
-	 * @param idStoria= identificativo della storia da aggiungere
-	 * @param username= utente a cui viene inserita una storia.
-	 */
-/*	public void aggiungiStoriaUser(int idStoria, String username) throws SQLException{
-		User utente = this.doRetrieveByKey(username);
+	/***************************************OK***********************************************
+	 * Metodo che comunica con StoryManager per aggiunger una lista di storie ad un utente	*
+	 * @param idStoria= identificativo della storia da aggiungere							*
+	 * @param username= utente a cui viene inserita una storia.								*
+	 ***************************************************************************************/
+	private Set<Storia> aggiungiStorieUser(User user) throws SQLException{
+		
 		StoryManager storyM = new StoryManager();
-		Storia storia = storyM.getStoria(username);
-		utente.aggiungiStoria(storia);
-	}*/
+		Collection<Storia> listaStorie = storyM.getStoria(user);
+		if(listaStorie != null) {
+			Set<Storia> storie = new HashSet<Storia>(listaStorie);
+			return storie;
+		} else return null;
+	}
 	
-	
-	
-
 	@Override
 	public Collection<User> doRetrieveAll(String order) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		Collection<User> utenti = new LinkedList<User>();
+		String selectUtenti = "SELECT * FROM "+TABLE_NAME;
+		
+		if(order != null && !order.equals("")) {
+			selectUtenti += " ORDER BY " + order;
+		}
+		
+		try {
+			con = DriverManagerConnectionPool.getConnection();
+			ps = con.prepareStatement(selectUtenti);
+			System.out.println("doRetrieveAll: " + ps.toString());
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				User utente = new User();
+				utente.setUsername(rs.getString("Username"));
+				utente.setName(rs.getString("Nome"));
+				utente.setSurname(rs.getString("Cognome"));
+				utente.setEmail(rs.getString("Email"));
+				utente.setPassword(rs.getNString("Password"));
+				utente.setRuolo(rs.getString("Ruolo"));
+				utenti.add(utente);
+			}
+		}finally {
+			try {
+				if(ps!=null)con.close();
+			}finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
+		}
+		
+		return utenti;
 	}
 
+	/* Metodo per salvare un nuovo utente
+	 * (non-Javadoc) 
+	 * @see interfaces.UserModelI#doSave(java.lang.Object)
+	 */
 	@Override
 	public void doSave(User user) throws SQLException {
 
@@ -133,23 +168,9 @@ public class UsersManager implements UserModelI<User>{
 		}
 	}
 
-	@Override
-	public void doUpdate(User product) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean doDelete(String code) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void doUpName(String name) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	
+	
 	
 	
 	

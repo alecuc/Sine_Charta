@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <jsp:include page="head.jsp"></jsp:include>
-
+<%@page import="manager.AbilitaManager" %>
 <%@page import="beans.User" %>
 <%@page import="beans.Personaggio"%>
 <%@page import="beans.Abilita"%>

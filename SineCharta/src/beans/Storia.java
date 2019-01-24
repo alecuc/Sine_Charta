@@ -130,7 +130,7 @@ public class Storia implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "Storia [id=" + id + ", titolo=" + titolo + ", descrizione=" + descrizione + ", ambientazione="
+		return getClass().getName() + "[id=" + id + ", titolo=" + titolo + ", descrizione=" + descrizione + ", ambientazione="
 				+ ambientazione + ", username=" + username + "]";
 	}
 	

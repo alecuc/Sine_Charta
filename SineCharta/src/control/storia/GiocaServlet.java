@@ -44,15 +44,11 @@ public class GiocaServlet extends HttpServlet {
 			response.sendRedirect("jsp_page/error.jsp");
 		}
 		
-		try {
 		Integer idStory = Integer.parseInt(story);
-		Storia str = storia.getStoria(idStory, username);
-		session.setAttribute("storia", str);
+		//Storia str = storia.getStoria(idStory, username);
+		//session.setAttribute("storia", str);
 		
 		response.sendRedirect("jsp_page/storia.jsp");
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**

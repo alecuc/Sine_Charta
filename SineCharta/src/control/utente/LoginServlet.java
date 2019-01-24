@@ -80,8 +80,8 @@ public class LoginServlet extends HttpServlet {
 				while(listaStorie.size() > 0) {
 					Iterator<Storia> it = listaStorie.iterator();
 					storia = it.next();
-					usrmng.aggiungiStoriaUser(storia.getId(), utenteLogin.getUsername());
-					strmng.setUserModeratoreForStory(utenteLogin.getUsername(), storia.getId());
+				//	usrmng.aggiungiStoriaUser(storia.getId(), utenteLogin.getUsername());
+			//		strmng.setUserModeratoreForStory(utenteLogin.getUsername(), storia.getId());
 					listaStorie.remove(storia);
 				}
 				

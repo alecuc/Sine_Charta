@@ -104,7 +104,7 @@ public class AbilitaManager {
 	 * @param username= identificativo dell'utente a cui appartiene il personaggio
 	 * @param idStoria= identificativo della storia a cui partecipa il personaggio
 	 * @param nome= identificativo dell'abilita
-	 */
+	 *
 	public void aggiugiPGaOggetto(String nome, int idStoria, String username)throws SQLException {
 		Personaggio pg = new Personaggio();
 		PersonaggioManager pgM = new PersonaggioManager();
@@ -112,7 +112,7 @@ public class AbilitaManager {
 		Abilita abilita = this.getAbilitaByName(nome);
 		abilita.setAbilitaPG(pg);
 	}
-	
+	*/
 	
 
 	
