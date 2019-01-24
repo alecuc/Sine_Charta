@@ -10,8 +10,6 @@
 <%@page import="beans.Personaggio"%>
 <%@page import="beans.Abilita"%>
 <%@page import="java.util.Collection"%>
-<%@page import="manager.PersonaggioManager"%>
-<%@page import="manager.AbilitaManager" %>
 <title>Riepilogo</title>
 
 </head>
@@ -21,13 +19,12 @@
 
 	<%
 		Personaggio pg = new Personaggio();
-		if (session.getAttribute("user") == null // ||session.getAttribute("storia") == null
+		if ((session.getAttribute("user") == null)||session.getAttribute("personaggio")==null
 		) {
 			response.sendRedirect("error.jsp");
-		} else {
-			PersonaggioManager pgm = new PersonaggioManager();
-			
-			
+		}
+		else{
+			pg= (Personaggio)session.getAttribute("personaggio");	
 		}
 	%>
 	<div class="container">

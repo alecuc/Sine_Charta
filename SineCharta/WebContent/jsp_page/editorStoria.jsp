@@ -12,15 +12,18 @@
 <body>
 	<jsp:include page="navigationbar.jsp"></jsp:include>
 
-	<div class="container">
-
+	<div class="container"> 
 		<div class="row">
 			<div class="col-8">
 				<div class="container-card"></div>
 			</div>
 
-				<div class="col-4"></div>
-		
+			<div class="col-4">
+			<div class="row"></div>
+			<div class="row">
+			</div>
+			</div>
+
 
 		</div>
 	</div>
