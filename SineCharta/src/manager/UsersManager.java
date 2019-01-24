@@ -95,6 +95,12 @@ public class UsersManager implements UserModelI<User>{
 		} else return null;
 	}
 	
+	
+	
+	/* Metodo che ritorna una lista di tutti gli utenti
+	 * (non-Javadoc)
+	 * @see interfaces.UserModelI#doRetrieveAll(java.lang.String)
+	 */
 	@Override
 	public Collection<User> doRetrieveAll(String order) throws SQLException {
 		Connection con = null;

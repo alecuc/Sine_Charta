@@ -47,11 +47,12 @@ public class StoryManager {
 				table.setFlagModeratore(rs.getBoolean("flag"));
 				
 				storia.setId(rs.getInt("IdStory"));
-				storia.setTitolo(rs.getString("Nome"));
+				storia.setTitolo(rs.getString("Titolo"));
 				storia.setDescrizione(rs.getString("Descrizione"));
 				storia.setAmbientazione(rs.getString("Ambientazione"));
 				storia.setUsername(table.getUsername());
 				storia.setUtenteModeratore(user);
+			//da finire	storia.addPersonaggio(pg);
 				storieutente.add(storia);
 			}
 			
@@ -67,11 +68,30 @@ public class StoryManager {
 	}
 		
 	
-	public Storia getStoriaDelPG(Personaggio pg) {
+	public Storia getStoriaDelPG(Personaggio pg)throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		Storia storia = new Storia();
+		String selectStoria = "SELECT * FROM " + TABLE_NAME_STORIA + " WHERE IDSTORY = ?";
 		
+		try {
+			con = DriverManagerConnectionPool.getConnection();
+			ps = con.prepareStatement(selectStoria);
+			ps.setInt(1, pg.getIdStoria());
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				storia.setId(rs.getInt("IdStory"));
+				storia.setTitolo(rs.getString("Titolo"));
+				storia.setDescrizione(rs.getString("Descrizione"));
+				storia.setAmbientazione(rs.getString("Ambientazione"));
+			}
+		}finally {
+			try {
+				if(ps!=null) ps.close();
+			}finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
+		}
 		return storia;
 	}
 

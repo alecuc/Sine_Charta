@@ -16,7 +16,22 @@ public class testBeans {
 		
 		UsersManager manager = new UsersManager();
 		User utente = manager.doRetrieveByKey("Raziel");
-		System.out.println(utente.toString());
+		/*System.out.println(utente.toString());
+		*/
+		
+		PersonaggioManager pgManager = new PersonaggioManager();
+		Personaggio pg = pgManager.getPersonaggioByUtente(utente);
+		System.out.println(pg);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	}
 	
 

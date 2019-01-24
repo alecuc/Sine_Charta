@@ -131,7 +131,7 @@ public class Storia implements Serializable{
 	@Override
 	public String toString() {
 		return getClass().getName() + "[id=" + id + ", titolo=" + titolo + ", descrizione=" + descrizione + ", ambientazione="
-				+ ambientazione + ", username=" + username + "]";
+				+ ambientazione + "]";
 	}
 	
 	

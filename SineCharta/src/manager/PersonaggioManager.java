@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import beans.Personaggio;
+import beans.Storia;
 import beans.User;
 
 public class PersonaggioManager {
@@ -15,11 +16,11 @@ public class PersonaggioManager {
 	private static final String TABLE_NAME_PG = "Personaggio";
 	
 	
-	/**
-	 * Metodo utilizzato per prendere un personaggio in base alla storia a cui partecipa.
-	 * @param idPG= valore id del personaggio
-	 * @return il personaggio con tutte le informazioni
-	 */
+	/*******************************************************************************************
+	 * Metodo utilizzato per prendere un personaggio in base alla storia a cui partecipa.	   *
+	 * @param idPG= valore id del personaggio 												   *
+	 * @return il personaggio con tutte le informazioni										   *
+	 *******************************************************************************************/
 	public Personaggio getPersonaggioByUtente(User user) throws SQLException{
 		
 		Connection connection = null;
@@ -36,6 +37,7 @@ public class PersonaggioManager {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
+				personaggio.setIdStoria(rs.getInt("IdStory"));
 				personaggio.setUsername(rs.getString("Username"));
 				personaggio.setNome(rs.getString("Nome"));
 				personaggio.setCognome(rs.getString("Cognome"));
@@ -64,7 +66,8 @@ public class PersonaggioManager {
 				personaggio.setFeritaTorso(rs.getString("FeriteTorso"));
 				personaggio.setFeritaGambe(rs.getString("FeriteGambe"));
 				personaggio.setUser(user);
-				//personaggio.setStoria(unaStoria);
+				personaggio.setStoria(setStoriaPersonaggio(personaggio));
+				//DA finire con abilità e oggetti
 			} 
 			
 		}finally {
@@ -79,13 +82,114 @@ public class PersonaggioManager {
 		return personaggio;
 	}
 	
-		
-	/**
-	 * Metodo per avere una lista di PG di un utente
-	 * @return una lista di PG
-	 * @throws SQLException
-	 */
+	/************************************************************************************
+	 * Metodo per settare la storia al personaggio che accede a StoryManager			*
+	 * @param pg= personaggio a cui associare la storia									*
+	 * @return la storia a cui partecipa il personaggio 								*
+	 ************************************************************************************/
+	private Storia setStoriaPersonaggio(Personaggio pg)throws SQLException {
+		StoryManager storyManager = new StoryManager();
+		Storia storia = storyManager.getStoriaDelPG(pg);
+		return storia;
+	}
 	
+	/***********************************************************************************************
+	 *  Metodo utilizzato per ottenere ID della storia a cui partecipa un personaggio			   *
+	 * @param pg = personaggio a cui associare la storia 										   *
+	 * @return id della storia del personaggio													   *
+	 ***********************************************************************************************/
+	public int getStoriaPersonaggioById(Personaggio pg) throws SQLException{
+		Connection con = null;
+		PreparedStatement ps = null;
+		int idStoria = 0;
+		String selectIDStoria = "SELECT IDSTORY FROM " + TABLE_NAME_PG + " WHERE USERNAME = ?";
+		try {
+			con = DriverManagerConnectionPool.getConnection();
+			ps = con.prepareStatement(selectIDStoria);
+			ps.setString(1, pg.getUsername());
+			ResultSet rs = ps.executeQuery();
+			System.out.println("getStoriaPersonaggioById" + ps.toString());
+			
+			while(rs.next()) {
+				idStoria = rs.getInt("IdStory");
+			}
+		}finally {
+			try {
+				if(ps!=null) ps.close();
+			}finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
+		}
+		return idStoria;
+	}
+	
+	/********************************************************************************
+	 * Metodo per avere tutti i personaggi di una storia specifica					*
+	 * @param storia= la storia a cui fanno riferimento i personaggi				*
+	 * @return lista dei personaggi della storia									*
+	 ********************************************************************************/
+	public Collection<Personaggio> getAllPgByStory(Storia storia)throws SQLException{
+		Connection con = null;
+		PreparedStatement ps = null;
+		Collection<Personaggio> listaPG = new LinkedList<Personaggio>();
+		String selectPGStoria = "SELECT * FROM " + TABLE_NAME_PG + " WHERE IDSTORY = ?";
+		try {
+			con = DriverManagerConnectionPool.getConnection();
+			ps = con.prepareStatement(selectPGStoria);
+			ps.setInt(1, storia.getId());
+			ResultSet rs = ps.executeQuery();
+			System.out.println("getAllPgByStory: " + ps.toString());
+			while(rs.next()) {
+				Personaggio personaggio = new Personaggio();
+				personaggio.setIdStoria(rs.getInt("IdStory"));
+				personaggio.setUsername(rs.getString("Username"));
+				personaggio.setNome(rs.getString("Nome"));
+				personaggio.setCognome(rs.getString("Cognome"));
+				personaggio.setAge(rs.getInt("Eta"));
+				personaggio.setNazionalita(rs.getString("Nazionalita"));
+				personaggio.setTaroccoDominante(rs.getString("TaroccoDominante"));
+				personaggio.setIntuito(rs.getInt("Intuito"));
+				personaggio.setAspetto(rs.getInt("Aspetto"));
+				personaggio.setCoordinazione(rs.getInt("Coordinazione"));
+				personaggio.setAffinOcculta(rs.getInt("AffinitaOcculta"));
+				personaggio.setMemoria(rs.getInt("Memoria"));
+				personaggio.setComando(rs.getInt("Comando"));
+				personaggio.setDestrManuale(rs.getInt("DestrezzaManuale"));
+				personaggio.setDistDaMorte(rs.getInt("DistanzaDallaMorte"));
+				personaggio.setPercezione(rs.getInt("Percezione"));
+				personaggio.setCreativita(rs.getInt("Creativita"));
+				personaggio.setForzaFisica(rs.getInt("ForzaFisica"));
+				personaggio.setEquilibrMentale(rs.getInt("EquilibrioMentale"));
+				personaggio.setVolonta(rs.getInt("Volonta"));
+				personaggio.setSocievolezza(rs.getInt("Socievolezza"));
+				personaggio.setMira(rs.getInt("Mira"));
+				personaggio.setKarma(rs.getInt("Karma"));
+				personaggio.setRisoluzione(rs.getInt("Risoluzione"));
+				personaggio.setFeritaTesta(rs.getString("FeriteTesta"));
+				personaggio.setFeritaBraccia(rs.getString("FeriteBraccia"));
+				personaggio.setFeritaTorso(rs.getString("FeriteTorso"));
+				personaggio.setFeritaGambe(rs.getString("FeriteGambe"));
+				//personaggio.setUser(user);
+				listaPG.add(personaggio);
+			}
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+			} finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
+		}
+		return listaPG;
+	}
+	
+	
+	// DA FINIRE private User getUserforStory()
+	
+	/******************************************************************************
+	 * Metodo per avere una lista di PG di un utente							  *
+	 * @return una lista di PG													  *
+	 * @throws SQLException														  *
+	 ******************************************************************************/
 	public Collection<Personaggio> listaPG(User user) throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -99,11 +203,11 @@ public class PersonaggioManager {
 			ps = con.prepareStatement(tuttiPG);
 			ps.setString(1, user.getUsername());
 			ResultSet rs = ps.executeQuery();
-			System.out.println("lista pers"+ps.toString());
+			System.out.println("listaPG: "+ps.toString());
 			while(rs.next()) {
 				
 				Personaggio personaggio = new Personaggio();
-				
+				personaggio.setIdStoria(rs.getInt("IdStory"));
 				personaggio.setUsername(rs.getString("Username"));
 				personaggio.setNome(rs.getString("Nome"));
 				personaggio.setCognome(rs.getString("Cognome"));
@@ -132,6 +236,7 @@ public class PersonaggioManager {
 				personaggio.setFeritaTorso(rs.getString("FeriteTorso"));
 				personaggio.setFeritaGambe(rs.getString("FeriteGambe"));				
 				personaggio.setUser(user);
+				personaggio.setStoria(setStoriaPersonaggio(personaggio));
 				personaggi.add(personaggio);
 			}
 		}finally {
@@ -147,11 +252,11 @@ public class PersonaggioManager {
 	
 	
 	
-	/**
-	 * Metodo per la creazione del personaggio 
-	 * @param pg= un oggetto personaggio
-	 * @param idPG= id del giocatore a cui è associato
-	 */
+	/**********************************************************************************
+	 * Metodo per la creazione del personaggio 										  *	
+	 * @param pg= un oggetto personaggio											  *
+	 * @param idPG= id del giocatore a cui è associato								  *
+	 **********************************************************************************/
 	
 	public void creaPersonaggio(Personaggio pg, int idStoria) throws SQLException{
 		
@@ -228,12 +333,12 @@ public class PersonaggioManager {
 
 
 	
-	/**
-	 * Metodo per aggiornare le ferite del personaggio
-	 * @param idPG= id del personaggio a cui è associata la ferita
-	 * @param areaFerita= parte del corpo a cui aggiungere la ferita
-	 * @param danno= valore della ferita
-	 */
+	/********************************************************************************************
+	 * Metodo per aggiornare le ferite del personaggio											*
+	 * @param idPG= id del personaggio a cui è associata la ferita								*
+	 * @param areaFerita= parte del corpo a cui aggiungere la ferita							*
+	 * @param danno= valore della ferita														*
+	 ********************************************************************************************/
 	public void updateFeritePg(int idPG, String areaFerita, int danno) throws SQLException{
 		
 		Connection con = null;
@@ -261,7 +366,13 @@ public class PersonaggioManager {
 		}
 	}
 	
-	public boolean eliminaPG(int idStoria, String username) throws SQLException{
+	
+	/****************************************************************************
+	 *  Metodo per eliminare un personaggio										*
+	 * @param pg = personaggio da eliminare										*
+	 * @return un valore che conferma l'avvenuta eliminazione					*
+	 ****************************************************************************/
+	public boolean eliminaPG(Personaggio pg) throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
@@ -270,8 +381,8 @@ public class PersonaggioManager {
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(eliminaPG);
-			ps.setInt(1, idStoria);
-			ps.setString(2, username);
+			ps.setInt(1, pg.getIdStoria());
+			ps.setString(2, pg.getUsername());
 			result = ps.executeUpdate();
 			System.out.println("eliminaPG: " + ps.toString());
 			con.commit();
@@ -286,21 +397,6 @@ public class PersonaggioManager {
 		return (result != 0);
 	}
 
-
-
-	/**
-	 * Metodo per settare la storia al personaggio
-	 * @param username= identificativo dell'utente a cui è associato il personaggio
-	 * @param idStoria= identificativo della storia a cui partecipa il personaggio.
-	 */
-	/*public void setStoryForPG(String username, int idStoria)throws SQLException{
-		StoryManager storyM = new StoryManager();
-		Storia storia = storyM.getStoria(idStoria, username);
-		Personaggio pg = this.getPersonaggioByUtente(idStoria, username);
-		pg.setStoria(storia);
-	}*/
-
-	
 	
 	
 	

@@ -16,14 +16,15 @@ public class Personaggio implements Serializable{
 	private int age, salute, risoluzione, idStoria;
 	private Set<Oggetto> oggetti;
 	private Storia storia;
+	private Set<Abilita> ability;
+	private User utenteDelPG;
 	
 	/*Caratteristiche del personaggio*/
 	private int intuito, memoria, percezione, volonta, aspetto, comando, creativita, socievolezza,
 			coordinazione, destrManuale, forzaFisica, mira, affinOcculta,
 			distDaMorte, equilibrMentale, karma;
 	
-	private Set<Abilita> ability;
-	private User utenteDelPG;
+	
 
 	
 	public Personaggio() {
