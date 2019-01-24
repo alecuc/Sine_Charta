@@ -13,6 +13,7 @@ import beans.HaTable;
 import beans.Personaggio;
 import beans.SessioneDiGioco;
 import beans.Storia;
+import beans.User;
 
 public class StoryManager {
 

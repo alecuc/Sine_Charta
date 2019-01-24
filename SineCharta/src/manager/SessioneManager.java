@@ -1,5 +1,9 @@
 package manager;
 
+import java.sql.*;
+
+import beans.SessioneDiGioco;
+
 public class SessioneManager {
 
 	private static final String TABLE_NAME = "Sessione";
