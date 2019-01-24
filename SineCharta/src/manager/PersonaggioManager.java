@@ -290,6 +290,21 @@ public class PersonaggioManager {
 		
 		return (result != 0);
 	}
+
+
+
+	/**
+	 * Metodo per settare la storia al personaggio
+	 * @param username= identificativo dell'utente a cui è associato il personaggio
+	 * @param idStoria= identificativo della storia a cui partecipa il personaggio.
+	 */
+	/*public void setStoryForPG(String username, int idStoria)throws SQLException{
+		StoryManager storyM = new StoryManager();
+		Storia storia = storyM.getStoria(idStoria, username);
+		Personaggio pg = this.getPersonaggioByUtente(idStoria, username);
+		pg.setStoria(storia);
+	}*/
+
 	
 	
 	

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class User implements Cloneable, Serializable{
+public class User implements Serializable{
 	
 	
 	/**
@@ -123,6 +123,14 @@ public class User implements Cloneable, Serializable{
 		// TODO Auto-generated method stub
 		this.ruolo= ruolo;
 	}
+
+	@Override
+	public String toString() {
+		return "User [name=" + name + ", surname=" + surname + ", email=" + email + ", username=" + username
+				+ ", password=" + password + ", ruolo=" + ruolo + ", personaggiUtente=" + personaggiUtente
+				+ ", storieUtente=" + storieUtente + "]";
+	}
+	
 	
 	
 	
