@@ -11,9 +11,9 @@
 <body>
 	
 	<%
-		if (session.getAttribute("user") == null) {
+	/*	if (session.getAttribute("user") == null) {
 			response.sendRedirect("error/error.jsp");
-		}
+		}*/
 	%>
 	<h1 class="card-title">Crea il tuo personaggio</h1>
 

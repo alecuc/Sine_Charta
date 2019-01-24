@@ -5,6 +5,7 @@ import java.util.Iterator;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import beans.Personaggio;
+import beans.Storia;
 import beans.User;
 
 import java.sql.*;

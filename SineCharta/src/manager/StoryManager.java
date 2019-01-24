@@ -13,6 +13,7 @@ import beans.HaTable;
 import beans.Personaggio;
 import beans.SessioneDiGioco;
 import beans.Storia;
+import beans.User;
 
 public class StoryManager {
 
@@ -204,10 +205,10 @@ public class StoryManager {
 		Storia storia = new Storia();
 		StoryManager stry = new StoryManager(); 
 		SessioneManager ssnM = new SessioneManager();
-		SessioneDiGioco ssn = ssnM.prendereSessione(numero, username, idStory);
+		//SessioneDiGioco ssn = ssnM.prendereSessione(numero, username, idStory);
 		
 		//storia = stry.getStoria(username);
-		storia.aggiungiSessione(ssn);
+		//storia.aggiungiSessione(ssn);
 	}
 	
 	
