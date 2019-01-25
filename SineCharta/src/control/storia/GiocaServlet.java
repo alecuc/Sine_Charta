@@ -39,6 +39,7 @@ public class GiocaServlet extends HttpServlet {
 		String story = request.getParameter("idStoria");
 		String username = request.getParameter("username");
 		HttpSession session = request.getSession();
+
 						
 		try {
 
@@ -64,6 +65,7 @@ public class GiocaServlet extends HttpServlet {
 			}catch (SQLException e) {
 				e.printStackTrace();
 			}
+
 
 	}
 

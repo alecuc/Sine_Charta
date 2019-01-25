@@ -16,27 +16,34 @@ public class Personaggio implements Serializable{
 	private int age, salute, risoluzione, idStoria;
 	private Set<Oggetto> oggetti;
 	private Storia storia;
+	private Set<Abilita> ability;
+	private User utenteDelPG;
 	
 	/*Caratteristiche del personaggio*/
 	private int intuito, memoria, percezione, volonta, aspetto, comando, creativita, socievolezza,
 			coordinazione, destrManuale, forzaFisica, mira, affinOcculta,
 			distDaMorte, equilibrMentale, karma;
 	
-	private Set<Abilita> ability;
-	private User utenteDelPG;
+	
 
 	
 	public Personaggio() {
 		oggetti = new HashSet<Oggetto>();
 		ability = new HashSet<Abilita>();
 	}
-	
+	public User getUser() {
+		return this.utenteDelPG;
+	}
 	public void setUser(User utente) {
 		if(utenteDelPG!= utente) {
 			User oldUser = utenteDelPG;
 			utenteDelPG = utente;
-			if(utente!=null)utente.aggiungiPG(this);
-			if(oldUser!=null)oldUser.rimuoviPG(this);
+			if(utenteDelPG!=null) {
+				utenteDelPG.aggiungiPG(this);
+			}
+			if(oldUser!=null) {
+				oldUser.rimuoviPG(this);
+			}
 		}
 	}
 	
@@ -72,6 +79,14 @@ public class Personaggio implements Serializable{
 	
 
 	
+	public String getUsername() {
+		return this.username;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	/**
 	 * @return the nome
 	 */
@@ -336,13 +351,6 @@ public class Personaggio implements Serializable{
 	public void setKarma(int karma) {
 		this.karma = karma;
 	}
-
-	/**
-	 * @return the username
-	 */
-	public String getUsername() {
-		return utenteDelPG.getUsername();
-	}
 	
 	
 	/**
@@ -423,7 +431,7 @@ public class Personaggio implements Serializable{
 	 */
 	@Override
 	public String toString() {
-		return "Personaggio [nome=" + nome + ", cognome=" + cognome + ", nazionalita=" + nazionalita
+		return getClass().getName()+" [nome=" + nome + ", cognome=" + cognome + ", nazionalita=" + nazionalita
 				+ ", taroccoDominante=" + taroccoDominante + ", username=" + username + ", feritaTesta=" + feritaTesta
 				+ ", feritaBraccia=" + feritaBraccia + ", feritaTorso=" + feritaTorso + ", feritaGambe=" + feritaGambe
 				+ ", age=" + age + ", salute=" + salute + ", risoluzione=" + risoluzione + ", idStoria=" + idStoria
@@ -432,7 +440,7 @@ public class Personaggio implements Serializable{
 				+ comando + ", creativita=" + creativita + ", socievolezza=" + socievolezza + ", coordinazione="
 				+ coordinazione + ", destrManuale=" + destrManuale + ", forzaFisica=" + forzaFisica + ", mira=" + mira
 				+ ", affinOcculta=" + affinOcculta + ", distDaMorte=" + distDaMorte + ", equilibrMentale="
-				+ equilibrMentale + ", karma=" + karma + ", ability=" + ability + ", utenteDelPG=" + utenteDelPG + "]";
+				+ equilibrMentale + ", karma=" + karma + ", ability=" + ability +"\n";
 	}
 
 	

@@ -24,7 +24,7 @@ public class DriverManagerConnectionPool {
 		/*****AmazonAWS Database*****/
 		String username = "SineMaster";
 		String password = "SinePassword";
-		String url = "jdbc:mysql://sinechartadb.c2ozuap0txvr.eu-west-2.rds.amazonaws.com:3306/dbSineCharta";
+		String url = "jdbc:mysql://sinechartadb.c4mcoif2kbyp.us-east-2.rds.amazonaws.com:3306/dbSineCharta";
 		/*old DB*/
 		/*String username = "sql7274119";
 		String password = "bR7ZUVIv9b";

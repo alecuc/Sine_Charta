@@ -26,19 +26,24 @@ public class User implements Serializable{
 		nuovaStoria.setUtenteModeratore(this);
 	}
 	
+	public void aggiungiListaStorie(Set<Storia> storie) {
+		this.storieUtente = storie;
+	}
+	
 	public void rimuoviStoria(Storia storiaDaRimuovere) {
 		storieUtente.remove(storiaDaRimuovere);
 		storiaDaRimuovere.setUtenteModeratore(null);
 		
 	}
 	
-	
-
 	public void aggiungiPG(Personaggio pg) {
 		personaggiUtente.add(pg);
 		pg.setUser(this);
 	}
 	
+	public void aggiungiListaPG(Set<Personaggio> personaggi) {
+		personaggiUtente = personaggi;
+	}
 	
 	public void rimuoviPG(Personaggio pg) {
 		personaggiUtente.remove(pg);
@@ -126,7 +131,7 @@ public class User implements Serializable{
 
 	@Override
 	public String toString() {
-		return "User [name=" + name + ", surname=" + surname + ", email=" + email + ", username=" + username
+		return getClass().getName() + "[name=" + name + ", surname=" + surname + ", email=" + email + ", username=" + username
 				+ ", password=" + password + ", ruolo=" + ruolo + ", personaggiUtente=" + personaggiUtente
 				+ ", storieUtente=" + storieUtente + "]";
 	}
