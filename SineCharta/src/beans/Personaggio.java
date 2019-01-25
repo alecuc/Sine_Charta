@@ -62,12 +62,12 @@ public class Personaggio implements Serializable{
 	
 	public void aggiungiOggetto(Oggetto obj) {
 		oggetti.add(obj);
-		obj.setOggettPG(this);
+		obj.setPersonaggioOggetto(this);;
 	}
 	
 	public void rimuoviOggetto(Oggetto obj) {
 		oggetti.remove(obj);
-		obj.setOggettPG(null);
+		obj.setPersonaggioOggetto(null);;
 	}
 
 	
