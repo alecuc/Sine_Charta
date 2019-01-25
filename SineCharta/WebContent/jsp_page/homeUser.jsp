@@ -70,54 +70,43 @@
 		NOME_STORIA - NOME_PG - 	PULSANTE_GIOCA
 		il nome		- il nome -	   il pulsante che
 		della storia- del pg  - carica la pagina del pg	 -->
-			<div class="table-responsive">
-				<table class=" table table-dark" id="tabellaStorie">
-					<thead>
-						<tr>
-							<th>Nome Storia</th>
-							<th>Nome Personaggio</th>
-							<th></th>
-						</tr>
-					</thead>
+				
+						<%
+							User utente = (User) session.getAttribute("user");
+							Collection<Storia> stList = (Collection) session.getAttribute("listaStorie");
 
-					<tbody>
+							if (!stList.isEmpty()) {
+								out.print("<div class=\"table-responsive col-8\">");
 
+									out.print("<table class=\"table table-dark\" id=\"tabellaStorie\">");
+									out.print("<thead>");
+									out.print("<tr>");
+									out.print("<th scope=\"col\">Nome Storia</th>");
+									out.print("<th scope=\"col\">Nome PG</th>");
+									out.print("<th scope=\"col\"></th>");
+									out.print("</tr>");
+									out.print("</thead>");
+									out.print("<tbody>");
+									
+								for (Storia st : stList) {
 
+									out.print("<tr>");
+									out.print("<form method=\"post\" action=\"../GiocaServlet\">");
+									out.print("<td class=\"td-prod\">" + st.getTitolo() + "</td>");
+									out.print("<td class=\"td-prod\">"+"QUI NOME PG" + "</td>");
 
+									out.print("<td><button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Gioca</button></td>");
+									out.print("</form>");
+									out.print("</tr>");
 
-				</table>
+								}
+								out.print("</tbody>");
+								out.print("</table>");
+
+							}
+						%>
+					
 			</div>
-
-			<%
-				User utente = (User) session.getAttribute("user");
-				Collection<Storia> stList = (Collection<Storia>) session.getAttribute("listastorie");
-				
-				
-				if (!stList.isEmpty()) {
-
-					out.print("<div class=\"table-responsive\">");
-
-					out.print("<table class=\"table table-dark\" id=\"tabellaStorie\">");
-					out.print("<thead>");
-					out.print("<tr>");
-					out.print("<th scope=\"col\">Nome Storia</th>");
-					out.print("<th scope=\"col\"></th>");
-					out.print("</tr>");
-					out.print("</thead>");
-					out.print("<tbody>");
-
-					for (Storia st : stList) {
-						out.print("<tr>");
-						out.print("<form method=\"post\" action=\"../GiocaServlet\">");
-						out.print("<td class=\"td-prod\">" + st.getTitolo() + "</td>");
-						out.print("<button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Gioca</button>");
-						out.print("</form>");
-						out.print("</tr>");
-
-					}
-				}
-			%>
-
 
 		</div>
 	</div>

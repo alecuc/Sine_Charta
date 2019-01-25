@@ -51,9 +51,9 @@ public class LoginServlet extends HttpServlet {
 			User utenteLogin= user.doRetrieveByKey(usernameInput);
 			String password= utenteLogin.getPassword();
 
-			/*if (utenteLogin.getUsername()==null) {
+			if (utenteLogin.getUsername()==null) {
 				response.sendRedirect("jsp_page/login404.jsp");
-			}*/
+			}
 			
 			
 				String passEncr = passwordInput;
@@ -70,29 +70,11 @@ public class LoginServlet extends HttpServlet {
 				
 			if (passEncr.equals(password)) {
 				session.setAttribute("user", utenteLogin);
-
-
-				StoryManager strmng = new StoryManager();
-				Storia storia = new Storia();
-				UsersManager usrmng = new UsersManager();
-				Collection<Storia> listaStorie = strmng.listaStorie(usernameInput);
-				
-				while(listaStorie.size() > 0) {
-					Iterator<Storia> it = listaStorie.iterator();
-					storia = it.next();
-				//	usrmng.aggiungiStoriaUser(storia.getId(), utenteLogin.getUsername());
-
-			//		strmng.setUserModeratoreForStory(utenteLogin.getUsername(), storia.getId());
-
-					listaStorie.remove(storia);
-				}
-				
-				session.setAttribute("listaStorie", listaStorie);
-
-				/*
-				 * TODO: METTERE COME ATTRIBUTO DI SESSIONE:
-				 * -STORIE A CUI PARTECIPO
-				 */
+				UsersManager usr = new UsersManager();
+				User user = usr.doRetrieveByKey(usernameInput);
+				StoryManager str = new StoryManager(); 
+				Collection<Storia>  listaStoria = str.getStoria(user);
+				session.setAttribute("listaStorie", listaStoria);
 				response.sendRedirect("jsp_page/homeUser.jsp");
 			} else {
 			
