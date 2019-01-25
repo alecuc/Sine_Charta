@@ -73,7 +73,7 @@ public class StoryManager {
 		PreparedStatement ps = null;
 		Storia storia = new Storia();
 		String selectStoria = "SELECT * FROM " + TABLE_NAME_STORIA + " WHERE IDSTORY = ?";
-		
+		//
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(selectStoria);
@@ -96,45 +96,7 @@ public class StoryManager {
 	}
 
 	
-	/**
-	 * Metodo che carica la lista delle storie di un Utente moderatore 
-	 * @return lista di tutte le storie associate alla username
-	 */
-	public Collection<Storia> listaStorie(String username) throws SQLException{
-		
-		Connection con = null;
-		PreparedStatement ps = null;
-		Collection<Storia> storie = new LinkedList<Storia>();
-		String storieUtente = "SELECT * FROM "+TABLE_NAME_STORIA+" WHERE Username = ?";
-		
-		try {
-			con = DriverManagerConnectionPool.getConnection();
-			ps = con.prepareStatement(storieUtente);
-			ps.setString(1, username);
-			ResultSet rs = ps.executeQuery();
-			System.out.println("listaStorie: " + ps.toString());
-			
-			while(rs.next()) {
-				
-				Storia storia = new Storia();
-				
-				storia.setId(rs.getInt("Id"));
-				storia.setTitolo(rs.getString("Titolo"));
-				storia.setDescrizione(rs.getString("Descrizione"));
-				storia.setAmbientazione(rs.getString("Ambientazione"));
-				storia.setUsername(rs.getString("Username"));
-				storie.add(storia);
-			}
-		}finally {
-			try {
-				if(ps != null) ps.close();
-			}finally {
-				DriverManagerConnectionPool.releaseConnection(con);
-			}
-		}
-		
-		return storie;
-	}
+
 	
 	/**
 	 * Metodo per inserire una nuova storia
