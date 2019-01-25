@@ -6,7 +6,7 @@ public class Tarocco {
 	 * Classe Tarocco, permette di istanziare un Oggetto Tarocco da inserire nel Mazzo
 	 */
 	
-	String descrizione, descrizioneDominante;
+	String descrizione, descrizioneDominante, nome;
 	int numero, valoreCuori, valoreQuadri, valoreFiori, valorePicche;
 	
 	
@@ -20,9 +20,11 @@ public class Tarocco {
 	 * @param valorePicche numero relativo al valore picche
 	 * @param numero il numero che identifica il Tarocco
 	 */
-	public Tarocco(String descrizione, String descrizioneDominante, int valoreCuori, int valoreQuadri,
+	public Tarocco(String nome, String descrizione, String descrizioneDominante, int valoreCuori, int valoreQuadri,
 			int valoreFiori, int valorePicche, int numero) {
 		super();
+		
+		this.setNome(nome);
 		this.descrizione = descrizione;
 		this.descrizioneDominante = descrizioneDominante;
 		this.valoreCuori = valoreCuori;
@@ -144,6 +146,14 @@ public class Tarocco {
 	 */
 	public void setNumero(int numero) {
 		this.numero = numero;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 
