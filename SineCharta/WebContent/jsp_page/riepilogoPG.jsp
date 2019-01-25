@@ -124,12 +124,10 @@
 				<table class="table table-dark">
 					<tbody>
 						<tr>
-							<%
+							<% /*
 							User utente= (User)session.getAttribute("user");
 
 							Collection <Abilita> abList;
-							AbilitaManager abm= new AbilitaManager();
-							abList= abm.getListaAbilitaByPG(pg.getUsername(), pg.getIdStoria());
 							
 								out.print("<div class=\"table-responsive\">");
 

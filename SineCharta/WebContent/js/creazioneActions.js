@@ -72,6 +72,7 @@ $(document).ready(function(){
 	});
 
 	$('#confDom').click(function(){
+		//	SHUFFLE MAZZO TAROCCHI
 		$(this).prop('disabled',true);
 		$('#dealDom').prop('disabled',true);
 		$('#dealCuori').prop('disabled',false);
@@ -79,6 +80,7 @@ $(document).ready(function(){
 		$('#dealFiori').prop('disabled',false);
 		$('#dealPicche').prop('disabled',false);
 		$('#confermaPunti').prop('disabled',false);
+	//	$.get(url, oggetti da inviare, funzione da eseguire in caso di successo)
 	});
 
 	
@@ -112,6 +114,7 @@ $(document).ready(function(){
 		 * ESTRAI TAROCCO DOMINANTE:
 		 * 	 SETTA L'IMMAGINE DI #TDOM
 		 * 	 SETTA LA DESCRIZIONE DI #TDOM
+		 * $.get(url, oggetti da inviare, funzione da eseguire in caso di successo)
 		 * */
 
 		$("#tDom").animate({width:'toggle'},350);
@@ -127,13 +130,14 @@ $(document).ready(function(){
 		}
 
 	});
-
+	
+	
 	$('#dealCuori').click(function(){
 		countCuori++;
 		/**
 		 * ESTRAI CUORI
 		 * SETTA IL VALORE E L'IMMAGINE
-		 * 
+		 * $.get(url, oggetti da inviare, funzione da eseguire in caso di successo)
 		 * */
 		$("#tarCuori").animate({width:'toggle'},350);
 		$("#tarCuori").attr("src","../images/cardPlaceholder2.png");
@@ -150,7 +154,7 @@ $(document).ready(function(){
 		/**
 		 * ESTRAI QUADRI
 		 * SETTA IL VALORE E L'IMMAGINE
-		 * 
+		 * $.get(url, oggetti da inviare, funzione da eseguire in caso di successo)
 		 * */
 		$("#tarQuadri").animate({width:'toggle'},350);
 		$("#tarQuadri").attr("src","../images/cardPlaceholder2.png");
@@ -167,7 +171,7 @@ $(document).ready(function(){
 		/**
 		 * ESTRAI FIORI
 		 * SETTA IL VALORE E L'IMMAGINE
-		 * 
+		 * $.get(url, oggetti da inviare, funzione da eseguire in caso di successo)
 		 * */
 		$("#tarFiori").animate({width:'toggle'},350);
 		$("#tarFiori").attr("src","../images/cardPlaceholder2.png");
@@ -184,7 +188,7 @@ $(document).ready(function(){
 		/**
 		 * ESTRAI PICCHE
 		 * SETTA IL VALORE E L'IMMAGINE
-		 * 
+		 * $.get(url, oggetti da inviare, funzione da eseguire in caso di successo)
 		 * */		
 		$("#tarPicche").animate({width:'toggle'},350);
 		$("#tarPicche").attr("src","../images/cardPlaceholder2.png");
