@@ -2,6 +2,7 @@ package control.storia;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +21,7 @@ import manager.StoryManager;
 public class GiocaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	static StoryManager storia = new StoryManager();
+	static StoryManager str = new StoryManager();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -34,17 +35,13 @@ public class GiocaServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
 		response.setContentType("text/html");
-		String story = request.getParameter("storia");
+		String story = request.getParameter("idStoria");
 		String username = request.getParameter("username");
 		HttpSession session = request.getSession();
-		
-		if(storia == null) {
-			response.sendRedirect("jsp_page/error.jsp");
-		}
-		
+						
 		try {
+
 		/*Integer idStory = Integer.parseInt(story);
 		Storia str = storia.getStoria(username);
 		session.setAttribute("storia", str);
@@ -55,6 +52,18 @@ public class GiocaServlet extends HttpServlet {
 //	*/	} finally {
 	
 }
+
+			
+			Integer idStory = Integer.parseInt(story);
+			//Storia str = storia.getStoria(idStory, username);
+			//session.setAttribute("storia", str);
+			Collection<Storia> storia = str.listaStorie(username);
+			response.sendRedirect("jsp_page/storia.jsp");
+						
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}
+
 	}
 
 	/**
