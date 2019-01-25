@@ -30,6 +30,7 @@ public class User implements Serializable{
 		this.storieUtente = storie;
 	}
 	
+	
 	public void rimuoviStoria(Storia storiaDaRimuovere) {
 		storieUtente.remove(storiaDaRimuovere);
 		storiaDaRimuovere.setUtenteModeratore(null);
@@ -49,6 +50,17 @@ public class User implements Serializable{
 		personaggiUtente.remove(pg);
 		pg.setUser(null);
 	}
+	
+	
+	
+	public Set<Personaggio> getPersonaggiUtente() {
+		return personaggiUtente;
+	}
+
+	public Set<Storia> getStorieUtente() {
+		return storieUtente;
+	}
+
 	/**
 	 *
 	 * @return the name
@@ -125,15 +137,15 @@ public class User implements Serializable{
 	}
 
 	public void setRuolo(String ruolo) {
-		// TODO Auto-generated method stub
 		this.ruolo= ruolo;
 	}
 
+	
 	@Override
 	public String toString() {
 		return getClass().getName() + "[name=" + name + ", surname=" + surname + ", email=" + email + ", username=" + username
 				+ ", password=" + password + ", ruolo=" + ruolo + ", personaggiUtente=" + personaggiUtente
-				+ ", storieUtente=" + storieUtente + "]";
+				+ ", storieUtente=" + storieUtente + "] \n";
 	}
 	
 	

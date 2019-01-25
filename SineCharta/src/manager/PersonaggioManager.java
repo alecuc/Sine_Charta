@@ -169,7 +169,9 @@ public class PersonaggioManager {
 				personaggio.setFeritaBraccia(rs.getString("FeriteBraccia"));
 				personaggio.setFeritaTorso(rs.getString("FeriteTorso"));
 				personaggio.setFeritaGambe(rs.getString("FeriteGambe"));
-				//personaggio.setUser(user);
+				personaggio.setUser(getUserByPG(personaggio));
+				personaggio.setStoria(storia);
+				//Aggiungere oggetti e abilità
 				listaPG.add(personaggio);
 			}
 		}finally {
@@ -182,9 +184,18 @@ public class PersonaggioManager {
 		return listaPG;
 	}
 	
-	
-	// DA FINIRE private User getUserforStory()
-	
+	/************************************************************************
+	 * Metodo che recupera un utente in base al personaggio 				*
+	 * @param pg= personaggio da cui recuperare la storia					*
+	 * @return un utente associato alla storia								*
+	 ************************************************************************/
+	private User getUserByPG(Personaggio pg)throws SQLException {
+		String username = pg.getUsername();
+		UsersManager userMa = new UsersManager();
+		User utente = userMa.doRetrieveByKey(username);
+		return utente;
+		
+	}
 	/******************************************************************************
 	 * Metodo per avere una lista di PG di un utente							  *
 	 * @return una lista di PG													  *
@@ -237,6 +248,7 @@ public class PersonaggioManager {
 				personaggio.setFeritaGambe(rs.getString("FeriteGambe"));				
 				personaggio.setUser(user);
 				personaggio.setStoria(setStoriaPersonaggio(personaggio));
+				//DA FINIRE  CON OGGETTO E ABILIA
 				personaggi.add(personaggio);
 			}
 		}finally {

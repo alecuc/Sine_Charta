@@ -35,36 +35,7 @@ public class GiocaServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.setContentType("text/html");
-		String story = request.getParameter("idStoria");
-		String username = request.getParameter("username");
-		HttpSession session = request.getSession();
-
-						
-		try {
-
-
-		/*Integer idStory = Integer.parseInt(story);
-		Storia str = storia.getStoria(username);
-		session.setAttribute("storia", str);
 		
-		response.sendRedirect("jsp_page/storia.jsp");
-		}catch(SQLException e) {
-			e.printStackTrace();
-//	*/	} finally {
-	
-}
-
-			
-			Integer idStory = Integer.parseInt(story);
-			//Storia str = storia.getStoria(idStory, username);
-			//session.setAttribute("storia", str);
-			Collection<Storia> storia = str.listaStorie(username);
-			response.sendRedirect("jsp_page/storia.jsp");
-						
-			}catch (SQLException e) {
-				e.printStackTrace();
-			}
 
 
 	}

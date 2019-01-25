@@ -15,8 +15,8 @@ public class Personaggio implements Serializable{
 	private String nome, cognome, nazionalita, taroccoDominante, username, feritaTesta, feritaBraccia, feritaTorso, feritaGambe;
 	private int age, salute, risoluzione, idStoria;
 	private Set<Oggetto> oggetti;
-	private Storia storia;
 	private Set<Abilita> ability;
+	private Storia storia;
 	private User utenteDelPG;
 	
 	/*Caratteristiche del personaggio*/
@@ -54,6 +54,10 @@ public class Personaggio implements Serializable{
 			if(unaStoria != null) unaStoria.addPersonaggio(this);
 			if(oldStory != null) oldStory.rimuoviPG(this);
 		}
+	}
+	
+	public Storia getStoria() {
+		return this.storia;
 	}
 	
 	public void aggiungiOggetto(Oggetto obj) {
@@ -435,12 +439,12 @@ public class Personaggio implements Serializable{
 				+ ", taroccoDominante=" + taroccoDominante + ", username=" + username + ", feritaTesta=" + feritaTesta
 				+ ", feritaBraccia=" + feritaBraccia + ", feritaTorso=" + feritaTorso + ", feritaGambe=" + feritaGambe
 				+ ", age=" + age + ", salute=" + salute + ", risoluzione=" + risoluzione + ", idStoria=" + idStoria
-				+ ", oggetti=" + oggetti + ", storia=" + storia + ", intuito=" + intuito + ", memoria=" + memoria
+				+ ", oggetti=" + oggetti + ", storia=" + storia.getTitolo() + ", intuito=" + intuito + ", memoria=" + memoria
 				+ ", percezione=" + percezione + ", volonta=" + volonta + ", aspetto=" + aspetto + ", comando="
 				+ comando + ", creativita=" + creativita + ", socievolezza=" + socievolezza + ", coordinazione="
 				+ coordinazione + ", destrManuale=" + destrManuale + ", forzaFisica=" + forzaFisica + ", mira=" + mira
 				+ ", affinOcculta=" + affinOcculta + ", distDaMorte=" + distDaMorte + ", equilibrMentale="
-				+ equilibrMentale + ", karma=" + karma + ", ability=" + ability +"\n";
+				+ equilibrMentale + ", karma=" + karma + ", ability=" + ability;
 	}
 
 	
