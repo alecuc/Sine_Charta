@@ -22,16 +22,18 @@ public class Oggetto implements Serializable{
 	
 
 	
-	public void setOggettPG(Personaggio newpg) {
+	public void setPersonaggioOggetto(Personaggio newpg) {
 		if(pg != newpg) {
 			Personaggio old = pg;
 			pg = newpg;
 			if(newpg != null) newpg.aggiungiOggetto(this);
 			if(old != null) old.rimuoviOggetto(this);
 		}
-		
 	}
 	
+	public Personaggio getPersonaggioOggetto() {
+		return this.pg;
+	}
 	
 	/**
 	 * @return the id_oggetto

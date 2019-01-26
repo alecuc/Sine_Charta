@@ -125,6 +125,8 @@ public class UsersManager implements UserModelI<User>{
 				utente.setEmail(rs.getString("Email"));
 				utente.setPassword(rs.getNString("Password"));
 				utente.setRuolo(rs.getString("Ruolo"));
+				utente.aggiungiListaStorie(aggiungiStorieUser(utente));
+				utente.aggiungiListaPG(aggiungiListaPGUser(utente));
 				utenti.add(utente);
 			}
 		}finally {

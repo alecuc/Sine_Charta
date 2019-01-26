@@ -37,6 +37,7 @@ public class StoryManager {
 			ps = con.prepareStatement(selectStoria);
 			
 			ps.setString(1, user.getUsername());
+			System.out.println("getStoria : " + ps.toString());
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -52,7 +53,8 @@ public class StoryManager {
 				storia.setAmbientazione(rs.getString("Ambientazione"));
 				storia.setUsername(table.getUsername());
 				storia.setUtenteModeratore(user);
-			//da finire	storia.addPersonaggio(pg);
+				storia.addPersonaggio(getPersonaggioForStory(user));
+				//Aggiungere sessione
 				storieutente.add(storia);
 			}
 			
@@ -68,22 +70,35 @@ public class StoryManager {
 	}
 		
 	
+	private Personaggio getPersonaggioForStory(User utente)throws SQLException {
+		PersonaggioManager manager = new PersonaggioManager();
+		Personaggio pg = manager.getPersonaggioByUtente(utente);
+		System.out.println("sono qua");
+		return pg;
+	}
+	
+	
+	
 	public Storia getStoriaDelPG(Personaggio pg)throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		Storia storia = new Storia();
 		String selectStoria = "SELECT * FROM " + TABLE_NAME_STORIA + " WHERE IDSTORY = ?";
-		
+		//
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(selectStoria);
 			ps.setInt(1, pg.getIdStoria());
+			System.out.println("getStoriadelPG: " + ps.toString());
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				storia.setId(rs.getInt("IdStory"));
 				storia.setTitolo(rs.getString("Titolo"));
 				storia.setDescrizione(rs.getString("Descrizione"));
 				storia.setAmbientazione(rs.getString("Ambientazione"));
+				storia.setUtenteModeratore(pg.getUser());
+				storia.addPersonaggio(pg);
+				//Aggiungere sessione
 			}
 		}finally {
 			try {
@@ -96,57 +111,19 @@ public class StoryManager {
 	}
 
 	
-	/**
-	 * Metodo che carica la lista delle storie di un Utente moderatore 
-	 * @return lista di tutte le storie associate alla username
-	 */
-	public Collection<Storia> listaStorie(String username) throws SQLException{
-		
-		Connection con = null;
-		PreparedStatement ps = null;
-		Collection<Storia> storie = new LinkedList<Storia>();
-		String storieUtente = "SELECT * FROM "+TABLE_NAME_STORIA+" WHERE Username = ?";
-		
-		try {
-			con = DriverManagerConnectionPool.getConnection();
-			ps = con.prepareStatement(storieUtente);
-			ps.setString(1, username);
-			ResultSet rs = ps.executeQuery();
-			System.out.println("listaStorie: " + ps.toString());
-			
-			while(rs.next()) {
-				
-				Storia storia = new Storia();
-				
-				storia.setId(rs.getInt("Id"));
-				storia.setTitolo(rs.getString("Titolo"));
-				storia.setDescrizione(rs.getString("Descrizione"));
-				storia.setAmbientazione(rs.getString("Ambientazione"));
-				storia.setUsername(rs.getString("Username"));
-				storie.add(storia);
-			}
-		}finally {
-			try {
-				if(ps != null) ps.close();
-			}finally {
-				DriverManagerConnectionPool.releaseConnection(con);
-			}
-		}
-		
-		return storie;
-	}
+
 	
 	/**
 	 * Metodo per inserire una nuova storia
 	 * @param storia= un oggetto di tipo storia 
 	 * @param username= utente che inserisce la storia
 	 */
-	public void aggiungiStoria(Storia storia , String username)throws SQLException{
+	public void aggiungiStoria(Storia storia)throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		
 		String creaStoria = "INSERT INTO "+ TABLE_NAME_STORIA 
-				+ " (TITOLO, DESCRIZIONE, AMBIENTAZIONE, USERNAME) VALUES(?, ?, ?, ?)";
+				+ " (TITOLO, DESCRIZIONE, AMBIENTAZIONE) VALUES(?, ?, ?)";
 		
 		try {
 			con = DriverManagerConnectionPool.getConnection();
@@ -155,7 +132,7 @@ public class StoryManager {
 			ps.setString(1, storia.getTitolo());
 			ps.setString(2, storia.getDescrizione());
 			ps.setString(3, storia.getAmbientazione());
-			ps.setString(4, username);
+		
 			
 			System.out.println("aggiungiStoria" + ps.toString());
 			ps.executeUpdate();
@@ -175,17 +152,16 @@ public class StoryManager {
 	 * @param idStoria= identificativo della storia da eliminare
 	 * @return risultato dell'avvenuta eliminazione
 	 */
-	public boolean eliminaStoria(int idStoria, String username) throws SQLException{
+	public boolean eliminaStoria(int idStoria) throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
-		String eliminaStoria = "DELETE FROM " + TABLE_NAME_STORIA + " WHERE ID = ? AND USERNAME = ?";
+		String eliminaStoria = "DELETE FROM " + TABLE_NAME_STORIA + " WHERE ID = ?";
 		
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(eliminaStoria);
 			ps.setInt(1, idStoria);
-			ps.setString(2,	username);
 			result = ps.executeUpdate();
 			System.out.println("eliminaStoria: " + ps.toString());
 			con.commit();
