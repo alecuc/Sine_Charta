@@ -5,8 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
+import beans.Abilita;
+import beans.Oggetto;
 import beans.Personaggio;
 import beans.Storia;
 import beans.User;
@@ -67,7 +71,10 @@ public class PersonaggioManager {
 				personaggio.setFeritaGambe(rs.getString("FeriteGambe"));
 				personaggio.setUser(user);
 				personaggio.setStoria(setStoriaPersonaggio(personaggio));
-				//DA finire con abilità e oggetti
+				personaggio.aggiungiListaOggetti(aggiungiListaOggettiPG(personaggio));
+				personaggio.aggiungiListaAbilita(aggiungiListaAbilitaPG(personaggio));
+				
+				//DA finire con abilità 
 			} 
 			
 		}finally {
@@ -82,6 +89,16 @@ public class PersonaggioManager {
 		return personaggio;
 	}
 	
+
+	private Set<Abilita> aggiungiListaAbilitaPG(Personaggio pg)throws SQLException{
+		AbilitaManager ability = new AbilitaManager();
+		Collection<Abilita> listaAbilita = ability.getListaAbilitaByPG(pg);
+		if(listaAbilita!=null) {
+			Set<Abilita> abilitaPg = new HashSet<Abilita>(listaAbilita);
+			return abilitaPg;
+		}else return null;
+	}
+	
 	/************************************************************************************
 	 * Metodo per settare la storia al personaggio che accede a StoryManager			*
 	 * @param pg= personaggio a cui associare la storia									*
@@ -92,6 +109,22 @@ public class PersonaggioManager {
 		Storia storia = storyManager.getStoriaDelPG(pg);
 		return storia;
 	}
+	
+	/********************************************************************************************
+	 * Metodo per settare la lista degli oggetti al personaggio che accede a EquipManager		*
+	 * @param pg= personaggio a cui sono associati gli oggetti									*
+	 * @return lista degli oggetti																*
+	 ********************************************************************************************/
+	private Set<Oggetto> aggiungiListaOggettiPG(Personaggio pg)throws SQLException{
+		EquipManager manager = new EquipManager();
+		Collection<Oggetto> listaOggetti = manager.getListaOggettiPG(pg);
+		if(listaOggetti!=null) {
+			Set<Oggetto> oggettiPg = new HashSet<Oggetto>(listaOggetti);
+			return oggettiPg;
+		}else return null;
+	}
+	
+	
 	
 	/***********************************************************************************************
 	 *  Metodo utilizzato per ottenere ID della storia a cui partecipa un personaggio			   *
@@ -171,7 +204,8 @@ public class PersonaggioManager {
 				personaggio.setFeritaGambe(rs.getString("FeriteGambe"));
 				personaggio.setUser(getUserByPG(personaggio));
 				personaggio.setStoria(storia);
-				//Aggiungere oggetti e abilità
+				personaggio.aggiungiListaOggetti(aggiungiListaOggettiPG(personaggio));
+				personaggio.aggiungiListaAbilita(aggiungiListaAbilitaPG(personaggio));
 				listaPG.add(personaggio);
 			}
 		}finally {
@@ -248,7 +282,8 @@ public class PersonaggioManager {
 				personaggio.setFeritaGambe(rs.getString("FeriteGambe"));				
 				personaggio.setUser(user);
 				personaggio.setStoria(setStoriaPersonaggio(personaggio));
-				//DA FINIRE  CON OGGETTO E ABILIA
+				personaggio.aggiungiListaOggetti(aggiungiListaOggettiPG(personaggio));
+				personaggio.aggiungiListaAbilita(aggiungiListaAbilitaPG(personaggio));
 				personaggi.add(personaggio);
 			}
 		}finally {

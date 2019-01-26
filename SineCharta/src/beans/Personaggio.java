@@ -65,6 +65,14 @@ public class Personaggio implements Serializable{
 		obj.setPersonaggioOggetto(this);;
 	}
 	
+	public void aggiungiListaOggetti(Set<Oggetto> oggetti) {
+		this.oggetti = oggetti;
+	}
+	
+	public Set<Oggetto> getListaOggetti(){
+		return this.oggetti;
+	}
+	
 	public void rimuoviOggetto(Oggetto obj) {
 		oggetti.remove(obj);
 		obj.setPersonaggioOggetto(null);;
@@ -73,12 +81,16 @@ public class Personaggio implements Serializable{
 	
 	public void aggiungiAbilita(Abilita abilita) {
 		ability.add(abilita);
-		abilita.setAbilitaPG(this);
+		abilita.setPersonaggio(this);
+	}
+	
+	public void aggiungiListaAbilita(Set<Abilita> listaAbilita) {
+		this.ability = listaAbilita;
 	}
 	
 	public void rimuoviAbilita(Abilita abilita) {
 		ability.remove(abilita);
-		abilita.setAbilitaPG(null);
+		abilita.setPersonaggio(null);
 	}
 	
 
@@ -439,12 +451,12 @@ public class Personaggio implements Serializable{
 				+ ", taroccoDominante=" + taroccoDominante + ", username=" + username + ", feritaTesta=" + feritaTesta
 				+ ", feritaBraccia=" + feritaBraccia + ", feritaTorso=" + feritaTorso + ", feritaGambe=" + feritaGambe
 				+ ", age=" + age + ", salute=" + salute + ", risoluzione=" + risoluzione + ", idStoria=" + idStoria
-				+ ", oggetti=" + oggetti + ", storia=" + storia.getTitolo() + ", intuito=" + intuito + ", memoria=" + memoria
+				+ ", oggetti=" + oggetti + ", storia=" + storia.toString() + ", intuito=" + intuito + ", memoria=" + memoria
 				+ ", percezione=" + percezione + ", volonta=" + volonta + ", aspetto=" + aspetto + ", comando="
 				+ comando + ", creativita=" + creativita + ", socievolezza=" + socievolezza + ", coordinazione="
 				+ coordinazione + ", destrManuale=" + destrManuale + ", forzaFisica=" + forzaFisica + ", mira=" + mira
 				+ ", affinOcculta=" + affinOcculta + ", distDaMorte=" + distDaMorte + ", equilibrMentale="
-				+ equilibrMentale + ", karma=" + karma + ", ability=" + ability;
+				+ equilibrMentale + ", karma=" + karma + ", ability=" + ability.toString();
 	}
 
 	

@@ -11,24 +11,24 @@ public class KeywordManager {
 	
 	private static final String TABLE_NAME = "Keyword";
 	
-	/**
-	 * Metodo che restituisce un bean di tipo keyword
-	 * @param idKeyword l'id della keyword 
-	 * @return il bean che rappresenta la keyword
-	 * @throws SQLException
-	 */
-	public Keyword prendereKeyword(int idKeyword) throws SQLException {
+	/********************************************************************************
+	 * Metodo che restituisce un bean di tipo keyword								*
+	 * @param idKeyword l'id della keyword 											*
+	 * @return il bean che rappresenta la keyword									*
+	 ********************************************************************************/
+	public Keyword prendereKeyword(SessioneDiGioco sessione, String chiave) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement ps = null;
 		
 		Keyword bean = new Keyword();
-		String selectSql = "SELECT * FROM " + TABLE_NAME + " WHERE idKeyword = ?";
+		String selectSql = "SELECT * FROM " + TABLE_NAME + " WHERE CHIAVE = ? AND NUMERO = ?";
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			ps = connection.prepareStatement(selectSql);
-			ps.setInt(1, idKeyword);
+			ps.setString(1, chiave);
+			ps.setInt(2, sessione.getIdNumeroSessione());
 			System.out.println("prendereKeyword: " + ps.toString());
 			
 			ResultSet rs = ps.executeQuery();
@@ -38,7 +38,7 @@ public class KeywordManager {
 				bean.setChiave_nome(rs.getString("Chiave"));
 				bean.setDescrizione(rs.getString("Descrizione"));
 				bean.setIdSessione(rs.getInt("Numero"));
-				
+				bean.setSessioneKeyword(sessione);
 			}
 		}finally {
 			try {
@@ -53,51 +53,31 @@ public class KeywordManager {
 		return bean;
 	}
 	
-	/**
-	 * aggiunge la sessione alla keyword creata
-	 * @param username
-	 * @param idStoria
-	 * @param numSessione
-	 * @throws SQLException
-	 */
-	public void aggiungiLaSessioneAllaKeyword(String username, int idStoria, int numSessione) throws SQLException {
-		
-		SessioneManager sessioneManager = new SessioneManager();
-		SessioneDiGioco sessione = sessioneManager.prendereSessione(numSessione, username, idStoria);
-		Keyword key = this.prendereKeyword(numSessione);
-		key.setSessioneKeyword(sessione);
-		
-	}
-
-	/**
-	 * metodo che permette di restituire una lista di keyword
-	 * @param session la sessione in cui su vuole recuperare la lista
-	 * @return la lista di keyword
-	 * @throws SQLException
-	 */
+	
+	/****************************************************************************************
+	 * Metodo che permette di restituire una lista di keyword								*
+	 * @param session la sessione in cui su vuole recuperare la lista						*
+	 * @return la lista di keyword															*
+	 ****************************************************************************************/
 	public Collection<Keyword> listaKeyword(SessioneDiGioco session) throws SQLException {
-
 		Connection con = null;
 		PreparedStatement ps = null;
 		Collection<Keyword> listaKeyword = new LinkedList<Keyword>();
 		String keywordSessioni = "SELECT * FROM " + TABLE_NAME + " WHERE NUMERO = ?";
-		
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(keywordSessioni);
 			ps.setInt(1, session.getIdNumeroSessione());
 			ResultSet rs = ps.executeQuery();
 			System.out.println("listaKeyword: " + ps.toString());
-			
 			while(rs.next()) {
 				Keyword keyword = new Keyword();
-				
 				keyword.setIdKeyword(rs.getInt("idKeyword"));
 				keyword.setChiave_nome(rs.getString("Chiave"));
 				keyword.setDescrizione(rs.getString("Descrizione"));
 				keyword.setIdSessione(rs.getInt("Numero"));
+				keyword.setSessioneKeyword(session);
 				listaKeyword.add(keyword);
-				
 			}
 		}finally {
 			try {
@@ -108,7 +88,6 @@ public class KeywordManager {
 				DriverManagerConnectionPool.releaseConnection(con);
 			}
 		}
-		
 		return listaKeyword;
 	}
 	

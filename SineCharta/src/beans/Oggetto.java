@@ -13,7 +13,7 @@ public class Oggetto implements Serializable{
 	 */
 	private String nome;
 	private double peso, costo;
-	private int quantita, id_oggetto;
+	private int quantita, id_oggetto, idStoria;
 	private Personaggio pg;
 	
 	
@@ -103,8 +103,26 @@ public class Oggetto implements Serializable{
 		this.quantita = quantita;
 	}
 
+	public int getIdStoria() {
+		return idStoria;
+	}
 
 
+
+	public void setIdStoria(int idStoria) {
+		this.idStoria = idStoria;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return getClass().getName() + "[nome=" + nome + ", peso=" + peso + ", costo=" + costo + ", quantita=" + quantita
+				+ ", id_oggetto=" + id_oggetto + ", idStoria=" + idStoria +"]";
+	}
+
+
+	
 	
 	
 }

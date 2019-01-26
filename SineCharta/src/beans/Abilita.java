@@ -17,7 +17,7 @@ public class Abilita implements Serializable{
 		
 	}
 	
-	public void setAbilitaPG(Personaggio pg) {
+	public void setPersonaggio(Personaggio pg) {
 		if(pgConAbilita != pg) {
 			Personaggio oldPg = pgConAbilita;
 			pgConAbilita = pg;
@@ -62,19 +62,14 @@ public class Abilita implements Serializable{
 		return pgConAbilita;
 	}
 
-	/**
-	 * @param pgConAbilita the pgConAbilita to set
-	 */
-	public void setPgConAbilita(Personaggio pgConAbilita) {
-		this.pgConAbilita = pgConAbilita;
-	}
+	
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
-		return "Abilita [nome=" + nome + ", valore=" + valore + ", pgConAbilita=" + pgConAbilita + "]";
+		return getClass().getName() + "[nome=" + nome + ", valore=" + valore + ", pgConAbilita=" + pgConAbilita.getNome()+", "+pgConAbilita.getCognome() + "]";
 	}
 	
 	

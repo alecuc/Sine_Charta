@@ -4,12 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
 
 import beans.HaTable;
 import beans.Personaggio;
+import beans.SessioneDiGioco;
 import beans.Storia;
 import beans.User;
 
@@ -54,7 +56,7 @@ public class StoryManager {
 				storia.setUsername(table.getUsername());
 				storia.setUtenteModeratore(user);
 				storia.addPersonaggio(getPersonaggioForStory(user));
-				//Aggiungere sessione
+				storia.aggiungiListaSessioni(aggiungiSessioniAllaStoria(storia, user));
 				storieutente.add(storia);
 			}
 			
@@ -73,18 +75,25 @@ public class StoryManager {
 	private Personaggio getPersonaggioForStory(User utente)throws SQLException {
 		PersonaggioManager manager = new PersonaggioManager();
 		Personaggio pg = manager.getPersonaggioByUtente(utente);
-		System.out.println("sono qua");
 		return pg;
 	}
 	
 	
+	private ArrayList<SessioneDiGioco> aggiungiSessioniAllaStoria(Storia storia, User utenteMod)throws SQLException{
+		SessioneManager manager = new SessioneManager();
+		Collection<SessioneDiGioco> listaSessione = manager.recuperoTutteLeSessioni(storia, utenteMod);
+		if(listaSessione!=null) {
+			ArrayList<SessioneDiGioco> sessioni = new ArrayList<SessioneDiGioco>(listaSessione);
+			return sessioni;
+		}else return null;
+	}
 	
 	public Storia getStoriaDelPG(Personaggio pg)throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		Storia storia = new Storia();
 		String selectStoria = "SELECT * FROM " + TABLE_NAME_STORIA + " WHERE IDSTORY = ?";
-		//
+		
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(selectStoria);
@@ -98,7 +107,7 @@ public class StoryManager {
 				storia.setAmbientazione(rs.getString("Ambientazione"));
 				storia.setUtenteModeratore(pg.getUser());
 				storia.addPersonaggio(pg);
-				//Aggiungere sessione
+				storia.aggiungiListaSessioni(aggiungiSessioniAllaStoria(storia, pg.getUser()));
 			}
 		}finally {
 			try {
@@ -118,22 +127,25 @@ public class StoryManager {
 	 * @param storia= un oggetto di tipo storia 
 	 * @param username= utente che inserisce la storia
 	 */
-	public void aggiungiStoria(Storia storia)throws SQLException{
+	public void aggiungiStoria(Storia storia, User utenteMod, int flag)throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
-		
+		//PreparedStatement ps2 = null;
 		String creaStoria = "INSERT INTO "+ TABLE_NAME_STORIA 
 				+ " (TITOLO, DESCRIZIONE, AMBIENTAZIONE) VALUES(?, ?, ?)";
+		//String aggiungiFlag = "INSERT INTO ha (USERNAME, IDSTORY, FLAG) VALUES(?,?,?)";
 		
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(creaStoria);
-			
+			//ps2 = con.prepareStatement(aggiungiFlag);
 			ps.setString(1, storia.getTitolo());
 			ps.setString(2, storia.getDescrizione());
 			ps.setString(3, storia.getAmbientazione());
-		
-			
+			//ps2.setString(1, utenteMod.getUsername());
+			//Storia stoTmp = 
+			//ps2.setInt(2, );
+			//AGGIUNGERE TRIGGER AL DB QUANDO SI INSERISCE NUOVA STORIA
 			System.out.println("aggiungiStoria" + ps.toString());
 			ps.executeUpdate();
 			con.commit();

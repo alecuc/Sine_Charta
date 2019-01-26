@@ -33,6 +33,14 @@ public class SessioneDiGioco implements Serializable{
 		nuovaKeyword.setSessioneKeyword(this);
 	}
 	
+	public Set<Keyword> getKeywordSessione(){
+		return this.sessionKeywords;
+	}
+	
+	public void addListaKeyword(Set<Keyword> list) {
+		this.sessionKeywords = list;
+	}
+	
 	public void rimuoviKeyword(Keyword keywordDaRimuovere) {
 		sessionKeywords.remove(keywordDaRimuovere);
 		keywordDaRimuovere.setSessioneKeyword(null);
@@ -93,6 +101,15 @@ public class SessioneDiGioco implements Serializable{
 	public void setUsernameModeratore(String usernameModeratore) {
 		this.usernameModeratore = usernameModeratore;
 	}
+
+	@Override
+	public String toString() {
+		return "SessioneDiGioco [idNumeroSessione=" + idNumeroSessione + ", idStoria=" + idStoria
+				+ ", contenutoSessione=" + contenutoSessione + ", usernameModeratore=" + usernameModeratore + "]";
+	}
+	
+	
+	
 
 	
 	

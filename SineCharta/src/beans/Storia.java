@@ -29,6 +29,10 @@ public class Storia implements Serializable{
 		sessione.setStoriaSessione(this);
 	}
 	
+	public void aggiungiListaSessioni(ArrayList<SessioneDiGioco> sessioni) {
+		this.listaSessioni = sessioni;
+	}
+	
 	public void rimuoviSessione(SessioneDiGioco sessione) {
 		listaSessioni.remove(sessione);
 		sessione.setStoriaSessione(null);
@@ -131,7 +135,7 @@ public class Storia implements Serializable{
 	@Override
 	public String toString() {
 		return getClass().getName() + "[id=" + id + ", titolo=" + titolo + ", descrizione=" + descrizione + ", ambientazione="
-				+ ambientazione + "]";
+				+ ambientazione + ", sessioni="+ listaSessioni + "]";
 	}
 	
 	
