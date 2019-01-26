@@ -21,22 +21,29 @@ function  validateTitle(formStoria){
 $(document).ready(function(){
 	var nInvitato=0;
 	$('#aggiungiUtente').click(function(){
-		
+
 		var rmButton= '<button class="btn btn-dark cancella">Rimuovi</button>';
 		var name = $('#user').val();
+		var match="";
+
 		
 		
-		//$.get(url, oggetti da inviare, funzione da eseguire in caso di successo)
-		
-		
-		$.get('../UserExistServlet', {usr : name}, function(responseText) {
-			console.log(responseText);
-			if(name == responseText){
-				nInvitato= nInvitato + 1;
-				$('#tabellaInviti > tbody:last-child').append('<tr><td><input type="text" name="invito'+nInvitato+'" value="'+name+'" disabled></td><td>'+rmButton+'</td></tr>');
-				
-			} else alert("Questo utente non esiste. Riprova");
-		});
+		if(name==match){
+			alert('Hai già invitato questo utente!');
+		} else{
+
+			$.get('../UserExistServlet', {usr : name}, function(responseText) {
+				console.log(responseText);
+				if(name == responseText){
+					nInvitato= nInvitato + 1;
+					$('#tabellaInviti > tbody:last-child').append('<tr><td><label id="'+nInvitato+'">"'+name+'"></label></td><td>'+rmButton+'</td></tr>');
+
+				} else alert("Questo utente non esiste. Riprova");
+			});
+		}
+
+
+
 	});
 
 	$("#tabellaInviti").on('click', '.cancella', function () {

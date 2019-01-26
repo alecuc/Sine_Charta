@@ -7,7 +7,7 @@
 <jsp:include page="head.jsp"></jsp:include>
 <script src="../js/editorStoriaScript.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Nuova storia</title>
 </head>
 <body>
 	<jsp:include page="navigationbar.jsp"></jsp:include>

@@ -7,7 +7,7 @@
 
 <meta charset="UTF-8">
 <title>Errore!</title>
-        <meta http-equiv="refresh" content="5; url=index.jsp" />
+        <meta http-equiv="refresh" content="5; url=../index.jsp" />
         <link rel="stylesheet" href="../css/bootstrap.min.css">
 </head>
 <body>

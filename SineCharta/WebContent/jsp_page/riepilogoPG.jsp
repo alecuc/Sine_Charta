@@ -5,8 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <jsp:include page="head.jsp"></jsp:include>
-<%@page import="manager.AbilitaManager" %>
-<%@page import="beans.User" %>
+<%@page import="manager.AbilitaManager"%>
+<%@page import="beans.User"%>
 <%@page import="beans.Personaggio"%>
 <%@page import="beans.Abilita"%>
 <%@page import="java.util.Collection"%>
@@ -19,9 +19,8 @@
 
 	<%
 		Personaggio pg = new Personaggio();
-		if ((session.getAttribute("user") == null)||session.getAttribute("personaggio")==null
-		) {
-			response.sendRedirect("error.jsp");
+		if ((session.getAttribute("user") == null)||session.getAttribute("personaggio")==null) {
+			response.sendRedirect("error/error.jsp");
 		}
 		else{
 			pg= (Personaggio)session.getAttribute("personaggio");	
@@ -43,12 +42,15 @@
 							<th><label>Cognome</label></th>
 							<th><label>Nazionalità</label></th>
 							<th><label>Età</label></th>
+							<th><label>Tarocco dominante</label></th>
 						</tr>
 						<tr>
 							<td><label><%=pg.getNome()%></label></td>
 							<td><label><%=pg.getCognome()%></label></td>
 							<td><label><%=pg.getNazionalita()%></label></td>
 							<td><label><%=pg.getAge()%></label></td>
+							<td><label><%=pg.getTaroccoDominante()%></label></td>
+
 						</tr>
 					</tbody>
 				</table>
@@ -152,7 +154,8 @@
 								}// */
 							
 							%>
-						</tbody>
+						
+					</tbody>
 				</table>
 			</div>
 			<h3 class="card-title">

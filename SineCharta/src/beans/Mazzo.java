@@ -78,7 +78,7 @@ public class Mazzo implements Deckable{
     	mazzoTarocco.add(torre);
     	Tarocco stelle = new Tarocco("Le Stelle","Un successo perfetto. Era destino.", "Sei nato per vincere ogni sfida che ti si para davanti.", 20, 22, 21, 18, 17);
     	mazzoTarocco.add(stelle);
-    	Tarocco luna = new Tarocco("La Luna","Insuccesso dovuto ad insicurezza e paura.", "Sei una persona romantica, sognatrice.", 21, 1, 16, 13, 18);
+    	Tarocco luna = new Tarocco("La Luna","Insuccesso dovuto ad insicurezza e paura.", "Sei una persona romantica, sognatrice.", 21, 14, 16, 13, 18);
     	mazzoTarocco.add(luna);
     	Tarocco sole = new Tarocco("Il Sole","Successo pieno dovuto interamente alle capacità del personaggio.", "Sei una persona molto estroversa e fiduciosa nel prossimo.", 13, 18, 20, 14, 19);
     	mazzoTarocco.add(sole);
