@@ -1,6 +1,9 @@
 package control.sessione;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Collection;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,71 +20,81 @@ import manager.SessioneManager;
 @WebServlet("/GestioneSessioneServlet")
 public class GestioneSessioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GestioneSessioneServlet() {
-        super();
-     
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public GestioneSessioneServlet() {
+		super();
+
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		response.setContentType("text/html");
 		String action = request.getParameter("action");
 		SessioneDiGioco sesDiGioco = new SessioneDiGioco();
 		SessioneManager ssn = new SessioneManager();
 		HttpSession session = request.getSession();
-		
+
 		try {
-			
+
+			//questo if permette di inserire una sessione
 			if(action.equalsIgnoreCase("inserisciSessione")) {
-				
+
 				String contenuto = request.getParameter("contenutoSessione");
 				String username = request.getParameter("Username");
 				String idStory = request.getParameter("idStoria");
-				
+
 				Integer idStor = Integer.parseInt(idStory);
-				
+
 				sesDiGioco.setContenutoSessione(contenuto);
 				sesDiGioco.setUsernameModeratore(username);
 				sesDiGioco.setIdStoria(idStor);
-				
-				//ssn.salvareSessioni(sesDiGioco);		
-				
+
+				ssn.salvareSessioni(sesDiGioco);		
+
 				System.out.println("successfully inserted");
 				response.sendRedirect("jps_page/vistaSessione.jsp");
-			}else if(action.equalsIgnoreCase("listaSessione")) {
-				//logica per lista delle sessioni
-			}else if(action.equalsIgnoreCase("modificaSessione")) {
 				
+				
+				// questo if permette di predere la lista delle sessioni legate alla storia	
+			}else if(action.equalsIgnoreCase("listaSessione")) {
+				
+				String idStory = request.getParameter("idStoria");
+				Integer id = Integer.parseInt(idStory);
+				Collection<SessioneDiGioco> sessioni = ssn.prendereTutteSessioni(id);
+				session.setAttribute("listaSessioni", sessioni);
+				response.sendRedirect("sessioneModeratore.jsp");
+				
+				//questo if permette di modificare una sessione	
+			}else if(action.equalsIgnoreCase("modificaSessione")) {
+
 				String idSessione = request.getParameter("idSessione");
 				String contenuto = request.getParameter("contenutoSessione");
 				String username = (String)session.getAttribute("Username");
 				String idStoria = (String)session.getAttribute("idStor");
-				
-				Integer id = Integer.parseInt(idStoria);
-				
-				//chiamare il manager per modificare il contenuto della sessione di gioco
-				
-				
-			}
-		}finally {
-			
-		}/* catch(SQLException e) {
-			e.printStackTrace();
-		}*/
-	}
 
+				SessioneDiGioco sdg = new SessioneDiGioco(); 				
+				Integer idStor = Integer.parseInt(idStoria);
+				Integer idSess = Integer.parseInt(idSessione);
+
+				sdg.setContenutoSessione(contenuto);
+				sdg.setIdNumeroSessione(idSess);
+
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		doGet(request, response);
 	}
 
