@@ -16,7 +16,7 @@ public class Storia implements Serializable{
 	private String titolo, descrizione, ambientazione, username;
 	private Set<Personaggio> personaggi;
 	private User utenteModeratore;
-	private ArrayList<SessioneDiGioco> listaSessioni;
+	private Set<SessioneDiGioco> listaSessioni;
 	
 	
 	
@@ -29,7 +29,7 @@ public class Storia implements Serializable{
 		sessione.setStoriaSessione(this);
 	}
 	
-	public void aggiungiListaSessioni(ArrayList<SessioneDiGioco> sessioni) {
+	public void aggiungiListaSessioni(Set<SessioneDiGioco> sessioni) {
 		this.listaSessioni = sessioni;
 	}
 	

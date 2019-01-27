@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import org.apache.catalina.mbeans.UserMBean;
 
 import manager.PersonaggioManager;
+import manager.SessioneManager;
 import manager.StoryManager;
 import manager.UsersManager;
 
@@ -49,11 +50,16 @@ public class testBeans {
 		
 		UsersManager userManager = new UsersManager();
 		User utenteListaStorie = userManager.doRetrieveByKey("Vince");
-		System.out.println(utenteListaStorie.toString());
+		//System.out.println(utenteListaStorie.toString());
 			
 	
-	
-	
+	SessioneManager manaSess = new SessioneManager();
+	StoryManager mstoria = new StoryManager();
+	PersonaggioManager pgMana = new PersonaggioManager();
+	Personaggio pGTest = pgMana.getPersonaggioByUtente(utenteListaStorie);
+	Storia sto = mstoria.getStoriaDelPG(pGTest);
+		Collection<SessioneDiGioco> s = manaSess.recuperoTutteLeSessioni(sto, utenteListaStorie);
+	System.out.println(s.toString());
 	
 	}
 	

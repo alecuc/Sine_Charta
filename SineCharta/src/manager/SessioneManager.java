@@ -93,8 +93,8 @@ public class SessioneManager {
 				session.setContenutoSessione(rs.getString("Contenuto"));
 				session.setUsernameModeratore(rs.getString("Username"));
 				session.setIdStoria(rs.getInt("IdStory"));
-				session.setStoriaSessione(storia);
 				session.addListaKeyword(aggiungiListaKeyword(session));
+				session.setStoriaSessione(storia);
 				sessioni.add(session);
 			}
 		}finally {

@@ -56,7 +56,8 @@ public class StoryManager {
 				storia.setUsername(table.getUsername());
 				storia.setUtenteModeratore(user);
 				storia.addPersonaggio(getPersonaggioForStory(user));
-				storia.aggiungiListaSessioni(aggiungiSessioniAllaStoria(storia, user));
+				//storia.aggiungiSessione(getSessioneForStory(storia, user));
+				//storia.aggiungiListaSessioni(aggiungiSessioniAllaStoria(storia, user));
 				storieutente.add(storia);
 			}
 			
@@ -76,6 +77,12 @@ public class StoryManager {
 		PersonaggioManager manager = new PersonaggioManager();
 		Personaggio pg = manager.getPersonaggioByUtente(utente);
 		return pg;
+	}
+	
+	private SessioneDiGioco getSessioneForStory(Storia storia, User utente)throws SQLException {
+		SessioneManager manager = new SessioneManager();
+		SessioneDiGioco se = manager.recuperoSessioneStoria(storia, utente, 1);
+		return se;
 	}
 	
 	
@@ -107,7 +114,7 @@ public class StoryManager {
 				storia.setAmbientazione(rs.getString("Ambientazione"));
 				storia.setUtenteModeratore(pg.getUser());
 				storia.addPersonaggio(pg);
-				storia.aggiungiListaSessioni(aggiungiSessioniAllaStoria(storia, pg.getUser()));
+			//	storia.aggiungiListaSessioni(aggiungiSessioniAllaStoria(storia, pg.getUser()));
 			}
 		}finally {
 			try {
