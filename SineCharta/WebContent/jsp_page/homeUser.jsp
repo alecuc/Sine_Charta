@@ -12,8 +12,6 @@
 
 <%@page import="java.util.Set"%>
 <%@page import="java.util.Collection"%>
-<%@page import="manager.StoryManager"%>
-<%@page import="manager.PersonaggioManager"%>
 
 </head>
 <body>

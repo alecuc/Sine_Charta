@@ -4,17 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="navigationbar.jsp"></jsp:include>
-<script src="../js/creazioneActions.js"></script>
+<jsp:include page="head.jsp"></jsp:include>
+<script src="../js/creazioneAction.js"></script>
 <title>Crea personaggio</title>
 </head>
 <body>
+<jsp:include page="navigationbar.jsp"></jsp:include>
 
 	<%
-		/*	if (session.getAttribute("user") == null) {
+			if (session.getAttribute("user") == null) {
 				response.sendRedirect("error/error.jsp");
-			}*/
+			};
 	%>
+	
 	<h1 class="card-title">Crea il tuo personaggio</h1>
 
 	<!-- TASTI ANNULLA E AIUTO -->
@@ -202,76 +204,146 @@
 
 	<!-- TABELLA SELEZIONE CARATTERISTICHE -->
 	<div class="container">
-		<fieldset id="setCar" class="container" disabled>
-			<table class="table table-dark">
+		<fieldset id="setCar" disabled>
+			<table class="table table-responsive table-dark">
 				<tbody>
 					<tr>
 
 						<th><label>CUORI - Rimasti: </label></th>
-						<th><label id="cuoriRimasti">xx</label></th>
+						<th><label id="cuoriRimasti"class="text-center">xx</label></th>
 						<th><label>QUADRI - Rimasti: </label></th>
-						<th><label id="quadriRimasti">xx</label></th>
+						<th><label id="quadriRimasti"class="text-center">xx</label></th>
 						<th><label>FIORI - Rimasti: </label></th>
-						<th><label id="fioriRimasti">xx</label></th>
+						<th><label id="fioriRimasti"class="text-center">xx</label></th>
 						<th><label>PICCHE - Rimasti: </label></th>
-						<th><label id="piccheRimasti">xx</label></th>
+						<th><label id="piccheRimasti" class="text-center">xx</label></th>
 
 					</tr>
 					<tr>
+					
 						<td><label>Intuito: </label></td>
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1" class="setCuori" id="int"></td>
+						<td>
+							<button class="btn btn-dark minusCuori"style="width: 20px;">-</button>
+							<input type="text" name="quantity"
+							value="1" class="setCuori" id="int" style="width: 18px;" readonly>
+							<button class="btn btn-dark plusCuori"style="width: 20px;">+</button>
+						</td>
+						
 						<td><label>Aspetto: </label></td>
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1" class="setQuadri" id="asp"></td>
+						<td>
+							<button class="btn btn-dark minusQuadri" style="width: 20px;">-</button>
+							<input type="text" name="quantity" style="width: 18px;"
+							value="1" class="setQuadri" id="asp" style="width: 18px;" readonly>
+							<button class="btn btn-dark plusQuadri" style="width: 20px;">+</button>
+						</td>
 						<td><label>Coordinazione: </label></td>
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1" class="setFiori" id="coo"></td>
+						<td>
+							<button class="btn btn-dark minusFiori" style="width: 20px;">-</button>
+							<input type="text" name="quantity" 
+							value="1" class="setFiori" id="coo" style="width: 18px;" readonly>
+							<button class="btn btn-dark plusFiori" style="width: 20px;">+</button>
+						</td>
 						<td><label>Affinità occulta:</label></td>
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1" class="setPicche" id="aff"></td>
+						<td>
+							<button class="btn btn-dark minusPicche" style="width: 20px;">-</button>
+							<input type="text" name="quantity" 
+							value="1" class="setPicche" id="aff" style="width: 18px;" readonly>
+							<button class="btn btn-dark plusPicche" style="width: 20px;">+</button>
+						</td>
+						
 					</tr>
 					<tr>
-						<td><label>Memoria:</label></td>
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1" class="setCuori" id="mem"></td>
-						<td><label>Comando:</label></td>
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1" class="setQuadri" id="com"></td>
-						<td><label>Destrezza manuale:</label></td>
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1" class="setFiori" id="des"></td>
-						<td><label>Distanza dalla morte: </label></td>
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1" class="setPicche" id="ddm"></td>
+						<td><label>Memoria: </label></td>
+						<td>
+							<button class="btn btn-dark minusCuori"style="width: 20px;">-</button>
+							<input type="text" name="quantity"
+							value="1" class="setCuori" id="mem" style="width: 18px;" readonly>
+							<button class="btn btn-dark plusCuori"style="width: 20px;">+</button>
+						</td>
+						
+						<td><label>Comando: </label></td>
+						<td>
+							<button class="btn btn-dark minusQuadri"style="width: 20px;">-</button>
+							<input type="text" name="quantity" style="width: 18px;"
+							value="1" class="setQuadri" id="com" style="width: 18px;" readonly>
+							<button class="btn btn-dark plusQuadri"style="width: 20px;">+</button>
+						</td>
+						<td><label>Destrezza manuale: </label></td>
+						<td>
+							<button class="btn btn-dark minusFiori"style="width: 20px;">-</button>
+							<input type="text" name="quantity" 
+							value="1" class="setFiori" id="des" style="width: 18px;" readonly>
+							<button class="btn btn-dark plusFiori"style="width: 20px;">+</button>
+						</td>
+						<td><label>Distanza dalla morte:</label></td>
+						<td>
+							<button class="btn btn-dark minusPicche"style="width: 20px;">-</button>
+							<input type="text" name="quantity" 
+							value="1" class="setPicche" id="ddm" style="width: 18px;" readonly>
+							<button class="btn btn-dark plusPicche"style="width: 20px;">+</button>
+						</td>
 					</tr>
 					<tr>
-						<td><label>Percezione:</label></td>
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1" class="setCuori" id="per"></td>
-						<td><label>Creatività:</label></td>
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1" class="setQuadri" id="cre"></td>
-						<td><label>Forza fisica:</label></td>
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1" class="setFiori" id="ffi"></td>
-						<td><label>Equilibrio mentale: </label></td>
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1" class="setPicche" id="eqm"></td>
+						<td><label>Percezione: </label></td>
+						<td>
+							<button class="btn btn-dark minusCuori"style="width: 20px;">-</button>
+							<input type="text" name="quantity"
+							value="1" class="setCuori" id="per" style="width: 18px;" readonly>
+							<button class="btn btn-dark plusCuori"style="width: 20px;">+</button>
+						</td>
+						
+						<td><label>Creatività: </label></td>
+						<td>
+							<button class="btn btn-dark minusQuadri"style="width: 20px;">-</button>
+							<input type="text" name="quantity" style="width: 18px;"
+							value="1" class="setQuadri" id="cre" style="width: 18px;" readonly>
+							<button class="btn btn-dark plusQuadri"style="width: 20px;">+</button>
+						</td>
+						<td><label>Forza fisica: </label></td>
+						<td>
+							<button class="btn btn-dark minusFiori"style="width: 20px;">-</button>
+							<input type="text" name="quantity" 
+							value="1" class="setFiori" id="for" style="width: 18px;" readonly>
+							<button class="btn btn-dark plusFiori"style="width: 20px;">+</button>
+						</td>
+						<td><label>Equilibrio mentale:</label></td>
+						<td>
+							<button class="btn btn-dark minusPicche"style="width: 20px;">-</button>
+							<input type="text" name="quantity" 
+							value="1" class="setPicche" id="eqm" style="width: 18px;" readonly>
+							<button class="btn btn-dark plusPicche"style="width: 20px;">+</button>
+						</td>
 					</tr>
 					<tr>
-						<td><label>Volontà:</label></td>
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1" class="setCuori" id="vol"></td>
-						<td><label>Socievolezza:</label></td>
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1" class="setQuadri" id="soc"></td>
-						<td><label>Mira:</label></td>
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1" class="setFiori" id="mir"></td>
-						<td><label>Karma: </label></td>
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1" class="setPicche" id="kar"></td>
+						<td><label>Volontà: </label></td>
+						<td>
+							<button class="btn btn-dark minusCuori"style="width: 20px;">-</button>
+							<input type="text" name="quantity"
+							value="1" class="setCuori" id="vol" style="width: 18px;" readonly>
+							<button class="btn btn-dark plusCuori"style="width: 20px;">+</button>
+						</td>
+						
+						<td><label>Socievolezza: </label></td>
+						<td>
+							<button class="btn btn-dark minusQuadri"style="width: 20px;">-</button>
+							<input type="text" name="quantity" style="width: 18px;"
+							value="1" class="setQuadri" id="soc" style="width: 18px;" readonly>
+							<button class="btn btn-dark plusQuadri"style="width: 20px;">+</button>
+						</td>
+						<td><label>Mira: </label></td>
+						<td>
+							<button class="btn btn-dark minusFiori"style="width: 20px;">-</button>
+							<input type="text" name="quantity" 
+							value="1" class="setFiori" id="mir" style="width: 18px;" readonly>
+							<button class="btn btn-dark plusFiori"style="width: 20px;">+</button>
+						</td>
+						<td><label>Karma:</label></td>
+						<td>
+							<button class="btn btn-dark minusPicche"style="width: 20px;">-</button>
+							<input type="text" name="quantity" 
+							value="1" class="setPicche" id="kar" style="width: 18px;" readonly>
+							<button class="btn btn-dark plusPicche"style="width: 20px;">+</button>
+						</td>
 					</tr>
 				</tbody>
 			</table>
@@ -290,7 +362,7 @@
 
 	<div class="container">
 		<h2 class="card-title">
-			PUNTI ABILITÀ TOTALI: <label id="totAbi">XX</label>
+			PUNTI ABILITÀ TOTALI: <label id="abiRimasti">XX</label>
 		</h2>
 		<fieldset id="setAbi" class="container" disabled>
 			<table class="table table-dark">
@@ -308,8 +380,10 @@
 
 						<td><label>car</label></td>
 
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1"></td>
+						<td><button class="btn btn-dark minusAbi">-</button>
+							<input type="text" name="quantity" 
+							value="1" class="setAbi" id="ab1" style="width: 30px;" readonly>
+							<button class="btn btn-dark plusAbi">+</button></td>
 
 						<td><label>tot</label></td>
 					</tr>
@@ -318,8 +392,10 @@
 
 						<td><label>car</label></td>
 
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1"></td>
+						<td><button class="btn btn-dark minusAbi">-</button>
+							<input type="text" name="quantity" 
+							value="1" class="setAbi" id="ab2" style="width: 30px;" readonly>
+							<button class="btn btn-dark plusAbi">+</button></td>
 
 						<td><label>tot</label></td>
 					</tr>
@@ -328,8 +404,10 @@
 
 						<td><label>car</label></td>
 
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1"></td>
+						<td><button class="btn btn-dark minusAbi">-</button>
+							<input type="text" name="quantity" 
+							value="1" class="setAbi" id="ab3" style="width: 30px;" readonly>
+							<button class="btn btn-dark plusAbi">+</button></td>
 
 						<td><label>tot</label></td>
 					</tr>
@@ -338,8 +416,10 @@
 
 						<td><label>car</label></td>
 
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1"></td>
+						<td><button class="btn btn-dark minusAbi">-</button>
+							<input type="text" name="quantity" 
+							value="1" class="setAbi" id="ab4" style="width: 30px;" readonly>
+							<button class="btn btn-dark plusAbi">+</button></td>
 
 						<td><label>tot</label></td>
 					</tr>
@@ -348,8 +428,10 @@
 
 						<td><label>car</label></td>
 
-						<td><input type="number" name="quantity" min="1" max="6"
-							value="1"></td>
+						<td><button class="btn btn-dark minusAbi">-</button>
+							<input type="text" name="quantity" 
+							value="1" class="setAbi" id="ab5" style="width: 30px;" readonly>
+							<button class="btn btn-dark plusAbi">+</button></td>
 
 						<td><label>tot</label></td>
 					</tr>

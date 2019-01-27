@@ -1,14 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<jsp:include page="head.jsp"></jsp:include>
-
-
-</head>
-<body>
-
 	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
 		<a class="navbar-brand" href="index.jsp">Home</a>
@@ -28,6 +17,3 @@
 			<button type="submit" id="logout" class="btn-dark btn">Logout</button>
 		</form>
 	</nav>
-
-</body>
-</html>

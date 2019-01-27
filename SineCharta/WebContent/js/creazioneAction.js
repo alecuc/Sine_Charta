@@ -50,9 +50,7 @@ function validate(){
 
 
 
-$(document).ready(function(){
-	
-	var int=1, mem=1, per=1, vol=1, asp=1, com=1, cre=1, soc=1, coo=1, des=1, ffi=1, mir=1, aff=1, ddm=1, eqm=1, kar=1;
+$(document).ready(function(){	
 
 	var countDom=0;
 	var countCuori=0;
@@ -64,6 +62,7 @@ $(document).ready(function(){
 	var puntiQuadri=0;
 	var puntiFiori=0;
 	var puntiPicche=0;
+	var puntiAbi=0;
 
 	var TDom=		{descrizioneDominante:""};
 	var TCuori=		{valoreCuori:""};
@@ -73,7 +72,7 @@ $(document).ready(function(){
 
 	var JTDom=		'{"nome":"", "numero":"", "descrizioneDominante":"", "valoreCuori":"", "valoreQuadri":"", "valoreFiori":"", "valorePicche":""}';
 	var	JTCuori=	'{"nome":"", "numero":"", "valoreCuori":"", "valoreQuadri":"", "valoreFiori":"", "valorePicche":""}'
-	var JTQuadri=	'{"nome":"", "numero":"", "valoreCuori":"", "valoreQuadri":"", "valoreFiori":"", "valorePicche":""}';
+		var JTQuadri=	'{"nome":"", "numero":"", "valoreCuori":"", "valoreQuadri":"", "valoreFiori":"", "valorePicche":""}';
 	var JTFiori=	'{"nome":"", "numero":"", "valoreCuori":"", "valoreQuadri":"", "valoreFiori":"", "valorePicche":""}';
 	var JTPicche=	'{"nome":"", "numero":"", "valoreCuori":"", "valoreQuadri":"", "valoreFiori":"", "valorePicche":""}';
 
@@ -95,38 +94,71 @@ $(document).ready(function(){
 	});
 
 	$('#confDom').click(function(){
+		
+		if(countDom==0){
+			alert("Devi estrarre un tarocco dominante!");
+		} else{
+		
 		$(this).prop('disabled',true);
 		$('#dealDom').prop('disabled',true);
 		$('#dealCuori').prop('disabled',false);
 		$('#dealQuadri').prop('disabled',false);
 		$('#dealFiori').prop('disabled',false);
 		$('#dealPicche').prop('disabled',false);
-		$('#confermaPunti').prop('disabled',false);
+		$('#confermaPunti').prop('disabled',false);ù
+		}
 	});
 
 
 	$('#confermaPunti').click(function(){
-		$(this).prop('disabled',true);
-		$('#dealCuori').prop('disabled',true);
-		$('#dealQuadri').prop('disabled',true);
-		$('#dealFiori').prop('disabled',true);
-		$('#dealPicche').prop('disabled',true);
-		$('#setCar').prop('disabled',false);
-		$('#confCar').prop('disabled',false);
 
-		$('#cuoriRimasti').text(" "+puntiCuori);
-		$('#quadriRimasti').text(" "+puntiQuadri);
-		$('#fioriRimasti').text(" "+puntiFiori);
-		$('#piccheRimasti').text(" "+puntiPicche);			
+		if(countCuori==0||countQuadri==0||countFiori==0||countPicche==0){
+			alert("Devi estrarre almeno una carta!");
+		}else{
 
+			$(this).prop('disabled',true);
+			$('#dealCuori').prop('disabled',true);
+			$('#dealQuadri').prop('disabled',true);
+			$('#dealFiori').prop('disabled',true);
+			$('#dealPicche').prop('disabled',true);
+			$('#setCar').prop('disabled',false);
+			$('#confCar').prop('disabled',false);
+
+			puntiAbi= Math.floor((parseInt(puntiCuori,10)+parseInt(puntiQuadri,10)+parseInt(puntiFiori,10)+parseInt(puntiPicche,10))/3);
+			puntiCuori -=4;
+			puntiQuadri -=4;
+			puntiFiori -=4;			
+			puntiPicche -=4;
+			
+			$('#abiRimasti').text(" "+puntiAbi);
+			$('#cuoriRimasti').text(" "+puntiCuori);
+			$('#quadriRimasti').text(" "+puntiQuadri);
+			$('#fioriRimasti').text(" "+puntiFiori);
+			$('#piccheRimasti').text(" "+puntiPicche);			
+		};
 	});
 
 	$('#confCar').click(function(){
-		$(this).prop('disabled',true);
-		$('#setCar').prop('disabled',true);
-		$('#setAbi').prop('disabled',false);
-		$('#completa').prop('disabled',false);
+		if(puntiCuori!=0 || puntiQuadri!=0 || puntiFiori!=0 || puntiPicche!=0){
+			alert("Inserisci i punti caratteristica rimasti! Il tuo pg potrebbe essere più forte!");
+		} else{
+			$(this).prop('disabled',true);
+			$('#setCar').prop('disabled',true);
+			$('#setAbi').prop('disabled',false);
+			$('#completa').prop('disabled',false);
+		}
+
 	});
+	
+	
+	$('#completa').click(function(){
+		if (puntiAbi!=0){ 
+			alert("Inserisci i punti abilità rimasti! Il tuo pg potrebbe essere più bravo a fare queste cose!")
+			return false;
+		} else return true;
+	});
+	
+	
 
 
 
@@ -245,24 +277,158 @@ $(document).ready(function(){
 
 	});
 
-	$('.setCuori').change(function(){
-		var currCuori=puntiCuori;
 
-		var currInt= parseInt($('#int').val(), 10);
-		var currMem= parseInt($('#mem').val(), 10);
-		var currPer= parseInt($('#per').val(), 10);
-		var currVol= parseInt($('#vol').val(), 10);
 
-		
-		
-		$('#cuoriRimasti').text(puntiCuori);	
+
+	$('.minusCuori').click(function(){
+
+		var tag= $(this).next();
+		var currValue= parseInt(tag.val(), 10);
+
+		if(currValue==1);
+		else{
+			currValue -=1;
+			tag.val(currValue--);
+			console.log(currValue);
+			puntiCuori +=1;
+			$('#cuoriRimasti').text(puntiCuori);
+		}
 	});
 
 
 
+	$('.plusCuori').click(function(){
+
+		var tag= $(this).prev();
+		var currValue= parseInt(tag.val(), 10);
+
+		if(puntiCuori==0||currValue==6);
+		else{
+			currValue +=1;
+			tag.val(currValue++);
+			puntiCuori -=1;
+			$('#cuoriRimasti').text(puntiCuori);
+		}
+	});
+
+	$('.minusQuadri').click(function(){
+
+		var tag= $(this).next();
+		var currValue= parseInt(tag.val(), 10);
+
+		if(currValue==1);
+		else{
+			currValue -=1;
+			tag.val(currValue--);
+			puntiQuadri +=1;
+			$('#quadriRimasti').text(puntiQuadri);
+		}
+	});
 
 
 
+	$('.plusQuadri').click(function(){
+
+		var tag= $(this).prev();
+		var currValue= parseInt(tag.val(), 10);
+
+		if(puntiQuadri==0||currValue==6);
+		else{
+			currValue +=1;
+			tag.val(currValue++);
+			puntiQuadri -=1;
+			$('#quadriRimasti').text(puntiQuadri);
+		}
+	});
+
+	$('.minusFiori').click(function(){
+
+		var tag= $(this).next();
+		var currValue= parseInt(tag.val(), 10);
+
+		if(currValue==1);
+		else{
+			currValue -=1;
+			tag.val(currValue--);
+			puntiFiori +=1;
+			$('#fioriRimasti').text(puntiFiori);
+		}
+	});
 
 
+
+	$('.plusFiori').click(function(){
+
+		var tag= $(this).prev();
+		var currValue= parseInt(tag.val(), 10);
+
+		if(puntiFiori==0||currValue==6);
+		else{
+			currValue +=1;
+			tag.val(currValue++);
+			puntiFiori -=1;
+			$('#fioriRimasti').text(puntiFiori);
+		}
+	});
+
+	$('.minusPicche').click(function(){
+
+		var tag= $(this).next();
+		var currValue= parseInt(tag.val(), 10);
+
+		if(currValue==1);
+		else{
+			currValue -=1;
+			tag.val(currValue--);
+			puntiPicche +=1;
+			$('#piccheRimasti').text(puntiPicche);
+		}
+	});
+
+
+
+	$('.plusPicche').click(function(){
+
+		var tag= $(this).prev();
+		var currValue= parseInt(tag.val(), 10);
+
+		if(puntiPicche==0||currValue==6);
+		else{
+			currValue +=1;
+			tag.val(currValue++);
+			puntiPicche -=1;
+			$('#piccheRimasti').text(puntiPicche);
+		}
+	});
+	
+	$('.minusAbi').click(function(){
+
+		var tag= $(this).next();
+		var currValue= parseInt(tag.val(), 10);
+
+		if(currValue==1);
+		else{
+			currValue -=1;
+			tag.val(currValue--);
+			puntiAbi +=1;
+			$('#abiRimasti').text(puntiAbi);
+		}
+	});
+
+
+
+	$('.plusAbi').click(function(){
+
+		var tag= $(this).prev();
+		var currValue= parseInt(tag.val(), 10);
+
+		if(puntiAbi==0||currValue==10);
+		else{
+			currValue +=1;
+			tag.val(currValue++);
+			puntiAbi -=1;
+			$('#abiRimasti').text(puntiAbi);
+		}
+	});
+	
 });
