@@ -24,8 +24,8 @@
 	%>
 
 	<nav>
-		<ul class="nav flex-column float-right mt-5">
-			<li class="nav-item"><button class="btn btn-dark my-5 ml-2"
+		<ul class="nav nav-tabs flex-column float-right mt-5">
+			<li class="nav-item active"><button class="btn btn-dark my-5 ml-2"
 					style="transform: rotate(90deg)" id="pgbutton">PG</button></li>
 			<li class="nav-item"><button class="btn btn-dark my-5"
 					style="transform: rotate(90deg)" id="mazzibutton">Mazzi</button></li>
@@ -33,6 +33,10 @@
 					style="transform: rotate(90deg)" id="guidabutton">Guida</button></li>
 		</ul>
 	</nav>
+
+
+
+
 
 	<div class="container card" id="pg">
 		<br>

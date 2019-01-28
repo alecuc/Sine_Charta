@@ -58,10 +58,7 @@
 						class="form-control" id="etaPG" placeholder="Età" name="eta">
 				</div>
 			</div>
-			<label><input type="radio" name="sesso" value="uomo"
-				id="PGuomo">Uomo</label> <label><input type="radio"
-				name="sesso" value="donna" id="PGdonna"> Donna</label>
-			<button class="btn btn-dark"
+			<button class="btn btn-dark float-right"
 				style="background-color: #212529; border-color: red;" id="confGen">Conferma</button>
 		</form>
 	</div>
@@ -101,7 +98,7 @@
 				<div class="row">
 					<button class="btn btn-dark my-2 mr-5"
 						style="background-color: #212529; border-color: red;" id="dealDom"
-						disabled>Estrai nuovo</button>
+						disabled>Estrai</button>
 					<br>
 					<button class="btn btn-dark"
 						style="background-color: #212529; border-color: red;" id="confDom"
@@ -134,7 +131,7 @@
 						<br>
 						<button class="btn btn-dark mb-2"
 							style="background-color: #212529; border-color: red;"
-							id="dealCuori" disabled>Estrai nuova</button>
+							id="dealCuori" disabled>Estrai</button>
 					</div>
 				</div>
 			</div>
@@ -151,7 +148,7 @@
 						<br>
 						<button class="btn btn-dark mb-2"
 							style="background-color: #212529; border-color: red;"
-							id="dealQuadri" disabled>Estrai nuova</button>
+							id="dealQuadri" disabled>Estrai</button>
 					</div>
 				</div>
 			</div>
@@ -168,7 +165,7 @@
 						<br>
 						<button class="btn btn-dark mb-2"
 							style="background-color: #212529; border-color: red;"
-							id="dealFiori" disabled>Estrai nuova</button>
+							id="dealFiori" disabled>Estrai</button>
 					</div>
 				</div>
 			</div>
@@ -186,7 +183,7 @@
 						<br>
 						<button class="btn btn-dark mb-2"
 							style="background-color: #212529; border-color: red;"
-							id="dealPicche" disabled>Estrai nuova</button>
+							id="dealPicche" disabled>Estrai</button>
 						<br>
 						<button class="btn btn-dark mb-2"
 							style="background-color: #212529; border-color: red;"
@@ -351,7 +348,7 @@
 		</fieldset>
 		<button class="btn btn-dark mb-2 mx-1 float-right"
 			style="background-color: #212529; border-color: red;" id="confCar"
-			disabled>CONFERMA CARATTERISTICHE</button>
+			disabled>Conferma caratteristiche</button>
 	</div>
 	<br>
 	<br>
@@ -442,7 +439,7 @@
 		<form action="riepilogoPG.jsp">
 			<button class="btn btn-dark mb-2 mx-1 float-right"
 				style="background-color: #212529; border-color: red;" id="completa"
-				disabled>COMPLETA CREAZIONE PG</button>
+				disabled>Completa il tuo PG</button>
 		</form>
 	</div>
 

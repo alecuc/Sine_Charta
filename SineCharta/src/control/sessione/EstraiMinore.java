@@ -1,4 +1,4 @@
-package control.storia;
+package control.sessione;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -12,16 +12,16 @@ import beans.Mazzo;
 import beans.Tarocco;
 
 /**
- * Servlet implementation class EstraiCreazione
+ * Servlet implementation class EstraiMinore
  */
-@WebServlet("/EstraiCreazione")
-public class EstraiCreazione extends HttpServlet {
+@WebServlet("/EstraiMinore")
+public class EstraiMinore extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EstraiCreazione() {
+    public EstraiMinore() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,21 +35,14 @@ public class EstraiCreazione extends HttpServlet {
 
 		
 		HttpSession session= request.getSession();
-		Mazzo tDeck= new Mazzo();
-		//tDeck= (Mazzo)session.getAttribute("mazzo");
-		Tarocco tarot= tDeck.estraiTarocco();
-		String JSONtarot= 
-				"{\"nome\":\""+tarot.getNome()+"\","
-			+ "\"numero\":\""+tarot.getNumero()+"\","
-			+ "\"descrizioneDominante\":\""+tarot.getDescrizioneDominante()+"\","
-			+ "\"valoreCuori\":\""+tarot.getValoreCuori()+"\","
-			+ "\"valoreQuadri\":\""+tarot.getValoreQuadri()+"\","
-			+ "\"valoreFiori\":\""+tarot.getValoreFiori()+"\","
-			+ "\"valorePicche\":\""+tarot.getValorePicche()+"\"}";
+		Mazzo pDeck= new Mazzo();
+		//pDeck= (Mazzo)session.getAttribute("mazzo");
 		
-		response.getWriter().write(JSONtarot);
-
-	
+		
+		String poker= pDeck.estraiPoker();
+		response.getWriter().write(poker);
+		
+		
 	}
 
 	/**
