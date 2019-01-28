@@ -82,6 +82,12 @@ public class Keyword implements Serializable{
 		this.descrizione = descrizione;
 	}
 
+	@Override
+	public String toString() {
+		return getClass().getName() +"[ idKeyword=" + idKeyword + ", idSessione=" + idSessione + ", chiave_nome=" + chiave_nome
+				+ ", descrizione=" + descrizione + "]";
+	}
+
 	
 	
 	

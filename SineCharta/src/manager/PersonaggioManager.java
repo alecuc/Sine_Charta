@@ -74,8 +74,7 @@ public class PersonaggioManager {
 				personaggio.aggiungiListaOggetti(aggiungiListaOggettiPG(personaggio));
 				personaggio.aggiungiListaAbilita(aggiungiListaAbilitaPG(personaggio));
 				
-				//DA finire con abilità 
-			} 
+				} 
 			
 		}finally {
 				try {
@@ -89,7 +88,11 @@ public class PersonaggioManager {
 		return personaggio;
 	}
 	
-
+	/****************************************************************************
+	 * Metodo per recuperare una lista di abilita'								*
+	 * @param pg= personaggio a cui sono associate le abilita'					*
+	 * @return la lista di abilita'												*
+	 ****************************************************************************/
 	private Set<Abilita> aggiungiListaAbilitaPG(Personaggio pg)throws SQLException{
 		AbilitaManager ability = new AbilitaManager();
 		Collection<Abilita> listaAbilita = ability.getListaAbilitaByPG(pg);

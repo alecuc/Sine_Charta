@@ -104,8 +104,8 @@ public class SessioneDiGioco implements Serializable{
 
 	@Override
 	public String toString() {
-		return "SessioneDiGioco [idNumeroSessione=" + idNumeroSessione + ", idStoria=" + idStoria
-				+ ", contenutoSessione=" + contenutoSessione + ", usernameModeratore=" + usernameModeratore + "]";
+		return getClass().getName() + "[idNumeroSessione=" + idNumeroSessione + ", idStoria=" + idStoria
+				+ ", contenutoSessione=" + contenutoSessione + ", usernameModeratore=" + usernameModeratore +", keyword= "+ sessionKeywords +"]";
 	}
 	
 	

@@ -23,24 +23,18 @@ public class SessioneManager {
 	 * @param numSessione= numero della sessione da recuperare										*
 	 * @return la sessione																			*
 	 ************************************************************************************************/
-	public SessioneDiGioco recuperoSessioneStoria(Storia storia, User utente, int numSessione) throws SQLException {
-		
+	public SessioneDiGioco recuperoSessioneStoria(Storia storia, User utente) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		
 		SessioneDiGioco bean = new SessioneDiGioco();
-		String selectSql = "SELECT * FROM " + SessioneManager.TABLE_NAME + " WHERE NUMERO = ? AND USERNAME = ? AND IDSTORY = ?";
-		
+		String selectSql = "SELECT * FROM " + SessioneManager.TABLE_NAME + " WHERE USERNAME = ? AND IDSTORY = ?";
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSql);
-			preparedStatement.setInt(1, numSessione);
-			preparedStatement.setString(2, utente.getUsername());
-			preparedStatement.setInt(3, storia.getId());
-			System.out.println("doRetrieveByKey: " + preparedStatement.toString());
-			
+			preparedStatement.setString(1, utente.getUsername());
+			preparedStatement.setInt(2, storia.getId());
+			System.out.println("recuperoSessioneStoria: " + preparedStatement.toString());
 			ResultSet rs = preparedStatement.executeQuery();
-			
 			while(rs.next()) {
 				bean.setIdNumeroSessione(rs.getInt("Numero"));
 				bean.setContenutoSessione(rs.getString("Contenuto"));
@@ -59,8 +53,7 @@ public class SessioneManager {
 			finally {
 				DriverManagerConnectionPool.releaseConnection(connection);
 			}
-		}
-			
+		}			
 		return bean;
 	}
 
@@ -83,18 +76,18 @@ public class SessioneManager {
 			ps = con.prepareStatement(sessioniStoria);
 			ps.setInt(1, storia.getId());
 			ps.setString(2, utente.getUsername());
+			System.out.println("recuperoTutteLeSessioni: " + ps.toString());
 			ResultSet rs = ps.executeQuery();
-			System.out.println("listaSessioni: " + ps.toString());
 			
 			while(rs.next()) {
 				SessioneDiGioco session = new SessioneDiGioco();
-				
 				session.setIdNumeroSessione(rs.getInt("Numero"));
 				session.setContenutoSessione(rs.getString("Contenuto"));
 				session.setUsernameModeratore(rs.getString("Username"));
 				session.setIdStoria(rs.getInt("IdStory"));
+				session.setStoriaSessione(getAnStory(session.getIdStoria()));
 				session.addListaKeyword(aggiungiListaKeyword(session));
-				session.setStoriaSessione(storia);
+				
 				sessioni.add(session);
 			}
 		}finally {
@@ -109,7 +102,24 @@ public class SessioneManager {
 		
 		return sessioni;
 	}
+	
+	/********************************************************************
+	 * Metodo per ottenere una storia tramite lo StoryManager			*
+	 * @param idStoria= identificativo della storia						*
+	 * @return una storia 												*
+	 ********************************************************************/
+	private Storia getAnStory(int idStoria) throws SQLException{
+		StoryManager manager = new StoryManager();
+		Storia sto = manager.getSimpleStory(idStoria);
+		return sto;
+	}
 
+	/********************************************************************
+	 * Metodo per recuperare una lista di Keyword						*					
+	 * @param sessione= a cui sono associate le keyword					*
+	 * @return una lista di keyword										*
+	 * @throws SQLException												*
+	 ********************************************************************/
 	private Set<Keyword> aggiungiListaKeyword(SessioneDiGioco sessione)throws SQLException{
 		KeywordManager manager = new KeywordManager();
 		Collection<Keyword> listaKeyword = manager.listaKeyword(sessione);

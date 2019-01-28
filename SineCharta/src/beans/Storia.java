@@ -1,7 +1,6 @@
 package beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,14 +18,21 @@ public class Storia implements Serializable{
 	private Set<SessioneDiGioco> listaSessioni;
 	
 	
-	
 	public Storia() {
 		personaggi = new HashSet<Personaggio>();
 	}
 
+	/**
+	 * 
+	 * @param sessione
+	 */
 	public void aggiungiSessione(SessioneDiGioco sessione) {
 		listaSessioni.add(sessione);
 		sessione.setStoriaSessione(this);
+	}
+	
+	public Set<SessioneDiGioco> getListaSessioni(){
+		return this.listaSessioni;
 	}
 	
 	public void aggiungiListaSessioni(Set<SessioneDiGioco> sessioni) {
@@ -135,7 +141,7 @@ public class Storia implements Serializable{
 	@Override
 	public String toString() {
 		return getClass().getName() + "[id=" + id + ", titolo=" + titolo + ", descrizione=" + descrizione + ", ambientazione="
-				+ ambientazione + ", sessioni="+ listaSessioni + "]";
+				+ ambientazione + ", sessioni="+ listaSessioni.toString() +"]";
 	}
 	
 	

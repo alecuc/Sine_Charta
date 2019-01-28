@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
-
+import java.util.Set;
 
 import beans.HaTable;
 import beans.Personaggio;
@@ -21,11 +21,11 @@ public class StoryManager {
 	private static final String TABLE_NAME_STORIA = "Storia";
 	
 	
-	/**
-	 * Metodo per caricare tutte le storie associate ad un utente
-	 * @param username= identificativo dell'utente
-	 * @return la storia a cui si riferisce idStoria
-	 */
+	/********************************************************************************
+	 * Metodo per caricare tutte le storie associate ad un utente					*
+	 * @param username= identificativo dell'utente									*
+	 * @return la storia a cui si riferisce idStoria								*
+	 ********************************************************************************/
 	public Collection<Storia> getStoria(User user) throws SQLException{
 		
 		Connection con = null;
@@ -56,8 +56,8 @@ public class StoryManager {
 				storia.setUsername(table.getUsername());
 				storia.setUtenteModeratore(user);
 				storia.addPersonaggio(getPersonaggioForStory(user));
-				//storia.aggiungiSessione(getSessioneForStory(storia, user));
-				//storia.aggiungiListaSessioni(aggiungiSessioniAllaStoria(storia, user));
+				storia.aggiungiListaSessioni(aggiungiSessioniAllaStoria(storia, user));
+				
 				storieutente.add(storia);
 			}
 			
@@ -72,35 +72,89 @@ public class StoryManager {
 		return storieutente;
 	}
 		
-	
+	/********************************************************************************************
+	 * Metodo per poter recuperare un persoanggio tramite un utente da PersonaggioManager		*
+	 * @param utente= utente a cui è associato il personaggio									*
+	 * @return un personaggio																	*
+	 ********************************************************************************************/
 	private Personaggio getPersonaggioForStory(User utente)throws SQLException {
 		PersonaggioManager manager = new PersonaggioManager();
 		Personaggio pg = manager.getPersonaggioByUtente(utente);
 		return pg;
 	}
 	
-	private SessioneDiGioco getSessioneForStory(Storia storia, User utente)throws SQLException {
-		SessioneManager manager = new SessioneManager();
-		SessioneDiGioco se = manager.recuperoSessioneStoria(storia, utente, 1);
-		return se;
+	/****************************************************************************
+	 * Metodo per recuperare una storia											*
+	 * @param idStory= identificativo della storia								*
+	 * @return una storia														*
+	 ****************************************************************************/
+	public Storia getSimpleStory(int idStory)throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		Storia storia = new Storia();
+		HaTable table = new HaTable();
+		String selectStoria = "SELECT * FROM "+TABLE_NAME_STORIA+" WHERE IDSTORY = ?";
+		try {
+			con = DriverManagerConnectionPool.getConnection();
+			ps = con.prepareStatement(selectStoria);
+			ps.setInt(1, idStory);
+			System.out.println("getStoria : " + ps.toString());
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				storia.setId(rs.getInt("IdStory"));
+				storia.setTitolo(rs.getString("Titolo"));
+				storia.setDescrizione(rs.getString("Descrizione"));
+				storia.setAmbientazione(rs.getString("Ambientazione"));
+				storia.setUsername(table.getUsername());
+				storia.aggiungiListaSessioni(aggiungiSessioniAllaStoria(storia, getUtente(storia.getUsername())));
+			}
+			
+		}finally {
+			try {
+				if(ps!=null) ps.close();
+			}finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
+		}
+		return storia;
 	}
 	
+	/********************************************************************
+	 * Metodo per recuperare un utente da UserManager					*
+	 * @param username= utente da recuperare							*
+	 * @return un utente												*
+	 ********************************************************************/
+	private User getUtente(String username)throws SQLException {
+		UsersManager manager = new UsersManager();
+		User utente = manager.doRetrieveByKey(username);
+		return utente;
+	}
 	
-	private ArrayList<SessioneDiGioco> aggiungiSessioniAllaStoria(Storia storia, User utenteMod)throws SQLException{
+	/****************************************************************************
+	 * Metodo per recupere una lista di sessioni per la storia					*
+	 * @param storia= a cui appartengono le sessioni							*
+	 * @param utenteMod= utente a cui è associata la storia						*
+	 * @return una lista di sessioni											*
+	 ****************************************************************************/
+	private Set<SessioneDiGioco> aggiungiSessioniAllaStoria(Storia storia, User utenteMod)throws SQLException{
 		SessioneManager manager = new SessioneManager();
 		Collection<SessioneDiGioco> listaSessione = manager.recuperoTutteLeSessioni(storia, utenteMod);
 		if(listaSessione!=null) {
-			ArrayList<SessioneDiGioco> sessioni = new ArrayList<SessioneDiGioco>(listaSessione);
+			Set<SessioneDiGioco> sessioni = new HashSet<SessioneDiGioco>(listaSessione);
 			return sessioni;
 		}else return null;
 	}
 	
+	/****************************************************************************************
+	 * Metodo per recuperare una storia in base al personaggio a cui vi partecipa			*
+	 * @param pg= personaggio a cui è associata la storia 									*
+	 * @return una storia del personaggio													*
+	 ****************************************************************************************/
 	public Storia getStoriaDelPG(Personaggio pg)throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		Storia storia = new Storia();
 		String selectStoria = "SELECT * FROM " + TABLE_NAME_STORIA + " WHERE IDSTORY = ?";
-		
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(selectStoria);
@@ -113,8 +167,8 @@ public class StoryManager {
 				storia.setDescrizione(rs.getString("Descrizione"));
 				storia.setAmbientazione(rs.getString("Ambientazione"));
 				storia.setUtenteModeratore(pg.getUser());
+				storia.aggiungiListaSessioni(aggiungiSessioniAllaStoria(storia, pg.getUser()));
 				storia.addPersonaggio(pg);
-			//	storia.aggiungiListaSessioni(aggiungiSessioniAllaStoria(storia, pg.getUser()));
 			}
 		}finally {
 			try {
@@ -126,33 +180,23 @@ public class StoryManager {
 		return storia;
 	}
 
-	
 
-	
-	/**
-	 * Metodo per inserire una nuova storia
-	 * @param storia= un oggetto di tipo storia 
-	 * @param username= utente che inserisce la storia
-	 */
+	/********************************************************************************************
+	 * Metodo per inserire una nuova storia														*
+	 * @param storia= un oggetto di tipo storia 												*
+	 * @param username= utente che inserisce la storia											*
+	 ********************************************************************************************/	
 	public void aggiungiStoria(Storia storia, User utenteMod, int flag)throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
-		//PreparedStatement ps2 = null;
 		String creaStoria = "INSERT INTO "+ TABLE_NAME_STORIA 
-				+ " (TITOLO, DESCRIZIONE, AMBIENTAZIONE) VALUES(?, ?, ?)";
-		//String aggiungiFlag = "INSERT INTO ha (USERNAME, IDSTORY, FLAG) VALUES(?,?,?)";
-		
+				+ " (TITOLO, DESCRIZIONE, AMBIENTAZIONE) VALUES(?, ?, ?)";		
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(creaStoria);
-			//ps2 = con.prepareStatement(aggiungiFlag);
 			ps.setString(1, storia.getTitolo());
 			ps.setString(2, storia.getDescrizione());
 			ps.setString(3, storia.getAmbientazione());
-			//ps2.setString(1, utenteMod.getUsername());
-			//Storia stoTmp = 
-			//ps2.setInt(2, );
-			//AGGIUNGERE TRIGGER AL DB QUANDO SI INSERISCE NUOVA STORIA
 			System.out.println("aggiungiStoria" + ps.toString());
 			ps.executeUpdate();
 			con.commit();
@@ -163,20 +207,46 @@ public class StoryManager {
 				DriverManagerConnectionPool.releaseConnection(con);
 			}
 		}
-		
 	}
 	
-	/**
-	 * Metodo per eliminare una storia
-	 * @param idStoria= identificativo della storia da eliminare
-	 * @return risultato dell'avvenuta eliminazione
-	 */
+	/********************************************************************************************
+	 * Metodo per aggiungere riga alla tabella delle associazioni tra utente e storia			*
+	 * @param storia= storia con un identificativo												*
+	 * @param utente= utente da aggiungere														*
+	 * @param flag= identifica il tipo di utente												*													
+	 ********************************************************************************************/
+	public void aggiungiATable(Storia storia, User utente, int flag) throws SQLException{
+		Connection con = null;
+		PreparedStatement ps = null;
+		String aggiungiHaTable = "INSERT INTO ha (USERNAME, IDSTORY, FLAG) VALUES(?, ?, ?)";
+		try {
+			con = DriverManagerConnectionPool.getConnection();
+			ps = con.prepareStatement(aggiungiHaTable);
+			ps.setString(1, utente.getUsername());
+			ps.setInt(2, storia.getId());
+			ps.setInt(3, flag);
+			System.out.println("aggiungiATable: " + ps.toString());
+			ps.executeUpdate();
+			con.commit();
+		}finally {
+			try {
+				if(ps!=null) ps.close();
+			}finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
+		}
+	}
+	
+	/************************************************************************************
+	 * Metodo per eliminare una storia													*
+	 * @param idStoria= identificativo della storia da eliminare						*
+	 * @return risultato dell'avvenuta eliminazione										*
+	 ************************************************************************************/
 	public boolean eliminaStoria(int idStoria) throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
 		String eliminaStoria = "DELETE FROM " + TABLE_NAME_STORIA + " WHERE ID = ?";
-		
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(eliminaStoria);
@@ -191,34 +261,8 @@ public class StoryManager {
 				DriverManagerConnectionPool.releaseConnection(con);
 			}
 		}
-		
 		return (result != 0);
 	}
 
-	
-	/**
-	 * Metodo per assegnare un personaggio ad una Storia.
-	 * @param username= identificativo del moderatore
-	 * @param idStoria= identificativo della storia
-	 *
-	public void setPgForStory(String user, int idStory)throws SQLException {
-		//PersonaggioManager pgM = new PersonaggioManager();
-	//	Personaggio pg = pgM.getPersonaggioByUtente(idStory, user);
-	//	Storia storia = this.getStoria(user);
-	//	storia.addPersonaggio(pg);
-	}
-	
-	public void aggiungiSessioneallaStoria(int numero, String username, int idStory) throws SQLException{
-		
-		Storia storia = new Storia();
-		StoryManager stry = new StoryManager(); 
-		SessioneManager ssnM = new SessioneManager();
-		//SessioneDiGioco ssn = ssnM.prendereSessione(numero, username, idStory);
-		
-		//storia = stry.getStoria(username);
-		//storia.aggiungiSessione(ssn);
-	}
-	*/
-	
 	
 }

@@ -3,6 +3,7 @@ package beans;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -49,17 +50,11 @@ public class testBeans {
 		
 		
 		UsersManager userManager = new UsersManager();
-		User utenteListaStorie = userManager.doRetrieveByKey("Vince");
-		//System.out.println(utenteListaStorie.toString());
+		User utenteListaStorie = userManager.doRetrieveByKey("RaffoV");
+
+		System.out.println(utenteListaStorie.toString());
 			
 	
-	SessioneManager manaSess = new SessioneManager();
-	StoryManager mstoria = new StoryManager();
-	PersonaggioManager pgMana = new PersonaggioManager();
-	Personaggio pGTest = pgMana.getPersonaggioByUtente(utenteListaStorie);
-	Storia sto = mstoria.getStoriaDelPG(pGTest);
-		Collection<SessioneDiGioco> s = manaSess.recuperoTutteLeSessioni(sto, utenteListaStorie);
-	System.out.println(s.toString());
 	
 	}
 	
