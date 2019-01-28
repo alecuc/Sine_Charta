@@ -94,18 +94,18 @@ $(document).ready(function(){
 	});
 
 	$('#confDom').click(function(){
-		
+
 		if(countDom==0){
 			alert("Devi estrarre un tarocco dominante!");
 		} else{
-		
-		$(this).prop('disabled',true);
-		$('#dealDom').prop('disabled',true);
-		$('#dealCuori').prop('disabled',false);
-		$('#dealQuadri').prop('disabled',false);
-		$('#dealFiori').prop('disabled',false);
-		$('#dealPicche').prop('disabled',false);
-		$('#confermaPunti').prop('disabled',false);ù
+
+			$(this).prop('disabled',true);
+			$('#dealDom').prop('disabled',true);
+			$('#dealCuori').prop('disabled',false);
+			$('#dealQuadri').prop('disabled',false);
+			$('#dealFiori').prop('disabled',false);
+			$('#dealPicche').prop('disabled',false);
+			$('#confermaPunti').prop('disabled',false);ù
 		}
 	});
 
@@ -129,7 +129,7 @@ $(document).ready(function(){
 			puntiQuadri -=4;
 			puntiFiori -=4;			
 			puntiPicche -=4;
-			
+
 			$('#abiRimasti').text(" "+puntiAbi);
 			$('#cuoriRimasti').text(" "+puntiCuori);
 			$('#quadriRimasti').text(" "+puntiQuadri);
@@ -149,16 +149,16 @@ $(document).ready(function(){
 		}
 
 	});
-	
-	
+
+
 	$('#completa').click(function(){
 		if (puntiAbi!=0){ 
 			alert("Inserisci i punti abilità rimasti! Il tuo pg potrebbe essere più bravo a fare queste cose!")
 			return false;
 		} else return true;
 	});
-	
-	
+
+
 
 
 
@@ -166,7 +166,7 @@ $(document).ready(function(){
 	$('#dealDom').click(function(){
 		countDom++;
 
-		$.get('../EstraiCreazione', function(responseText) {
+		$.get('../EstraiMaggiore', function(responseText) {
 			JTDom= responseText;
 			TDom=JSON.parse(JTDom);
 
@@ -175,8 +175,9 @@ $(document).ready(function(){
 			$('#domName').text(TDom.nome);
 			$('#numDom').text(" "+3-countDom)
 			$("#domDesc").text(TDom.descrizioneDominante);
-			$("#tDom").animate({width:'toggle'},350);
-			$("#tDom").attr("src","../images/TaroccoNum_"+n+".png");
+			$("#tDom").animate({width:'toggle'},350, function(){
+				$("#tDom").attr("src","../images/TaroccoNum_"+n+".png");
+			});
 			$("#tDom").animate({width:'toggle'},350);
 		});
 
@@ -191,7 +192,7 @@ $(document).ready(function(){
 	$('#dealCuori').click(function(){
 		countCuori++;
 
-		$.get('../EstraiCreazione', function(responseText) {
+		$.get('../EstraiMaggiore', function(responseText) {
 			JTCuori= responseText;
 			TCuori=JSON.parse(JTCuori);
 			var rim= 3-countCuori;
@@ -199,8 +200,9 @@ $(document).ready(function(){
 			puntiCuori= TCuori.valoreCuori;
 			$('#valCuori').text(" "+puntiCuori);
 			$('#numCuori').text("Numero estrazioni rimaste: "+ rim);
-			$("#tarCuori").animate({width:'toggle'},350);
-			$("#tarCuori").attr("src","../images/TaroccoNum_"+n+".png");
+			$("#tarCuori").animate({width:'toggle'},350, function(){				
+				$("#tarCuori").attr("src","../images/TaroccoNum_"+n+".png");
+			});
 			$("#tarCuori").animate({width:'toggle'},350);
 		});
 
@@ -214,7 +216,7 @@ $(document).ready(function(){
 	$('#dealQuadri').click(function(){
 		countQuadri++;
 
-		$.get('../EstraiCreazione', function(responseText) {
+		$.get('../EstraiMaggiore', function(responseText) {
 			JTQuadri= responseText;
 			TQuadri=JSON.parse(JTQuadri);
 			var rim= 3-countQuadri;
@@ -222,8 +224,9 @@ $(document).ready(function(){
 			puntiQuadri= TQuadri.valoreQuadri;
 			$('#valQuadri').text(" "+puntiQuadri);
 			$('#numQuadri').text("Numero estrazioni rimaste: "+ rim);
-			$("#tarQuadri").animate({width:'toggle'},350);
-			$("#tarQuadri").attr("src","../images/TaroccoNum_"+n+".png");
+			$("#tarQuadri").animate({width:'toggle'},350, function(){				
+				$("#tarQuadri").attr("src","../images/TaroccoNum_"+n+".png");
+			});
 			$("#tarQuadri").animate({width:'toggle'},350);
 		});
 
@@ -236,7 +239,7 @@ $(document).ready(function(){
 	$('#dealFiori').click(function(){
 		countFiori++;
 
-		$.get('../EstraiCreazione', function(responseText) {
+		$.get('../EstraiMaggiore', function(responseText) {
 			JTFiori= responseText;
 			TFiori=JSON.parse(JTFiori);
 			var rim= 3-countFiori;
@@ -244,8 +247,9 @@ $(document).ready(function(){
 			puntiFiori= TFiori.valoreFiori;
 			$('#valFiori').text(" "+puntiFiori);
 			$('#numFiori').text("Numero estrazioni rimaste: "+ rim);
-			$("#tarFiori").animate({width:'toggle'},350);
-			$("#tarFiori").attr("src","../images/TaroccoNum_"+n+".png");
+			$("#tarFiori").animate({width:'toggle'},350, function(){				
+				$("#tarFiori").attr("src","../images/TaroccoNum_"+n+".png");
+			});
 			$("#tarFiori").animate({width:'toggle'},350);
 		});
 
@@ -258,7 +262,7 @@ $(document).ready(function(){
 	$('#dealPicche').click(function(){
 		countPicche++;
 
-		$.get('../EstraiCreazione', function(responseText) {
+		$.get('../EstraiMaggiore', function(responseText) {
 			JTPicche= responseText;
 			TPicche=JSON.parse(JTPicche);
 			var rim= 3-countPicche;
@@ -266,8 +270,9 @@ $(document).ready(function(){
 			puntiPicche= TPicche.valorePicche;
 			$('#valPicche').text(" "+puntiPicche);			
 			$('#numPicche').text("Numero estrazioni rimaste: "+ rim);
-			$("#tarPicche").animate({width:'toggle'},350);
-			$("#tarPicche").attr("src","../images/TaroccoNum_"+n+".png");
+			$("#tarPicche").animate({width:'toggle'},350, function(){				
+				$("#tarPicche").attr("src","../images/TaroccoNum_"+n+".png");
+			});
 			$("#tarPicche").animate({width:'toggle'},350);
 		});
 
@@ -400,7 +405,7 @@ $(document).ready(function(){
 			$('#piccheRimasti').text(puntiPicche);
 		}
 	});
-	
+
 	$('.minusAbi').click(function(){
 
 		var tag= $(this).next();
@@ -430,5 +435,5 @@ $(document).ready(function(){
 			$('#abiRimasti').text(puntiAbi);
 		}
 	});
-	
+
 });

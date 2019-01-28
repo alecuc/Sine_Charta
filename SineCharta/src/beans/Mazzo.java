@@ -58,13 +58,13 @@ public class Mazzo implements Deckable{
     	mazzoTarocco.add(innamorato);
     	Tarocco carro = new Tarocco("Il Carro","Un successo trionfale in qualsiasi situazione.", "Sei una persona ambiziosa e che aspira al successo", 18, 21, 19, 12, 7);
     	mazzoTarocco.add(carro);
-    	Tarocco giustizia = new Tarocco("La Giustizia","Un fallimento in qualsiasi situazione. Maggiori le tue colpe, peggiore il falliento.", "Giudicherai sempre gli altri prima di te stesso.", 16, 18, 15, 15, 8);
+    	Tarocco giustizia = new Tarocco("La Giustizia","Un fallimento in qualsiasi situazione. Maggiori le tue colpe, peggiore il falliento.", "Giudicherai sempre gli altri prima di te stesso.", 16, 18, 15, 15, 11);
     	mazzoTarocco.add(giustizia);
     	Tarocco eremita = new Tarocco("L'Eremita","Insuccesso durevole: si ripercuote in ogni situazione simile.", "Saggio e riservato, vivi in pace con gli altri.", 22, 8, 11, 22, 9);
     	mazzoTarocco.add(eremita);
     	Tarocco ruotaFortuna = new Tarocco("La Ruota della Fortuna","Il personaggio ottiene un successo. Immeritato, ma pur sempre un successo. Che fortuna!", "Sei una persona convinta che tutto sia predestinato.", 14, 14, 14, 19, 10);
     	mazzoTarocco.add(ruotaFortuna);
-    	Tarocco forza = new Tarocco("La Forza","Un impeto di risolutezza e coraggio conduce ad un successo!", "Sei una persona che non si lascia mai scoraggiare e che lotta fino alla fine.", 10, 13, 24, 13, 11);
+    	Tarocco forza = new Tarocco("La Forza","Un impeto di risolutezza e coraggio conduce ad un successo!", "Sei una persona che non si lascia mai scoraggiare e che lotta fino alla fine.", 10, 13, 24, 13, 8);
     	mazzoTarocco.add(forza);
     	Tarocco appeso = new Tarocco("L'Appeso","Un insuccesso dovuto alle circostanze, contro le quali non puoi nulla.", "Vivi nelle tue fantasie, dimenticando il reale.", 13, 22, 13, 17, 12);
     	mazzoTarocco.add(appeso);
@@ -84,7 +84,7 @@ public class Mazzo implements Deckable{
     	mazzoTarocco.add(sole);
     	Tarocco giudizio = new Tarocco("Il Giudizio","Una scarsa interpretazione degli eventi conduce ad un fallimento.", "Sei cocciuto e criticone.", 13, 13, 16, 15, 20);
     	mazzoTarocco.add(giudizio);
-    	Tarocco mondo = new Tarocco("Il Mondo","L'azione va a buon fine grazie ad una buona conoscenza delle circostanze.", "Nessuno riesce a importi di fare qualcosa: farai sempre di testa tua.", 17, 16, 16, 16, 21);
+    	Tarocco mondo = new Tarocco("Il Mondo","L'azione va a buon fine perché il tempo sembra essersi fermato.", "Nessuno riesce a importi di fare qualcosa: farai sempre di testa tua.", 17, 16, 16, 16, 21);
     	mazzoTarocco.add(mondo);
     	Tarocco matto = new Tarocco("Il Matto","La situazione si risolve in maniera incomprensibile, irripetibile e improvvisa.", "Imprevedibile, folle. MATTO.", 17, 17, 17, 17, 0);
     	mazzoTarocco.add(matto);
