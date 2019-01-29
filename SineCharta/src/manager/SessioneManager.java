@@ -23,16 +23,17 @@ public class SessioneManager {
 	 * @param numSessione= numero della sessione da recuperare										*
 	 * @return la sessione																			*
 	 ************************************************************************************************/
-	public SessioneDiGioco recuperoSessioneStoria(Storia storia, User utente) throws SQLException {
+	public SessioneDiGioco recuperoSessioneStoria(Storia storia, User utente, int numSessione) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		SessioneDiGioco bean = new SessioneDiGioco();
-		String selectSql = "SELECT * FROM " + SessioneManager.TABLE_NAME + " WHERE USERNAME = ? AND IDSTORY = ?";
+		String selectSql = "SELECT * FROM " + SessioneManager.TABLE_NAME + " WHERE NUMERO = ? AND USERNAME = ? AND IDSTORY = ?";
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSql);
-			preparedStatement.setString(1, utente.getUsername());
-			preparedStatement.setInt(2, storia.getId());
+			preparedStatement.setInt(1, numSessione);
+			preparedStatement.setString(2, utente.getUsername());
+			preparedStatement.setInt(3, storia.getId());
 			System.out.println("recuperoSessioneStoria: " + preparedStatement.toString());
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
