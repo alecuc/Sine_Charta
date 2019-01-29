@@ -124,7 +124,7 @@ $(document).ready(function(){
 			$('#setCar').prop('disabled',false);
 			$('#confCar').prop('disabled',false);
 
-			puntiAbi= Math.floor((parseInt(puntiCuori,10)+parseInt(puntiQuadri,10)+parseInt(puntiFiori,10)+parseInt(puntiPicche,10))/3);
+			puntiAbi= Math.floor((parseInt(puntiCuori,10)+parseInt(puntiQuadri,10)+parseInt(puntiFiori,10)+parseInt(puntiPicche,10))/4);
 			puntiCuori -=4;
 			puntiQuadri -=4;
 			puntiFiori -=4;			
@@ -146,6 +146,12 @@ $(document).ready(function(){
 			$('#setCar').prop('disabled',true);
 			$('#setAbi').prop('disabled',false);
 			$('#completa').prop('disabled',false);
+			$('#carUso').text($('#mir').val());
+			$('#carPerc').text($('#per').val());
+			$('#carFurt').text($('#des').val());
+			$('#carUtil').text($('#int').val());
+			$('#carGuida').text($('#des').val());
+			
 		}
 
 	});
@@ -155,7 +161,19 @@ $(document).ready(function(){
 		if (puntiAbi!=0){ 
 			alert("Inserisci i punti abilità rimasti! Il tuo pg potrebbe essere più bravo a fare queste cose!")
 			return false;
-		} else return true;
+		} else 
+
+			var data= $('#nomePG').val() + ',' + $('#cognomePG').val() + ',' + $('#etaPG').val() + ',' + $('#nazionalitaPG').val() + ',' + $('#domName').text()+',';
+			
+			console.log(data);
+		
+			data = data+$('#int').val()+','+$('#asp').val()+','+$('#coo').val()+','+$('#aff').val()+','+$('#mem').val()+','+$('#com').val()+','+$('#des').val()+','+$('#ddm').val()+','+$('#per').val()+','+$('#cre').val()+','+$('#for').val()+','+$('#eqm').val()+','+$('#vol').val()+','+$('#soc').val()+','+$('#mir').val()+','+$('#kar').val()+',';
+			
+			console.log(data);
+			data= data+$('#abiUso').val()+','+$('#totUso').text()+','+$('#abiPerc').val()+','+$('#totPerc').text()+','+$('#abiFurt').val()+','+$('#totFurt').text()+','+$('#abiUtil').val()+','+$('#totUtil').text()+','+$('#abiGuida').val()+','+$('#totGuida').text();
+			$.get('../GestioneStoriaServlet',data);
+			
+			
 	});
 
 
@@ -166,7 +184,7 @@ $(document).ready(function(){
 	$('#dealDom').click(function(){
 		countDom++;
 
-		$.get('../EstraiMaggiore', function(responseText) {
+		$.get('../GestioneMazzoServlet', "estraiTarocco", function(responseText) {
 			JTDom= responseText;
 			TDom=JSON.parse(JTDom);
 
@@ -192,7 +210,7 @@ $(document).ready(function(){
 	$('#dealCuori').click(function(){
 		countCuori++;
 
-		$.get('../EstraiMaggiore', function(responseText) {
+		$.get('../GestioneMazzoServlet', "estraiTarocco", function(responseText) {
 			JTCuori= responseText;
 			TCuori=JSON.parse(JTCuori);
 			var rim= 3-countCuori;
@@ -216,7 +234,7 @@ $(document).ready(function(){
 	$('#dealQuadri').click(function(){
 		countQuadri++;
 
-		$.get('../EstraiMaggiore', function(responseText) {
+		$.get('../GestioneMazzoServlet', "estraiTarocco", function(responseText) {
 			JTQuadri= responseText;
 			TQuadri=JSON.parse(JTQuadri);
 			var rim= 3-countQuadri;
@@ -239,7 +257,7 @@ $(document).ready(function(){
 	$('#dealFiori').click(function(){
 		countFiori++;
 
-		$.get('../EstraiMaggiore', function(responseText) {
+		$.get('../GestioneMazzoServlet', "estraiTarocco", function(responseText) {
 			JTFiori= responseText;
 			TFiori=JSON.parse(JTFiori);
 			var rim= 3-countFiori;
@@ -262,7 +280,7 @@ $(document).ready(function(){
 	$('#dealPicche').click(function(){
 		countPicche++;
 
-		$.get('../EstraiMaggiore', function(responseText) {
+		$.get('../GestioneMazzoServlet', "estraiTarocco", function(responseText) {
 			JTPicche= responseText;
 			TPicche=JSON.parse(JTPicche);
 			var rim= 3-countPicche;
@@ -410,11 +428,14 @@ $(document).ready(function(){
 
 		var tag= $(this).next();
 		var currValue= parseInt(tag.val(), 10);
-
+		var caratteristica= parseInt($(this).prev().text(),10);
+		var tot=0;
+		
 		if(currValue==1);
 		else{
 			currValue -=1;
 			tag.val(currValue--);
+	/***************/
 			puntiAbi +=1;
 			$('#abiRimasti').text(puntiAbi);
 		}
@@ -427,7 +448,7 @@ $(document).ready(function(){
 		var tag= $(this).prev();
 		var currValue= parseInt(tag.val(), 10);
 
-		if(puntiAbi==0||currValue==10);
+		if(puntiAbi==0||currValue==5);
 		else{
 			currValue +=1;
 			tag.val(currValue++);
