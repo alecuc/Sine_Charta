@@ -82,7 +82,7 @@ $(document).ready(function(){
 
 		if(tarocchiRimasti==0) alert("Il mazzo dei tarocchi è finito. Devi mischiarlo prima di poter pescare di nuovo.");
 		else{
-			$.get('../EstraiMaggiore', function(responseText) {
+			$.get('../GestioneMazzoServlet', "estraiTarocco", function(responseText) {
 				JTDom= responseText;
 				TDom=JSON.parse(JTDom);
 
@@ -102,7 +102,7 @@ $(document).ready(function(){
 	
 	$('#shuffMaj').click(function(){
 
-		$.get('../MischiaMaggiore', function(responseText) {
+		$.get('../GestioneMazzoServlet', "mischiaTarocco", function(responseText) {
 			
 			$("#tMaj").animate({width:'toggle'},350,function(){
 				$("#tMaj").attr("src","../images/cardBack.png");				
@@ -120,7 +120,7 @@ $(document).ready(function(){
 
 		if(tarocchiRimasti==0) alert("Il mazzo da poker è finito. Devi mischiarlo prima di poter pescare di nuovo.");
 		else{
-			$.get('../EstraiMinore', function(responseText) {
+			$.get('../GestioneMazzoServlet',"estraiPoker", function(responseText) {
 
 				$('#minoreEstratto').text(TDom.nome);
 				$("#pokerEstratta").text(responseText);
@@ -137,7 +137,7 @@ $(document).ready(function(){
 	
 	$('#shuffleMin').click(function(){
 
-		$.get('../MischiaMiniore', function(responseText) {
+		$.get('../GestioneMazzoServlet',"mischiaPoker", function(responseText) {
 			
 			$("#tMin").animate({width:'toggle'},350,function(){
 				$("#tMin").attr("src","../images/cardBack.png");				
