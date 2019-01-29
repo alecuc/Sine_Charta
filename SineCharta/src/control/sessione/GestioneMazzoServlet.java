@@ -35,8 +35,7 @@ public class GestioneMazzoServlet extends HttpServlet {
 		HttpSession session= request.getSession();
 		
 		String action= request.getParameter("action");
-		//Mazzo mazzo= (Mazzo) session.getAttribute("mazzo");
-		Mazzo mazzo= new Mazzo();
+		Mazzo mazzo= (Mazzo) session.getAttribute("Mazzo");
 		if(action.equalsIgnoreCase("estraiTarocco")) {
 		
 			Tarocco tarot= mazzo.estraiTarocco();
