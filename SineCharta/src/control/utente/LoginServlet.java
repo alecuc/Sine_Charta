@@ -14,9 +14,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.SendResult;
 
 import manager.StoryManager;
 import manager.UsersManager;
+import beans.Mazzo;
 import beans.Storia;
 import beans.User;
 /**
@@ -70,10 +72,10 @@ public class LoginServlet extends HttpServlet {
 				
 			if (passEncr.equals(password)) {
 				session.setAttribute("user", utenteLogin);
-				UsersManager usr = new UsersManager();
-				User user = usr.doRetrieveByKey(usernameInput);
 				StoryManager str = new StoryManager(); 
-				Collection<Storia>  listaStoria = str.getStoria(user);
+				Collection<Storia>  listaStoria = str.getStoria(utenteLogin);
+				Mazzo mazzo = new Mazzo();
+				session.setAttribute("Mazzo", mazzo);
 				session.setAttribute("listaStorie", listaStoria);
 				response.sendRedirect("jsp_page/homeUser.jsp");
 			} else {
@@ -87,9 +89,12 @@ public class LoginServlet extends HttpServlet {
 
 
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
+		} catch (NullPointerException e) {
+			response.sendRedirect("jsp_page/error/error.jsp");
 		}
+		
 	}
 		
 	/**

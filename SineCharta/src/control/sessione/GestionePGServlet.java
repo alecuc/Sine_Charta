@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.Oggetto;
+import beans.Personaggio;
 import manager.EquipManager;
+import manager.PersonaggioManager;
 
 /**
  * Servlet implementation class GestionePGServlet
@@ -21,69 +23,67 @@ import manager.EquipManager;
 @WebServlet("/GestionePGServlet")
 public class GestionePGServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	EquipManager equipaggiamento = new EquipManager();
 	Oggetto oggetto = new Oggetto();
-	
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GestionePGServlet() {
-       super();
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public GestionePGServlet() {
+		super();
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		HttpSession session = request.getSession();
-		ArrayList<Oggetto> listaOggetti = (ArrayList<Oggetto>) session.getAttribute("listaOggettiPG");
+		Collection<Oggetto> listaOggetti = (Collection<Oggetto>) session.getAttribute("listaOggettiPG");
 		String action = request.getParameter("action");
-		
+		Personaggio pg = (Personaggio)session.getAttribute("pg");
+
 		try {
 			if(action.equalsIgnoreCase("aggOggetto")) {
 				String nomeOggetto = request.getParameter("nomeOggetto");
 				String peso = request.getParameter("peso");
 				String costo = request.getParameter("costo");
-				
+				String quantita = request.getParameter("quantita");
+
 				oggetto.setNome(nomeOggetto);
 				oggetto.setPeso(Double.parseDouble(peso));
 				oggetto.setCosto(Double.parseDouble(costo));
-				
-				equipaggiamento.inserisciOggetto(oggetto,Integer.parseInt(request.getParameter("idPG")));
-				
+				oggetto.setQuantita(Integer.parseInt(quantita));
+				PersonaggioManager pgM = new PersonaggioManager();
+
+				equipaggiamento.inserisciOggetto(oggetto, pg);
 				System.out.println("Oggetto inserito.");
 				response.sendRedirect("/*PAGINA PERSONAGGIO*/");
 			}
 			/*  DA COMPLETARE    */
 			else if(action.equalsIgnoreCase("rimuoviOggetto")) {
-				int idPG = Integer.parseInt(request.getParameter("idPG"));
-				
-				equipaggiamento.rimuoviOggetto(idPG);
-				
-				
-				
+
+				EquipManager eqp = new EquipManager();
+				oggetto = (Oggetto)session.getAttribute("oggetto");
+				eqp.rimuoviOggetto(oggetto, pg);
+
 			}else if(action.equalsIgnoreCase("listaOggettiPg")) {
-				Collection<Oggetto> listaOggettiPg = equipaggiamento.getListaOggettiPG("Peso",  Integer.parseInt(request.getParameter("idPG")));
-				
-			}else if(action.equalsIgnoreCase("aggArma")) {
-				
-				
-			}else if(action.equalsIgnoreCase("rimuoviArma")) {
-				
-			}else if(action.equalsIgnoreCase("listaArmiPg")) {
-				
-			}
-			/* DA COMPLETARE*/
-		} catch(SQLException e) {
+
+				EquipManager eqp = new EquipManager();
+				listaOggetti = eqp.getListaOggettiPG(pg);
+				session.setAttribute("listaOggetti", listaOggetti);
+
+			}	
+		}catch(SQLException e) {
 			e.printStackTrace();
 			session.setAttribute("InsertError", "inserimento errato");
 			response.sendRedirect("#");
+
 		}
-		
-		
-		
+
+
+
 	}
 
 	/**

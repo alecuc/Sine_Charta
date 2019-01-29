@@ -43,7 +43,7 @@ public class RegistrazioneServlet extends HttpServlet {
 
 		try {
 				if(action.equalsIgnoreCase("register")) {
-					System.out.println("strunz");;
+					
 					String username = request.getParameter("username");
 					String name = request.getParameter("name");
 					String surname = request.getParameter("surname");

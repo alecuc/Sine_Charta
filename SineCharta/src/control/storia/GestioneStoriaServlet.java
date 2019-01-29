@@ -45,8 +45,6 @@ public class GestioneStoriaServlet extends HttpServlet {
 
 		response.setContentType("text/html");
 		String idStoria = request.getParameter("idStoria"); 
-		String titolo = request.getParameter("nome");
-		String contenuto = request.getParameter("descrizione");
 		String action = request.getParameter("action");
 		StoryManager str = new StoryManager();
 		Storia storia = new Storia();
@@ -60,22 +58,20 @@ public class GestioneStoriaServlet extends HttpServlet {
 
 				// prenderlo dall'utente Personaggio pg = (Personaggio)session.getAttribute("pe");
 				
-				UsersManager usr = new UsersManager();
-				User utente = usr.doRetrieveByKey(username);
-				PersonaggioManager pgM = new PersonaggioManager();
-				Personaggio pg = pgM.getPersonaggioByUtente(utente);
-				storia = str.getStoriaDelPG(pg);
-				session.setAttribute("storiaDelPg", storia);
+				Integer idStory = Integer.parseInt(idStoria);
+				Storia story = str.getSimpleStory(idStory);
+				
+				session.setAttribute("storia", story);
 				response.sendRedirect("scheda pg");
 				
 				//questo if permette di inserire una storia nel database	
 			}else if(action.equalsIgnoreCase("inserisciStoria")) {
 
-				String nome = request.getParameter("Nome");
+				String nome = request.getParameter("Titolo");
 				String descrizione = request.getParameter("Descrizione");
 				String ambientazione = request.getParameter("Ambientazione");
 
-				storia.setTitolo(titolo);
+				storia.setTitolo(nome);
 				storia.setDescrizione(descrizione);
 				storia.setAmbientazione(ambientazione);
 
@@ -93,16 +89,20 @@ public class GestioneStoriaServlet extends HttpServlet {
 				
 				//questo if permette di fare un redirect alla pagina di creazione personaggio
 			}else if(action.equalsIgnoreCase("creaPg")) {
-				
-				Mazzo mazzo = new Mazzo();
-				session.setAttribute("mazzo", mazzo);
+								
 				String idSto = request.getParameter("idStoria");
 				Integer idS = Integer.parseInt(idSto);
 				session.setAttribute("idStory", idS);
 				response.sendRedirect("jsp_page/creazionePG.jsp");
 				
-			}
-
+			}else if(action.equalsIgnoreCase("inserisciPg"));
+				
+				Personaggio pg = (Personaggio)request.getAttribute("Pg");
+				PersonaggioManager pgM = new PersonaggioManager();
+				String idSto = request.getParameter("idStoria");
+				Integer idS = Integer.parseInt(idSto);
+				pgM.creaPersonaggio(pg, idS);
+				
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
