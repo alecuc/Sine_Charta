@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import beans.Personaggio;
 import beans.SessioneDiGioco;
 import beans.Storia;
 import beans.User;
+import manager.PersonaggioManager;
 import manager.SessioneManager;
 
 /**
@@ -42,6 +44,8 @@ public class GestioneSessioneServlet extends HttpServlet {
 		SessioneManager ssn = new SessioneManager();
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
+		String numSessione = request.getParameter("numSessione");
+		Integer nSessione = Integer.parseInt(numSessione);
 
 		try {
 
@@ -67,7 +71,7 @@ public class GestioneSessioneServlet extends HttpServlet {
 				// questo if permette di predere la lista delle sessioni legate alla storia	
 			}else if(action.equalsIgnoreCase("listaSessione")) {
 				
-				Storia storia = (Storia)session.getAttribute("storiaDelPg");			
+				Storia storia = (Storia)session.getAttribute("storia");			
 				User utente = (User)session.getAttribute("user");
 				Collection<SessioneDiGioco> listaSessioni = ssn.recuperoTutteLeSessioni(storia, utente);
 				session.setAttribute("listaSessioni", listaSessioni);
@@ -75,25 +79,16 @@ public class GestioneSessioneServlet extends HttpServlet {
 				
 				//questo if permette di modificare una sessione	
 			}else if(action.equalsIgnoreCase("modificaSessione")) {
-
-				String idSessione = request.getParameter("idSessione");
+				
 				String contenuto = request.getParameter("contenutoSessione");
-				String username = (String)session.getAttribute("Username");
-				String idStoria = (String)session.getAttribute("idStor");
-
-				SessioneDiGioco sdg = new SessioneDiGioco(); 				
-				Integer idStor = Integer.parseInt(idStoria);
-				Integer idSess = Integer.parseInt(idSessione);
-
-				sdg.setContenutoSessione(contenuto);
-				sdg.setIdNumeroSessione(idSess);
-
+				SessioneManager sdG = new SessioneManager();		
+				sdG.aggiornareSessioni(sesDiGioco, contenuto);
+				
+				//questo if permette di fare un retrieve della sessione dal database
 			}else if(action.equalsIgnoreCase("prendiSessione")){
 				
 				Storia storia = (Storia)session.getAttribute("storia");			
 				User utente = (User)session.getAttribute("user");
-				String numSessione = request.getParameter("numSessione");
-				Integer nSessione = Integer.parseInt(numSessione);
 				sesDiGioco = ssn.recuperoSessioneStoria(storia, utente, nSessione);
 				session.setAttribute("sessione", sesDiGioco);
 				
@@ -101,13 +96,17 @@ public class GestioneSessioneServlet extends HttpServlet {
 				
 				Storia storia = (Storia)session.getAttribute("storia");			
 				User utente = (User)session.getAttribute("user");
-				String numSessione = request.getParameter("numSessione");
-				Integer nSessione = Integer.parseInt(numSessione);
+				
+				
 				sesDiGioco = ssn.recuperoSessioneStoria(storia, utente, nSessione);
 				session.setAttribute("sessione", sesDiGioco);
 				if(user.getRuolo().equalsIgnoreCase("utenteGiocatore")) {
-					response.sendRedirect("jsp_page/vistaModeratore.jsp");
+					PersonaggioManager pgM = new PersonaggioManager();
+					Personaggio PG = pgM.getSimplePGByStory(utente, storia.getId());
+					session.setAttribute("Pg", PG);
+					response.sendRedirect("jsp_page/vistaGiocatore.jsp");
 				}else if(user.getRuolo().equalsIgnoreCase("utenteModeratore")) {
+										
 					response.sendRedirect("jsp_page/vistaModeratore.jsp");
 				}
 			}
