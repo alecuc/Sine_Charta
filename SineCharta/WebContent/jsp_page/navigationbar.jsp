@@ -7,7 +7,7 @@
 		</button>
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="homeUser.jsp">Profilo</a>
+				<li class="nav-item"><a class="nav-link" href="homeUser.jsp">Home</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="#">Bacheca</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Inviti</a></li>

@@ -301,7 +301,7 @@ public class PersonaggioManager {
 	/**********************************************************************************
 	 * Metodo per la creazione del personaggio 										  *	
 	 * @param pg= un oggetto personaggio											  *
-	 * @param idPG= id del giocatore a cui è associato								  *
+	 * @param idPG= id del giocatore a cui ï¿½ associato								  *
 	 **********************************************************************************/
 	
 	public void creaPersonaggio(Personaggio pg, int idStoria) throws SQLException{
@@ -381,7 +381,7 @@ public class PersonaggioManager {
 	
 	/********************************************************************************************
 	 * Metodo per aggiornare le ferite del personaggio											*
-	 * @param idPG= id del personaggio a cui è associata la ferita								*
+	 * @param idPG= id del personaggio a cui ï¿½ associata la ferita								*
 	 * @param areaFerita= parte del corpo a cui aggiungere la ferita							*
 	 * @param danno= valore della ferita														*
 	 ********************************************************************************************/
