@@ -52,9 +52,6 @@ function validate(){
 
 $(document).ready(function(){	
 
-	$.post('../GestioneMazzoServlet',{action: "mischiaTarocco"});
-
-	
 	var countDom=0;
 	var countCuori=0;
 	var countQuadri=0;
@@ -108,7 +105,7 @@ $(document).ready(function(){
 			$('#dealQuadri').prop('disabled',false);
 			$('#dealFiori').prop('disabled',false);
 			$('#dealPicche').prop('disabled',false);
-			$('#confermaPunti').prop('disabled',false);
+			$('#confermaPunti').prop('disabled',false);ù
 		}
 	});
 
@@ -127,7 +124,7 @@ $(document).ready(function(){
 			$('#setCar').prop('disabled',false);
 			$('#confCar').prop('disabled',false);
 
-			puntiAbi= Math.floor((parseInt(puntiCuori,10)+parseInt(puntiQuadri,10)+parseInt(puntiFiori,10)+parseInt(puntiPicche,10))/4);
+			puntiAbi= Math.floor((parseInt(puntiCuori,10)+parseInt(puntiQuadri,10)+parseInt(puntiFiori,10)+parseInt(puntiPicche,10))/3);
 			puntiCuori -=4;
 			puntiQuadri -=4;
 			puntiFiori -=4;			
@@ -149,17 +146,6 @@ $(document).ready(function(){
 			$('#setCar').prop('disabled',true);
 			$('#setAbi').prop('disabled',false);
 			$('#completa').prop('disabled',false);
-			$('#carUso').text($('#mir').val());
-			$('#carPerc').text($('#per').val());
-			$('#carFurt').text($('#des').val());
-			$('#carUtil').text($('#int').val());
-			$('#carGuida').text($('#des').val());
-			$('#totUso').text(parseInt($('#mir').val(),10)+1);
-			$('#totPerc').text(parseInt($('#per').val(),10)+1);
-			$('#totFurt').text(parseInt($('#des').val(),10)+1);
-			$('#totUtil').text(parseInt($('#int').val(),10)+1);
-			$('#totGuida').text(parseInt($('#des').val(),10)+1);
-			puntiAbi-=5;
 		}
 
 	});
@@ -169,19 +155,7 @@ $(document).ready(function(){
 		if (puntiAbi!=0){ 
 			alert("Inserisci i punti abilità rimasti! Il tuo pg potrebbe essere più bravo a fare queste cose!")
 			return false;
-		} else 
-
-			var data= $('#nomePG').val() + ',' + $('#cognomePG').val() + ',' + $('#etaPG').val() + ',' + $('#nazionalitaPG').val() + ',' + $('#domName').text()+',';
-			
-			console.log(data);
-		
-			data = data+$('#int').val()+','+$('#asp').val()+','+$('#coo').val()+','+$('#aff').val()+','+$('#mem').val()+','+$('#com').val()+','+$('#des').val()+','+$('#ddm').val()+','+$('#per').val()+','+$('#cre').val()+','+$('#for').val()+','+$('#eqm').val()+','+$('#vol').val()+','+$('#soc').val()+','+$('#mir').val()+','+$('#kar').val()+',';
-			
-			console.log(data);
-			data= data+$('#abiUso').val()+','+$('#totUso').text()+','+$('#abiPerc').val()+','+$('#totPerc').text()+','+$('#abiFurt').val()+','+$('#totFurt').text()+','+$('#abiUtil').val()+','+$('#totUtil').text()+','+$('#abiGuida').val()+','+$('#totGuida').text();
-			$.post('../GestioneStoriaServlet',data);
-			
-			
+		} else return true;
 	});
 
 
@@ -192,7 +166,7 @@ $(document).ready(function(){
 	$('#dealDom').click(function(){
 		countDom++;
 
-		$.post('../GestioneMazzoServlet',{action: "estraiTarocco"}, function(responseText) {
+		$.get('../EstraiMaggiore', function(responseText) {
 			JTDom= responseText;
 			TDom=JSON.parse(JTDom);
 
@@ -218,7 +192,7 @@ $(document).ready(function(){
 	$('#dealCuori').click(function(){
 		countCuori++;
 
-		$.post('../GestioneMazzoServlet',{action: "estraiTarocco"}, function(responseText) {
+		$.get('../EstraiMaggiore', function(responseText) {
 			JTCuori= responseText;
 			TCuori=JSON.parse(JTCuori);
 			var rim= 3-countCuori;
@@ -242,7 +216,7 @@ $(document).ready(function(){
 	$('#dealQuadri').click(function(){
 		countQuadri++;
 
-		$.post('../GestioneMazzoServlet',{action: "estraiTarocco"}, function(responseText) {
+		$.get('../EstraiMaggiore', function(responseText) {
 			JTQuadri= responseText;
 			TQuadri=JSON.parse(JTQuadri);
 			var rim= 3-countQuadri;
@@ -265,7 +239,7 @@ $(document).ready(function(){
 	$('#dealFiori').click(function(){
 		countFiori++;
 
-		$.post('../GestioneMazzoServlet',{action: "estraiTarocco"}, function(responseText) {
+		$.get('../EstraiMaggiore', function(responseText) {
 			JTFiori= responseText;
 			TFiori=JSON.parse(JTFiori);
 			var rim= 3-countFiori;
@@ -288,7 +262,7 @@ $(document).ready(function(){
 	$('#dealPicche').click(function(){
 		countPicche++;
 
-		$.post('../GestioneMazzoServlet',{action: "estraiTarocco"}, function(responseText) {
+		$.get('../EstraiMaggiore', function(responseText) {
 			JTPicche= responseText;
 			TPicche=JSON.parse(JTPicche);
 			var rim= 3-countPicche;
@@ -434,20 +408,15 @@ $(document).ready(function(){
 
 	$('.minusAbi').click(function(){
 
-		var input= $(this).next();
-		var currValue= parseInt(input.val(), 10);
-		var totLabel= $(this).parent().next().children();
-		var currTot= parseInt(totLabel.text(),10);
-		
+		var tag= $(this).next();
+		var currValue= parseInt(tag.val(), 10);
+
 		if(currValue==1);
 		else{
 			currValue -=1;
-			currTot -=1;
-			input.val(currValue--);
-			totLabel.text(currTot);
+			tag.val(currValue--);
 			puntiAbi +=1;
 			$('#abiRimasti').text(puntiAbi);
-			
 		}
 	});
 
@@ -455,20 +424,15 @@ $(document).ready(function(){
 
 	$('.plusAbi').click(function(){
 
-		var input= $(this).prev();
-		var currValue= parseInt(input.val(), 10);
-		var totLabel= $(this).parent().next().children();
-		var currTot= parseInt(totLabel.text(),10);
-		
-		if(currValue==4||puntiAbi==0);
+		var tag= $(this).prev();
+		var currValue= parseInt(tag.val(), 10);
+
+		if(puntiAbi==0||currValue==10);
 		else{
 			currValue +=1;
-			currTot +=1;
-			input.val(currValue++);
-			totLabel.text(currTot);
+			tag.val(currValue++);
 			puntiAbi -=1;
 			$('#abiRimasti').text(puntiAbi);
-			
 		}
 	});
 
