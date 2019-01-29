@@ -149,11 +149,4 @@ $(document).ready(function(){
 	});
 	
 	
-	
-	
-	
-	
-	
-	
-	
 });
