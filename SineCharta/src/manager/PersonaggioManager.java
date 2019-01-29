@@ -20,26 +20,26 @@ public class PersonaggioManager {
 	private static final String TABLE_NAME_PG = "Personaggio";
 	
 	
-	/*******************************************************************************************
-	 * Metodo utilizzato per prendere un personaggio in base alla storia a cui partecipa.	   *
-	 * @param idPG= valore id del personaggio 												   *
-	 * @return il personaggio con tutte le informazioni										   *
-	 *******************************************************************************************/
-	public Personaggio getPersonaggioByUtente(User user) throws SQLException{
-		
-		Connection connection = null;
+	
+	
+	/************************************************************************************
+	 * Metodo che torna un singolo personaggio associato alla storia 					*
+	 * @param utente= utente a cui appartiene il persoanggio							*
+	 * @param idStory= identificativo della storia										*
+	 * @return un personaggio dell'utente in base alla storia							*
+	 ************************************************************************************/
+	public Personaggio getSimplePGByStory(User utente, int idStory)throws SQLException {
+		Connection con = null;
 		PreparedStatement ps = null;
 		Personaggio personaggio = new Personaggio();
-		String selectSQL = "SELECT * FROM "+PersonaggioManager.TABLE_NAME_PG+" WHERE USERNAME = ?";
-		
+		String selectPg = "SELECT * ALL FROM " + TABLE_NAME_PG + " WHERE USERNAME = ? AND IDSTORY = ?";
 		try {
-			connection = DriverManagerConnectionPool.getConnection();
-			ps = connection.prepareStatement(selectSQL);
-			ps.setString(1, user.getUsername());
-			System.out.println("getPersonaggio: " + ps.toString());
-			
+			con = DriverManagerConnectionPool.getConnection();
+			ps = con.prepareStatement(selectPg);
+			ps.setString(1, utente.getUsername());
+			ps.setInt(2, idStory);
+			System.out.println("getSimplePGByStory: "+ ps.toString());
 			ResultSet rs = ps.executeQuery();
-			
 			while(rs.next()) {
 				personaggio.setIdStoria(rs.getInt("IdStory"));
 				personaggio.setUsername(rs.getString("Username"));
@@ -69,21 +69,17 @@ public class PersonaggioManager {
 				personaggio.setFeritaBraccia(rs.getString("FeriteBraccia"));
 				personaggio.setFeritaTorso(rs.getString("FeriteTorso"));
 				personaggio.setFeritaGambe(rs.getString("FeriteGambe"));
-				personaggio.setUser(user);
+				personaggio.setUser(utente);
 				personaggio.setStoria(setStoriaPersonaggio(personaggio));
 				personaggio.aggiungiListaOggetti(aggiungiListaOggettiPG(personaggio));
 				personaggio.aggiungiListaAbilita(aggiungiListaAbilitaPG(personaggio));
-				
-				} 
-			
+			}
 		}finally {
-				try {
-					if(ps != null)
-						ps.close();
-				}finally {
-					DriverManagerConnectionPool.releaseConnection(connection);
-				}
-	
+			try {
+				if(ps != null) ps.close();
+			}finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
 		}
 		return personaggio;
 	}

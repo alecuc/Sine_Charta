@@ -55,7 +55,7 @@ public class StoryManager {
 				storia.setAmbientazione(rs.getString("Ambientazione"));
 				storia.setUsername(table.getUsername());
 				storia.setUtenteModeratore(user);
-				storia.addPersonaggio(getPersonaggioForStory(user));
+				storia.addPersonaggio(getPersonaggioForStory(user,storia.getId()));
 				storia.aggiungiListaSessioni(aggiungiSessioniAllaStoria(storia, user));
 				
 				storieutente.add(storia);
@@ -77,9 +77,9 @@ public class StoryManager {
 	 * @param utente= utente a cui è associato il personaggio									*
 	 * @return un personaggio																	*
 	 ********************************************************************************************/
-	private Personaggio getPersonaggioForStory(User utente)throws SQLException {
+	private Personaggio getPersonaggioForStory(User utente, int idStory)throws SQLException {
 		PersonaggioManager manager = new PersonaggioManager();
-		Personaggio pg = manager.getPersonaggioByUtente(utente);
+		Personaggio pg = manager.getSimplePGByStory(utente, idStory);
 		return pg;
 	}
 	
