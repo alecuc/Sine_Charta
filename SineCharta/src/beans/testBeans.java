@@ -48,14 +48,13 @@ public class testBeans {
 		*/
 		//TEST COLLECTION STORIA da UTENTE
 		
-		
+		/*
 		UsersManager userManager = new UsersManager();
 		User utenteListaStorie = userManager.doRetrieveByKey("RaffoV");
 
 		System.out.println(utenteListaStorie.toString());
-			
-	
-	
+			*/
+		
 	}
 	
 

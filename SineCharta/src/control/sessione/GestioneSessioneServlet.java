@@ -41,6 +41,7 @@ public class GestioneSessioneServlet extends HttpServlet {
 		SessioneDiGioco sesDiGioco = new SessioneDiGioco();
 		SessioneManager ssn = new SessioneManager();
 		HttpSession session = request.getSession();
+		User user = (User)session.getAttribute("user");
 
 		try {
 
@@ -89,13 +90,28 @@ public class GestioneSessioneServlet extends HttpServlet {
 
 			}else if(action.equalsIgnoreCase("prendiSessione")){
 				
-				Storia storia = (Storia)session.getAttribute("storiaDelPg");			
+				Storia storia = (Storia)session.getAttribute("storia");			
 				User utente = (User)session.getAttribute("user");
 				String numSessione = request.getParameter("numSessione");
 				Integer nSessione = Integer.parseInt(numSessione);
 				sesDiGioco = ssn.recuperoSessioneStoria(storia, utente, nSessione);
 				session.setAttribute("sessione", sesDiGioco);
+				
+			}else if(action.equalsIgnoreCase("gioca")) {
+				
+				Storia storia = (Storia)session.getAttribute("storia");			
+				User utente = (User)session.getAttribute("user");
+				String numSessione = request.getParameter("numSessione");
+				Integer nSessione = Integer.parseInt(numSessione);
+				sesDiGioco = ssn.recuperoSessioneStoria(storia, utente, nSessione);
+				session.setAttribute("sessione", sesDiGioco);
+				if(user.getRuolo().equalsIgnoreCase("utenteGiocatore")) {
+					response.sendRedirect("jsp_page/vistaModeratore.jsp");
+				}else if(user.getRuolo().equalsIgnoreCase("utenteModeratore")) {
+					response.sendRedirect("jsp_page/vistaModeratore.jsp");
+				}
 			}
+			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}

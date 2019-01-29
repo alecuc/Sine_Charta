@@ -32,7 +32,7 @@ public class PersonaggioManager {
 		Connection con = null;
 		PreparedStatement ps = null;
 		Personaggio personaggio = new Personaggio();
-		String selectPg = "SELECT * ALL FROM " + TABLE_NAME_PG + " WHERE USERNAME = ? AND IDSTORY = ?";
+		String selectPg = "SELECT * FROM " + TABLE_NAME_PG + " WHERE USERNAME = ? AND IDSTORY = ?";
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(selectPg);
