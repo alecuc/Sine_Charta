@@ -73,10 +73,14 @@ public class LoginServlet extends HttpServlet {
 			if (passEncr.equals(password)) {
 				session.setAttribute("user", utenteLogin);
 				StoryManager str = new StoryManager(); 
-				Collection<Storia>  listaStoria = str.getStoria(utenteLogin);
+				//Collection<Storia>  listaStoria = str.getStoria(utenteLogin,0);
 				Mazzo mazzo = new Mazzo();
 				session.setAttribute("Mazzo", mazzo);
-				session.setAttribute("listaStorie", listaStoria);
+				//session.setAttribute("storieGiocatore", listaStoria);
+				if(utenteLogin.getRuolo().equalsIgnoreCase("utenteModeratore")) {
+					//Collection<Storia> listaStorieMod = str.getStoria(utenteLogin,1);
+					//session.setAttribute(storieModeratore);
+				}
 				response.sendRedirect("jsp_page/homeUser.jsp");
 			} else {
 
