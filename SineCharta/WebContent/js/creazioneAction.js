@@ -192,7 +192,7 @@ $(document).ready(function(){
 	$('#dealDom').click(function(){
 		countDom++;
 
-		$.post('../GestioneMazzoServlet',{action: "estraiTarocco"}, function(responseText) {
+		$.post('../GestioneMazzoServlet', {action: "estraiTarocco"} , function(responseText) {
 			JTDom= responseText;
 			TDom=JSON.parse(JTDom);
 

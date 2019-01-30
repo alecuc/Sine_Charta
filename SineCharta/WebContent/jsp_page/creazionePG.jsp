@@ -18,6 +18,9 @@
 		;//*/
 	%>
 
+
+	<% System.out.println(session.getAttribute("Mazzo")); %>
+
 	<h1 class="card-title">Crea il tuo personaggio</h1>
 
 	<!-- TASTI ANNULLA E AIUTO -->

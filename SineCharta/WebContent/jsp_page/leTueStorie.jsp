@@ -36,7 +36,6 @@
 									out.print("<tr>");
 									out.print("<th scope=\"col\">Nome Storia</th>");
 									out.print("<th scope=\"col\"></th>");
-									out.print("<th scope=\"col\"></th>");
 									out.print("</tr>");
 									out.print("</thead>");
 									out.print("<tbody>");
@@ -44,13 +43,14 @@
 										for(SessioneDiGioco sdg: listaSessioni){
 											out.print("<tr>");
 											out.print("<form method=\"post\" action=\"../GiocaServlet\">");
-											out.print("<td class=\"td-prod\">" + st.getTitolo() + "</td>");
-											out.print("<td class=\"td-prod\">"+"QUI NOME PG" + "</td>");
-											out.print("<td><button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Gioca</button></td>");
+											out.print("<td class=\"td-prod\"><label>Sessione numero: " +sdg.getIdNumeroSessione() + "</label></td>");
 											out.print("</form>");
 											out.print("</tr>");
 										}
 								}
+								out.print("<form method=\"post\" action=\"../EditorSessioneServlet\">");
+								out.print("<td class=\"td-prod\"><button class=\"btn btn-dark\">Sessione numero: " +"Nuova sessione"+ "</button></td>");
+								out.print("</form>");
 								out.print("</tbody>");
 								out.print("</table>");
 								}
@@ -66,6 +66,9 @@
 
 
 			<div class="col-7 card"></div>
+			
+			
+			
 		</div>
 	</div>
 </body>
