@@ -74,7 +74,7 @@ public class StoryManager {
 		
 	/********************************************************************************************
 	 * Metodo per poter recuperare un persoanggio tramite un utente da PersonaggioManager		*
-	 * @param utente= utente a cui è associato il personaggio									*
+	 * @param utente= utente a cui ï¿½ associato il personaggio									*
 	 * @return un personaggio																	*
 	 ********************************************************************************************/
 	private Personaggio getPersonaggioForStory(User utente, int idStory)throws SQLException {
@@ -133,7 +133,7 @@ public class StoryManager {
 	/****************************************************************************
 	 * Metodo per recupere una lista di sessioni per la storia					*
 	 * @param storia= a cui appartengono le sessioni							*
-	 * @param utenteMod= utente a cui è associata la storia						*
+	 * @param utenteMod= utente a cui ï¿½ associata la storia						*
 	 * @return una lista di sessioni											*
 	 ****************************************************************************/
 	private Set<SessioneDiGioco> aggiungiSessioniAllaStoria(Storia storia, User utenteMod)throws SQLException{
@@ -147,7 +147,7 @@ public class StoryManager {
 	
 	/****************************************************************************************
 	 * Metodo per recuperare una storia in base al personaggio a cui vi partecipa			*
-	 * @param pg= personaggio a cui è associata la storia 									*
+	 * @param pg= personaggio a cui ï¿½ associata la storia 									*
 	 * @return una storia del personaggio													*
 	 ****************************************************************************************/
 	public Storia getStoriaDelPG(Personaggio pg)throws SQLException {

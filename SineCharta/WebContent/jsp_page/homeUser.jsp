@@ -71,7 +71,7 @@
 				
 						<%
 							User utente = (User) session.getAttribute("user");
-							Collection<Storia> stList = (Collection) session.getAttribute("listaStorie");
+							Collection<Storia> stList = (Collection) session.getAttribute("storieGiocatore");
 
 							if (!stList.isEmpty()) {
 								out.print("<div class=\"table-responsive col-8\">");
