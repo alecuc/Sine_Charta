@@ -16,6 +16,7 @@ public class User implements Serializable{
 	private Set<Storia> storieUtente;
 	
 
+	
 	public User() {
 		personaggiUtente = new HashSet<Personaggio>();
 		storieUtente = new HashSet<Storia>();
