@@ -153,13 +153,5 @@ $(document).ready(function(){
 
 		pokerRimaste=52;
 	});
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 });
