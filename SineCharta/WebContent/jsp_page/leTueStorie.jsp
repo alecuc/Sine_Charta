@@ -18,17 +18,16 @@
 
 		<div class="row">
 
-			<div class="col-4 card">
+			<div class="col-5 card">
 
 				<%
-						/*	User utente = (User) session.getAttribute("user");
-							Collection<Storia> stList = (Collection) session.getAttribute("listaStorie");
+							User utente = (User) session.getAttribute("user");
+							Collection<Storia> stList = (Collection<Storia>) session.getAttribute("storieModeratore");
 
 							if (!stList.isEmpty()) {
 								for (Storia st : stList) {
 									
-									ArrayList<SessioneDiGioco> ls= st.
-											
+									Set<SessioneDiGioco> listaSessioni= st.getListaSessioni();
 											
 									out.print("<div class=\"table-responsive col-8\">");
 
@@ -42,12 +41,11 @@
 									out.print("</thead>");
 									out.print("<tbody>");
 									
-										for(SessioneDiGioco sdg: ){
+										for(SessioneDiGioco sdg: listaSessioni){
 											out.print("<tr>");
 											out.print("<form method=\"post\" action=\"../GiocaServlet\">");
 											out.print("<td class=\"td-prod\">" + st.getTitolo() + "</td>");
 											out.print("<td class=\"td-prod\">"+"QUI NOME PG" + "</td>");
-		
 											out.print("<td><button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Gioca</button></td>");
 											out.print("</form>");
 											out.print("</tr>");
@@ -60,14 +58,14 @@
 								out.print("<h3>Non hai scritto nessuna storia. Clicca </h3>");
 								out.print("<a href=\"editorStoria\">qui</a>");
 								out.print("<h3> per iniziare.</h3>");
-							} //*/
+							}
 						%>
 
 			</div>
 
 
 
-			<div class="col-8 card"></div>
+			<div class="col-7 card"></div>
 		</div>
 	</div>
 </body>
