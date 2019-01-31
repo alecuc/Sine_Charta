@@ -1,6 +1,5 @@
 package manager;
 
-import java.net.UnknownServiceException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -8,6 +8,7 @@ import beans.Personaggio;
 import beans.Storia;
 import beans.User;
 import exception.UserNotFoundException;
+import exception.UserNullException;
 
 import java.sql.*;
 import interfaces.UserModelI;
@@ -39,7 +40,7 @@ public class UsersManager implements UserModelI<User>{
 			preparedStatement.setString(1, user);
 			
 			ResultSet rs = preparedStatement.executeQuery();
-			if(!rs.next()) throw new UserNotFoundException("utente non presente"); 
+		//	if(!rs.next()) throw new UserNotFoundException("utente non presente"); 
 			
 				System.out.println("doRetrieveByKey: " + preparedStatement.toString());
 				bean = new User();
@@ -105,7 +106,7 @@ public class UsersManager implements UserModelI<User>{
 	
 	
 	/* Metodo che ritorna una lista di tutti gli utenti
-	 * (non-Javadoc)
+	 * (non-Javadoc) 
 	 * @see interfaces.UserModelI#doRetrieveAll(java.lang.String)
 	 */
 	@Override
@@ -154,8 +155,8 @@ public class UsersManager implements UserModelI<User>{
 	 * @see interfaces.UserModelI#doSave(java.lang.Object)
 	 */
 	@Override
-	public void doSave(User user) throws SQLException {
-
+	public void doSave(User user) throws SQLException, UserNullException{
+		if(user==null) throw new UserNullException("Utente NULL");
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
@@ -171,7 +172,7 @@ public class UsersManager implements UserModelI<User>{
 			preparedStatement.setString(3, user.getEmail());
 			preparedStatement.setString(4, user.getName());
 			preparedStatement.setString(5, user.getSurname());
-			
+			System.out.println("doSave: " + preparedStatement.toString());
 			preparedStatement.executeUpdate();
 
 			connection.commit();

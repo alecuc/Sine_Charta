@@ -3,6 +3,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 
 import exception.UserNotFoundException;
+import exception.UserNullException;
 
 public interface UserModelI<T> {
 	
@@ -10,7 +11,7 @@ public interface UserModelI<T> {
 	
 	public Collection<T> doRetrieveAll(String order) throws SQLException;
 	
-	public void doSave(T user) throws SQLException;
+	public void doSave(T user) throws SQLException, UserNullException;
 	
 
 

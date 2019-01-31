@@ -62,7 +62,7 @@ public class testBeans {
 			System.out.println(utente.toString());
 		}
 		*/
-		User ute = mana.doRetrieveByKey("prova");
+		User ute = mana.doRetrieveByKey("Raziel");
 		System.out.println(ute.toString());
 		
 	}
