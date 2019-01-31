@@ -91,6 +91,34 @@ public class KeywordManager {
 		return listaKeyword;
 	}
 	
+	/********************************************************************************
+	 * Metodo per eliminare una keyword 											*
+	 * @param idKeyWord= identificativo della keyword da eliminare					*
+	 * @param numero= numero della sessione a cui appartiene la keyword				*
+	 * @return valore conferma eliminazione											*
+	 ********************************************************************************/
+	public boolean eliminaKeyword(int idKeyWord, int numero)throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String eliminaKeyword = "DELETE FROM " + TABLE_NAME + "WHERE IDKEYWORD = ? AND NUMERO = ?";
+		try {
+			con = DriverManagerConnectionPool.getConnection();
+			ps = con.prepareStatement(eliminaKeyword);
+			ps.setInt(1, idKeyWord);
+			ps.setInt(2, numero);
+			result = ps.executeUpdate();
+			System.out.println("eliminaKeyword: " + ps.toString());
+			con.commit();
+		}finally {
+			try {
+				if(ps!=null) ps.close();
+			}finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
+		}
+		return (result!=0);
+	}
 	
 	
 }

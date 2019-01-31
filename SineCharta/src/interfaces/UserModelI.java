@@ -2,9 +2,11 @@ package interfaces;
 import java.sql.SQLException;
 import java.util.Collection;
 
+import exception.UserNotFoundException;
+
 public interface UserModelI<T> {
 	
-	public T doRetrieveByKey(String nick) throws SQLException;
+	public T doRetrieveByKey(String nick) throws SQLException, UserNotFoundException;
 	
 	public Collection<T> doRetrieveAll(String order) throws SQLException;
 	

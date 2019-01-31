@@ -36,4 +36,8 @@ public class StoryManagerTest {
 		fail("Not yet implemented");
 	}
 
+	@Test
+	public void testEliminaRiferimentoHaTable() {
+		
+	}
 }

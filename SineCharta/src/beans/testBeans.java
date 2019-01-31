@@ -7,8 +7,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import org.apache.catalina.mbeans.UserMBean;
-
+import exception.UserNotFoundException;
 import manager.PersonaggioManager;
 import manager.SessioneManager;
 import manager.StoryManager;
@@ -16,7 +15,7 @@ import manager.UsersManager;
 
 public class testBeans {
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException, UserNotFoundException {
 		
 		/*
 		UsersManager manager = new UsersManager();
@@ -54,6 +53,17 @@ public class testBeans {
 
 		System.out.println(utenteListaStorie.toString());
 			*/
+	
+		UsersManager mana = new UsersManager();
+	/*	Collection<User> lista = mana.doRetrieveAll(null);
+		Iterator<User> it = lista.iterator();
+		while(it.hasNext()) {
+			User utente = (User) it.next();
+			System.out.println(utente.toString());
+		}
+		*/
+		User ute = mana.doRetrieveByKey("prova");
+		System.out.println(ute.toString());
 		
 	}
 	
