@@ -173,12 +173,10 @@ $(document).ready(function(){
 
 			var data= $('#nomePG').val() + ',' + $('#cognomePG').val() + ',' + $('#etaPG').val() + ',' + $('#nazionalitaPG').val() + ',' + $('#domName').text()+',';
 
-			console.log(data);
-
 			data = data+$('#int').val()+','+$('#asp').val()+','+$('#coo').val()+','+$('#aff').val()+','+$('#mem').val()+','+$('#com').val()+','+$('#des').val()+','+$('#ddm').val()+','+$('#per').val()+','+$('#cre').val()+','+$('#for').val()+','+$('#eqm').val()+','+$('#vol').val()+','+$('#soc').val()+','+$('#mir').val()+','+$('#kar').val()+',';
 
-			console.log(data);
 			data= data+$('#abiUso').val()+','+$('#totUso').text()+','+$('#abiPerc').val()+','+$('#totPerc').text()+','+$('#abiFurt').val()+','+$('#totFurt').text()+','+$('#abiUtil').val()+','+$('#totUtil').text()+','+$('#abiGuida').val()+','+$('#totGuida').text();
+			console.log(data);
 			$.post('../GestioneStoriaServlet',
 					{
 					dati: data,
