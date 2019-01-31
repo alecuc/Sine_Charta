@@ -28,7 +28,7 @@ public class StoryManager {
 	 * @return la storia a cui si riferisce idStoria								*
 	 ********************************************************************************/
 	public Collection<Storia> getStoria(User user) throws SQLException{
-		
+		//da cambiare con il flag
 		Connection con = null;
 		PreparedStatement ps = null;
 		Collection<Storia> storieutente = new LinkedList<Storia>();
