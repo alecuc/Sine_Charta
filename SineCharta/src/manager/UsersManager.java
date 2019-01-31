@@ -7,25 +7,30 @@ import java.util.Set;
 import beans.Personaggio;
 import beans.Storia;
 import beans.User;
+import exception.UserNotFoundException;
 
 import java.sql.*;
 import interfaces.UserModelI;
 
 public class UsersManager implements UserModelI<User>{
-
+	
+	/**
+	 * Riferimento alla tabella Utente del DataBase	
+	 */
 	private static final String TABLE_NAME = "utenteRegistrato";
 
-	/* Metodo per caricare un utente
-	 * (non-Javadoc)
-	 * @see interfaces.UserModelI#doRetrieveByKey(java.lang.String)
-	 */
+	/* **********************************************************************
+	 * Metodo per caricare un utente										*
+	 * (non-Javadoc)														*
+	 * @see interfaces.UserModelI#doRetrieveByKey(java.lang.String)			*
+	 ************************************************************************/
 	@Override
-	public User doRetrieveByKey(String user) throws SQLException {
+	public User doRetrieveByKey(String user) throws SQLException, UserNotFoundException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
-		User bean = new User();
+		User bean;
 		String selectSql = "SELECT * FROM " + UsersManager.TABLE_NAME + " WHERE Username = ?;";
 		
 		try {
@@ -34,20 +39,22 @@ public class UsersManager implements UserModelI<User>{
 			preparedStatement.setString(1, user);
 			
 			ResultSet rs = preparedStatement.executeQuery();
-			System.out.println("doRetrieveByKey: " + preparedStatement.toString());
+			if(!rs.next()) throw new UserNotFoundException("utente non presente"); 
+			
+				System.out.println("doRetrieveByKey: " + preparedStatement.toString());
+				bean = new User();
 
-			while(rs.next()) {
-				bean.setUsername(rs.getString("Username"));
-				bean.setPassword(rs.getString("Password"));
-				bean.setEmail(rs.getString("EMail"));
-				bean.setName(rs.getString("Nome"));
-				bean.setSurname(rs.getString("Cognome"));
-				bean.setRuolo(rs.getString("Ruolo"));
-				bean.aggiungiListaStorie(aggiungiStorieUser(bean));
-				bean.aggiungiListaPG(aggiungiListaPGUser(bean));
-					
-				
-			}			
+				while(rs.next()) {
+					bean.setUsername(rs.getString("Username"));
+					bean.setPassword(rs.getString("Password"));
+					bean.setEmail(rs.getString("EMail"));
+					bean.setName(rs.getString("Nome"));
+					bean.setSurname(rs.getString("Cognome"));
+					bean.setRuolo(rs.getString("Ruolo"));
+					bean.aggiungiListaStorie(aggiungiStorieUser(bean));
+					bean.aggiungiListaPG(aggiungiListaPGUser(bean));
+				}			
+			
 		}
 		finally {
 			try {
@@ -88,7 +95,7 @@ public class UsersManager implements UserModelI<User>{
 	private Set<Storia> aggiungiStorieUser(User user) throws SQLException{
 		
 		StoryManager storyM = new StoryManager();
-		Collection<Storia> listaStorie = storyM.getStoria(user);
+		Collection<Storia> listaStorie = storyM.getStoria(user);//Da aggiustare!
 		if(listaStorie != null) {
 			Set<Storia> storie = new HashSet<Storia>(listaStorie);
 			return storie;
@@ -105,7 +112,7 @@ public class UsersManager implements UserModelI<User>{
 	public Collection<User> doRetrieveAll(String order) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		Collection<User> utenti = new LinkedList<User>();
+		Collection<User> utenti;
 		String selectUtenti = "SELECT * FROM "+TABLE_NAME;
 		
 		if(order != null && !order.equals("")) {
@@ -113,6 +120,7 @@ public class UsersManager implements UserModelI<User>{
 		}
 		
 		try {
+			utenti = new LinkedList<User>();
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(selectUtenti);
 			System.out.println("doRetrieveAll: " + ps.toString());
@@ -123,11 +131,12 @@ public class UsersManager implements UserModelI<User>{
 				utente.setName(rs.getString("Nome"));
 				utente.setSurname(rs.getString("Cognome"));
 				utente.setEmail(rs.getString("Email"));
-				utente.setPassword(rs.getNString("Password"));
+				utente.setPassword(rs.getString("Password"));
 				utente.setRuolo(rs.getString("Ruolo"));
 				utente.aggiungiListaStorie(aggiungiStorieUser(utente));
 				utente.aggiungiListaPG(aggiungiListaPGUser(utente));
 				utenti.add(utente);
+				
 			}
 		}finally {
 			try {
@@ -176,6 +185,33 @@ public class UsersManager implements UserModelI<User>{
 		}
 	}
 
+	/************************************************************************
+	 * Metodo per eliminare un utente										*
+	 * @param username= identificativo dell'utente							*
+	 * @return conferma dell'eliminazione									*
+	 ************************************************************************/
+	public boolean eliminaUtente(String username)throws SQLException{
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String delete = "DELETE FROM "+ TABLE_NAME+ " WHERE USERNAME = ?";
+		
+		try {
+			con = DriverManagerConnectionPool.getConnection();
+			ps = con.prepareStatement(delete);
+			ps.setString(1, username);
+			System.out.println("eliminaUtente: " + ps.toString());
+			result = ps.executeUpdate();
+			con.commit();
+		}finally {
+			try {
+				if(ps!=null) ps.close();
+			}finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
+		}
+		return (result != 0);
+	}
 	
 	
 	

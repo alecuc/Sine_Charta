@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.User;
+import exception.UserNotFoundException;
 import manager.UsersManager;
 
 /**
@@ -49,6 +50,9 @@ public class UserExistServlet extends HttpServlet {
 		try {
 			user= um.doRetrieveByKey(username);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UserNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

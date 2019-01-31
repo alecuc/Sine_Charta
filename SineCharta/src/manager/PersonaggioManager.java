@@ -1,5 +1,6 @@
 package manager;
 
+import java.net.UnknownServiceException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ import beans.Oggetto;
 import beans.Personaggio;
 import beans.Storia;
 import beans.User;
+import exception.UserNotFoundException;
 
 public class PersonaggioManager {
 	
@@ -160,7 +162,7 @@ public class PersonaggioManager {
 	 * @param storia= la storia a cui fanno riferimento i personaggi				*
 	 * @return lista dei personaggi della storia									*
 	 ********************************************************************************/
-	public Collection<Personaggio> getAllPgByStory(Storia storia)throws SQLException{
+	public Collection<Personaggio> getAllPgByStory(Storia storia)throws SQLException, UserNotFoundException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		Collection<Personaggio> listaPG = new LinkedList<Personaggio>();
@@ -222,7 +224,7 @@ public class PersonaggioManager {
 	 * @param pg= personaggio da cui recuperare la storia					*
 	 * @return un utente associato alla storia								*
 	 ************************************************************************/
-	private User getUserByPG(Personaggio pg)throws SQLException {
+	private User getUserByPG(Personaggio pg)throws SQLException , UserNotFoundException{
 		String username = pg.getUsername();
 		UsersManager userMa = new UsersManager();
 		User utente = userMa.doRetrieveByKey(username);

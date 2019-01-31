@@ -14,6 +14,7 @@ import beans.Personaggio;
 import beans.SessioneDiGioco;
 import beans.Storia;
 import beans.User;
+import exception.UserNotFoundException;
 
 public class StoryManager {
 
@@ -27,7 +28,7 @@ public class StoryManager {
 	 * @return la storia a cui si riferisce idStoria								*
 	 ********************************************************************************/
 	public Collection<Storia> getStoria(User user) throws SQLException{
-		
+		//da cambiare con il flag
 		Connection con = null;
 		PreparedStatement ps = null;
 		Collection<Storia> storieutente = new LinkedList<Storia>();
@@ -71,7 +72,61 @@ public class StoryManager {
 		
 		return storieutente;
 	}
+	
+	
+	/***********************************************************************************************
+	 * Metodo per caricare tutte le storie associate ad un utente tramite flag						*
+	 * @param username= identificativo dell'utente													*
+	 * @param flag= identificativo di un utente Moderatore rispetto ad un utente giocatore			*
+	 * @return la storia a cui si riferisce idStoria												*
+	 ************************************************************************************************/
+	public Collection<Storia> getStoriaByFlag(User user, int flag) throws SQLException{
 		
+		Connection con = null;
+		PreparedStatement ps = null;
+		Collection<Storia> storieutente = new LinkedList<Storia>();
+		HaTable table = new HaTable();
+		String selectStoria = "SELECT * FROM "+TABLE_NAME_STORIA+" NATURAL JOIN "+TABLE_NAME_HA+" WHERE USERNAME = ? AND FLAG = ?";
+		
+		try {
+			con = DriverManagerConnectionPool.getConnection();
+			ps = con.prepareStatement(selectStoria);
+			
+			ps.setString(1, user.getUsername());
+			ps.setInt(2, flag);
+			System.out.println("getStoria : " + ps.toString());
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Storia storia = new Storia();
+				
+				table.setIdStoria(rs.getInt("IdStory"));
+				table.setUsername(rs.getString("Username"));
+				table.setFlagModeratore(rs.getBoolean("flag"));
+				
+				storia.setId(rs.getInt("IdStory"));
+				storia.setTitolo(rs.getString("Titolo"));
+				storia.setDescrizione(rs.getString("Descrizione"));
+				storia.setAmbientazione(rs.getString("Ambientazione"));
+				storia.setUsername(table.getUsername());
+				storia.setUtenteModeratore(user);
+				storia.addPersonaggio(getPersonaggioForStory(user,storia.getId()));
+				storia.aggiungiListaSessioni(aggiungiSessioniAllaStoria(storia, user));
+				
+				storieutente.add(storia);
+			}
+			
+		}finally {
+			try {
+				if(ps!=null) ps.close();
+			}finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
+		}
+		
+		return storieutente;
+	}
+	
 	/********************************************************************************************
 	 * Metodo per poter recuperare un persoanggio tramite un utente da PersonaggioManager		*
 	 * @param utente= utente a cui ï¿½ associato il personaggio									*
@@ -92,21 +147,19 @@ public class StoryManager {
 		Connection con = null;
 		PreparedStatement ps = null;
 		Storia storia = new Storia();
-		HaTable table = new HaTable();
 		String selectStoria = "SELECT * FROM "+TABLE_NAME_STORIA+" WHERE IDSTORY = ?";
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(selectStoria);
 			ps.setInt(1, idStory);
-			System.out.println("getStoria : " + ps.toString());
+			System.out.println("getSimpleStoria : " + ps.toString());
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				storia.setId(rs.getInt("IdStory"));
 				storia.setTitolo(rs.getString("Titolo"));
 				storia.setDescrizione(rs.getString("Descrizione"));
 				storia.setAmbientazione(rs.getString("Ambientazione"));
-				storia.setUsername(table.getUsername());
-				storia.aggiungiListaSessioni(aggiungiSessioniAllaStoria(storia, getUtente(storia.getUsername())));
+				storia.aggiungiListaSessioni(aggiungiSessioniById(idStory));
 			}
 			
 		}finally {
@@ -119,15 +172,32 @@ public class StoryManager {
 		return storia;
 	}
 	
+	
 	/********************************************************************
 	 * Metodo per recuperare un utente da UserManager					*
 	 * @param username= utente da recuperare							*
-	 * @return un utente												*
+	 * @return un utente												
+	 * @throws UserNotFoundException *
 	 ********************************************************************/
-	private User getUtente(String username)throws SQLException {
+	@SuppressWarnings("unused")
+	private User getUtente(String username)throws SQLException, UserNotFoundException {
 		UsersManager manager = new UsersManager();
 		User utente = manager.doRetrieveByKey(username);
 		return utente;
+	}
+	
+	/****************************************************************************
+	 * Metodo per recuperare la lista delle sessioni di una storia				*
+	 * @param idStory= identificativo della storia								*
+	 * @return lista di sessioni appartenenti alla storia						*
+	 ****************************************************************************/
+	private Set<SessioneDiGioco> aggiungiSessioniById(int idStory)throws SQLException{
+		SessioneManager manager = new SessioneManager();
+		Collection<SessioneDiGioco> se = manager.recuperoSessioni(idStory);
+		if(se!= null) {
+			Set<SessioneDiGioco> sessioni = new HashSet<SessioneDiGioco>(se);
+			return sessioni;
+		} else return null;
 	}
 	
 	/****************************************************************************
@@ -264,5 +334,35 @@ public class StoryManager {
 		return (result != 0);
 	}
 
+	
+	/********************************************************************************
+	 * Metodo per eliminare il riferimento ad HaTable della storia					*
+	 * @param username= identificativo dell'utente a cui è riferita la storia		*
+	 * @param idStory= identificativo della storia 									*
+	 * @return valore di conferma eliminazione										*
+	 ********************************************************************************/
+	public boolean eliminaRiferimentoHaTable(String username, int idStory)throws SQLException{
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String eliminaHaRow = "DELETE FROM " + TABLE_NAME_HA + " WHERE USERNAME = ? AND IDSTORY = ?";
+		try {
+			con = DriverManagerConnectionPool.getConnection();
+			ps = con.prepareStatement(eliminaHaRow);
+			ps.setString(1, username);
+			ps.setInt(2, idStory);
+			result  = ps.executeUpdate();
+			System.out.println("eliminaRiferimentoHaTable: "+ ps.toString());
+			con.commit();
+		}finally {
+			try {
+				if(ps!=null) ps.close();
+			}finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
+		}
+		return (result!=0);
+	}
+	
 	
 }

@@ -201,5 +201,104 @@ public class SessioneManager {
 		
 	}
 	
-
+	/****************************************************************************
+	 * Metodo per eliminare una singola sessione								*
+	 * @param numero= numero della sessione da eliminare						*
+	 * @param IdStory= identificativo della sessione per la storia				*
+	 * @param username= utente a cui si riferisce la sessione					*
+	 * @return valore di avvenuta eliminazione									*	
+	 ****************************************************************************/
+	public boolean eliminaSingolaSessione(int numero, int IdStory, String username)throws SQLException{
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String eliminaSessione = "DELETE FROM "+ TABLE_NAME + " WHERE NUMERO = ? AND USERNAME = ? AND IDSTORY = ?";
+		result = 0;
+		try {
+			con = DriverManagerConnectionPool.getConnection();
+			ps = con.prepareStatement(eliminaSessione);
+			ps.setInt(1, numero);
+			ps.setInt(2, IdStory);
+			ps.setString(3, username);
+			result = ps.executeUpdate();
+			System.out.println("eliminaSingolaSessione: " + ps.toString());
+			con.commit();
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+			}finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
+		}
+		return (result!=0);
+	}
+	
+	
+	/****************************************************************************
+	 * Metodo per eliminare tutte le sessioni									*
+	 * @param IdStory= identificativo delle sessioni per la storia				*
+	 * @param username= utente a cui si riferiscono le sessioni					*
+	 * @return valore di avvenuta eliminazione									*	
+	 ****************************************************************************/
+	public boolean eliminaSessioni(int IdStory, String username)throws SQLException{
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String eliminaSessione = "DELETE FROM "+ TABLE_NAME + " WHERE USERNAME = ? AND IDSTORY = ?";
+		result = 0;
+		try {
+			con = DriverManagerConnectionPool.getConnection();
+			ps = con.prepareStatement(eliminaSessione);
+			ps.setInt(1, IdStory);
+			ps.setString(2, username);
+			result = ps.executeUpdate();
+			System.out.println("eliminaSessioni: " + ps.toString());
+			con.commit();
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+			}finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
+		}
+		return (result!=0);
+	}
+	
+	
+	public Collection<SessioneDiGioco> recuperoSessioni(int idStory)throws SQLException{
+		Connection con = null;
+		PreparedStatement ps = null;
+		Collection<SessioneDiGioco> sessioni = new LinkedList<SessioneDiGioco>();
+		String sessioniStoria = "SELECT * FROM " + TABLE_NAME + " WHERE IDSTORY = ?";
+		
+		try {
+			con = DriverManagerConnectionPool.getConnection();
+			ps = con.prepareStatement(sessioniStoria);
+			ps.setInt(1, idStory);
+			System.out.println("recuperoTutteLeSessioniById: " + ps.toString());
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				SessioneDiGioco session = new SessioneDiGioco();
+				session.setIdNumeroSessione(rs.getInt("Numero"));
+				session.setContenutoSessione(rs.getString("Contenuto"));
+				session.setUsernameModeratore(rs.getString("Username"));
+				session.setIdStoria(rs.getInt("IdStory"));
+				session.addListaKeyword(aggiungiListaKeyword(session));
+				
+				sessioni.add(session);
+			}
+		}finally {
+			try {
+				if(ps != null) {
+					ps.close();
+				}
+			}finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
+		}
+		
+		return sessioni;
+	}
+	
 }
