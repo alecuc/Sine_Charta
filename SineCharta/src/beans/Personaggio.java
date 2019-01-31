@@ -68,7 +68,7 @@ public class Personaggio implements Serializable{
 	public void aggiungiListaOggetti(Set<Oggetto> oggetti) {
 		this.oggetti = oggetti;
 	}
-	
+		
 	public Set<Oggetto> getListaOggetti(){
 		return this.oggetti;
 	}
@@ -82,6 +82,10 @@ public class Personaggio implements Serializable{
 	public void aggiungiAbilita(Abilita abilita) {
 		ability.add(abilita);
 		abilita.setPersonaggio(this);
+	}
+	
+	public Set<Abilita> getListaAbilita(){
+		return this.ability;
 	}
 	
 	public void aggiungiListaAbilita(Set<Abilita> listaAbilita) {

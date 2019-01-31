@@ -9,7 +9,7 @@
 <%@page import="beans.User"%>
 <%@page import="beans.Personaggio"%>
 <%@page import="beans.Abilita"%>
-<%@page import="java.util.Collection"%>
+<%@page import="java.util.Set"%>
 <title>Riepilogo</title>
 
 </head>
@@ -126,10 +126,8 @@
 				<table class="table table-dark">
 					<tbody>
 						<tr>
-							<% /*
+							<% 
 							User utente= (User)session.getAttribute("user");
-
-							Collection <Abilita> abList;
 							
 								out.print("<div class=\"table-responsive\">");
 
@@ -143,6 +141,7 @@
 								out.print("</thead>");
 								out.print("<tbody>");
 
+								Set <Abilita> abList= pg.getListaAbilita();
 								for (Abilita ab : abList) {
 
 									out.print("<tr>");
@@ -151,7 +150,7 @@
 									out.print("<td>" + "</td>");
 									out.print("</tr>");
 
-								}// */
+								}
 							
 							%>
 						
