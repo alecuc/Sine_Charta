@@ -19,11 +19,11 @@
 
 	<%
 		Personaggio pg = new Personaggio();
-		if ((session.getAttribute("user") == null)||session.getAttribute("personaggio")==null) {
+		if ((session.getAttribute("user") == null)||session.getAttribute("nuovoPG")==null) {
 			response.sendRedirect("error/error.jsp");
 		}
 		else{
-			pg= (Personaggio)session.getAttribute("personaggio");	
+			pg= (Personaggio)session.getAttribute("nuovoPG");	
 		}
 	%>
 	<div class="container">

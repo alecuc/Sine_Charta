@@ -179,7 +179,11 @@ $(document).ready(function(){
 
 			console.log(data);
 			data= data+$('#abiUso').val()+','+$('#totUso').text()+','+$('#abiPerc').val()+','+$('#totPerc').text()+','+$('#abiFurt').val()+','+$('#totFurt').text()+','+$('#abiUtil').val()+','+$('#totUtil').text()+','+$('#abiGuida').val()+','+$('#totGuida').text();
-			$.post('../GestioneStoriaServlet',data);
+			$.post('../GestioneStoriaServlet',
+					{
+					dati: data,
+					action: "inserisciPg"
+					});
 
 
 	});

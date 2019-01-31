@@ -6,22 +6,20 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.Iterator;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.SendResult;
 
 import manager.StoryManager;
 import manager.UsersManager;
 import beans.Mazzo;
 import beans.Storia;
 import beans.User;
+import exception.UserNotFoundException;
 /**
  * Servlet implementation class LoginServlet
  */
@@ -73,30 +71,34 @@ public class LoginServlet extends HttpServlet {
 			if (passEncr.equals(password)) {
 				session.setAttribute("user", utenteLogin);
 				StoryManager str = new StoryManager(); 
-				//Collection<Storia>  listaStoria = str.getStoria(utenteLogin,0);
+				Collection<Storia>  listaStoria = str.getStoriaByFlag(utenteLogin, 0);
 				Mazzo mazzo = new Mazzo();
 				session.setAttribute("Mazzo", mazzo);
-				//session.setAttribute("storieGiocatore", listaStoria);
-				if(utenteLogin.getRuolo().equalsIgnoreCase("utenteModeratore")) {
-					//Collection<Storia> listaStorieMod = str.getStoria(utenteLogin,1);
-					//session.setAttribute(storieModeratore);
-				}
+				session.setAttribute("storieGiocatore", listaStoria);
+				System.out.println("if password");;
+					if(utenteLogin.getRuolo().equalsIgnoreCase("utenteModeratore")) {
+						Collection<Storia> listaStorieMod = str.getStoriaByFlag(utenteLogin, 1);
+						session.setAttribute("storieModeratore", listaStorieMod);
+					}
 				response.sendRedirect("jsp_page/homeUser.jsp");
 			} else {
-
 				System.out.println("OH NON SONO UGUALI LE DUE PASSWORD");
 				response.sendRedirect("jsp_page/error/loginErrorePassword.jsp");
 			}
 
-		} catch (IllegalStateException e) {
-			RequestDispatcher rd = request.getRequestDispatcher("jsp_page/error/loginErrorePassword.jsp");
-			rd.forward(request, response);
-		} catch (SQLException e) {
+		} /*
+			 * catch (IllegalStateException e) { RequestDispatcher rd =
+			 * request.getRequestDispatcher("jsp_page/error/loginErrorePassword.jsp");
+			 * rd.forward(request, response); }
+			 */ catch (SQLException e) {
 			e.printStackTrace();
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (NullPointerException e) {
 			response.sendRedirect("jsp_page/error/error.jsp");
+		} catch (UserNotFoundException e) {
+			
+			response.sendRedirect("jps_page/error/utenteNonTrovato.jsp");
 		}
 	}
 	/**
