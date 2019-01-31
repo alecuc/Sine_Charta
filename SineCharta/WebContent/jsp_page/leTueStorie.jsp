@@ -8,66 +8,28 @@
 </head>
 <body>
 	<jsp:include page="navigationbar.jsp"></jsp:include>
-	<%@page import="beans.User"%>
-	<%@page import="beans.Storia"%>
-	<%@page import="beans.SessioneDiGioco"%>
-	<%@page import="java.util.Set"%>
-	<%@page import="java.util.Collection"%>
+
+		<%@page import="beans.User"%>
+	<%User usr= (User)session.getAttribute("user");
+	if(usr.getRuolo().equalsIgnoreCase("utenteModeratore")){
+	%>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-5 card">
+				<jsp:include page="leTueStorieComponent.jsp"></jsp:include>
+			</div>
+		</div>
+	</div>
+
+<%} else{ %>
+
+
+<%} %>
 
 	<div class="container">
-
 		<div class="row">
-
-			<div class="col-5 card">
-
-				<%
-							User utente = (User) session.getAttribute("user");
-							Collection<Storia> stList = (Collection<Storia>) session.getAttribute("storieModeratore");
-
-							if (!stList.isEmpty()) {
-								for (Storia st : stList) {
-									
-									Set<SessioneDiGioco> listaSessioni= st.getListaSessioni();
-											
-									out.print("<div class=\"table-responsive col-8\">");
-
-									out.print("<table class=\"table table-dark\" id=\"tabellaStorie\">");
-									out.print("<thead>");
-									out.print("<tr>");
-									out.print("<th scope=\"col\">Nome Storia</th>");
-									out.print("<th scope=\"col\"></th>");
-									out.print("</tr>");
-									out.print("</thead>");
-									out.print("<tbody>");
-									
-										for(SessioneDiGioco sdg: listaSessioni){
-											out.print("<tr>");
-											out.print("<form method=\"post\" action=\"../GiocaServlet\">");
-											out.print("<td class=\"td-prod\"><label>Sessione numero: " +sdg.getIdNumeroSessione() + "</label></td>");
-											out.print("</form>");
-											out.print("</tr>");
-										}
-								}
-								out.print("<form method=\"post\" action=\"../EditorSessioneServlet\">");
-								out.print("<td class=\"td-prod\"><button class=\"btn btn-dark\">Sessione numero: " +"Nuova sessione"+ "</button></td>");
-								out.print("</form>");
-								out.print("</tbody>");
-								out.print("</table>");
-								}
-								else	{
-								out.print("<h3>Non hai scritto nessuna storia. Clicca </h3>");
-								out.print("<a href=\"editorStoria\">qui</a>");
-								out.print("<h3> per iniziare.</h3>");
-							}
-						%>
-
-			</div>
-
-
-
-			<div class="col-7 card"></div>
-			
-			
+			<h2 class="card-title">Siamo spiacenti, la modalità di promozione da Giocatore a Moderatore non è ancora stata implementata.</h2>
 			
 		</div>
 	</div>

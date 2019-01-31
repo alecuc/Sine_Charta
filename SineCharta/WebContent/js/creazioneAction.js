@@ -75,7 +75,7 @@ $(document).ready(function(){
 
 	var JTDom=		'{"nome":"", "numero":"", "descrizioneDominante":"", "valoreCuori":"", "valoreQuadri":"", "valoreFiori":"", "valorePicche":""}';
 	var	JTCuori=	'{"nome":"", "numero":"", "valoreCuori":"", "valoreQuadri":"", "valoreFiori":"", "valorePicche":""}'
-		var JTQuadri=	'{"nome":"", "numero":"", "valoreCuori":"", "valoreQuadri":"", "valoreFiori":"", "valorePicche":""}';
+	var JTQuadri=	'{"nome":"", "numero":"", "valoreCuori":"", "valoreQuadri":"", "valoreFiori":"", "valorePicche":""}';
 	var JTFiori=	'{"nome":"", "numero":"", "valoreCuori":"", "valoreQuadri":"", "valoreFiori":"", "valorePicche":""}';
 	var JTPicche=	'{"nome":"", "numero":"", "valoreCuori":"", "valoreQuadri":"", "valoreFiori":"", "valorePicche":""}';
 
@@ -171,6 +171,14 @@ $(document).ready(function(){
 			return false;
 		} else
 
+			var risoluzione;
+			var coo=$('#int').val();
+			var vol=$('#vol').val();
+			var kar=$('#kar').val();
+			var des=$('#des').val();
+			
+			risoluzione= parseInt(coo,10)+parseInt(vol,10)+parseInt(kar,10)+parseInt(des,10);
+			
 			var data= $('#nomePG').val() + ',' + $('#cognomePG').val() + ',' + $('#etaPG').val() + ',' + $('#nazionalitaPG').val() + ',' + $('#domName').text()+',';
 
 			console.log(data);
@@ -178,7 +186,7 @@ $(document).ready(function(){
 			data = data+$('#int').val()+','+$('#asp').val()+','+$('#coo').val()+','+$('#aff').val()+','+$('#mem').val()+','+$('#com').val()+','+$('#des').val()+','+$('#ddm').val()+','+$('#per').val()+','+$('#cre').val()+','+$('#for').val()+','+$('#eqm').val()+','+$('#vol').val()+','+$('#soc').val()+','+$('#mir').val()+','+$('#kar').val()+',';
 
 			console.log(data);
-			data= data+$('#abiUso').val()+','+$('#totUso').text()+','+$('#abiPerc').val()+','+$('#totPerc').text()+','+$('#abiFurt').val()+','+$('#totFurt').text()+','+$('#abiUtil').val()+','+$('#totUtil').text()+','+$('#abiGuida').val()+','+$('#totGuida').text();
+			data= data+$('#abiUso').val()+','+$('#totUso').text()+','+$('#abiPerc').val()+','+$('#totPerc').text()+','+$('#abiFurt').val()+','+$('#totFurt').text()+','+$('#abiUtil').val()+','+$('#totUtil').text()+','+$('#abiGuida').val()+','+$('#totGuida').text()+','+risoluzione;
 			$.post('../GestioneStoriaServlet',data);
 
 
