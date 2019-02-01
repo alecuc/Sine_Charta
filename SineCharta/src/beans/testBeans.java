@@ -61,13 +61,7 @@ public class testBeans {
 			User utente = (User) it.next();
 			System.out.println(utente.toString());
 		}
-		
-		User ute = mana.doRetrieveByKey("prova");
-		System.out.println(ute.toString());
-		*/
-		
-		String animals = "dog,ele,cat,bear";
-		String[] animalArray = animals.split(",");
+*/
 		
 		for(int i = 0; i < animalArray.length ; i++) {
 			System.out.println(animalArray[i]);
