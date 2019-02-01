@@ -173,16 +173,23 @@ $(document).ready(function(){
 
 			var data= $('#nomePG').val() + ',' + $('#cognomePG').val() + ',' + $('#etaPG').val() + ',' + $('#nazionalitaPG').val() + ',' + $('#domName').text()+',';
 
-			data = data+$('#int').val()+','+$('#asp').val()+','+$('#coo').val()+','+$('#aff').val()+','+$('#mem').val()+','+$('#com').val()+','+$('#des').val()+','+$('#ddm').val()+','+$('#per').val()+','+$('#cre').val()+','+$('#for').val()+','+$('#eqm').val()+','+$('#vol').val()+','+$('#soc').val()+','+$('#mir').val()+','+$('#kar').val()+',';
+		data = data+$('#int').val()+','+$('#asp').val()+','+$('#coo').val()+','+$('#aff').val()+','+$('#mem').val()+','+$('#com').val()+','+$('#des').val()+','+$('#ddm').val()+','+$('#per').val()+','+$('#cre').val()+','+$('#for').val()+','+$('#eqm').val()+','+$('#vol').val()+','+$('#soc').val()+','+$('#mir').val()+','+$('#kar').val()+',';
 
-			data= data+$('#abiUso').val()+','+$('#totUso').text()+','+$('#abiPerc').val()+','+$('#totPerc').text()+','+$('#abiFurt').val()+','+$('#totFurt').text()+','+$('#abiUtil').val()+','+$('#totUtil').text()+','+$('#abiGuida').val()+','+$('#totGuida').text();
-			console.log(data);
-			$.post('../GestioneStoriaServlet',
-					{
-					dati: data,
-					action: "inserisciPg"
-					});
+		data= data+$('#abiUso').val()+','+$('#totUso').text()+','+$('#abiPerc').val()+','+$('#totPerc').text()+','+$('#abiFurt').val()+','+$('#totFurt').text()+','+$('#abiUtil').val()+','+$('#totUtil').text()+','+$('#abiGuida').val()+','+$('#totGuida').text();
+		console.log(data);
 
+		
+		//QUESTA FUNZIONE FA IL REDIRECT AL RIEPILOGO DOPO AVER COMPLETATO LA CREAZIONE DEL PG E SALVATAGGIO IN DB
+		
+		$.ajax({
+			  type: "POST",
+			  url: '../GestioneStoriaServlet',
+			  data: {dati: data, action: "inserisciPg"},
+			  success: function(){
+				  //QUESTA PARTE È NECESSARIA PER IL REDIRECT, POICHÉ AJAX ESEGUE OPERAZIONI SU THREAD SECONDARI
+					window.location.assign("riepilogoPG.jsp");
+				}
+			});
 
 	});
 

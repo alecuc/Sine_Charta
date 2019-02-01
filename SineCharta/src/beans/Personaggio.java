@@ -93,7 +93,9 @@ public class Personaggio implements Serializable{
 		abilita.setPersonaggio(null);
 	}
 	
-
+	public Set<Abilita> getListaAbilita(){
+		return this.ability;
+	}
 	
 	public String getUsername() {
 		return this.username;

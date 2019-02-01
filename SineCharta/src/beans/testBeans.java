@@ -63,9 +63,7 @@ public class testBeans {
 		}
 */
 		
-		for(int i = 0; i < animalArray.length ; i++) {
-			System.out.println(animalArray[i]);
-		}
+
 		
 	}
 	

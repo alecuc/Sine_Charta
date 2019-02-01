@@ -24,6 +24,8 @@
 							User utente = (User) session.getAttribute("user");
 							Collection<Storia> stList = (Collection<Storia>) session.getAttribute("storieModeratore");
 
+							if(stList!=null){
+							
 							if (!stList.isEmpty()) {
 								for (Storia st : stList) {
 									
@@ -56,10 +58,16 @@
 								}
 								else	{
 								out.print("<h3>Non hai scritto nessuna storia. Clicca </h3>");
-								out.print("<a href=\"editorStoria\">qui</a>");
+								out.print("<a href=\"editorStoria.jsp\">qui</a>");
 								out.print("<h3> per iniziare.</h3>");
 							}
-						%>
+							
+							} else{%>
+							
+							<h2>SIAMO SPIACENTI, MA LA FUNZIONE PER DIVENTARE MODERATORI NON È PRESENTE.</h2>
+							
+								
+						<%	}	%>
 
 			</div>
 

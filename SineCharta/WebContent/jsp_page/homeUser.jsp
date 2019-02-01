@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -61,88 +62,100 @@
 				</ul>
 				<hr class="d-sm-none">
 			</div>
-					<div class="table-responsive col-8">
+			<div class="col-8">
 
-			<!-- TABELLA DELLE STORIE ATTIVE
+				<!-- TABELLA DELLE STORIE ATTIVE
 		QUESTA TABELLA È FORMATA DA:
 		
 		NOME_STORIA - NOME_PG - 	PULSANTE_GIOCA
 		il nome		- il nome -	   il pulsante che
 		della storia- del pg  - carica la pagina del pg	 -->
 
-			<%
-				User utente = (User) session.getAttribute("user");
-				Collection<Storia> stList = (Collection) session.getAttribute("storieGiocatore");
-				Set<Personaggio> pgList = utente.getPersonaggiUtente();
+				<%
+					User utente = (User) session.getAttribute("user");
+					Collection<Storia> stList = (Collection) session.getAttribute("storieGiocatore");
+					Set<Personaggio> pgList = utente.getPersonaggiUtente();
 
-				for(Storia st: stList){
-				System.out.println(st.toString());
-				}
-				if (!stList.isEmpty()) {
-					Collection<Storia> stNoPG= (Collection) session.getAttribute("storieGiocatore");
+					if (!stList.isEmpty()) {
+						ArrayList <Storia> stNoPG = new ArrayList<Storia>();
 
-					out.print("<table class=\"table table-dark\" id=\"tabellaStorie\">");
-					out.print("<thead>");
-					out.print("<tr>");
-					out.print("<th scope=\"col\">Nome Storia</th>");
-					out.print("<th scope=\"col\">Nome PG</th>");
-					out.print("<th scope=\"col\"></th>");
-					out.print("</tr>");
-					out.print("</thead>");
-					out.print("<tbody>");
 
-					for (Personaggio pg : pgList) {
-						for (Storia st : stList) {
-							if (pg.getIdStoria() == st.getId()) {
-
-								out.print("<tr>");
-								out.print("<form method=\"post\" action=\"../GiocaServlet\">");
-								out.print("<td class=\"td-prod\">" + st.getTitolo() + "</td>");
-								out.print("<td class=\"td-prod\">" + pg.getNome() + " " + pg.getCognome() + "</td>");
-								out.print(
-										"<td><button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Gioca</button></td>");
-								out.print("</form>");
-								out.print("</tr>");
-
-							}
-						}
-
-					}
-					out.print("</tbody>");
-					out.print("</table>");
-					out.print("</div>");
-					/*CHIUDI TABELLA "GIOCA"*/
-
-					if (!stNoPG.isEmpty()) {
-						/*APRI TABELLA "CREA"*/
-						out.print("<table class=\"table table-dark\" id=\"tabellaNoPG\">");
+						out.print("<div class=\"row\">");
+						out.print("<table class=\"table table-responsive table-dark\" id=\"tabellaStorie\">");
 						out.print("<thead>");
 						out.print("<tr>");
 						out.print("<th scope=\"col\">Nome Storia</th>");
+						out.print("<th scope=\"col\">Nome PG</th>");
 						out.print("<th scope=\"col\"></th>");
 						out.print("</tr>");
 						out.print("</thead>");
 						out.print("<tbody>");
 
-						for (Storia st : stNoPG) {
-							out.print("<tr>");
-							out.print("<form method=\"post\" action=\"../GiocaServlet\">");
-							out.print("<td class=\"td-prod\">" + st.getTitolo() + "</td>");
-							out.print(
-									"<td><button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Crea PG</button></td>");
-							out.print("</form>");
-							out.print("</tr>");
+						for (Storia st : stList) {
+
+							boolean pgFound = false;
+							for (Personaggio pg : pgList) {
+
+								if (pg.getIdStoria() == st.getId()) {
+
+									out.print("<tr>");
+									out.print("<form method=\"post\" action=\"../GestioneSessioneServlet?action=gioca&idStoria="+st.getId()+"\">");
+									out.print("<td class=\"td-prod\">" + st.getTitolo() + "</td>");
+									out.print("<td class=\"td-prod\">" + pg.getNome() + " " + pg.getCognome() + "</td>");
+									out.print(
+											"<td><button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Gioca</button></td>");
+									out.print("</form>");
+									out.print("</tr>");
+									pgFound = true;
+									break;
+								}
+
+							}
+								if(!pgFound) {
+									stNoPG.add(st);
+								}
 						}
 						out.print("</tbody>");
 						out.print("</table>");
 						out.print("</div>");
+						/*CHIUDI TABELLA "GIOCA"*/
+
+						System.out.println("Qui le storie a cui partecipi, senza pg");
+						for (Storia st : stNoPG) {
+							System.out.println(st.toString());
+						}
+
+						if (!stNoPG.isEmpty()) {
+							//APRI TABELLA "CREA"
+							out.print("<div class=\"row\">");
+							out.print("<table class=\"table table-responsive table-dark\" id=\"tabellaNoPG\">");
+							out.print("<thead>");
+							out.print("<tr>");
+							out.print("<th>Nome Storia</th>");
+							out.print("<th>.</th>");
+							out.print("</tr>");
+							out.print("</thead>");
+							out.print("<tbody>");
+
+							for (Storia st : stNoPG) {
+								out.print("<tr>");
+								out.print("<form method=\"post\" action=\"../GestioneStoriaServlet?action=creaPG&idStoria="+st.getId()+"\">");
+								out.print("<td class=\"td-prod\">" + st.getTitolo() + "</td>");
+								out.print(
+										"<td><button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Crea PG</button></td>");
+								out.print("</form>");
+								out.print("</tr>");
+							}
+							out.print("</tbody>");
+							out.print("</table>");
+							out.print("</div>");
+						}
 					}
-				}
-			%>
+				%>
 
+
+			</div>
 		</div>
-
-	</div>
 	</div>
 
 </body>

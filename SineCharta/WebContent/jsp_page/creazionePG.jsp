@@ -454,7 +454,7 @@
 			</table>
 
 		</fieldset>
-
+	
 		<button class="btn btn-dark mb-2 mx-1 float-right"
 			style="background-color: #212529; border-color: red;" id="completa"
 			disabled>Completa il tuo PG</button>
