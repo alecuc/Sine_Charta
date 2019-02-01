@@ -40,7 +40,9 @@ public class UsersManager implements UserModelI<User>{
 			preparedStatement.setString(1, user);
 			
 			ResultSet rs = preparedStatement.executeQuery();
-		//	if(!rs.next()) throw new UserNotFoundException("utente non presente"); 
+
+			//if(!rs.next()) throw new UserNotFoundException("utente non presente"); 
+
 			
 				System.out.println("doRetrieveByKey: " + preparedStatement.toString());
 				bean = new User();

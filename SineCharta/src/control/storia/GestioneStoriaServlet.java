@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -13,20 +12,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.SendResult;
 
-import beans.Mazzo;
+import beans.Abilita;
 import beans.Personaggio;
 import beans.Storia;
 import beans.User;
+import manager.AbilitaManager;
 import manager.PersonaggioManager;
 import manager.StoryManager;
-import manager.UsersManager;
+
 
 /**
  * Servlet implementation class EditorStoriaServlet
  */
-@WebServlet("/EditorStoriaServlet")
+@WebServlet("/GestioneStoriaServlet")
 public class GestioneStoriaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -44,25 +43,137 @@ public class GestioneStoriaServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		response.setContentType("text/html");
-		String idStoria = request.getParameter("idStoria"); 
-		String action = request.getParameter("action");
-		StoryManager str = new StoryManager();
-		Storia storia = new Storia();
 		HttpSession session = request.getSession();
-		User user = (User)session.getAttribute("username");
+		String idStoria = request.getParameter("idStoria"); 
+		String action= request.getParameter("action");
+		Storia storia = new Storia();
+		StoryManager str = new StoryManager();
+		User user = (User)session.getAttribute("user");
+		Integer idStory = Integer.parseInt(idStoria);
+		System.out.println("USER: "+user.getUsername());
+
 
 		try {
 
 			storia = (Storia)session.getAttribute("storia");
 
+			
+			
+			if(action.equalsIgnoreCase("inserisciPg")) {
+				String nome, cognome, nazionalita, taroccoDominante, abiUso, abiPerc, abiFurt, abiUtil, abiGuida; 
+					  int eta, intuito, aspetto, coordinazione, affinOcculta, memoria, comando, destrezza, distanzaDaMorte, percezione, creativita, forza, equilibrioMent, volonta, socievolezza, mira, karma, valUso,  valPerc, valFurt, valUtil, valGuida;
+					      
+				String pgData = (String) request.getParameter("dati");
+				String[] attriPg = pgData.split(",");
+				
+				
+				int i = 0;
+				nome = attriPg[i]; i++; 
+				cognome = attriPg[i]; i++;
+				eta = Integer.parseInt(attriPg[i]); i++; 
+				nazionalita = attriPg[i]; i++; 
+				taroccoDominante = attriPg[i]; i++; 
+				
+				intuito = Integer.parseInt(attriPg[i]);i++; 
+				aspetto = Integer.parseInt(attriPg[i]); i++; 
+				coordinazione= Integer.parseInt(attriPg[i]); i++; 
+				affinOcculta= Integer.parseInt(attriPg[i]); i++; 
+				memoria= Integer.parseInt(attriPg[i]); i++; 
+				comando= Integer.parseInt(attriPg[i]); i++; 
+				destrezza = Integer.parseInt(attriPg[i]); i++; 
+				distanzaDaMorte= Integer.parseInt(attriPg[i]); i++; 
+				percezione = Integer.parseInt(attriPg[i]); i++; 
+				creativita= Integer.parseInt(attriPg[i]); i++; 
+				forza = Integer.parseInt(attriPg[i]); i++; 
+				equilibrioMent = Integer.parseInt(attriPg[i]); i++; 
+				volonta = Integer.parseInt(attriPg[i]); i++; 
+				socievolezza = Integer.parseInt(attriPg[i]); i++; 
+				mira = Integer.parseInt(attriPg[i]); i++; 
+				karma = Integer.parseInt(attriPg[i]); i++; 
+				
+				abiUso = attriPg[i]; i++; 
+				valUso =Integer.parseInt(attriPg[i]);i++; 
+				abiPerc = attriPg[i]; i++; 
+				valPerc = Integer.parseInt(attriPg[i]);i++; 
+				abiFurt = attriPg[i]; i++; 
+				valFurt = Integer.parseInt(attriPg[i]);i++; 
+				abiUtil = attriPg[i]; i++; 
+				valUtil = Integer.parseInt(attriPg[i]);i++; 
+				abiGuida = attriPg[i]; i++; 
+				valGuida = Integer.parseInt(attriPg[i]);i++; 
+							
+				Personaggio pg = new Personaggio();
+
+				pg.setNome(nome);
+				pg.setCognome(cognome);
+				pg.setAge(eta);
+				pg.setNazionalita(nazionalita);
+				pg.setTaroccoDominante(taroccoDominante);
+				pg.setIntuito(intuito);
+				pg.setAspetto(aspetto);
+				pg.setCoordinazione(coordinazione);
+				pg.setAffinOcculta(affinOcculta);
+				pg.setMemoria(memoria);
+				pg.setComando(comando);
+				pg.setDestrManuale(destrezza);
+				pg.setDistDaMorte(distanzaDaMorte);
+				pg.setPercezione(percezione);
+				pg.setCreativita(creativita);
+				pg.setForzaFisica(forza);
+				pg.setEquilibrMentale(equilibrioMent);
+				pg.setVolonta(volonta);
+				pg.setSocievolezza(socievolezza);
+				pg.setMira(mira);
+				pg.setKarma(karma);
+				pg.setRisoluzione(karma+destrezza+coordinazione+volonta);
+				pg.setFeritaTesta("-");
+				pg.setFeritaTorso("-");
+				pg.setFeritaBraccia("-");
+				pg.setFeritaGambe("-");
+				pg.setUser(user);
+				pg.setUsername(user.getUsername());
+				pg.setStoria(storia);
+				pg.setIdStoria(1);
+
+
+				PersonaggioManager pgM = new PersonaggioManager();
+				pgM.creaPersonaggio(pg, 1);
+				
+				AbilitaManager abM = new AbilitaManager();
+				Abilita abilita = new Abilita();		
+				abilita.setNome(abiFurt);
+				abilita.setValore(valFurt);
+				Abilita abi2 = new Abilita();
+				abi2.setNome(abiGuida);
+				abi2.setValore(valGuida);
+				Abilita abi3 = new Abilita();
+				abi3.setNome(abiPerc);
+				abi3.setValore(valPerc);
+				Abilita abi4 = new Abilita();
+				abi4.setNome(abiUso);
+				abi4.setValore(valUso);
+				Abilita abi5 = new Abilita();
+				abi5.setNome(abiUtil);
+				abi5.setValore(valUtil);
+				
+				abM.aggiungiAbilita(abilita, pg);
+				abM.aggiungiAbilita(abi2, pg);
+				abM.aggiungiAbilita(abi3, pg);
+				abM.aggiungiAbilita(abi4, pg);
+				abM.aggiungiAbilita(abi5, pg);
+				
+				session.setAttribute("nuovoPG", pg);
+				
+				response.sendRedirect("jsp_page/riepilogoPG.jsp");
+			}
 			//questo if permette di predere una storia in base ad un pg
-			if(action.equalsIgnoreCase("acquisireStoria"))	{
+			else if(action.equalsIgnoreCase("acquisireStoria"))	{
 
 
-				Integer idStory = Integer.parseInt(idStoria);
-				Storia story = str.getSimpleStory(idStory);
+				
+			//	Storia story = str.getSimpleStory(idStory);
 
-				session.setAttribute("storia", story);
+				//session.setAttribute("storia", story);
 
 				//questo if permette di inserire una storia nel database	
 			}else if(action.equalsIgnoreCase("inserisciStoria")) {
@@ -95,16 +206,9 @@ public class GestioneStoriaServlet extends HttpServlet {
 				Integer idS = Integer.parseInt(idSto);
 				session.setAttribute("idStory", idS);
 				response.sendRedirect("jsp_page/creazionePG.jsp");
-
+				
 				//questo if permette di inserire un pg	
-			}else if(action.equalsIgnoreCase("inserisciPg"));
-
-			Personaggio pg = (Personaggio)request.getAttribute("Pg");
-			PersonaggioManager pgM = new PersonaggioManager();
-			String idSto = request.getParameter("idStoria");
-			Integer idS = Integer.parseInt(idSto);
-			pgM.creaPersonaggio(pg, idS);
-
+			} 
 		}catch (SQLException e) {
 			e.printStackTrace();
 

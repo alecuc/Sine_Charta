@@ -55,6 +55,7 @@ public class testBeans {
 		System.out.println(utenteListaStorie.toString());
 			*/
 		UsersManager mana = new UsersManager();
+
 		User utente = new User();
 		utente.setUsername("testUser");
 		utente.setRuolo("utenteModeratore");
@@ -69,6 +70,7 @@ public class testBeans {
 		sto.setTitolo("TestTitolo");
 		sto.setDescrizione("Test test Test");
 		//manager.aggiungiStoria(sto);
+
 		
 		
 		int x = manager.selectLastId();

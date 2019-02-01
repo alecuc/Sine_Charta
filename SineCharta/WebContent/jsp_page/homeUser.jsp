@@ -61,6 +61,7 @@
 				</ul>
 				<hr class="d-sm-none">
 			</div>
+					<div class="table-responsive col-8">
 
 			<!-- TABELLA DELLE STORIE ATTIVE
 		QUESTA TABELLA È FORMATA DA:
@@ -68,45 +69,80 @@
 		NOME_STORIA - NOME_PG - 	PULSANTE_GIOCA
 		il nome		- il nome -	   il pulsante che
 		della storia- del pg  - carica la pagina del pg	 -->
-				
-						<%
-							User utente = (User) session.getAttribute("user");
-							Collection<Storia> stList = (Collection) session.getAttribute("storieGiocatore");
 
-							if (!stList.isEmpty()) {
-								out.print("<div class=\"table-responsive col-8\">");
+			<%
+				User utente = (User) session.getAttribute("user");
+				Collection<Storia> stList = (Collection) session.getAttribute("storieGiocatore");
+				Set<Personaggio> pgList = utente.getPersonaggiUtente();
 
-									out.print("<table class=\"table table-dark\" id=\"tabellaStorie\">");
-									out.print("<thead>");
-									out.print("<tr>");
-									out.print("<th scope=\"col\">Nome Storia</th>");
-									out.print("<th scope=\"col\">Nome PG</th>");
-									out.print("<th scope=\"col\"></th>");
-									out.print("</tr>");
-									out.print("</thead>");
-									out.print("<tbody>");
-									
-								for (Storia st : stList) {
+				for(Storia st: stList){
+				System.out.println(st.toString());
+				}
+				if (!stList.isEmpty()) {
+					Collection<Storia> stNoPG= (Collection) session.getAttribute("storieGiocatore");
 
-									out.print("<tr>");
-									out.print("<form method=\"post\" action=\"../GiocaServlet\">");
-									out.print("<td class=\"td-prod\">" + st.getTitolo() + "</td>");
-									out.print("<td class=\"td-prod\">"+"QUI NOME PG" + "</td>");
+					out.print("<table class=\"table table-dark\" id=\"tabellaStorie\">");
+					out.print("<thead>");
+					out.print("<tr>");
+					out.print("<th scope=\"col\">Nome Storia</th>");
+					out.print("<th scope=\"col\">Nome PG</th>");
+					out.print("<th scope=\"col\"></th>");
+					out.print("</tr>");
+					out.print("</thead>");
+					out.print("<tbody>");
 
-									out.print("<td><button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Gioca</button></td>");
-									out.print("</form>");
-									out.print("</tr>");
+					for (Personaggio pg : pgList) {
+						for (Storia st : stList) {
+							if (pg.getIdStoria() == st.getId()) {
 
-								}
-								out.print("</tbody>");
-								out.print("</table>");
+								out.print("<tr>");
+								out.print("<form method=\"post\" action=\"../GiocaServlet\">");
+								out.print("<td class=\"td-prod\">" + st.getTitolo() + "</td>");
+								out.print("<td class=\"td-prod\">" + pg.getNome() + " " + pg.getCognome() + "</td>");
+								out.print(
+										"<td><button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Gioca</button></td>");
+								out.print("</form>");
+								out.print("</tr>");
 
 							}
-						%>
-					
-			</div>
+						}
+
+					}
+					out.print("</tbody>");
+					out.print("</table>");
+					out.print("</div>");
+					/*CHIUDI TABELLA "GIOCA"*/
+
+					if (!stNoPG.isEmpty()) {
+						/*APRI TABELLA "CREA"*/
+						out.print("<table class=\"table table-dark\" id=\"tabellaNoPG\">");
+						out.print("<thead>");
+						out.print("<tr>");
+						out.print("<th scope=\"col\">Nome Storia</th>");
+						out.print("<th scope=\"col\"></th>");
+						out.print("</tr>");
+						out.print("</thead>");
+						out.print("<tbody>");
+
+						for (Storia st : stNoPG) {
+							out.print("<tr>");
+							out.print("<form method=\"post\" action=\"../GiocaServlet\">");
+							out.print("<td class=\"td-prod\">" + st.getTitolo() + "</td>");
+							out.print(
+									"<td><button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Crea PG</button></td>");
+							out.print("</form>");
+							out.print("</tr>");
+						}
+						out.print("</tbody>");
+						out.print("</table>");
+						out.print("</div>");
+					}
+				}
+			%>
 
 		</div>
+
+	</div>
 	</div>
 
 </body>

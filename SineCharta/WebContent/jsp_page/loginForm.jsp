@@ -48,7 +48,7 @@
 						style="background-color: #212529; border-color: red;">Login</button>
 					</div>
 				</form>
-				<br> <a href="homeUser.jsp">pagina utente (link provvisorio)</a>
+				 
 			</div>
 </body>
 </html>
