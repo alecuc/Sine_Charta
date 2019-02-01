@@ -256,7 +256,7 @@ public class StoryManager {
 	 * @param storia= un oggetto di tipo storia 												*
 	 * @param username= utente che inserisce la storia											*
 	 ********************************************************************************************/	
-	public void aggiungiStoria(Storia storia, User utenteMod)throws SQLException{
+	public void aggiungiStoria(Storia storia)throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		String creaStoria = "INSERT INTO "+ TABLE_NAME_STORIA 
