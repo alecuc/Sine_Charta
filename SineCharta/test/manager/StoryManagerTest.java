@@ -1,6 +1,5 @@
 package manager;
 
-import static org.junit.Assert.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,15 +18,18 @@ public class StoryManagerTest extends TestCase{
 
 	private StoryManager storyManager;
 	private Storia storiaDaInserire;
+	private Storia storiaRecuperata;
 	private Collection<Storia> listaStoria;
 	private UsersManager userManager;
 	private User utenteTest;
+	private User utenteRecuperato;
 	
 	protected void setUp() throws SQLException, UserNotFoundException{
 		System.out.println("\n Running setUp \n");
 		storyManager = new StoryManager();
 		userManager = new UsersManager();
 		utenteTest = new User();
+		utenteRecuperato = new User();
 		utenteTest.setName("testStory");
 		utenteTest.setSurname("testSusrname");
 		utenteTest.setUsername("utenteTestStory");
@@ -36,6 +38,7 @@ public class StoryManagerTest extends TestCase{
 		utenteTest.setRuolo("utenteModeratore");
 		listaStoria = new ArrayList<Storia>();
 		storiaDaInserire = new Storia();
+		storiaRecuperata = new Storia();
 		storiaDaInserire.setTitolo("testTitolo");
 		storiaDaInserire.setDescrizione("testDescrizioneStoria");
 		storiaDaInserire.setAmbientazione("Sanctum Imperum");
@@ -45,59 +48,83 @@ public class StoryManagerTest extends TestCase{
 	@Test
 	public void testAggiungiStoria() throws SQLException, UserNullException{
 		System.out.println("\n Running aggiungiStoria TEST: \n");
+		//Utente moderatore che inserisce la storia
 		userManager.doSave(utenteTest);
+		//Storia da inserie
 		storyManager.aggiungiStoria(storiaDaInserire);
-		storyManager.aggiungiATable(storiaDaInserire, utenteTest, 1);
-		listaStoria = storyManager.getStoria(utenteTest);
-		int last = listaStoria.size();
-		System.out.println(last);
-		assertTrue(!storiaDaInserire.equals(null));
+		storyManager.aggiungiATable(utenteTest, 1);
+		
+		assertNotNull(utenteTest);
 		assertNotNull(storiaDaInserire);
 		assertNotNull(utenteTest);
-		storyManager.eliminaRiferimentoHaTable(utenteTest.getUsername(), storiaDaInserire.getId());
-		storyManager.eliminaStoria(storiaDaInserire.getId());
+		
+		storiaRecuperata = storyManager.getSimpleStory(storyManager.selectLastId());
+		assertNotNull(storiaRecuperata);
+		
+		storyManager.eliminaRiferimentoHaTable(utenteTest.getUsername(), storyManager.selectLastId());
+		storyManager.eliminaStoria(storiaRecuperata.getId());
 		userManager.eliminaUtente(utenteTest.getUsername());
 		
 		}
 
-	@Test
-	public void testAggiungiATable() throws SQLException {
-		System.out.println("\n Running aggiungiATable TEST: \n");
-		/*storyManager.aggiungiATable(storiaDaInserire, utenteTest, 0);
-		assertNotNull(storiaDaInserire);
-		assertNotNull(utenteTest);*/
-	}
+
 	
 	@Test
-	public void testGetStoria() throws SQLException {
+	public void testGetStoria() throws SQLException, UserNullException, UserNotFoundException {
 		System.out.println("\n Running getStoria TEST: \n");
-		listaStoria = storyManager.getStoria(utenteTest);
+		userManager.doSave(utenteTest);
+		storyManager.aggiungiStoria(storiaDaInserire);
+		storyManager.aggiungiATable(utenteTest, 1);
+		assertNotNull(utenteTest);
+		assertNotNull(storiaDaInserire);
+		utenteRecuperato = userManager.doRetrieveByKey("utenteTestStory");
+		assertNotNull(utenteRecuperato);
+		
+		listaStoria = storyManager.getStoria(utenteRecuperato);
+		storyManager.eliminaRiferimentoHaTable(utenteTest.getUsername(), storyManager.selectLastId());
+		storyManager.eliminaStoria(storyManager.selectLastId());
+		userManager.eliminaUtente(utenteTest.getUsername());
 		assertFalse(listaStoria.isEmpty());
-	}
 
-	@Test
-	public void testGetSimpleStory() {
-		fail();
-	}
-
-	@Test
-	public void testGetStoriaDelPG() {
-		fail("Not yet implemented");
+	
 	}
 
 
 	@Test
-	public void testEliminaStoria() {
-		System.out.println("\n Running eliminaStoria TEST: \n");
-		fail();
-	}
-
-	@Test
-	public void testEliminaRiferimentoHaTable() {
+	public void testGetStoriaByFlag() throws SQLException, UserNullException, UserNotFoundException {
+		System.out.println("\n Running getStoriaByFlag TEST: \n");
+		utenteTest.setRuolo("utenteGiocatore");
+		userManager.doSave(utenteTest);
+		storyManager.aggiungiStoria(storiaDaInserire);
+		storyManager.aggiungiATable(utenteTest, 0);
+		utenteTest.setRuolo("utenteModeratore");
+		storiaDaInserire.setTitolo("TestByFLag2");
+		storyManager.aggiungiStoria(storiaDaInserire);
+		storyManager.aggiungiATable(utenteTest, 1);
+		assertNotNull(utenteTest);
+		assertNotNull(storiaDaInserire);
+		utenteRecuperato = userManager.doRetrieveByKey("utenteTestStory");
+		assertNotNull(utenteRecuperato);
+		
+		listaStoria = storyManager.getStoriaByFlag(utenteRecuperato, 0);
+		assertFalse(listaStoria.isEmpty());
+		
+		storyManager.eliminaRiferimentoHaTable(utenteRecuperato.getUsername(), storyManager.selectLastId());
+		storyManager.eliminaStoria(storyManager.selectLastId());
+		storyManager.eliminaRiferimentoHaTable(utenteRecuperato.getUsername(), storyManager.selectLastId());
+		storyManager.eliminaStoria(storyManager.selectLastId());
+		userManager.eliminaUtente(utenteRecuperato.getUsername());
 		
 	}
 	
 	public void tearDown() {
-		
+		System.out.println("\n Running tearDown TEST: \n");
+		storyManager = null;
+		userManager = null;
+		listaStoria.clear();
+		storiaDaInserire = null;
+		storiaRecuperata = null;
+		utenteTest = null;
+		utenteRecuperato = null;
 	}
 }

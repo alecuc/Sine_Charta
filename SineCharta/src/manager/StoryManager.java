@@ -28,13 +28,12 @@ public class StoryManager {
 	 * @return la storia a cui si riferisce idStoria								*
 	 ********************************************************************************/
 	public Collection<Storia> getStoria(User user) throws SQLException{
-		//da cambiare con il flag
 		Connection con = null;
 		PreparedStatement ps = null;
 		Collection<Storia> storieutente = new LinkedList<Storia>();
 		HaTable table = new HaTable();
 		String selectStoria = "SELECT * FROM "+TABLE_NAME_STORIA+" NATURAL JOIN "+TABLE_NAME_HA+" WHERE USERNAME = ?";
-		
+		 
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(selectStoria);
@@ -74,6 +73,30 @@ public class StoryManager {
 	}
 	
 	
+	public int selectLastId()throws SQLException{
+		Connection con = null;
+		PreparedStatement ps = null;
+		int id = 0;
+		
+		String selectMax = "SELECT MAX(IDSTORY) FROM " + TABLE_NAME_STORIA;
+		try {
+			con = DriverManagerConnectionPool.getConnection();
+			ps = con.prepareStatement(selectMax);
+			System.out.println("selectLastId: " + ps.toString());
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				id = rs.getInt("max(IdStory)");
+			}
+		}finally {
+			try {
+				if(ps!=null)ps.close();
+			}finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
+		}
+		return id;
+	}
+	
 	/***********************************************************************************************
 	 * Metodo per caricare tutte le storie associate ad un utente tramite flag						*
 	 * @param username= identificativo dell'utente													*
@@ -94,7 +117,7 @@ public class StoryManager {
 			
 			ps.setString(1, user.getUsername());
 			ps.setInt(2, flag);
-			System.out.println("getStoria : " + ps.toString());
+			System.out.println("getStoriaByFlag : " + ps.toString());
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -285,7 +308,7 @@ public class StoryManager {
 	 * @param utente= utente da aggiungere														*
 	 * @param flag= identifica il tipo di utente												*													
 	 ********************************************************************************************/
-	public void aggiungiATable(Storia storia, User utente, int flag) throws SQLException{
+	public void aggiungiATable(User utente, int flag) throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		String aggiungiHaTable = "INSERT INTO ha (USERNAME, IDSTORY, FLAG) VALUES(?, ?, ?)";
@@ -293,7 +316,7 @@ public class StoryManager {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(aggiungiHaTable);
 			ps.setString(1, utente.getUsername());
-			ps.setInt(2, storia.getId());
+			ps.setInt(2, this.selectLastId());
 			ps.setInt(3, flag);
 			System.out.println("aggiungiATable: " + ps.toString());
 			ps.executeUpdate();
@@ -316,7 +339,7 @@ public class StoryManager {
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
-		String eliminaStoria = "DELETE FROM " + TABLE_NAME_STORIA + " WHERE ID = ?";
+		String eliminaStoria = "DELETE FROM " + TABLE_NAME_STORIA + " WHERE IDSTORY = ?";
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(eliminaStoria);
