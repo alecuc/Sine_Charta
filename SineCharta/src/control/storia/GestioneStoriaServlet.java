@@ -211,7 +211,7 @@ public class GestioneStoriaServlet extends HttpServlet {
 				user.aggiungiStoria(storia);
 				
 				str.aggiungiStoria(storia);
-				str.aggiungiATable(storia, user, 1);
+				str.aggiungiATable(user, 1);
 				response.sendRedirect("jsp_page/riepilogoStoria(da vedere)");
 
 				//questo if permette di prendere la lista delle storie

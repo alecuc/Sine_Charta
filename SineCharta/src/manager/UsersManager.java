@@ -32,7 +32,7 @@ public class UsersManager implements UserModelI<User>{
 		PreparedStatement preparedStatement = null;
 		
 		User bean;
-		String selectSql = "SELECT * FROM " + UsersManager.TABLE_NAME + " WHERE Username = ?;";
+		String selectSql = "SELECT * FROM " + UsersManager.TABLE_NAME + " WHERE Username = ?";
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
@@ -217,6 +217,28 @@ public class UsersManager implements UserModelI<User>{
 	}
 	
 	
+	public boolean checkUser(String username)throws SQLException{
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String check = "SELECT * FROM "+ TABLE_NAME+ " WHERE USERNAME = ?";
+		
+		try {
+			con = DriverManagerConnectionPool.getConnection();
+			ps = con.prepareStatement(check);
+			ps.setString(1, username);
+			System.out.println("checkUser: " + ps.toString());
+			result = ps.executeUpdate();
+			con.commit();
+		}finally {
+			try {
+				if(ps!=null) ps.close();
+			}finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
+		}
+		return (result != 0);
+	}
 	
 	
 	
