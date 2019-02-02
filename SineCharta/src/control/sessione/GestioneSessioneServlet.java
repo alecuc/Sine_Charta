@@ -44,9 +44,17 @@ public class GestioneSessioneServlet extends HttpServlet {
 		SessioneManager ssn = new SessioneManager();
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
+
+		System.out.println("++++++++++++++++++++++++");
+		System.out.println("Action: "+action);	
+		System.out.println("++++++++++++++++++++++++");
+		
+		/* TODO: SPOSTA ALTROVE PD
 		String numSessione = request.getParameter("numSessione");
 		Integer nSessione = Integer.parseInt(numSessione);
-
+		 */
+		
+		
 		try {
 
 			//questo if permette di inserire una sessione
@@ -66,51 +74,49 @@ public class GestioneSessioneServlet extends HttpServlet {
 
 				System.out.println("successfully inserted");
 				response.sendRedirect("jps_page/vistaSessione.jsp");
-				
-				
+
+
 				// questo if permette di predere la lista delle sessioni legate alla storia	
 			}else if(action.equalsIgnoreCase("listaSessione")) {
-				
+
 				Storia storia = (Storia)session.getAttribute("storia");			
 				User utente = (User)session.getAttribute("user");
 				Collection<SessioneDiGioco> listaSessioni = ssn.recuperoTutteLeSessioni(storia, utente);
 				session.setAttribute("listaSessioni", listaSessioni);
 				response.sendRedirect("sessioneModeratore.jsp");
-				
+
 				//questo if permette di modificare una sessione	
 			}else if(action.equalsIgnoreCase("modificaSessione")) {
-				
+
 				String contenuto = request.getParameter("contenutoSessione");
 				SessioneManager sdG = new SessioneManager();		
 				sdG.aggiornareSessioni(sesDiGioco, contenuto);
-				
+
 				//questo if permette di fare un retrieve della sessione dal database
 			}else if(action.equalsIgnoreCase("prendiSessione")){
-				
+
 				Storia storia = (Storia)session.getAttribute("storia");			
 				User utente = (User)session.getAttribute("user");
-				sesDiGioco = ssn.recuperoSessioneStoria(storia, utente, nSessione);
+				//		sesDiGioco = ssn.recuperoSessioneStoria(storia, utente, nSessione);
 				session.setAttribute("sessione", sesDiGioco);
-				
+
 			}else if(action.equalsIgnoreCase("gioca")) {
-				
-				Storia storia = (Storia)session.getAttribute("storia");			
-				User utente = (User)session.getAttribute("user");
-				
-				
-				sesDiGioco = ssn.recuperoSessioneStoria(storia, utente, nSessione);
-				session.setAttribute("sessione", sesDiGioco);
-				if(user.getRuolo().equalsIgnoreCase("utenteGiocatore")) {
-					PersonaggioManager pgM = new PersonaggioManager();
-					Personaggio PG = pgM.getSimplePGByStory(utente, storia.getId());
-					session.setAttribute("Pg", PG);
-					response.sendRedirect("jsp_page/vistaGiocatore.jsp");
-				}else if(user.getRuolo().equalsIgnoreCase("utenteModeratore")) {
-										
-					response.sendRedirect("jsp_page/vistaModeratore.jsp");
-				}
+
+				System.out.println("++++++++++++++++++++++++");
+				System.out.println("Sto eseguendo: "+action);	
+				System.out.println("++++++++++++++++++++++++");
+
+				String param= request.getParameter("idStoria");
+				int idStoria= Integer.parseInt(param);
+
+				PersonaggioManager pgM = new PersonaggioManager();
+				Personaggio pg = pgM.getSimplePGByStory(user, idStoria);
+
+				session.setAttribute("personaggio", pg);
+				response.sendRedirect("jsp_page/vistaGiocatore.jsp");
+
 			}
-			
+
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}

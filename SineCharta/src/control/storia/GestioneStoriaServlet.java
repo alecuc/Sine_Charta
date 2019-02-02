@@ -3,10 +3,10 @@ package control.storia;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,27 +44,27 @@ public class GestioneStoriaServlet extends HttpServlet {
 
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
-		String idStoria = request.getParameter("idStoria"); 
 		String action= request.getParameter("action");
 		Storia storia = new Storia();
 		StoryManager str = new StoryManager();
 		User user = (User)session.getAttribute("user");
-		Integer idStory = Integer.parseInt(idStoria);
-		System.out.println("USER: "+user.getUsername());
 
 
 		try {
 
-			storia = (Storia)session.getAttribute("storia");
-
-			
-			
 			if(action.equalsIgnoreCase("inserisciPg")) {
+				
+				String param = (String)session.getAttribute("idStory"); 
+				int idStory= Integer.parseInt(param);
+				
 				String nome, cognome, nazionalita, taroccoDominante, abiUso, abiPerc, abiFurt, abiUtil, abiGuida; 
 					  int eta, intuito, aspetto, coordinazione, affinOcculta, memoria, comando, destrezza, distanzaDaMorte, percezione, creativita, forza, equilibrioMent, volonta, socievolezza, mira, karma, valUso,  valPerc, valFurt, valUtil, valGuida;
 					      
 				String pgData = (String) request.getParameter("dati");
 				String[] attriPg = pgData.split(",");
+				
+					
+				storia= str.getSimpleStory(idStory);
 				
 				
 				int i = 0;
@@ -101,7 +101,7 @@ public class GestioneStoriaServlet extends HttpServlet {
 				valUtil = Integer.parseInt(attriPg[i]);i++; 
 				abiGuida = attriPg[i]; i++; 
 				valGuida = Integer.parseInt(attriPg[i]);i++; 
-							
+				
 				Personaggio pg = new Personaggio();
 
 				pg.setNome(nome);
@@ -130,43 +130,65 @@ public class GestioneStoriaServlet extends HttpServlet {
 				pg.setFeritaTorso("-");
 				pg.setFeritaBraccia("-");
 				pg.setFeritaGambe("-");
+				pg.setSalute(10);
+				
 				pg.setUser(user);
 				pg.setUsername(user.getUsername());
 				pg.setStoria(storia);
-				pg.setIdStoria(1);
+				pg.setIdStoria(idStory);
 
 
+				
 				PersonaggioManager pgM = new PersonaggioManager();
-				pgM.creaPersonaggio(pg, 1);
+				pgM.creaPersonaggio(pg, idStory);
 				
 				AbilitaManager abM = new AbilitaManager();
-				Abilita abilita = new Abilita();		
-				abilita.setNome(abiFurt);
-				abilita.setValore(valFurt);
+				Abilita abi1 = new Abilita();		
+				abi1.setNome(abiFurt);
+				abi1.setValore(valFurt);
+				abi1.setPersonaggio(pg);
+				
 				Abilita abi2 = new Abilita();
 				abi2.setNome(abiGuida);
 				abi2.setValore(valGuida);
+				abi2.setPersonaggio(pg);
+				
 				Abilita abi3 = new Abilita();
 				abi3.setNome(abiPerc);
 				abi3.setValore(valPerc);
+				abi3.setPersonaggio(pg);
+				
 				Abilita abi4 = new Abilita();
 				abi4.setNome(abiUso);
 				abi4.setValore(valUso);
+				abi4.setPersonaggio(pg);
+				
 				Abilita abi5 = new Abilita();
 				abi5.setNome(abiUtil);
 				abi5.setValore(valUtil);
+				abi5.setPersonaggio(pg);
+
+				Set <Abilita> abSet= new HashSet<Abilita>();
+				abSet.add(abi1);
+				abSet.add(abi2);
+				abSet.add(abi3);
+				abSet.add(abi4);
+				abSet.add(abi5);
 				
-				abM.aggiungiAbilita(abilita, pg);
+				pg.aggiungiListaAbilita(abSet);
+				
+				abM.aggiungiAbilita(abi1, pg);
 				abM.aggiungiAbilita(abi2, pg);
 				abM.aggiungiAbilita(abi3, pg);
 				abM.aggiungiAbilita(abi4, pg);
 				abM.aggiungiAbilita(abi5, pg);
-				
+								
 				session.setAttribute("nuovoPG", pg);
 				
-				response.sendRedirect("jsp_page/riepilogoPG.jsp");
+				response.setContentType("text/plain");
+				response.getWriter().write("OK");
 			}
-			//questo if permette di predere una storia in base ad un pg
+			//questo if permette di prendere una storia in base ad un pg
 			else if(action.equalsIgnoreCase("acquisireStoria"))	{
 
 
@@ -186,25 +208,26 @@ public class GestioneStoriaServlet extends HttpServlet {
 				storia.setDescrizione(descrizione);
 				storia.setAmbientazione(ambientazione);
 
-				str.aggiungiStoria(storia, user);
+				user.aggiungiStoria(storia);
+				
+				str.aggiungiStoria(storia);
 				str.aggiungiATable(storia, user, 1);
-
-				System.out.println("successfully inserted");
 				response.sendRedirect("jsp_page/riepilogoStoria(da vedere)");
 
 				//questo if permette di prendere la lista delle storie
 			}else if(action.equalsIgnoreCase("listaStorie")) {
 
-				User usr = (User)session.getAttribute("user");
-				Collection<Storia>  listaStoria = str.getStoria(usr);
+				
+				Collection<Storia>  listaStoria = str.getStoria(user);
 				session.setAttribute("listaStorie", listaStoria);
 
 				//questo if permette di fare un redirect alla pagina di creazione personaggio
 			}else if(action.equalsIgnoreCase("creaPg")) {
 
-				String idSto = request.getParameter("idStoria");
-				Integer idS = Integer.parseInt(idSto);
-				session.setAttribute("idStory", idS);
+				String param = request.getParameter("idStoria"); 
+
+				
+				session.setAttribute("idStory", param);
 				response.sendRedirect("jsp_page/creazionePG.jsp");
 				
 				//questo if permette di inserire un pg	

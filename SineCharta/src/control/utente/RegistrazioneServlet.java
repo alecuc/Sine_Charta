@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.User;
+import exception.UserNullException;
 import interfaces.UserModelI;
 import manager.UsersManager;
 /**
@@ -58,7 +59,7 @@ public class RegistrazioneServlet extends HttpServlet {
 					user.doSave(usr);	
 			
 				System.out.println("successfully inserted");
-			//	RequestDispatcher rd = request.getRequestDispatcher("/jsp_page/index.jsp");
+				//RequestDispatcher rd = request.getRequestDispatcher("/jsp_page/index.jsp");
 				System.out.println("OK");
 				response.sendRedirect("jsp_page/regSuccess.jsp");
 				//rd.forward(request, response);
@@ -71,7 +72,10 @@ public class RegistrazioneServlet extends HttpServlet {
 			 session.setAttribute("RegistrationError", str);
 			 RequestDispatcher rd = request.getRequestDispatcher("");
 			 rd.forward(request, response);
-		 }
+		 } catch (UserNullException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
