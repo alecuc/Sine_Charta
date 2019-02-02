@@ -56,24 +56,32 @@ public class GestioneSessioneServlet extends HttpServlet {
 		
 		
 		try {
+			
+			if(action.equalsIgnoreCase("nuovaSessione")) {
+				String idStory = request.getParameter("idStoria");
+				session.setAttribute("idStoria", idStory);
+				response.sendRedirect("jsp_page/editorSessione.jsp");
+			
+			}
 
 			//questo if permette di inserire una sessione
 			if(action.equalsIgnoreCase("inserisciSessione")) {
 
-				String contenuto = request.getParameter("contenutoSessione");
-				String username = request.getParameter("Username");
-				String idStory = request.getParameter("idStoria");
-
-				Integer idStor = Integer.parseInt(idStory);
+				String contenuto = request.getParameter("Contenuto");
+				String idStory = (String) session.getAttribute("idStoria");
+				
+				Integer id = Integer.parseInt(idStory);
 
 				sesDiGioco.setContenutoSessione(contenuto);
-				sesDiGioco.setUsernameModeratore(username);
-				sesDiGioco.setIdStoria(idStor);
+				sesDiGioco.setUsernameModeratore(user.getUsername());
+				sesDiGioco.setIdStoria(id);
 
-				ssn.salvareSessioni(sesDiGioco);		
+				
+				ssn.salvareSessioni(sesDiGioco);
+				sesDiGioco.setIdStoria(id);
 
 				System.out.println("successfully inserted");
-				response.sendRedirect("jps_page/vistaSessione.jsp");
+				response.sendRedirect("jps_page/sessioneSuccess.jsp");
 
 
 				// questo if permette di predere la lista delle sessioni legate alla storia	

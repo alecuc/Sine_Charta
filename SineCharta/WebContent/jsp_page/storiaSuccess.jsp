@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-        <meta http-equiv="refresh" content="5; url=index.jsp" />
+        <meta http-equiv="refresh" content="5; url=leTueStorie.jsp" />
 
 <title>Successo!</title>
 <jsp:include page="head.jsp"></jsp:include>
@@ -15,10 +15,10 @@
     <br>
     <br>
 	<h3 class="card-title">
-          Sei stato registrato con successo! Stai per essere reindirizzato alla homepage.
+          Hai appena creato con successo una nuova storia e invitato i tuoi amici!
         </h3>
         <h3 class="card-title">
-          Clicca <a href="index.jsp">qui</a> se non vuoi attendere oltre. 
+         Stai per tornare alle tue storie. Clicca <a href="leTueStorie.jsp">qui</a> se non vuoi attendere oltre. 
         </h3>
 </div>
 </body>

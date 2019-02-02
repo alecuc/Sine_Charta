@@ -9,18 +9,61 @@
 <title>Crea personaggio</title>
 </head>
 <body>
+
+	<%@page import="beans.User"%>
+	<%@page import="beans.Storia"%>
+	<%@page import="beans.Personaggio"%>
+
+	<%@page import="java.util.Set"%>
+	<%@page import="java.util.Collection"%>
+
+
+
 	<jsp:include page="navigationbar.jsp"></jsp:include>
 
 	<%
-/*		if (session.getAttribute("user") == null) {
+		//Utente non è loggato
+		if (session.getAttribute("user") == null) {
 			response.sendRedirect("error/error.jsp");
 		}
-		;//*/
+
+		//Accede illegalmente alla pagina
+		if (session.getAttribute("idStory") == null) {
+			response.sendRedirect("error/error.jsp");
+		}
+
+		User utente = (User) session.getAttribute("user");
+		Collection<Storia> stListGioc = (Collection) session.getAttribute("storieGiocatore");
+		Set<Personaggio> pgList = utente.getPersonaggiUtente();
+
+		//PG già esistente
+		for (Storia st : stListGioc) {
+			for (Personaggio pg : pgList) {
+
+				if (pg.getIdStoria() == st.getId())
+					response.sendRedirect("error/error.jsp");
+
+			}
+		}
+
+		//Moderatore crea pg nella sua stessa storia
+		if (utente.getRuolo().equalsIgnoreCase("utenteModeratore")) {
+			Collection<Storia> stListMod = (Collection<Storia>) session.getAttribute("storieModeratore");
+
+			String param = (String) session.getAttribute("idStory");
+			int idStory = Integer.parseInt(param);
+
+			for (Storia st : stListMod) {
+				if (st.getId() == idStory)
+					response.sendRedirect("error/error.jsp");
+
+			}
+		}
 	%>
 
 	<h1 class="card-title">Crea il tuo personaggio</h1>
 
-	<!-- TASTI ANNULLA E AIUTO -->
+	<!-- TASTI ANNULLA E AIUTO 
 
 	<div class="position-fixed">
 		<form action="homeUser.jsp">
@@ -30,8 +73,12 @@
 		<br>
 		<button class="btn btn-dark mx-2"
 			style="background-color: #212529; border-color: red;">Aiuto</button>
-	</div>
-
+	</div>		-->
+	
+	
+	
+	
+	
 	<!-- FORM GENERALITÀ -->
 
 	<div class="container card p-2" id="generalità">
@@ -454,7 +501,7 @@
 			</table>
 
 		</fieldset>
-	
+
 		<button class="btn btn-dark mb-2 mx-1 float-right"
 			style="background-color: #212529; border-color: red;" id="completa"
 			disabled>Completa il tuo PG</button>
