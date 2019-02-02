@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import exception.UserNotFoundException;
+import exception.UserNullException;
 import manager.PersonaggioManager;
 import manager.SessioneManager;
 import manager.StoryManager;
@@ -15,7 +16,7 @@ import manager.UsersManager;
 
 public class testBeans {
 
-	public static void main(String[] args) throws SQLException, UserNotFoundException {
+	public static void main(String[] args) throws SQLException, UserNotFoundException, UserNullException {
 		
 		/*
 		UsersManager manager = new UsersManager();
@@ -53,19 +54,36 @@ public class testBeans {
 
 		System.out.println(utenteListaStorie.toString());
 			*/
-	
 		UsersManager mana = new UsersManager();
-	/*	Collection<User> lista = mana.doRetrieveAll(null);
-		Iterator<User> it = lista.iterator();
-		while(it.hasNext()) {
-			User utente = (User) it.next();
-			System.out.println(utente.toString());
-		}
-*/
+
+		User utente = new User();
+		utente.setUsername("testUser");
+		utente.setRuolo("utenteModeratore");
+		utente.setPassword("test");
+		utente.setName("tstName");
+		utente.setSurname("testSru");
+		utente.setEmail("testMail");
+	//	mana.doSave(utente);
+		StoryManager manager = new StoryManager();
+		Storia sto = new Storia();
+		sto.setAmbientazione("Sanctum Imperum");
+		sto.setTitolo("TestTitolo");
+		sto.setDescrizione("Test test Test");
+		//manager.aggiungiStoria(sto);
+
 		
 
 		
+		int x = manager.selectLastId();
+		sto.setId(x);
+		//manager.aggiungiATable(utente, 1);
+		System.out.println(x);
+		
+		manager.eliminaRiferimentoHaTable(utente.getUsername(), sto.getId());
+		manager.eliminaStoria(sto.getId());
+		mana.eliminaUtente(utente.getUsername());
 	}
+	
 	
 
 
