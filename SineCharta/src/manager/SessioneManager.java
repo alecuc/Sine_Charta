@@ -140,7 +140,7 @@ public class SessioneManager {
 		PreparedStatement preparedStatement = null;
 		
 		String creaSessione = "INSERT INTO " + TABLE_NAME
-				+ " (CONTENUTO, USERNAME, IDSTORY) VALUES (?, ?, ?, ?)";
+				+ " (NUMERO, CONTENUTO, USERNAME, IDSTORY) VALUES (?, ?, ?, ?)";
 		
 		try {
 			con = DriverManagerConnectionPool.getConnection();
@@ -300,5 +300,35 @@ public class SessioneManager {
 		
 		return sessioni;
 	}
+	
+	/********************************************************************
+	   * Metodo per contare tutte le sessioni di una storia        *
+	   * @param storia= a cui appartengono le sessioni          *
+	   * @return numero delle sessioni                  *
+	   ********************************************************************/
+	  public int getNumeroSessioniStoria(Storia storia) throws SQLException{
+	    Connection con = null;
+	    PreparedStatement ps = null;
+	    int count = 0;
+	    
+	    String countSession = "SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE IDSTORY = ?";
+	    try {
+	      con = DriverManagerConnectionPool.getConnection();
+	      ps = con.prepareStatement(countSession);
+	      ps.setInt(1, storia.getId());
+	      System.out.println("getNumeroSessioniStoria: " + ps.toString());
+	      ResultSet rs = ps.executeQuery();
+	      while(rs.next()) {
+	        count = rs.getInt("count(*)");
+	      }
+	    }finally {
+	      try {
+	        if(ps!=null)ps.close();
+	      }finally {
+	        DriverManagerConnectionPool.releaseConnection(con);
+	      }
+	    }
+	    return count;
+	  }
 	
 }

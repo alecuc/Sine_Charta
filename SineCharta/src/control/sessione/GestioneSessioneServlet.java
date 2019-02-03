@@ -3,6 +3,7 @@ package control.sessione;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +18,7 @@ import beans.Storia;
 import beans.User;
 import manager.PersonaggioManager;
 import manager.SessioneManager;
+import manager.StoryManager;
 
 /**
  * Servlet implementation class GestioneSessioneServlet
@@ -39,20 +41,14 @@ public class GestioneSessioneServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		response.setContentType("text/html");
-		String action = request.getParameter("action");
-		SessioneDiGioco sesDiGioco = new SessioneDiGioco();
-		SessioneManager ssn = new SessioneManager();
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
+		String action = request.getParameter("action");
 
 		System.out.println("++++++++++++++++++++++++");
 		System.out.println("Action: "+action);	
 		System.out.println("++++++++++++++++++++++++");
 		
-		/* TODO: SPOSTA ALTROVE PD
-		String numSessione = request.getParameter("numSessione");
-		Integer nSessione = Integer.parseInt(numSessione);
-		 */
 		
 		
 		try {
@@ -69,45 +65,65 @@ public class GestioneSessioneServlet extends HttpServlet {
 
 				String contenuto = request.getParameter("Contenuto");
 				String idStory = (String) session.getAttribute("idStoria");
-				
 				Integer id = Integer.parseInt(idStory);
-
-				sesDiGioco.setContenutoSessione(contenuto);
-				sesDiGioco.setUsernameModeratore(user.getUsername());
-				sesDiGioco.setIdStoria(id);
-
 				
-				ssn.salvareSessioni(sesDiGioco);
-				sesDiGioco.setIdStoria(id);
-
+				Storia storia= new Storia();
+				SessioneDiGioco sdg= new SessioneDiGioco();
+				
+				StoryManager stManager= new StoryManager();
+				SessioneManager sgManager= new SessioneManager();
+				
+				storia= stManager.getSimpleStory(id);
+				
+				int numSessione= sgManager.getNumeroSessioniStoria(storia);
+				
+				
+				sdg.setContenutoSessione(contenuto);
+				sdg.setIdNumeroSessione(numSessione);
+				sdg.setIdStoria(id);
+				sdg.setUsernameModeratore(user.getUsername());
+				
+				sgManager.salvareSessioni(sdg);
+				
+				storia.aggiungiSessione(sdg);
+				sdg.setStoriaSessione(storia);
+				
+				
+				Collection<Storia> listaStorieMod = stManager.getStoriaByFlag(user, 1);
+				session.setAttribute("storieModeratore", listaStorieMod);
+				
 				System.out.println("successfully inserted");
-				response.sendRedirect("jps_page/sessioneSuccess.jsp");
+				response.sendRedirect("jsp_page/sessioneSuccess.jsp");
 
 
 				// questo if permette di predere la lista delle sessioni legate alla storia	
 			}else if(action.equalsIgnoreCase("listaSessione")) {
-
+/*
 				Storia storia = (Storia)session.getAttribute("storia");			
 				User utente = (User)session.getAttribute("user");
-				Collection<SessioneDiGioco> listaSessioni = ssn.recuperoTutteLeSessioni(storia, utente);
+				Collection<SessioneDiGioco> listaSessioni = sdgManager.recuperoTutteLeSessioni(storia, utente);
 				session.setAttribute("listaSessioni", listaSessioni);
 				response.sendRedirect("sessioneModeratore.jsp");
-
+*/
 				//questo if permette di modificare una sessione	
 			}else if(action.equalsIgnoreCase("modificaSessione")) {
-
+/*
 				String contenuto = request.getParameter("contenutoSessione");
 				SessioneManager sdG = new SessioneManager();		
 				sdG.aggiornareSessioni(sesDiGioco, contenuto);
-
+*/
 				//questo if permette di fare un retrieve della sessione dal database
 			}else if(action.equalsIgnoreCase("prendiSessione")){
 
-				Storia storia = (Storia)session.getAttribute("storia");			
+			/*	Storia storia = (Storia)session.getAttribute("storia");			
 				User utente = (User)session.getAttribute("user");
-				//		sesDiGioco = ssn.recuperoSessioneStoria(storia, utente, nSessione);
+				String param= request.getParameter("numSessione");
+				
+				int numSessione= Integer.parseInt(param);
+				
+				sesDiGioco = sdgManager.recuperoSessioneStoria(storia, utente, numSessione);
 				session.setAttribute("sessione", sesDiGioco);
-
+*/
 			}else if(action.equalsIgnoreCase("gioca")) {
 
 				System.out.println("++++++++++++++++++++++++");
