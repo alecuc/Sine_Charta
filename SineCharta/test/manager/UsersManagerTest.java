@@ -44,18 +44,6 @@ public class UsersManagerTest extends TestCase{
 
 	
 	@Test
-	public void testDoSave() throws SQLException,UserNullException, UserNotFoundException{
-		System.out.println("\n Running doSave TEST: \n");
-		userManager.doSave(utenteDaInserire);
-		assertNotNull(utenteDaInserire);
-		utenteTestInserito = userManager.doRetrieveByKey(utenteDaInserire.getUsername());
-		assertNotNull(utenteTestInserito);
-		assertEquals(utenteDaInserire.getUsername(), utenteTestInserito.getUsername());
-		userManager.eliminaUtente("testUsername");
-
-	}
-	
-	@Test
 	public void testDoRetrieveByKey() throws SQLException, UserNotFoundException, UserNullException{
 		System.out.println("\n Running doRetrieveByKey TEST: \n");
 		userManager.doSave(utenteDaInserire);
@@ -74,14 +62,6 @@ public class UsersManagerTest extends TestCase{
 		
 	}
 
-	@Test
-	public void testEliminaUtente() throws SQLException, UserNotFoundException, UserNullException{
-		System.out.println("\n Running eliminaUtente TEST: \n");
-		userManager.doSave(utenteDaInserire);
-		userManager.eliminaUtente("testUsername");
-		utenteDaTrovare = userManager.doRetrieveByKey("testUsername");
-		assertFalse(utenteDaInserire.getUsername()==utenteDaTrovare.getUsername());
-	}
 
 	/*per rimuovere tutte le cose istanziate*/
 	protected void tearDown() throws SQLException{

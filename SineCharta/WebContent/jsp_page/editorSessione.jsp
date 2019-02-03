@@ -26,16 +26,14 @@
 				<h3 class="card-title">Editor di sessione</h3>
 
 				<div class="container-card">
-					<form action="EditorSessione" method="post">
+					<form action="" method="post" id="form">
 						<div class="row">
 
 
 							<textarea class="form-control" aria-label="With textarea"
-								placeholder="Descrivi la sessione qui..."
+								placeholder="Descrivi la sessione qui..." id="contenuto"
 								style="resize: none; height: 400px;" name="descrizione"></textarea>
-							<button class="btn btn-dark"
-								onclick="return validateTitle(this.form)">Salva
-								sessione</button>
+							<button class="btn btn-dark" id="salvaSessione">Salva sessione</button>
 
 						</div>
 					</form>

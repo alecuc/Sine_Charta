@@ -316,7 +316,7 @@ public class StoryManager {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(aggiungiHaTable);
 			ps.setString(1, utente.getUsername());
-			ps.setInt(2, this.selectLastId());
+			ps.setInt(2, selectLastId());
 			ps.setInt(3, flag);
 			System.out.println("aggiungiATable: " + ps.toString());
 			ps.executeUpdate();

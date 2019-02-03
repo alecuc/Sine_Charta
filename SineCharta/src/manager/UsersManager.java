@@ -216,9 +216,48 @@ public class UsersManager implements UserModelI<User>{
 		return (result != 0);
 	}
 	
+	/************************************************************************
+	 * Metodo per controllare l'esistenza di un utente						*
+	 * @param username= identificativo dell'utente							*
+	 * @return conferma del controllo										*
+	 ************************************************************************/
 	
-	
-	
-	
+	public boolean checkUser(String username)throws SQLException{
+		Connection con = null;
+		PreparedStatement ps = null;
+		String result=null;
+		String check = "SELECT USERNAME FROM "+ TABLE_NAME+ " WHERE USERNAME = ?";
+		User usr= new User();
+		usr.setUsername(result);
+
+		try {
+			con = DriverManagerConnectionPool.getConnection();
+			ps = con.prepareStatement(check);
+			ps.setString(1, username);
+			System.out.println("checkUser: " + ps.toString());
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+			usr.setUsername(rs.getString("Username"));
+			}
+			con.commit();
+			
+		}finally {
+			try {
+				if(ps!=null) ps.close();
+			}finally {
+				DriverManagerConnectionPool.releaseConnection(con);
+			}
+		}
+		
+		System.out.println(usr.toString());
+		
+		if(usr.getUsername().equals(null)) {
+			System.out.println("NON L'HO TROVATO");
+			return false;
+			}
+		else return true;
+	}
 	
 }

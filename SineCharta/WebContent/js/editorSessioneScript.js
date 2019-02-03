@@ -1,5 +1,18 @@
 $(document).ready(function(){	
 
+	console.log("loading v0.1");
+	
+	$('#salvaSessione').click(function(){
+		
+		var tagCont= $('#contenuto');
+		var cont= tagCont.val();
+
+		var value= '../GestioneSessioneServlet?action=inserisciSessione&Contenuto='+cont;
+
+		$('#form').attr('action', value);
+
+	});
+	
 
 	$('.minusEnemy').click(function(){
 

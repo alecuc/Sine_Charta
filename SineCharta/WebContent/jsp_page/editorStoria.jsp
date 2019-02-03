@@ -20,15 +20,15 @@
 				<h3 class="card-title">DESCRIVI LA TUA STORIA</h3>
 
 				<div class="container-card">
-					<form action="EditorStoria" method="post">
+					<form action="" method="post" id="form">
 						<div class="row">
 
 							<div class="col-6">
-								<input type="text" class="form-control"
+								<input type="text" class="form-control" id="titolo"
 									placeholder="Inserisci qui il titolo..." name="titolo">
 							</div>
 							<div class="col-6">
-								<select class="form-control" name="ambientazione">
+								<select class="form-control" name="ambientazione" id="ambientazione">
 									<option>Seleziona un'ambientazione</option>
 									<option>Sanctum Imperum</option>
 									<option>Terre Perdute</option>
@@ -37,10 +37,10 @@
 								</select>
 							</div>
 						</div>
-						<textarea class="form-control" aria-label="With textarea"
+						<textarea class="form-control" aria-label="With textarea" id="descrizione"
 							placeholder="Scrivi qui l'introduzione della tua storia..."
 							style="resize: none; height: 400px;" name="descrizione"></textarea>
-						<button class="btn btn-dark"
+						<button class="btn btn-dark" id="salvaStoria"
 							onclick="return validateTitle(this.form)">Salva storia</button>
 					</form>
 				</div>
@@ -56,7 +56,7 @@
 								<th></th>
 							</tr>
 							<tr>
-								<td></td>
+								<td hidden="true"></td>
 							</tr>
 						</tbody>
 					</table>

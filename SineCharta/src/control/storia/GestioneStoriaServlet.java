@@ -20,6 +20,7 @@ import beans.User;
 import manager.AbilitaManager;
 import manager.PersonaggioManager;
 import manager.StoryManager;
+import manager.UsersManager;
 
 
 /**
@@ -45,15 +46,17 @@ public class GestioneStoriaServlet extends HttpServlet {
 		response.setContentType("text/html");
 		HttpSession session = request.getSession();
 		String action= request.getParameter("action");
-		Storia storia = new Storia();
-		StoryManager str = new StoryManager();
 		User user = (User)session.getAttribute("user");
 
 
+		System.out.println("Action:" + action);
+		
 		try {
 
 			if(action.equalsIgnoreCase("inserisciPg")) {
 				
+				Storia storia = new Storia();
+				StoryManager str = new StoryManager();
 				String param = (String)session.getAttribute("idStory"); 
 				int idStory= Integer.parseInt(param);
 				
@@ -200,34 +203,58 @@ public class GestioneStoriaServlet extends HttpServlet {
 				//questo if permette di inserire una storia nel database	
 			}else if(action.equalsIgnoreCase("inserisciStoria")) {
 
-				String nome = request.getParameter("Titolo");
+				String titolo = request.getParameter("Titolo");
 				String descrizione = request.getParameter("Descrizione");
 				String ambientazione = request.getParameter("Ambientazione");
+				String data= request.getParameter("data");
+				User utente= (User) session.getAttribute("user");
+				Storia storia = new Storia();
+				StoryManager str = new StoryManager();
+				
+				System.out.println("Dati ricevuti: "+ data);
+				
+				
+				String[] inviti = data.split(",");
 
-				storia.setTitolo(nome);
+				storia.setTitolo(titolo);
 				storia.setDescrizione(descrizione);
 				storia.setAmbientazione(ambientazione);
 
-				user.aggiungiStoria(storia);
-				
 				str.aggiungiStoria(storia);
-				str.aggiungiATable(storia, user, 1);
-				response.sendRedirect("jsp_page/riepilogoStoria(da vedere)");
-
-				//questo if permette di prendere la lista delle storie
-			}else if(action.equalsIgnoreCase("listaStorie")) {
-
+				user.aggiungiStoria(storia);
+				storia.setUtenteModeratore(user);
+				storia.setUsername(user.getUsername());
 				
-				Collection<Storia>  listaStoria = str.getStoria(user);
-				session.setAttribute("listaStorie", listaStoria);
+				str.aggiungiATable(user, 1);
+				
+				
+				for(String st: inviti) {
+					utente.setUsername(st);
+					str.aggiungiATable(utente, 0);
+				}
+				
+				Collection<Storia> listaStorieMod = str.getStoriaByFlag(utente, 1);
+				session.setAttribute("storieModeratore", listaStorieMod);
+				
+				
+				response.sendRedirect("jsp_page/storiaSuccess.jsp");
 
-				//questo if permette di fare un redirect alla pagina di creazione personaggio
-			}else if(action.equalsIgnoreCase("creaPg")) {
+			}	
+			
+			
+			
+			
+			
+			
+			
+			
+			else if(action.equalsIgnoreCase("creaPg")) {
 
 				String param = request.getParameter("idStoria"); 
-
-				
 				session.setAttribute("idStory", param);
+				
+				
+				
 				response.sendRedirect("jsp_page/creazionePG.jsp");
 				
 				//questo if permette di inserire un pg	
@@ -236,7 +263,8 @@ public class GestioneStoriaServlet extends HttpServlet {
 			e.printStackTrace();
 
 		}catch (NullPointerException e) {
-			response.sendRedirect("jsp_page/error/error.jsp");
+	//		response.sendRedirect("jsp_page/error/error.jsp");
+			e.printStackTrace();
 		}
 	}	
 

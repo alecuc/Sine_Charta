@@ -43,27 +43,21 @@ public class UserExistServlet extends HttpServlet {
 		
 		response.setContentType("text/plain");
 		UsersManager um= new UsersManager();
-		User user= new User();
 		String username= request.getParameter("usr");
-		
-		
+		boolean check=false;
 		try {
-			user= um.doRetrieveByKey(username);
+			check= um.checkUser(username);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (UserNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
+
+		System.out.println("Username: "+username+"\n status check: "+check);
 		
-		if(user.getUsername()!=null) {
-			response.getWriter().write(user.getUsername());
-		}
-		else {
-			response.getWriter().write("NO");
-		}
-		
+		if(check) {
+			response.getWriter().write(username);
+			
+		} else response.getWriter().write("NO");		
 	}
 
 	/**
