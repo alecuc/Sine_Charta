@@ -83,7 +83,7 @@ public class PersonaggioManagerTest extends TestCase{
 	@Test
 	public void testGetSimplePGByStory() throws SQLException, UserNullException {
 		System.out.println("\n Running getSimplePGByStory TEST: \n");
-		managerUser.doSave(utenteTest);
+	/*	managerUser.doSave(utenteTest);
 		managerStory.aggiungiStoria(storiaTest);
 		managerStory.aggiungiATable(utenteTest, 0);
 		personaggioTest.setUsername(utenteTest.getUsername());
@@ -96,10 +96,10 @@ public class PersonaggioManagerTest extends TestCase{
 		managerStory.eliminaStoria(managerStory.selectLastId());
 		managerUser.eliminaUtente(utenteTest.getUsername());
 		assertNotNull(pgDaRecuperare);
-		
+		*/
 		
 	}
-
+ 
 	@Test
 	public void testGetStoriaPersonaggioById() throws SQLException, UserNullException {
 		System.out.println("\n Running getStoriaPersonaggioById TEST: \n");
@@ -112,12 +112,12 @@ public class PersonaggioManagerTest extends TestCase{
  		assertNotNull(personaggioTest);
  		assertNotNull(storiaTest);
 		id = managerPg.getStoriaPersonaggioById(personaggioTest);
+		assertTrue(id == managerStory.selectLastId());
+
 		managerPg.eliminaPG(personaggioTest);
 		managerStory.eliminaRiferimentoHaTable(utenteTest.getUsername(), managerStory.selectLastId());
 		managerStory.eliminaStoria(managerStory.selectLastId());
 		managerUser.eliminaUtente(utenteTest.getUsername());
-		
-		assertTrue(id == managerStory.selectLastId());
 		
 	}
 
@@ -136,34 +136,38 @@ public class PersonaggioManagerTest extends TestCase{
 		storiaRecuperata = managerStory.getSimpleStory(managerStory.selectLastId());
 		assertNotNull(storiaRecuperata);
 		listaPg = managerPg.getAllPgByStory(storiaRecuperata);
-		System.out.println(listaPg.toString());
+		assertFalse(listaPg.isEmpty());
+
 		managerPg.eliminaPG(personaggioTest);
 		managerStory.eliminaRiferimentoHaTable(utenteTest.getUsername(), managerStory.selectLastId());
 		managerStory.eliminaStoria(managerStory.selectLastId());
 		managerUser.eliminaUtente(utenteTest.getUsername());
+
+	}
+
+	@Test
+	public void testListaPG() throws SQLException, UserNullException{
+		System.out.println("\n Running listaPG TEST: \n");
+	/*	managerUser.doSave(utenteTest);
+		managerStory.aggiungiStoria(storiaTest);
+		managerStory.aggiungiATable(utenteTest, 0);
+		personaggioTest.setUsername(utenteTest.getUsername());
+		personaggioTest.setIdStoria(managerStory.selectLastId());
+		managerPg.creaPersonaggio(personaggioTest, personaggioTest.getIdStoria());
+		assertNotNull(utenteTest);
+		assertNotNull(storiaTest);
+		
+		listaPg = managerPg.listaPG(utenteTest);
 		assertFalse(listaPg.isEmpty());
-
+		
+		managerPg.eliminaPG(personaggioTest);
+		managerStory.eliminaRiferimentoHaTable(utenteTest.getUsername(), managerStory.selectLastId());
+		managerStory.eliminaStoria(managerStory.selectLastId());
+		managerUser.eliminaUtente(utenteTest.getUsername());
+		*/
 	}
 
-	@Test
-	public void testListaPG() {
-		fail("Not yet implemented");
-	}
 
-	@Test
-	public void testCreaPersonaggio() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testUpdateFeritePg() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testEliminaPG() {
-		fail("Not yet implemented");
-	}
 
 	
 	protected void tearDown() {
