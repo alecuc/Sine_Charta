@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package manager;
 
@@ -27,7 +27,7 @@ public class PersonaggioManagerTest2 extends TestCase{
 	private PersonaggioManager managerPg;
 	private UsersManager managerUser;
 	private StoryManager managerStory;
-	
+
 	private Personaggio personaggioTest;
 	private Personaggio pgDaRecuperare;
 	private User utenteTest;
@@ -35,7 +35,7 @@ public class PersonaggioManagerTest2 extends TestCase{
 	private Storia storiaRecuperata;
 	private Collection<Personaggio> listaPg;
 	private int id;
-	
+
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -77,30 +77,30 @@ public class PersonaggioManagerTest2 extends TestCase{
 		personaggioTest.setFeritaTorso("+");
 		personaggioTest.setFeritaBraccia("+");
 		personaggioTest.setFeritaGambe("+");
-		
+
 		utenteTest.setUsername("testPG");
 		utenteTest.setName("testName");
 		utenteTest.setSurname("testSurn");
 		utenteTest.setEmail("test@test");
 		utenteTest.setPassword("test");
 		utenteTest.setRuolo("utenteGiocatore");
-		
+
 		storiaTest.setTitolo("testPGStoria");
 		storiaTest.setDescrizione("test test test");
 		storiaTest.setAmbientazione("Sanctum Imperum");
-		
+
 		personaggioTest.setUsername(utenteTest.getUsername());
-		
+
 		managerUser.doSave(utenteTest);
-		
+
 		managerStory.aggiungiStoria(storiaTest);
 		managerStory.aggiungiATable(utenteTest, 0);
 		personaggioTest.setIdStoria(managerStory.selectLastId());
 		managerPg.creaPersonaggio(personaggioTest, managerStory.selectLastId());
-		
+
 	}
 
-	
+
 	@After
 	public void tearDown() throws Exception {
 		managerPg.eliminaPG(personaggioTest);
@@ -108,17 +108,18 @@ public class PersonaggioManagerTest2 extends TestCase{
 		managerStory.eliminaStoria(managerStory.selectLastId());
 		managerUser.eliminaUtente(personaggioTest.getUsername());
 		pgDaRecuperare = null;
-		
+
 	}
 
-   
+
 	@Test
 	public void testGetSimplePGByStory() throws SQLException {
 		System.out.println("Running getSimplePgByStory: \n");
-		
+
 		pgDaRecuperare = managerPg.getSimplePGByStory(utenteTest, managerStory.selectLastId());
-		
+
 		assertNotNull(pgDaRecuperare);
+		assertTrue(utenteTest.getUsername().equals(pgDaRecuperare.getUsername()));
 	}
 
 	@Test
@@ -126,25 +127,25 @@ public class PersonaggioManagerTest2 extends TestCase{
 		fail("Not yet implemented");
 	}
 
-	
+
 	@Test
 	public void testGetAllPgByStory() {
 		fail("Not yet implemented");
 	}
 
-	
+
 	@Test
 	public void testListaPG() {
 		fail("Not yet implemented");
 	}
 
-	
+
 	@Test
 	public void testCreaPersonaggio() {
 		fail("Not yet implemented");
 	}
 
-	
+
 	@Test
 	public void testUpdateFeritePg() {
 		fail("Not yet implemented");
