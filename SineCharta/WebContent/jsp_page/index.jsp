@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <jsp:include page="head.jsp"></jsp:include>
+<script src="../js/validation_registrazione.js"/"></script>
 <title>Sine Charta</title>
 </head>
 <body>

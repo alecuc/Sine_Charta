@@ -67,11 +67,11 @@ public class RegistrazioneServlet extends HttpServlet {
 				} 
 		 } catch(SQLException e) {
 			 e.printStackTrace();
-			 HttpSession session = request.getSession();
-			 String str = "true";
-			 session.setAttribute("RegistrationError", str);
-			 RequestDispatcher rd = request.getRequestDispatcher("");
-			 rd.forward(request, response);
+			/*
+			 * HttpSession session = request.getSession(); String str = "true";
+			 * session.setAttribute("RegistrationError", str);
+			 */ 
+			 response.sendRedirect("jsp_page/error/campiGiaPresenti.jsp");
 		 } catch (UserNullException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

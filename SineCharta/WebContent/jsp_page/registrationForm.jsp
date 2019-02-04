@@ -1,8 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<body>
 
 	<div class="col mx-auto">
 			<h5 class="card-title text-center">Registrati</h5>
@@ -117,6 +112,3 @@
 				</div>
 			</form>
 		</div>
-
-
-</body>

@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Collection;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -52,8 +53,9 @@ public class LoginServlet extends HttpServlet {
 			User utenteLogin= user.doRetrieveByKey(usernameInput);
 			String password= utenteLogin.getPassword();
 
-			if (utenteLogin.getUsername()==null) {
-				response.sendRedirect("jsp_page/error/error.jsp");
+			if (utenteLogin.getUsername().equals(null)) {
+				
+				response.sendRedirect("jsp_page/error/utenteNonTrovato.jsp");
 			}
 
 			String passEncr = passwordInput;
@@ -86,16 +88,15 @@ public class LoginServlet extends HttpServlet {
 				response.sendRedirect("jsp_page/error/loginErrorePassword.jsp");
 			}
 
-		} /*
-			 * catch (IllegalStateException e) { RequestDispatcher rd =
-			 * request.getRequestDispatcher("jsp_page/error/loginErrorePassword.jsp");
-			 * rd.forward(request, response); }
-			 */ catch (SQLException e) {
+		} catch (IllegalStateException e) { 
+			e.printStackTrace();
+			response.sendRedirect("jps_page/error/utenteNonTrovato.jsp");
+	    } catch (SQLException e) {
 			e.printStackTrace();
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (NullPointerException e) {
-			response.sendRedirect("jsp_page/error/error.jsp");
+			response.sendRedirect("jsp_page/error/utenteNonTrovato.jsp");
 		} catch (UserNotFoundException e) {
 			
 			response.sendRedirect("jps_page/error/utenteNonTrovato.jsp");

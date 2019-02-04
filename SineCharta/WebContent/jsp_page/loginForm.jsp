@@ -1,8 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<body>
+
 	<div class="col mx-auto">
 				<h5 class="card-title text-center">Login</h5>
 				<form class="form-signin" method="post" action="../LoginServlet">
@@ -17,7 +13,7 @@
 										<i class="fa fa-user"></i>
 									</div>
 									<input type="text" name="username" class="form-control"
-										id="username" placeholder="Username" required autofocus>
+										id="us" placeholder="Username" required autofocus>
 								</div>
 							</div>
 						</div>
@@ -33,7 +29,7 @@
 										<i class="fa fa-key"></i>
 									</div>
 									<input type="password" name="password" class="form-control"
-										id="password" placeholder="Password" required>
+										id="pwd" placeholder="Password" required>
 								</div>
 							</div>
 						</div>
@@ -50,5 +46,3 @@
 				</form>
 				 
 			</div>
-</body>
-</html>
