@@ -1,3 +1,4 @@
+<%@page import="beans.SessioneDiGioco"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,16 +12,14 @@
 <body>
 	<jsp:include page="navigationbar.jsp"></jsp:include>
 	<%@page import="beans.User"%>
-	<%@page import="beans.Personaggio"%>
-	<%@page import="beans.Abilita"%>
+	<%@page import="beans.SessioneDiGioco"%>
+	<%@page import="beans.Keyword"%>
 	<%@page import="java.util.Collection"%>
 	<%
-		/*	if ((session.getAttribute("user") == null)||session.getAttribute("personaggio")==null) {
+			if ((session.getAttribute("user") == null)||session.getAttribute("sessione")==null) {
 				response.sendRedirect("error/error.jsp");
 			}
-			else{
-				pg= (Personaggio)session.getAttribute("personaggio");	
-			}//*/
+			
 	%>
 
 
@@ -38,10 +37,12 @@
 		<div class="row">
 			<div class="col-8 card">
 				<h4>Sessione</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
+				<p>
+					<% 
+				SessioneDiGioco sdg= (SessioneDiGioco) session.getAttribute("sessione");
+
+				out.print(sdg.getContenutoSessione()); %>
+				</p>
 			</div>
 			<div class="col-4 card">
 				<h4>Keyword</h4>
@@ -52,8 +53,6 @@
 			</div>
 		</div>
 	</div>
-
-
 
 	<div class="container card position-absolute" id="mazzi"
 		style="z-index: auto">
@@ -102,213 +101,14 @@
 
 			</div>
 		</div>
-	</div>
 
+	</div>
 	<div class="container card position-absolute" id="guida"
 		style="z-index: -2">
 
 		<div class="row">
 
-			<div class="col-6 card">
-				<h4>Nome tarocco 1</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			<div class="col-6 card">
-				<h4>Nome tarocco 2</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-
-		</div>
-		<div class="row">
-
-			<div class="col-6 card">
-				<h4>Nome tarocco 3</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			<div class="col-6 card">
-				<h4>Nome tarocco 4</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-
-		</div>
-		<div class="row">
-
-			<div class="col-6 card">
-				<h4>Nome tarocco 5</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			<div class="col-6 card">
-				<h4>Nome tarocco 6</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-
-		</div>
-		<div class="row">
-
-			<div class="col-6 card">
-				<h4>Nome tarocco 7</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			<div class="col-6 card">
-				<h4>Nome tarocco 8</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-
-		</div>
-		<div class="row">
-
-			<div class="col-6 card">
-				<h4>Nome tarocco 9</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			<div class="col-6 card">
-				<h4>Nome tarocco 10</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-
-		</div>
-		<div class="row">
-
-			<div class="col-6 card">
-				<h4>Nome tarocco 11</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			<div class="col-6 card">
-				<h4>Nome tarocco 12</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-
-		</div>
-
-		<div class="row">
-
-			<div class="col-6 card">
-				<h4>Nome tarocco 13</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			<div class="col-6 card">
-				<h4>Nome tarocco 14</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-
-		</div>
-
-
-		<div class="row">
-
-			<div class="col-6 card">
-				<h4>Nome tarocco 15</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			<div class="col-6 card">
-				<h4>Nome tarocco 16</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-
-		</div>
-
-		<div class="row">
-
-			<div class="col-6 card">
-				<h4>Nome tarocco 17</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			<div class="col-6 card">
-				<h4>Nome tarocco 18</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-
-		</div>
-
-		<div class="row">
-
-			<div class="col-6 card">
-				<h4>Nome tarocco 19</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			<div class="col-6 card">
-				<h4>Nome tarocco 20</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-
-		</div>
-
-		<div class="row">
-
-			<div class="col-6 card">
-				<h4>Nome tarocco 21</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-			<div class="col-6 card">
-				<h4>Nome tarocco 0</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
+			<jsp:include page="guida.jsp"></jsp:include>
 
 		</div>
 	</div>

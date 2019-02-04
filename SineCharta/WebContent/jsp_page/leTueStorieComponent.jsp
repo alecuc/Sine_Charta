@@ -30,7 +30,7 @@
 
 				for (SessioneDiGioco sdg : listaSessioni) {
 					out.print("<tr>");
-					out.print("<form method=\"post\" action=\"../GiocaServlet\">");
+					out.print("<form method=\"post\" action=\"../GestioneSessioneServlet?action=prendiSessione&idStoria="+st.getId()+"&numero="+sdg.getIdNumeroSessione()+"\">");
 					out.print("<td>");
 					out.print("Sessione numero: "+sdg.getIdNumeroSessione());
 					out.print("</td>");

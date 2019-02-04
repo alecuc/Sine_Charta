@@ -115,15 +115,25 @@ public class GestioneSessioneServlet extends HttpServlet {
 				//questo if permette di fare un retrieve della sessione dal database
 			}else if(action.equalsIgnoreCase("prendiSessione")){
 
-			/*	Storia storia = (Storia)session.getAttribute("storia");			
-				User utente = (User)session.getAttribute("user");
-				String param= request.getParameter("numSessione");
+				StoryManager stManager= new StoryManager();
+				SessioneManager sgManager= new SessioneManager();				
+				String param= request.getParameter("numero");
+				Integer num= Integer.parseInt(param);
+				String idStory= request.getParameter("idStoria");
+				Integer id = Integer.parseInt(idStory);
 				
-				int numSessione= Integer.parseInt(param);
+				Storia storia= new Storia();
+				SessioneDiGioco sdg= new SessioneDiGioco();
 				
-				sesDiGioco = sdgManager.recuperoSessioneStoria(storia, utente, numSessione);
-				session.setAttribute("sessione", sesDiGioco);
-*/
+				
+				
+				storia= stManager.getSimpleStory(id);
+				sdg= sgManager.recuperoSessioneStoria(storia, user, num);
+				
+				
+				session.setAttribute("sessione", sdg);
+				response.sendRedirect("jsp_page/vistaModeratore.jsp");
+			
 			}else if(action.equalsIgnoreCase("gioca")) {
 
 				System.out.println("++++++++++++++++++++++++");
