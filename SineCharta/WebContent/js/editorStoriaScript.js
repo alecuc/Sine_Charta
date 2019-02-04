@@ -1,16 +1,13 @@
-/*
- * QUESTA FUNZIONE EFFETTUA UNA CHIAMATA ASINCRONA AD UNA SERVLET.
- * LA SERVLET UTILIZZERÀ USERSMANAGER PER CONTROLLARE L'ESISTENZA DELL'USERNAME INSERITO.
- * */
 
 $(document).ready(function(){
 	var nInvitato=0;
 	var utenti=[];
 	var data= "";
 
-
-	console.log("loaded v0.12");
-
+	/*
+	 * QUESTA FUNZIONE EFFETTUA UNA CHIAMATA ASINCRONA AD UNA SERVLET.
+	 * LA SERVLET UTILIZZERÀ USERSMANAGER PER CONTROLLARE L'ESISTENZA DELL'USERNAME INSERITO.
+	 * */
 
 	$('#aggiungiUtente').click(function(){
 
@@ -30,13 +27,21 @@ $(document).ready(function(){
 					utenti.push(name);
 					console.log(utenti.toString());
 
-				} else alert("Questo utente non esiste. Riprova");
+				} else if(responseText== "TU"){
+					alert("Non preocccuparti! Non devi invitarti alla tua stessa storia!");	
+				}
+				else alert("Questo utente non esiste. Riprova");
 			});
 		}
 
 
 	});
 
+	/*
+	 * Questa funzione elimina l'utente selezionato dalla lista di utenti da invitare
+	 * */
+	
+	
 	$("#tabellaInviti").on('click', '.cancella', function () {
 		var row= $(this).closest('tr');
 		var toRemove= row.find($('label')).text();
@@ -50,6 +55,11 @@ $(document).ready(function(){
 		console.log(utenti.toString());
 	});
 
+	
+	/*
+	 * Questa funzione finalizza la creazione della storia
+	 * */
+	
 	$('#salvaStoria').click(function(){
 
 

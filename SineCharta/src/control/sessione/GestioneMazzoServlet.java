@@ -36,6 +36,13 @@ public class GestioneMazzoServlet extends HttpServlet {
 		
 		String action= request.getParameter("action");
 		Mazzo mazzo= (Mazzo) session.getAttribute("Mazzo");
+		
+		
+		/*
+		 * Questo metodo restituisce nella response un oggetto JSON
+		 * che può essere interpretato per l'estrazione di un tarocco
+		 * */
+		
 		if(action.equalsIgnoreCase("estraiTarocco")) {
 		
 			Tarocco tarot= mazzo.estraiTarocco();
@@ -50,17 +57,36 @@ public class GestioneMazzoServlet extends HttpServlet {
 				+ "\"valorePicche\":\""+tarot.getValorePicche()+"\"}";
 			
 			response.getWriter().write(JSONtarot);
+		
+				
+		}	
+		
+		/*
+		 * Questo metodo restituisce nella response una stringa
+		 * che può essere interpretata per l'estrazione di una carta da poker
+		 * */
 			
-		}	else if(action.equalsIgnoreCase("estraiPoker")){
+			else if(action.equalsIgnoreCase("estraiPoker")){
 			String poker= mazzo.estraiPoker();
 			
 			
 			response.getWriter().write(poker);
-		}	else if(action.equalsIgnoreCase("mischiaTarocco")) {
+		}	
+		
+		/*
+		 * Questo metodo mischia il mazzo dei Tarocchi 
+		 * */
+		
+			else if(action.equalsIgnoreCase("mischiaTarocco")) {
 			mazzo.mischiaTarocco();
 			
 			
-		}	else if(action.equalsIgnoreCase("mischiaPoker")) {
+		}
+		
+		/*
+		 * Questo metodo mischia il mazzo da poker 
+		 * */
+			else if(action.equalsIgnoreCase("mischiaPoker")) {
 			mazzo.mischiaPoker();
 		}
 		

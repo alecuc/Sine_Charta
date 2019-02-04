@@ -54,6 +54,12 @@ $(document).ready(function(){
 
 	$.post('../GestioneMazzoServlet',{action: "mischiaTarocco"});
 
+	/*
+	 * Qui vengono inizializzati:
+	 *  i contatori per il numero di estrazioni
+	 * 	i punteggi delle caratteristiche
+	 *  gli oggetti temporanei per la gestione delle estrazioni
+	 * */
 
 	var countDom=0;
 	var countCuori=0;
@@ -79,6 +85,11 @@ $(document).ready(function(){
 	var JTFiori=	'{"nome":"", "numero":"", "valoreCuori":"", "valoreQuadri":"", "valoreFiori":"", "valorePicche":""}';
 	var JTPicche=	'{"nome":"", "numero":"", "valoreCuori":"", "valoreQuadri":"", "valoreFiori":"", "valorePicche":""}';
 
+	
+	/*
+	 * Questa funzione disattiva il form delle generalità e attiva quello per l'estrazione del tarocco dominante
+	 * */
+	
 	$('#confGen').click(function(){
 
 		if(validate('#formGen')){
@@ -96,6 +107,10 @@ $(document).ready(function(){
 
 	});
 
+	/*
+	 * Questa funzione disattiva la sezione per il tarocco dominante e attiva quella per l'estrazione delle caratteristiche
+	 * */
+	
 	$('#confDom').click(function(){
 
 		if(countDom==0){
@@ -112,7 +127,10 @@ $(document).ready(function(){
 		}
 	});
 
-
+	/*
+	 * Questa funzione disattiva la sezione dell'estrazione delle caratteristiche ed attiva quella per la distribuzione dei punteggi 
+	 * */
+	
 	$('#confermaPunti').click(function(){
 
 		if(countCuori==0||countQuadri==0||countFiori==0||countPicche==0){
@@ -141,6 +159,10 @@ $(document).ready(function(){
 		};
 	});
 
+	/*
+	 * Questa funzione disabilita la sezione per distribuire i punti caratteristica e attiva quella per la scelta delle abilità
+	 * */
+	
 	$('#confCar').click(function(){
 		if(puntiCuori!=0 || puntiQuadri!=0 || puntiFiori!=0 || puntiPicche!=0){
 			alert("Inserisci i punti caratteristica rimasti! Il tuo pg potrebbe essere più forte!");
@@ -165,6 +187,11 @@ $(document).ready(function(){
 	});
 
 
+	/*
+	 * Questa funzione finalizza la creazione del personaggio, eseguendo una richiesta asincrona alla servlet
+	 * e mandando in input alla servlet tutti i dati in un'unica stringa
+	 * */
+	
 	$('#completa').click(function(){
 		if (puntiAbi!=0){
 			alert("Inserisci i punti abilità rimasti! Il tuo pg potrebbe essere più bravo a fare queste cose!")
@@ -195,7 +222,9 @@ $(document).ready(function(){
 
 
 
-
+	/*
+	 * Questa funzione invia una richiesta asincrona alla servlet che estrae il tarocco dominante
+	 * */
 
 
 	$('#dealDom').click(function(){
@@ -223,7 +252,10 @@ $(document).ready(function(){
 
 	});
 
-
+	/*
+	 * Questa funzione invia una richiesta asincrona alla servlet che estrae il tarocco per le caratteristiche CUORI
+	 * */
+	
 	$('#dealCuori').click(function(){
 		countCuori++;
 
@@ -248,6 +280,10 @@ $(document).ready(function(){
 
 	});
 
+	/*
+	 * Questa funzione invia una richiesta asincrona alla servlet che estrae il tarocco per le caratteristiche QUADRI
+	 * */
+	
 	$('#dealQuadri').click(function(){
 		countQuadri++;
 
@@ -271,6 +307,10 @@ $(document).ready(function(){
 
 	});
 
+	/*
+	 * Questa funzione invia una richiesta asincrona alla servlet che estrae il tarocco per le caratteristiche FIORI
+	 * */
+	
 	$('#dealFiori').click(function(){
 		countFiori++;
 
@@ -294,6 +334,10 @@ $(document).ready(function(){
 
 	});
 
+	/*
+	 * Questa funzione invia una richiesta asincrona alla servlet che estrae il tarocco per le caratteristiche PICCHE
+	 * */
+	
 	$('#dealPicche').click(function(){
 		countPicche++;
 
@@ -317,8 +361,9 @@ $(document).ready(function(){
 
 	});
 
-
-
+	/*
+	 * Le due funzioni successive permettono di distribuire i punti delle caratteristiche CUORI
+	 * */
 
 	$('.minusCuori').click(function(){
 
@@ -336,7 +381,6 @@ $(document).ready(function(){
 	});
 
 
-
 	$('.plusCuori').click(function(){
 
 		var tag= $(this).prev();
@@ -351,6 +395,10 @@ $(document).ready(function(){
 		}
 	});
 
+	/*
+	 * Le due funzioni successive permettono di distribuire i punti delle caratteristiche QUADRI
+	 * */
+	
 	$('.minusQuadri').click(function(){
 
 		var tag= $(this).next();
@@ -381,6 +429,10 @@ $(document).ready(function(){
 		}
 	});
 
+	/*
+	 * Le due funzioni successive permettono di distribuire i punti delle caratteristiche FIORI
+	 * */
+	
 	$('.minusFiori').click(function(){
 
 		var tag= $(this).next();
@@ -411,6 +463,10 @@ $(document).ready(function(){
 		}
 	});
 
+	/*
+	 * Le due funzioni successive permettono di distribuire i punti delle caratteristiche PICCHE
+	 * */
+	
 	$('.minusPicche').click(function(){
 
 		var tag= $(this).next();
@@ -441,6 +497,10 @@ $(document).ready(function(){
 		}
 	});
 
+	/*
+	 * Le due funzioni successive permettono di distribuire i punti abilità
+	 * */
+	
 	$('.minusAbi').click(function(){
 
 		var input= $(this).next();

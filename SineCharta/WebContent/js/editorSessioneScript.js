@@ -1,6 +1,8 @@
 $(document).ready(function(){	
-
-	console.log("loading v0.1");
+	
+	/*
+	 * Questa funzione permette di salvare il contenuto di una sessione
+	 * */
 	
 	$('#salvaSessione').click(function(){
 		
@@ -13,6 +15,9 @@ $(document).ready(function(){
 
 	});
 	
+	/*
+	 * Le due funzioni successive permettono di aggiungere o rimuovere dei nemici dalla sessione corrente
+	 * */
 
 	$('.minusEnemy').click(function(){
 

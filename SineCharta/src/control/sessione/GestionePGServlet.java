@@ -39,6 +39,12 @@ public class GestionePGServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		
+		/*
+		 * Questa servlet non sarà completata.
+		 * */
+		
+		
 		HttpSession session = request.getSession();
 		Collection<Oggetto> listaOggetti = (Collection<Oggetto>) session.getAttribute("listaOggettiPG");
 		String action = request.getParameter("action");

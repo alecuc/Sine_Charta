@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.User;
 import exception.UserNotFoundException;
@@ -42,8 +43,11 @@ public class UserExistServlet extends HttpServlet {
 		
 		
 		response.setContentType("text/plain");
+		HttpSession session= request.getSession();
 		UsersManager um= new UsersManager();
 		String username= request.getParameter("usr");
+		User utente= (User) session.getAttribute("user");
+		
 		boolean check=false;
 		try {
 			check= um.checkUser(username);
@@ -56,6 +60,9 @@ public class UserExistServlet extends HttpServlet {
 		
 		if(check) {
 			response.getWriter().write(username);
+			
+		} else if(username.equals(utente.getUsername())) {
+			response.getWriter().write("TU");		
 			
 		} else response.getWriter().write("NO");		
 	}

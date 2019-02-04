@@ -45,13 +45,13 @@ public class GestioneSessioneServlet extends HttpServlet {
 		User user = (User)session.getAttribute("user");
 		String action = request.getParameter("action");
 
-		System.out.println("++++++++++++++++++++++++");
-		System.out.println("Action: "+action);	
-		System.out.println("++++++++++++++++++++++++");
-		
-		
-		
+				
 		try {
+
+			/*
+			 * Questo metodo indirizza l'utente alla pagina editorSessione,
+			 * inserendo come attributo di sessione l'id della storia corretto
+			 * */
 			
 			if(action.equalsIgnoreCase("nuovaSessione")) {
 				String idStory = request.getParameter("idStoria");
@@ -59,9 +59,12 @@ public class GestioneSessioneServlet extends HttpServlet {
 				response.sendRedirect("jsp_page/editorSessione.jsp");
 			
 			}
-
-			//questo if permette di inserire una sessione
-			if(action.equalsIgnoreCase("inserisciSessione")) {
+			
+			/*
+			 * Questo metodo permette di inserire una nuova sessione.
+			 * */
+			
+			else if(action.equalsIgnoreCase("inserisciSessione")) {
 
 				String contenuto = request.getParameter("Contenuto");
 				String idStory = (String) session.getAttribute("idStoria");
@@ -96,24 +99,24 @@ public class GestioneSessioneServlet extends HttpServlet {
 				response.sendRedirect("jsp_page/sessioneSuccess.jsp");
 
 
-				// questo if permette di predere la lista delle sessioni legate alla storia	
-			}else if(action.equalsIgnoreCase("listaSessione")) {
-/*
-				Storia storia = (Storia)session.getAttribute("storia");			
-				User utente = (User)session.getAttribute("user");
-				Collection<SessioneDiGioco> listaSessioni = sdgManager.recuperoTutteLeSessioni(storia, utente);
-				session.setAttribute("listaSessioni", listaSessioni);
-				response.sendRedirect("sessioneModeratore.jsp");
-*/
-				//questo if permette di modificare una sessione	
+				/*
+				 * Questo metodo permette di modificare il contenuto di una sessione.
+				 * Non sarà implementato.
+				 * */	
 			}else if(action.equalsIgnoreCase("modificaSessione")) {
 /*
 				String contenuto = request.getParameter("contenutoSessione");
 				SessioneManager sdG = new SessioneManager();		
 				sdG.aggiornareSessioni(sesDiGioco, contenuto);
-*/
-				//questo if permette di fare un retrieve della sessione dal database
-			}else if(action.equalsIgnoreCase("prendiSessione")){
+*/			}
+			
+						
+			/*
+			 * Questo metodo indirizza l'utente alla pagina dove può visualizzare la sessione di gioco,
+			 * inserendo come attributo di sessione la sessione di gioco corretta
+			 * */
+			
+			else if(action.equalsIgnoreCase("prendiSessione")){
 
 				StoryManager stManager= new StoryManager();
 				SessioneManager sgManager= new SessioneManager();				
@@ -125,8 +128,6 @@ public class GestioneSessioneServlet extends HttpServlet {
 				Storia storia= new Storia();
 				SessioneDiGioco sdg= new SessioneDiGioco();
 				
-				
-				
 				storia= stManager.getSimpleStory(id);
 				sdg= sgManager.recuperoSessioneStoria(storia, user, num);
 				
@@ -134,12 +135,16 @@ public class GestioneSessioneServlet extends HttpServlet {
 				session.setAttribute("sessione", sdg);
 				response.sendRedirect("jsp_page/vistaModeratore.jsp");
 			
-			}else if(action.equalsIgnoreCase("gioca")) {
+			}
+			
+			/*
+			 * Questo metodo reindirizza l'utente alla pagina per visualizzare il personaggio
+			 * e aggiunge il personaggio agli attributi di sessione
+			 * */
+			
+			else if(action.equalsIgnoreCase("gioca")) {
 
-				System.out.println("++++++++++++++++++++++++");
-				System.out.println("Sto eseguendo: "+action);	
-				System.out.println("++++++++++++++++++++++++");
-
+			
 				String param= request.getParameter("idStoria");
 				int idStoria= Integer.parseInt(param);
 

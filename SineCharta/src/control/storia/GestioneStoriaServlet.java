@@ -53,6 +53,10 @@ public class GestioneStoriaServlet extends HttpServlet {
 		
 		try {
 
+			/*
+			 * Questo metodo permette di completare la creazione del personaggio
+			 * */
+			
 			if(action.equalsIgnoreCase("inserisciPg")) {
 				
 				Storia storia = new Storia();
@@ -190,18 +194,14 @@ public class GestioneStoriaServlet extends HttpServlet {
 				
 				response.setContentType("text/plain");
 				response.getWriter().write("OK");
+			
 			}
-			//questo if permette di prendere una storia in base ad un pg
-			else if(action.equalsIgnoreCase("acquisireStoria"))	{
-
-
-				
-			//	Storia story = str.getSimpleStory(idStory);
-
-				//session.setAttribute("storia", story);
-
-				//questo if permette di inserire una storia nel database	
-			}else if(action.equalsIgnoreCase("inserisciStoria")) {
+			
+			/*
+			 * Questo metodo permette di completare la creazione di una nuova storia
+			 * */
+			
+			else if(action.equalsIgnoreCase("inserisciStoria")) {
 
 				String titolo = request.getParameter("Titolo");
 				String descrizione = request.getParameter("Descrizione");
@@ -241,6 +241,9 @@ public class GestioneStoriaServlet extends HttpServlet {
 
 			}	
 			
+			/*
+			 *Questo metodo indirizza l'utente alla pagina di creazione pg
+			 */
 			
 			else if(action.equalsIgnoreCase("creaPg")) {
 
