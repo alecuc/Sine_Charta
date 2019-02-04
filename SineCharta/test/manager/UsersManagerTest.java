@@ -29,10 +29,10 @@ public class UsersManagerTest extends TestCase{
 		listTest = new ArrayList<User>();
 		check = false;
 		
-		userTest.setUsername("testUser");
+		userTest.setUsername("testUserManager");
 		userTest.setName("test");
 		userTest.setSurname("testeste");
-		userTest.setEmail("test@test");
+		userTest.setEmail("testUser@test");
 		userTest.setPassword("test");
 		userTest.setRuolo("utenteModeratore");
 		
@@ -58,7 +58,7 @@ public class UsersManagerTest extends TestCase{
 		
 		assertNotNull(userTest);
 		assertNotNull(userTestRetrieve);
-		assertEquals("testUser", userTestRetrieve.getUsername());
+		assertEquals(userTest.getUsername(), userTestRetrieve.getUsername());
 	}
 
 	@Test
