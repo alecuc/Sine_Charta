@@ -73,6 +73,10 @@ public class StoryManager {
 	}
 	
 	
+	/****************************************************************************
+	 * Metodo per selezionare l'ultima storia inserita							*
+	 * @return id dell'ultima storia inserita									*
+	 ****************************************************************************/
 	public int selectLastId()throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
