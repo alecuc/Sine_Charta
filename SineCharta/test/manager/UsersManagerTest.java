@@ -1,76 +1,84 @@
 package manager;
 
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import beans.User;
 import exception.UserNotFoundException;
-import exception.UserNullException;
 import junit.framework.TestCase;
 
 public class UsersManagerTest extends TestCase{
 
-	private UsersManager userManager;
-	private User utenteDaTrovare;
-	private User utenteInvalid;
-	private User utenteDaInserire;
-	private User utenteTestInserito;
-	private Collection<User> listaUtenti;
-	//private User utenteDaInserire;
+	private UsersManager managerUser;
+	private User userTest;
+	private User userTestRetrieve;
+	private Collection<User> listTest;
+	private boolean check;
 	
-	/*Simula le chiamate della servlet*/
-	protected void setUp() {
-		System.out.println("\n Running setUP \n");
-		userManager = new UsersManager();
-		utenteDaTrovare = new User();
-		utenteTestInserito = new User();
-		utenteDaInserire = new User();
-		utenteInvalid = new User();
-		listaUtenti = new ArrayList<User>();
-		utenteDaInserire.setUsername("testUsername");
-		utenteDaInserire.setName("testName");
-		utenteDaInserire.setSurname("testSurname");
-		utenteDaInserire.setPassword("testPassword");
-		utenteDaInserire.setEmail("test@test.test");
-		utenteDaInserire.setRuolo("utenteGiocatore");
+	@Before
+	public void setUp() throws Exception {
+		System.out.println("\n Running setUp:");
+		managerUser = new UsersManager();
+		userTest = new User();
+		userTestRetrieve = new User();
+		listTest = new ArrayList<User>();
+		check = false;
+		
+		userTest.setUsername("testUser");
+		userTest.setName("test");
+		userTest.setSurname("testeste");
+		userTest.setEmail("test@test");
+		userTest.setPassword("test");
+		userTest.setRuolo("utenteModeratore");
+		
+		managerUser.doSave(userTest);
+		
+	}
 
-	}	
-	
-	/* Test su tutte le chiamate prima con valori verificati e poi con valori falsi*/
-
-	
-	@Test
-	public void testDoRetrieveByKey() throws SQLException, UserNotFoundException, UserNullException{
-		System.out.println("\n Running doRetrieveByKey TEST: \n");
-		userManager.doSave(utenteDaInserire);
-		utenteDaTrovare = userManager.doRetrieveByKey("testUsername");
-		assertEquals(utenteDaInserire.getUsername(), utenteDaTrovare.getUsername());
-		userManager.eliminaUtente("testUsername");
-		utenteInvalid = userManager.doRetrieveByKey("prova");
-		assertEquals(null, utenteInvalid.getUsername());
+	@After
+	public void tearDown() throws Exception {
+		System.out.println("\n Running tearDown TEST:\n");
+		managerUser.eliminaUtente(userTest.getUsername());
+		listTest.clear();
+		managerUser = null;
+		userTest = null;
+		userTestRetrieve = null;
 	}
 
 	@Test
-	public void testDoRetrieveAll() throws SQLException{
-		System.out.println("\n Running doRetrieveAll TEST: \n");
-		listaUtenti = userManager.doRetrieveAll(null);
-		assertFalse(listaUtenti.isEmpty());
+	public void testDoRetrieveByKey() throws SQLException, UserNotFoundException {
+		System.out.println("\n Running doRetrieveByKey: \n");
+		
+		userTestRetrieve = managerUser.doRetrieveByKey(userTest.getUsername());
+		
+		assertNotNull(userTest);
+		assertNotNull(userTestRetrieve);
+		assertEquals("testUser", userTestRetrieve.getUsername());
+	}
+
+	@Test
+	public void testDoRetrieveAll() throws SQLException {
+		System.out.println("\n Running doRetrieveAll TEST:\n");
+		
+		listTest = managerUser.doRetrieveAll(null);
+		
+		assertFalse(listTest.isEmpty());
+		
 		
 	}
 
-
-	/*per rimuovere tutte le cose istanziate*/
-	protected void tearDown() throws SQLException{
-		System.out.println("\n Running tearDown \n");
-		userManager = null;
-		listaUtenti.clear();
-		utenteDaInserire = null;
-		utenteDaTrovare = null;
+	@Test
+	public void testCheckUser() throws SQLException {
+		System.out.println("\n Running checkUser TEST:\n");
 		
+		check = managerUser.checkUser(userTest.getUsername());
 		
+		assertTrue(check);		
 	}
+
 }

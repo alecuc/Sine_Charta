@@ -5,7 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import beans.Storia;
@@ -24,7 +25,8 @@ public class StoryManagerTest extends TestCase{
 	private User utenteTest;
 	private User utenteRecuperato;
 	
-	protected void setUp() throws SQLException, UserNotFoundException{
+	@Before
+	protected void setUp() throws Exception{
 		System.out.println("\n Running setUp \n");
 		storyManager = new StoryManager();
 		userManager = new UsersManager();
@@ -42,48 +44,43 @@ public class StoryManagerTest extends TestCase{
 		storiaDaInserire.setTitolo("testTitolo");
 		storiaDaInserire.setDescrizione("testDescrizioneStoria");
 		storiaDaInserire.setAmbientazione("Sanctum Imperum");
-	}
-	
-
-	@Test
-	public void testAggiungiStoria() throws SQLException, UserNullException{
-		System.out.println("\n Running aggiungiStoria TEST: \n");
-		//Utente moderatore che inserisce la storia
+		
 		userManager.doSave(utenteTest);
-		//Storia da inserie
 		storyManager.aggiungiStoria(storiaDaInserire);
 		storyManager.aggiungiATable(utenteTest, 1);
-		
-		assertNotNull(utenteTest);
-		assertNotNull(storiaDaInserire);
-		assertNotNull(utenteTest);
-		
-		storiaRecuperata = storyManager.getSimpleStory(storyManager.selectLastId());
-		assertNotNull(storiaRecuperata);
-		
+	}
+	
+	@After
+	public void tearDown() throws SQLException {
+		System.out.println("\n Running tearDown TEST: \n");
 		storyManager.eliminaRiferimentoHaTable(utenteTest.getUsername(), storyManager.selectLastId());
-		storyManager.eliminaStoria(storiaRecuperata.getId());
+		storyManager.eliminaStoria(storyManager.selectLastId());
 		userManager.eliminaUtente(utenteTest.getUsername());
+
+		storyManager = null;
 		
-		}
+		userManager = null;
+		listaStoria.clear();
+		storiaDaInserire = null;
+		storiaRecuperata = null;
+		utenteTest = null;
+		utenteRecuperato = null;
+	}
 
-
+	
 	
 	@Test
 	public void testGetStoria() throws SQLException, UserNullException, UserNotFoundException {
 		System.out.println("\n Running getStoria TEST: \n");
-		userManager.doSave(utenteTest);
-		storyManager.aggiungiStoria(storiaDaInserire);
-		storyManager.aggiungiATable(utenteTest, 1);
+		
 		assertNotNull(utenteTest);
 		assertNotNull(storiaDaInserire);
+		
 		utenteRecuperato = userManager.doRetrieveByKey("utenteTestStory");
 		assertNotNull(utenteRecuperato);
 		
 		listaStoria = storyManager.getStoria(utenteRecuperato);
-		storyManager.eliminaRiferimentoHaTable(utenteTest.getUsername(), storyManager.selectLastId());
-		storyManager.eliminaStoria(storyManager.selectLastId());
-		userManager.eliminaUtente(utenteTest.getUsername());
+		
 		assertFalse(listaStoria.isEmpty());
 
 	
@@ -93,38 +90,14 @@ public class StoryManagerTest extends TestCase{
 	@Test
 	public void testGetStoriaByFlag() throws SQLException, UserNullException, UserNotFoundException {
 		System.out.println("\n Running getStoriaByFlag TEST: \n");
-		utenteTest.setRuolo("utenteGiocatore");
-		userManager.doSave(utenteTest);
-		storyManager.aggiungiStoria(storiaDaInserire);
-		storyManager.aggiungiATable(utenteTest, 0);
-		utenteTest.setRuolo("utenteModeratore");
-		storiaDaInserire.setTitolo("TestByFLag2");
-		storyManager.aggiungiStoria(storiaDaInserire);
-		storyManager.aggiungiATable(utenteTest, 1);
-		assertNotNull(utenteTest);
-		assertNotNull(storiaDaInserire);
+		
 		utenteRecuperato = userManager.doRetrieveByKey("utenteTestStory");
 		assertNotNull(utenteRecuperato);
+		listaStoria = storyManager.getStoriaByFlag(utenteRecuperato, 1);
 		
-		listaStoria = storyManager.getStoriaByFlag(utenteRecuperato, 0);
 		assertFalse(listaStoria.isEmpty());
 		
-		storyManager.eliminaRiferimentoHaTable(utenteRecuperato.getUsername(), storyManager.selectLastId());
-		storyManager.eliminaStoria(storyManager.selectLastId());
-		storyManager.eliminaRiferimentoHaTable(utenteRecuperato.getUsername(), storyManager.selectLastId());
-		storyManager.eliminaStoria(storyManager.selectLastId());
-		userManager.eliminaUtente(utenteRecuperato.getUsername());
 		
 	}
 	
-	public void tearDown() {
-		System.out.println("\n Running tearDown TEST: \n");
-		storyManager = null;
-		userManager = null;
-		listaStoria.clear();
-		storiaDaInserire = null;
-		storiaRecuperata = null;
-		utenteTest = null;
-		utenteRecuperato = null;
-	}
 }

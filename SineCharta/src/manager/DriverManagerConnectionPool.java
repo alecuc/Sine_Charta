@@ -15,34 +15,34 @@ public class DriverManagerConnectionPool {
 			Class.forName("com.mysql.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			System.out.println("DB driver not found:"+ e.getMessage());
-		} 
+		}
 	}
-	
+
 	private static synchronized Connection createDBConnection() throws SQLException {
 		Connection newConnection = null;
-		
+
 		/*****AmazonAWS Database****/
 		//String username = "SineMaster";
 		//String password = "SinePassword";
 		//String url = "jdbc:mysql://sinechartadb.c4mcoif2kbyp.us-east-2.rds.amazonaws.com:3306/dbSineCharta";
-		
+
 		/*local DB*/
-		
+
 		// String username = "root";
 		//String password = "12345";
 		//String url = "jdbc:mysql://localhost:3306/dbsinecharta?useLegacyDatetimeCode=false&serverTimezone=UTC";
-		
-		
+
+
 		String username = "sql7277168";
 		String password = "vLrF71CFKY";
 		String url = "jdbc:mysql://sql7.freesqldatabase.com:3306/sql7277168";
 		newConnection = DriverManager.getConnection(url, username, password);
-	
+
 		newConnection.setAutoCommit(false);
 		return newConnection;
 	}
 
-	
+
 	public static synchronized Connection getConnection() throws SQLException {
 		Connection connection;
 
@@ -58,7 +58,7 @@ public class DriverManagerConnectionPool {
 				connection = getConnection();
 			}
 		} else {
-			connection = createDBConnection();		
+			connection = createDBConnection();
 		}
 
 		return connection;

@@ -207,7 +207,6 @@ public class GestioneStoriaServlet extends HttpServlet {
 				String descrizione = request.getParameter("Descrizione");
 				String ambientazione = request.getParameter("Ambientazione");
 				String data= request.getParameter("data");
-				User utente= (User) session.getAttribute("user");
 				Storia storia = new Storia();
 				StoryManager str = new StoryManager();
 				
@@ -228,24 +227,19 @@ public class GestioneStoriaServlet extends HttpServlet {
 				str.aggiungiATable(user, 1);
 				
 				
-				for(String st: inviti) {
-					utente.setUsername(st);
-					str.aggiungiATable(utente, 0);
+				for(String string: inviti) {
+					User daInvitare= new User();
+					daInvitare.setUsername(string);
+					str.aggiungiATable(daInvitare, 0);
 				}
 				
-				Collection<Storia> listaStorieMod = str.getStoriaByFlag(utente, 1);
+				Collection<Storia> listaStorieMod = str.getStoriaByFlag(user, 1);
 				session.setAttribute("storieModeratore", listaStorieMod);
 				
 				
 				response.sendRedirect("jsp_page/storiaSuccess.jsp");
 
 			}	
-			
-			
-			
-			
-			
-			
 			
 			
 			else if(action.equalsIgnoreCase("creaPg")) {

@@ -15,7 +15,9 @@
 			for (Storia st : stList) {
 
 				Set<SessioneDiGioco> listaSessioni = st.getListaSessioni();
-
+	
+				System.out.println("NUMERO DI SESSIONI NELLA STORIA CORRENTE: "+ st.getListaSessioni().size());
+				
 				out.print("<table class=\"table table-dark\" id=\"tabellaStorie\">");
 				out.print("<thead>");
 				out.print("<tr>");
