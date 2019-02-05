@@ -1,3 +1,21 @@
+function validateTitle(form) {
+
+	//define storia form regular expression
+	var titleRX = /^(\w+[\._\-\?\!\+\*\']?(...)?){5,}$/;
+	var descrRX = /^(\w+[\._\-\?\!\+\*\']?(...)?){5,}$/;
+
+	var titleOK = form.titolo.value.match(titleRX);
+	var descOK = form.descrizione.value.match(descrRX);
+
+	if(!titleOK){ //check titolo
+		alert("Il campo titolo non è corretto");
+		return false;
+	}else if(!descOK){ // check descrizione
+		alert("Il campo descrizione non è corretto");
+		return false;
+	}else
+		return true;
+}
 
 $(document).ready(function(){
 	var nInvitato=0;
@@ -40,8 +58,8 @@ $(document).ready(function(){
 	/*
 	 * Questa funzione elimina l'utente selezionato dalla lista di utenti da invitare
 	 * */
-	
-	
+
+
 	$("#tabellaInviti").on('click', '.cancella', function () {
 		var row= $(this).closest('tr');
 		var toRemove= row.find($('label')).text();
@@ -55,29 +73,35 @@ $(document).ready(function(){
 		console.log(utenti.toString());
 	});
 
-	
+
 	/*
 	 * Questa funzione finalizza la creazione della storia
 	 * */
-	
+
 	$('#salvaStoria').click(function(){
 
+		if(validateTitle($("#form"))){
 
 
-		var tagTitolo= $('#titolo');
-		var tagAmb= $('#ambientazione');
-		var tagDesc= $('#descrizione');
+			if(utenti.length == 0) {
+				alert('Devi invitare qualcuno a giocare!');
+			} else{
 
-		var titolo= tagTitolo.val();
-		var ambi= tagAmb.val();
-		var desc= tagDesc.val();
+				var tagTitolo= $('#titolo');
+				var tagAmb= $('#ambientazione');
+				var tagDesc= $('#descrizione');
 
-		data= utenti.toString();
-		var value= '../GestioneStoriaServlet?action=inserisciStoria&Descrizione='+desc+'&Titolo='+titolo+'&Ambientazione='+ambi+'&data='+data;
+				var titolo= tagTitolo.val();
+				var ambi= tagAmb.val();
+				var desc= tagDesc.val();
 
-		$('#form').attr('action', value);
+				data= utenti.toString();
 
+				var value= '../GestioneStoriaServlet?action=inserisciStoria&Descrizione='+desc+'&Titolo='+titolo+'&Ambientazione='+ambi+'&data='+data;
 
+				$('#form').attr('action', value);
+			}
+		}
 	});
 
 });

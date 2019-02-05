@@ -134,7 +134,7 @@ $(document).ready(function(){
 	$('#confermaPunti').click(function(){
 
 		if(countCuori==0||countQuadri==0||countFiori==0||countPicche==0){
-			alert("Devi estrarre almeno una carta!");
+			alert("Devi estrarre almeno una carta per seme!");
 		}else{
 
 			$(this).prop('disabled',true);

@@ -27,16 +27,13 @@
 
 				<div class="container-card">
 					<form action="" method="post" id="form">
-						<div class="row">
 
 
 							<textarea class="form-control" aria-label="With textarea"
 								placeholder="Descrivi la sessione qui..." id="contenuto"
-								style="resize: none; height: 400px;" name="descrizione"></textarea>
+								style="resize: none; height: 400px;" name="contenuto" required="required"></textarea>
 							<button class="btn btn-dark" id="salvaSessione">Salva sessione</button>
-
-						</div>
-					</form>
+				</form>
 				</div>
 			</div>
 

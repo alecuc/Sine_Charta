@@ -252,7 +252,7 @@ public class UsersManager implements UserModelI<User>{
 		
 		System.out.println(usr.toString());
 		
-		if(usr.getUsername().equals(null)) {
+		if(usr.getUsername()==null) {
 			System.out.println("NON L'HO TROVATO");
 			return false;
 			}
