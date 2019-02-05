@@ -4,93 +4,6 @@
   "name": "LogIn",
   "url": "http://localhost:8080/SineCharta/jsp_page/index.jsp",
   "tests": [{
-    "id": "802efaee-a286-4a61-a9ca-db50858ca2ff",
-    "name": "LogOut",
-    "commands": [{
-      "id": "cf36d694-a765-4958-8c36-a9c9e172dfee",
-      "comment": "",
-      "command": "open",
-      "target": "http://localhost:8080/SineCharta/jsp_page/index.jsp",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "898f25f2-622d-4373-b6da-6ac351b3c616",
-      "comment": "",
-      "command": "setWindowSize",
-      "target": "1050x708",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "c812ace2-1c18-4a4d-addc-c9e1bc5a9cb4",
-      "comment": "",
-      "command": "type",
-      "target": "id=username",
-      "targets": [
-        ["id=username", "id"],
-        ["name=username", "name"],
-        ["css=.row:nth-child(1) > .col-md-6 #username", "css:finder"],
-        ["css=#username", "css"],
-        ["xpath=//input[@id='username']", "xpath:attributes"],
-        ["xpath=//input", "xpath:position"]
-      ],
-      "value": "Raziel"
-    }, {
-      "id": "a3d69300-e284-4aa7-b33b-cdf4cb2390df",
-      "comment": "",
-      "command": "type",
-      "target": "id=password",
-      "targets": [
-        ["id=password", "id"],
-        ["name=password", "name"],
-        ["css=.row:nth-child(2) #password", "css:finder"],
-        ["css=#password", "css"],
-        ["xpath=//input[@id='password']", "xpath:attributes"],
-        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
-      ],
-      "value": "1234"
-    }, {
-      "id": "908908bd-a94c-4f83-829a-f4c2e2a23d16",
-      "comment": "",
-      "command": "sendKeys",
-      "target": "id=password",
-      "targets": [
-        ["id=password", "id"],
-        ["name=password", "name"],
-        ["css=.row:nth-child(2) #password", "css:finder"],
-        ["css=#password", "css"],
-        ["xpath=//input[@id='password']", "xpath:attributes"],
-        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
-      ],
-      "value": "${KEY_ENTER}"
-    }, {
-      "id": "fb7aa3f6-cdc8-4ba4-8feb-91e635b65a7d",
-      "comment": "",
-      "command": "chooseOkOnNextConfirmation",
-      "target": "",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "b06b5efb-aa6b-4efc-ac5f-7b40e2d1976b",
-      "comment": "",
-      "command": "click",
-      "target": "id=logout",
-      "targets": [
-        ["id=logout", "id"],
-        ["css=#logout", "css:finder"],
-        ["css=#logout", "css"],
-        ["xpath=//button[@id='logout']", "xpath:attributes"],
-        ["xpath=//form/button", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "4b906ab4-72a1-41c6-8208-3c0597202a57",
-      "comment": "",
-      "command": "webdriverChooseOkOnVisibleConfirmation",
-      "target": "",
-      "targets": [],
-      "value": ""
-    }]
-  }, {
     "id": "ec233683-61bf-41c2-9033-3537731ce2ba",
     "name": "TC_1.1",
     "commands": [{
@@ -424,14 +337,7 @@
       "value": ""
     }]
   }],
-  "suites": [{
-    "id": "e42d1f49-7a24-40cd-be9e-370c44c90c16",
-    "name": "Default Suite",
-    "persistSession": false,
-    "parallel": false,
-    "timeout": 300,
-    "tests": []
-  }],
+  "suites": [],
   "urls": ["http://localhost:8080/", "http://localhost:8080/SineCharta/jsp_page/index.jsp", "http://localhost:8080/SineCharta/jsp_page/homeUser.jsp"],
   "plugins": []
 }
