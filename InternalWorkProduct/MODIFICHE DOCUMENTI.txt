@@ -1,4 +1,4 @@
- -- RAD --
+﻿ -- RAD --
 
 Pagina 6, 7 - L'amministratore non esiste.
 
@@ -14,12 +14,12 @@ Pagina 16 - La figura 4 degli scenari è sbagliata
 
 
  -- SDD --
-
-Pagina 4 - Che introduzione di merda. I tempi di risposta finora sono lunghi.
-Pagina 5 - Tabella: tempi di risposta (?????????)
-	 - Throughput: IL SISTEMA NON È DISTRIBUITO
-	 - Memoria: 40 moderatori invece di 70
+modificare decomposizione del sistema
 
 
+
+--SDD dati persistenti--
+-campo email: unique
+-aggiunger distanzadallamorte, salute
 
 
