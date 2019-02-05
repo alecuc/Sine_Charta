@@ -13,15 +13,19 @@
 			</li>
 			<li class="nav-item"><a class="nav-link" href="bacheca.jsp">Bacheca</a></li>
 			<li class="nav-item"><a class="nav-link" href="iTuoiInviti.jsp">Inviti</a></li>
-			<%User user= (User)session.getAttribute("user"); 
+			<%
+			if (session.getAttribute("user")==null) response.sendRedirect("error/error.jsp");
+			else{
+				User user= (User) session.getAttribute("user");
 				if(user.getRuolo().equalsIgnoreCase("utenteModeratore")){%>
+			
 			<li class="nav-item"><a class="nav-link" href="leTueStorie.jsp">Le tue
 					storie</a></li>
 			<%} else {%>
 			<li class="nav-item"><a class="nav-link" href="leTueStorie.jsp">Diventa un
 					moderatore</a></li>
 
-			<%} %>
+			<%}} %>
 		</ul>
 	</div>
 	<form action="../LogoutServlet" method="post">

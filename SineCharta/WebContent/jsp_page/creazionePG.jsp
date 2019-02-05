@@ -13,7 +13,6 @@
 	<%@page import="beans.User"%>
 	<%@page import="beans.Storia"%>
 	<%@page import="beans.Personaggio"%>
-
 	<%@page import="java.util.Set"%>
 	<%@page import="java.util.Collection"%>
 
@@ -23,40 +22,41 @@
 
 	<%
 		//Utente non è loggato
-		if (session.getAttribute("user") == null) {
+		if (session.getAttribute("user") == null || session.getAttribute("idStory") == null) {
 			response.sendRedirect("error/error.jsp");
-		}
 
-		//Accede illegalmente alla pagina
-		if (session.getAttribute("idStory") == null) {
-			response.sendRedirect("error/error.jsp");
-		}
+		} else {
 
-		User utente = (User) session.getAttribute("user");
-		Collection<Storia> stListGioc = (Collection) session.getAttribute("storieGiocatore");
-		Set<Personaggio> pgList = utente.getPersonaggiUtente();
+			User utente = (User) session.getAttribute("user");
+			Collection<Storia> stListGioc = (Collection) session.getAttribute("storieGiocatore");
 
-		//PG già esistente
-		for (Storia st : stListGioc) {
-			for (Personaggio pg : pgList) {
+			if (utente.getPersonaggiUtente().isEmpty()) {
 
-				if (pg.getIdStoria() == st.getId())
-					response.sendRedirect("error/error.jsp");
+				Set<Personaggio> pgList = utente.getPersonaggiUtente();
 
-			}
-		}
+				//PG già esistente
+				for (Storia st : stListGioc) {
+					for (Personaggio pg : pgList) {
 
-		//Moderatore crea pg nella sua stessa storia
-		if (utente.getRuolo().equalsIgnoreCase("utenteModeratore")) {
-			Collection<Storia> stListMod = (Collection<Storia>) session.getAttribute("storieModeratore");
+						if (pg.getIdStoria() == st.getId())
+							response.sendRedirect("error/error.jsp");
 
-			String param = (String) session.getAttribute("idStory");
-			int idStory = Integer.parseInt(param);
+					}
+				}
+			} else
+			//Moderatore crea pg nella sua stessa storia
+			if (utente.getRuolo().equalsIgnoreCase("utenteModeratore") && session.getAttribute("idStory") != null) {
+				Collection<Storia> stListMod = (Collection<Storia>) session.getAttribute("storieModeratore");
 
-			for (Storia st : stListMod) {
-				if (st.getId() == idStory)
-					response.sendRedirect("error/error.jsp");
+				String param = (String) session.getAttribute("idStory");
 
+				int idStory = Integer.parseInt(param);
+
+				for (Storia st : stListMod) {
+					if (st.getId() == idStory)
+						response.sendRedirect("error/error.jsp");
+
+				}
 			}
 		}
 	%>
@@ -74,11 +74,8 @@
 		<button class="btn btn-dark mx-2"
 			style="background-color: #212529; border-color: red;">Aiuto</button>
 	</div>		-->
-	
-	
-	
-	
-	
+
+
 	<!-- FORM GENERALITÀ -->
 
 	<div class="container card p-2" id="generalità">

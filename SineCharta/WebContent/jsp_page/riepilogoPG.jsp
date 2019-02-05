@@ -19,11 +19,10 @@
 
 	<%
 		Personaggio pg = new Personaggio();
-		if ((session.getAttribute("user") == null)||session.getAttribute("nuovoPG")==null) {
+		if ((session.getAttribute("user") == null) || session.getAttribute("nuovoPG") == null) {
 			response.sendRedirect("error/error.jsp");
-		}
-		else{
-			pg= (Personaggio)session.getAttribute("nuovoPG");	
+		} else {
+			pg = (Personaggio) session.getAttribute("nuovoPG");
 		}
 	%>
 	<div class="container">
@@ -118,26 +117,21 @@
 				</table>
 			</div>
 		</div>
+		<h4 class=" card-title">LE TUE ABILITÀ</h4>
 		<div class="row">
 			<div class="col-12">
-
-				<br>
-				<h4 class=" card-title">LE TUE ABILITÀ</h4>
 				<table class="table table-dark">
 					<tbody>
 						<tr>
-							<% /*
-							User utente= (User)session.getAttribute("user");
+							<%
+								Collection<Abilita> abList = pg.getListaAbilita();
 
-							Collection <Abilita> abList;
-							
 								out.print("<div class=\"table-responsive\">");
 
 								out.print("<table class=\"table table-dark\" id=\"tabellaAbilita\">");
 								out.print("<thead>");
 								out.print("<tr>");
 								out.print("<th scope=\"col\">Abilità</th>");
-								out.print("<th scope=\"col\">Punti abilità</th>");
 								out.print("<th scope=\"col\">Totale</th>");
 								out.print("</tr>");
 								out.print("</thead>");
@@ -146,22 +140,21 @@
 								for (Abilita ab : abList) {
 
 									out.print("<tr>");
-									out.print("<td>" +ab.getNome()+ "</td>");
+									out.print("<td>" + ab.getNome() + "</td>");
 									out.print("<td>" + ab.getValore() + "</td>");
-									out.print("<td>" + "</td>");
 									out.print("</tr>");
 
-								}// */
-							
+								}
 							%>
 						
 					</tbody>
 				</table>
 			</div>
+		</div>
+		<br>
 			<h3 class="card-title">
 				Per tornare alla tua pagina personale, clicca <a href="homeUser.jsp">qui.</a>
 			</h3>
-		</div>
 	</div>
 </body>
 </html>

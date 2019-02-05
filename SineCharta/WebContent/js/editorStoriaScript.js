@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
 	var nInvitato=0;
 	var utenti=[];

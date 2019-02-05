@@ -16,12 +16,11 @@
 	<%@page import="java.util.Collection"%>
 	<%
 		Personaggio pg = new Personaggio();
-			if ((session.getAttribute("user") == null)||session.getAttribute("personaggio")==null) {
-				response.sendRedirect("error/error.jsp");
-			}
-			else{
-				pg= (Personaggio)session.getAttribute("personaggio");	
-			}
+		if ((session.getAttribute("user") == null) || session.getAttribute("personaggio") == null) {
+			response.sendRedirect("error/error.jsp");
+		} else {
+			pg = (Personaggio) session.getAttribute("personaggio");
+		}
 	%>
 
 	<nav>
@@ -133,7 +132,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-12">
+				<div class="col-6">
 
 					<br>
 					<h4 class=" card-title">LE TUE ABILITÀ</h4>
@@ -141,35 +140,62 @@
 						<tbody>
 							<tr>
 								<%
-									
-									
-															Collection <Abilita> abList= pg.getListaAbilita();
-															
-																out.print("<div class=\"table-responsive\">");
-									
-																out.print("<table class=\"table table-dark\" id=\"tabellaAbilita\">");
-																out.print("<thead>");
-																out.print("<tr>");
-																out.print("<th scope=\"col\">Abilità</th>");
-																out.print("<th scope=\"col\">Punti abilità</th>");
-																out.print("<th scope=\"col\">Totale</th>");
-																out.print("</tr>");
-																out.print("</thead>");
-																out.print("<tbody>");
-									
-																for (Abilita ab : abList) {
-									
-																	out.print("<tr>");
-																	out.print("<td>" +ab.getNome()+ "</td>");
-																	out.print("<td>" + ab.getValore() + "</td>");
-																	out.print("<td>" + "</td>");
-																	out.print("</tr>");
-									
-																}// */
+									Collection<Abilita> abList = pg.getListaAbilita();
+
+									out.print("<div class=\"table-responsive\">");
+
+									out.print("<table class=\"table table-dark\" id=\"tabellaAbilita\">");
+									out.print("<thead>");
+									out.print("<tr>");
+									out.print("<th scope=\"col\">Abilità</th>");
+									out.print("<th scope=\"col\">Punti abilità</th>");
+									out.print("<th scope=\"col\">Totale</th>");
+									out.print("</tr>");
+									out.print("</thead>");
+									out.print("<tbody>");
+
+									for (Abilita ab : abList) {
+
+										out.print("<tr>");
+										out.print("<td>" + ab.getNome() + "</td>");
+										out.print("<td>" + ab.getValore() + "</td>");
+										out.print("<td>" + "</td>");
+										out.print("</tr>");
+
+									} // */
 								%>
 							
 						</tbody>
 					</table>
+				</div>
+				<div class="col-6">
+					<table class="table table-dark table-responsive">
+						<thead>
+							<tr>
+								<th>Oggetti</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>obj1</td>
+								<td><button class="btn btn-dark" disabled>Rimuovi</button></td>
+							</tr>
+							<tr>
+								<td>obj2</td>
+								<td><button class="btn btn-dark" disabled>Rimuovi</button></td>
+							</tr>
+							<tr>
+								<td>obj3</td>
+								<td><button class="btn btn-dark" disabled>Rimuovi</button></td>
+							</tr>
+							<tr>
+								<td>obj4</td>
+								<td><button class="btn btn-dark" disabled>Rimuovi</button></td>
+							</tr>
+						</tbody>
+					</table>
+
 				</div>
 			</div>
 		</div>

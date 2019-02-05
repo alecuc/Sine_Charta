@@ -5,6 +5,7 @@
 <%@page import="java.util.Set"%>
 <%@page import="java.util.Collection"%>
 
+
 <%
 	User utente = (User) session.getAttribute("user");
 	Collection<Storia> stList = (Collection<Storia>) session.getAttribute("storieModeratore");
@@ -51,7 +52,6 @@
 				out.print("</table>");
 			}
 %>
-
 <table class="table table-dark">
 	<tr>
 		<td><a href="editorStoria.jsp" class="btn btn-dark">Nuova
@@ -62,9 +62,7 @@
 
 <%
 	} else {
-			out.print("<h3>Non hai scritto nessuna storia. Clicca </h3>");
-			out.print("<a href=\"editorStoria.jsp\">qui</a>");
-			out.print("<h3> per iniziare.</h3>");
+			out.print("<h3>Non hai scritto nessuna storia. Clicca <a href=\"editorStoria.jsp\">qui</a> per iniziare.</h3>");
 		}
 
 	} else {

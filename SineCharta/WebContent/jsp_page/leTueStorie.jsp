@@ -15,7 +15,7 @@
 	<%@page import="java.util.Collection"%>
 
 	<div class="container">
-
+<br>
 		<div class="row">
 
 			<div class="col-5 card">
