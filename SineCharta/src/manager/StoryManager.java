@@ -20,8 +20,8 @@ public class StoryManager {
 
 	private static final String TABLE_NAME_HA = "ha";
 	private static final String TABLE_NAME_STORIA = "Storia";
-	
-	
+
+
 	/********************************************************************************
 	 * Metodo per caricare tutte le storie associate ad un utente					*
 	 * @param username= identificativo dell'utente									*
@@ -33,22 +33,22 @@ public class StoryManager {
 		Collection<Storia> storieutente = new LinkedList<Storia>();
 		HaTable table = new HaTable();
 		String selectStoria = "SELECT * FROM "+TABLE_NAME_STORIA+" NATURAL JOIN "+TABLE_NAME_HA+" WHERE USERNAME = ?";
-		 
+
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(selectStoria);
-			
+
 			ps.setString(1, user.getUsername());
 			System.out.println("getStoria : " + ps.toString());
 			ResultSet rs = ps.executeQuery();
-			
+
 			while(rs.next()) {
 				Storia storia = new Storia();
-				
+
 				table.setIdStoria(rs.getInt("IdStory"));
 				table.setUsername(rs.getString("Username"));
 				table.setFlagModeratore(rs.getBoolean("flag"));
-				
+
 				storia.setId(rs.getInt("IdStory"));
 				storia.setTitolo(rs.getString("Titolo"));
 				storia.setDescrizione(rs.getString("Descrizione"));
@@ -57,10 +57,10 @@ public class StoryManager {
 				storia.setUtenteModeratore(user);
 				storia.addPersonaggio(getPersonaggioForStory(user,storia.getId()));
 				storia.aggiungiListaSessioni(aggiungiSessioniAllaStoria(storia, user));
-				
+
 				storieutente.add(storia);
 			}
-			
+
 		}finally {
 			try {
 				if(ps!=null) ps.close();
@@ -68,11 +68,11 @@ public class StoryManager {
 				DriverManagerConnectionPool.releaseConnection(con);
 			}
 		}
-		
+
 		return storieutente;
 	}
-	
-	
+
+
 	/****************************************************************************
 	 * Metodo per selezionare l'ultima storia inserita							*
 	 * @return id dell'ultima storia inserita									*
@@ -81,7 +81,7 @@ public class StoryManager {
 		Connection con = null;
 		PreparedStatement ps = null;
 		int id = 0;
-		
+
 		String selectMax = "SELECT MAX(IDSTORY) FROM " + TABLE_NAME_STORIA;
 		try {
 			con = DriverManagerConnectionPool.getConnection();
@@ -100,7 +100,7 @@ public class StoryManager {
 		}
 		return id;
 	}
-	
+
 	/***********************************************************************************************
 	 * Metodo per caricare tutte le storie associate ad un utente tramite flag						*
 	 * @param username= identificativo dell'utente													*
@@ -108,29 +108,29 @@ public class StoryManager {
 	 * @return la storia a cui si riferisce idStoria												*
 	 ************************************************************************************************/
 	public Collection<Storia> getStoriaByFlag(User user, int flag) throws SQLException{
-		
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		Collection<Storia> storieutente = new LinkedList<Storia>();
 		HaTable table = new HaTable();
 		String selectStoria = "SELECT * FROM "+TABLE_NAME_STORIA+" NATURAL JOIN "+TABLE_NAME_HA+" WHERE USERNAME = ? AND FLAG = ?";
-		
+
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(selectStoria);
-			
+
 			ps.setString(1, user.getUsername());
 			ps.setInt(2, flag);
 			System.out.println("getStoriaByFlag : " + ps.toString());
 			ResultSet rs = ps.executeQuery();
-			
+
 			while(rs.next()) {
 				Storia storia = new Storia();
-				
+
 				table.setIdStoria(rs.getInt("IdStory"));
 				table.setUsername(rs.getString("Username"));
 				table.setFlagModeratore(rs.getBoolean("flag"));
-				
+
 				storia.setId(rs.getInt("IdStory"));
 				storia.setTitolo(rs.getString("Titolo"));
 				storia.setDescrizione(rs.getString("Descrizione"));
@@ -139,10 +139,10 @@ public class StoryManager {
 				storia.setUtenteModeratore(user);
 				storia.addPersonaggio(getPersonaggioForStory(user,storia.getId()));
 				storia.aggiungiListaSessioni(aggiungiSessioniAllaStoria(storia, user));
-				
+
 				storieutente.add(storia);
 			}
-			
+
 		}finally {
 			try {
 				if(ps!=null) ps.close();
@@ -150,10 +150,10 @@ public class StoryManager {
 				DriverManagerConnectionPool.releaseConnection(con);
 			}
 		}
-		
+
 		return storieutente;
 	}
-	
+
 	/********************************************************************************************
 	 * Metodo per poter recuperare un persoanggio tramite un utente da PersonaggioManager		*
 	 * @param utente= utente a cui ï¿½ associato il personaggio									*
@@ -164,7 +164,7 @@ public class StoryManager {
 		Personaggio pg = manager.getSimplePGByStory(utente, idStory);
 		return pg;
 	}
-	
+
 	/****************************************************************************
 	 * Metodo per recuperare una storia											*
 	 * @param idStory= identificativo della storia								*
@@ -188,7 +188,7 @@ public class StoryManager {
 				storia.setAmbientazione(rs.getString("Ambientazione"));
 				storia.aggiungiListaSessioni(aggiungiSessioniById(idStory));
 			}
-			
+
 		}finally {
 			try {
 				if(ps!=null) ps.close();
@@ -198,12 +198,12 @@ public class StoryManager {
 		}
 		return storia;
 	}
-	
-	
+
+
 	/********************************************************************
 	 * Metodo per recuperare un utente da UserManager					*
 	 * @param username= utente da recuperare							*
-	 * @return un utente												
+	 * @return un utente
 	 * @throws UserNotFoundException *
 	 ********************************************************************/
 	@SuppressWarnings("unused")
@@ -212,7 +212,7 @@ public class StoryManager {
 		User utente = manager.doRetrieveByKey(username);
 		return utente;
 	}
-	
+
 	/****************************************************************************
 	 * Metodo per recuperare la lista delle sessioni di una storia				*
 	 * @param idStory= identificativo della storia								*
@@ -226,7 +226,7 @@ public class StoryManager {
 			return sessioni;
 		} else return null;
 	}
-	
+
 	/****************************************************************************
 	 * Metodo per recupere una lista di sessioni per la storia					*
 	 * @param storia= a cui appartengono le sessioni							*
@@ -241,7 +241,7 @@ public class StoryManager {
 			return sessioni;
 		}else return null;
 	}
-	
+
 	/****************************************************************************************
 	 * Metodo per recuperare una storia in base al personaggio a cui vi partecipa			*
 	 * @param pg= personaggio a cui ï¿½ associata la storia 									*
@@ -282,12 +282,12 @@ public class StoryManager {
 	 * Metodo per inserire una nuova storia														*
 	 * @param storia= un oggetto di tipo storia 												*
 	 * @param username= utente che inserisce la storia											*
-	 ********************************************************************************************/	
+	 ********************************************************************************************/
 	public void aggiungiStoria(Storia storia)throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
-		String creaStoria = "INSERT INTO "+ TABLE_NAME_STORIA 
-				+ " (TITOLO, DESCRIZIONE, AMBIENTAZIONE) VALUES(?, ?, ?)";		
+		String creaStoria = "INSERT INTO "+ TABLE_NAME_STORIA
+				+ " (TITOLO, DESCRIZIONE, AMBIENTAZIONE) VALUES(?, ?, ?)";
 		try {
 			con = DriverManagerConnectionPool.getConnection();
 			ps = con.prepareStatement(creaStoria);
@@ -299,18 +299,18 @@ public class StoryManager {
 			con.commit();
 		} finally {
 			try {if(ps!=null) ps.close();
-				
+
 			} finally {
 				DriverManagerConnectionPool.releaseConnection(con);
 			}
 		}
 	}
-	
+
 	/********************************************************************************************
 	 * Metodo per aggiungere riga alla tabella delle associazioni tra utente e storia			*
 	 * @param storia= storia con un identificativo												*
 	 * @param utente= utente da aggiungere														*
-	 * @param flag= identifica il tipo di utente												*													
+	 * @param flag= identifica il tipo di utente												*
 	 ********************************************************************************************/
 	public void aggiungiATable(User utente, int flag) throws SQLException{
 		Connection con = null;
@@ -333,7 +333,7 @@ public class StoryManager {
 			}
 		}
 	}
-	
+
 	/************************************************************************************
 	 * Metodo per eliminare una storia													*
 	 * @param idStoria= identificativo della storia da eliminare						*
@@ -361,10 +361,10 @@ public class StoryManager {
 		return (result != 0);
 	}
 
-	
+
 	/********************************************************************************
 	 * Metodo per eliminare il riferimento ad HaTable della storia					*
-	 * @param username= identificativo dell'utente a cui è riferita la storia		*
+	 * @param username= identificativo dell'utente a cui ï¿½ riferita la storia		*
 	 * @param idStory= identificativo della storia 									*
 	 * @return valore di conferma eliminazione										*
 	 ********************************************************************************/
@@ -390,6 +390,6 @@ public class StoryManager {
 		}
 		return (result!=0);
 	}
-	
-	
+
+
 }
