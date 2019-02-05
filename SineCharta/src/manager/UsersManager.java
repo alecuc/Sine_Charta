@@ -228,7 +228,6 @@ public class UsersManager implements UserModelI<User>{
 		String result=null;
 		String check = "SELECT USERNAME FROM "+ TABLE_NAME+ " WHERE USERNAME = ?";
 		User usr= new User();
-		usr.setUsername(result);
 
 		try {
 			con = DriverManagerConnectionPool.getConnection();

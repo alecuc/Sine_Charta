@@ -210,7 +210,9 @@ public class PersonaggioManager {
 			}
 		}finally {
 			try {
-				if(ps!=null)ps.close();
+				if(ps!=null) {
+					ps.close();
+				}
 			} finally {
 				DriverManagerConnectionPool.releaseConnection(con);
 			}
@@ -361,7 +363,7 @@ public class PersonaggioManager {
 			ps.setString(27, pg.getFeritaGambe());
 		
 			ps.setString(28, pg.getUsername());
-			ps.setInt(29, pg.getIdStoria());
+			ps.setInt(29, idStoria);
 			
 			System.out.println("creaPersonaggio: " + ps.toString());
 			ps.executeUpdate();

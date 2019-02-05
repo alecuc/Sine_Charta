@@ -1,5 +1,6 @@
 package manager;
 
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,36 +11,39 @@ import beans.Personaggio;
 import beans.Storia;
 import beans.User;
 import exception.UserNotFoundException;
-import exception.UserNullException;
 import junit.framework.TestCase;
 
 public class PersonaggioManagerTest extends TestCase{
 
-	
-
+	private StoryManager managerStory;
 	private PersonaggioManager managerPg;
 	private UsersManager managerUser;
-	private StoryManager managerStory;
-	
-	private Personaggio personaggioTest;
-	private Personaggio pgDaRecuperare;
-	private User utenteTest;
 	private Storia storiaTest;
 	private Storia storiaRecuperata;
+	private User utenteTest;
+	private User userTest2;
+	private User utenteRecuperato;
+	private Personaggio pgDaRecuperare;
+	private Personaggio personaggioTest;
+	private Personaggio persTest2;
 	private Collection<Personaggio> listaPg;
-	private int id;
+	private int idStoria;
 	
-	protected void setUp() {
-		System.out.println("\n Running setUp TEST: \n");
+	public void setUp() throws Exception {
+		System.out.println("\n Running setUp: \n");
 		managerStory = new StoryManager();
 		managerPg = new PersonaggioManager();
 		managerUser = new UsersManager();
 		storiaTest = new Storia();
 		storiaRecuperata = new Storia();
 		utenteTest = new User();
-		pgDaRecuperare = new Personaggio();
+		userTest2 = new User();
 		personaggioTest = new Personaggio();
+		pgDaRecuperare = new Personaggio();
+		persTest2 = new Personaggio();
 		listaPg = new ArrayList<Personaggio>();
+		utenteRecuperato = new User();
+		idStoria = 0;
 		personaggioTest.setNome("testPG");
 		personaggioTest.setCognome("testCogn");
 		personaggioTest.setAge(50);
@@ -68,119 +72,124 @@ public class PersonaggioManagerTest extends TestCase{
 		personaggioTest.setFeritaBraccia("+");
 		personaggioTest.setFeritaGambe("+");
 		
-		utenteTest.setUsername("testPG");
+		persTest2.setNome("testPG2");
+		persTest2.setCognome("testCogn2");
+		persTest2.setAge(50);
+		persTest2.setNazionalita("testNati");
+		persTest2.setTaroccoDominante("testTarocco");
+		persTest2.setIntuito(5);
+		persTest2.setAspetto(5);
+		persTest2.setCoordinazione(5);
+		persTest2.setAffinOcculta(5);
+		persTest2.setMemoria(5);
+		persTest2.setComando(5);
+		persTest2.setDestrManuale(5);
+		persTest2.setDistDaMorte(5);
+		persTest2.setPercezione(5);
+		persTest2.setCreativita(5);
+		persTest2.setForzaFisica(5);
+		persTest2.setEquilibrMentale(5);
+		persTest2.setVolonta(5);
+		persTest2.setSocievolezza(5);
+		persTest2.setMira(5);
+		persTest2.setKarma(5);
+		persTest2.setRisoluzione(5);
+		persTest2.setSalute(5);
+		persTest2.setFeritaTesta("+-");
+		persTest2.setFeritaTorso("+-");
+		persTest2.setFeritaBraccia("-+");
+		persTest2.setFeritaGambe("+-");
+		
+		utenteTest.setUsername("testPersonaggio");
 		utenteTest.setName("testName");
 		utenteTest.setSurname("testSurn");
-		utenteTest.setEmail("test@test");
+		utenteTest.setEmail("test@test1222");
 		utenteTest.setPassword("test");
 		utenteTest.setRuolo("utenteGiocatore");
+		
+		userTest2.setUsername("test2");
+		userTest2.setName("testtst");
+		userTest2.setSurname("suer");
+		userTest2.setPassword("test");
+		userTest2.setEmail("test2@test");
+		userTest2.setRuolo("utenteGiocatore");
 		
 		storiaTest.setTitolo("testPGStoria");
 		storiaTest.setDescrizione("test test test");
 		storiaTest.setAmbientazione("Sanctum Imperum");
-	}
-
-	@Test
-	public void testGetSimplePGByStory() throws SQLException, UserNullException {
-		System.out.println("\n Running getSimplePGByStory TEST: \n");
-	/*	managerUser.doSave(utenteTest);
+		
+		
+		personaggioTest.setUsername(utenteTest.getUsername());
+		persTest2.setUsername(userTest2.getUsername());
+		
+		managerUser.doSave(utenteTest);
+		managerUser.doSave(userTest2);
 		managerStory.aggiungiStoria(storiaTest);
 		managerStory.aggiungiATable(utenteTest, 0);
-		personaggioTest.setUsername(utenteTest.getUsername());
-		personaggioTest.setIdStoria(managerStory.selectLastId());
-		managerPg.creaPersonaggio(personaggioTest, managerStory.selectLastId());
+		managerStory.aggiungiATable(userTest2, 0);
+		idStoria = managerStory.selectLastId();
+		personaggioTest.setIdStoria(idStoria);
+		persTest2.setIdStoria(idStoria);
+		managerPg.creaPersonaggio(personaggioTest, idStoria);
+		managerPg.creaPersonaggio(persTest2, idStoria);
+	}
+
 	
-		pgDaRecuperare = managerPg.getSimplePGByStory(utenteTest, managerStory.selectLastId());
+	
+	public void tearDown() throws Exception {
+		System.out.println("\n Running tearDown: \n");
+		managerStory.eliminaRiferimentoHaTable(personaggioTest.getUsername(), idStoria);
+		managerStory.eliminaRiferimentoHaTable(userTest2.getUsername(), idStoria);
+		managerStory.eliminaStoria(idStoria);
 		managerPg.eliminaPG(personaggioTest);
-		managerStory.eliminaRiferimentoHaTable(utenteTest.getUsername(), managerStory.selectLastId());
-		managerStory.eliminaStoria(managerStory.selectLastId());
-		managerUser.eliminaUtente(utenteTest.getUsername());
+		managerPg.eliminaPG(persTest2);
+		managerUser.eliminaUtente(personaggioTest.getUsername());
+		managerUser.eliminaUtente(userTest2.getUsername());
+		
+		
+		managerStory = null;
+		managerPg = null;
+		managerUser = null;
+		storiaTest = null;
+		storiaRecuperata = null;
+		utenteTest = null;
+		pgDaRecuperare = null;
+		personaggioTest = null;
+		userTest2 = null;
+		utenteRecuperato = null;
+		persTest2 = null;
+		listaPg.clear();
+		idStoria = 0;
+	}
+
+	@Test
+	public void testGetSimplePGByStory() throws SQLException, UserNotFoundException {
+		System.out.println("\n Running getSimplePgByStory: \n");
+
+		utenteRecuperato = managerUser.doRetrieveByKey(utenteTest.getUsername());
+		pgDaRecuperare = managerPg.getSimplePGByStory(utenteRecuperato, managerStory.selectLastId());
+		System.out.println(pgDaRecuperare.toString());
 		assertNotNull(pgDaRecuperare);
-		*/
-		
-	}
- 
-	@Test
-	public void testGetStoriaPersonaggioById() throws SQLException, UserNullException {
-		System.out.println("\n Running getStoriaPersonaggioById TEST: \n");
-		managerUser.doSave(utenteTest);
-		managerStory.aggiungiStoria(storiaTest);
-		managerStory.aggiungiATable(utenteTest, 0);
-		personaggioTest.setUsername(utenteTest.getUsername());
-		personaggioTest.setIdStoria(managerStory.selectLastId());
-		managerPg.creaPersonaggio(personaggioTest, personaggioTest.getIdStoria());
- 		assertNotNull(personaggioTest);
- 		assertNotNull(storiaTest);
-		id = managerPg.getStoriaPersonaggioById(personaggioTest);
-		assertTrue(id == managerStory.selectLastId());
-
-		managerPg.eliminaPG(personaggioTest);
-		managerStory.eliminaRiferimentoHaTable(utenteTest.getUsername(), managerStory.selectLastId());
-		managerStory.eliminaStoria(managerStory.selectLastId());
-		managerUser.eliminaUtente(utenteTest.getUsername());
-		
+		assertEquals("testPersonaggio", pgDaRecuperare.getUsername());
 	}
 
+	
 	@Test
-	public void testGetAllPgByStory() throws SQLException, UserNullException, UserNotFoundException {
-		System.out.println("\n Running getAllPgByStory TEST: \n");
-		managerUser.doSave(utenteTest);
-		managerStory.aggiungiStoria(storiaTest);
-		managerStory.aggiungiATable(utenteTest, 0);
-		personaggioTest.setUsername(utenteTest.getUsername());
-		personaggioTest.setIdStoria(managerStory.selectLastId());
-		managerPg.creaPersonaggio(personaggioTest, personaggioTest.getIdStoria());
-		assertNotNull(utenteTest);
-		assertNotNull(storiaTest);
+	public void testGetAllPgByStory() throws SQLException, UserNotFoundException {
+		System.out.println("\n Running getAllPgByStory TEEST: \n");
+
+		int id = managerStory.selectLastId();
 		
-		storiaRecuperata = managerStory.getSimpleStory(managerStory.selectLastId());
+		storiaRecuperata = managerStory.getSimpleStory(id);
+		System.out.println(storiaRecuperata.toString());
 		assertNotNull(storiaRecuperata);
 		listaPg = managerPg.getAllPgByStory(storiaRecuperata);
+		System.out.println(listaPg.toString());
 		assertFalse(listaPg.isEmpty());
-
-		managerPg.eliminaPG(personaggioTest);
-		managerStory.eliminaRiferimentoHaTable(utenteTest.getUsername(), managerStory.selectLastId());
-		managerStory.eliminaStoria(managerStory.selectLastId());
-		managerUser.eliminaUtente(utenteTest.getUsername());
-
-	}
-
-	@Test
-	public void testListaPG() throws SQLException, UserNullException{
-		System.out.println("\n Running listaPG TEST: \n");
-	/*	managerUser.doSave(utenteTest);
-		managerStory.aggiungiStoria(storiaTest);
-		managerStory.aggiungiATable(utenteTest, 0);
-		personaggioTest.setUsername(utenteTest.getUsername());
-		personaggioTest.setIdStoria(managerStory.selectLastId());
-		managerPg.creaPersonaggio(personaggioTest, personaggioTest.getIdStoria());
-		assertNotNull(utenteTest);
-		assertNotNull(storiaTest);
-		
-		listaPg = managerPg.listaPG(utenteTest);
-		assertFalse(listaPg.isEmpty());
-		
-		managerPg.eliminaPG(personaggioTest);
-		managerStory.eliminaRiferimentoHaTable(utenteTest.getUsername(), managerStory.selectLastId());
-		managerStory.eliminaStoria(managerStory.selectLastId());
-		managerUser.eliminaUtente(utenteTest.getUsername());
-		*/
-	}
-
-
-
-	
-	protected void tearDown() {
-		System.out.println("\n Running tearDown TEST: \n");
-		managerPg = null;
-		listaPg.clear();
-		managerStory = null;
-		managerUser = null;
-		personaggioTest = null;
-		pgDaRecuperare = null;
-		utenteTest = null;
-		storiaTest = null;
-		id = 0;
 	}
 	
+
+	
+
+
 }

@@ -453,7 +453,7 @@ public class Personaggio implements Serializable{
 				+ ", taroccoDominante=" + taroccoDominante + ", username=" + username + ", feritaTesta=" + feritaTesta
 				+ ", feritaBraccia=" + feritaBraccia + ", feritaTorso=" + feritaTorso + ", feritaGambe=" + feritaGambe
 				+ ", age=" + age + ", salute=" + salute + ", risoluzione=" + risoluzione + ", idStoria=" + idStoria
-				+ ", oggetti=" + oggetti + ", storia=" + storia.toString() + ", intuito=" + intuito + ", memoria=" + memoria
+				+ ", oggetti=" + oggetti.toString() + ", storia=" + storia.toString() + ", intuito=" + intuito + ", memoria=" + memoria
 				+ ", percezione=" + percezione + ", volonta=" + volonta + ", aspetto=" + aspetto + ", comando="
 				+ comando + ", creativita=" + creativita + ", socievolezza=" + socievolezza + ", coordinazione="
 				+ coordinazione + ", destrManuale=" + destrManuale + ", forzaFisica=" + forzaFisica + ", mira=" + mira

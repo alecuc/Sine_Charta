@@ -21,17 +21,16 @@ public class EquipManager {
 	 * @param pg= personaggio a cui appartiene l'oggetto									*
 	 * @return un oggetto selezionato														*
 	 ****************************************************************************************/
-	public Oggetto getOggettoPersonaggioById(Personaggio pg, int idOggetto) throws SQLException {
+	public Oggetto getOggettoPersonaggioById(Personaggio pg, int idStory) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		Oggetto bean = new Oggetto();
-		String selectSQL = "SELECT * FROM " + EquipManager.TABLE_NAME_OGGETTI + " WHERE USERNAME = ? AND IDSTORY = ? AND IDOGGETTO = ?";
+		String selectSQL = "SELECT * FROM " + EquipManager.TABLE_NAME_OGGETTI + " WHERE USERNAME = ? AND IDSTORY = ?";
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, pg.getUsername());
 			preparedStatement.setInt(2, pg.getIdStoria());
-			preparedStatement.setInt(3, idOggetto);
 			System.out.println("getOggettoPersonaggioById: " + preparedStatement.toString());			
 			ResultSet rs = preparedStatement.executeQuery();
 			while(rs.next()) {
