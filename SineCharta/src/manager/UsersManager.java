@@ -225,7 +225,6 @@ public class UsersManager implements UserModelI<User>{
 	public boolean checkUser(String username)throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
-		String result=null;
 		String check = "SELECT USERNAME FROM "+ TABLE_NAME+ " WHERE USERNAME = ?";
 		User usr= new User();
 

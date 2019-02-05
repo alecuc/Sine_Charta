@@ -118,7 +118,9 @@ public class StoryManagerTest extends TestCase{
 	
 		storiaRecuperata = storyManager.getSimpleStory(idStoria);
 		assertNotNull(storiaRecuperata);
-		assertEquals("testTitolo", storiaRecuperata.getTitolo());
+		assertEquals(storiaDaInserire.getTitolo(), storiaRecuperata.getTitolo());
+		assertEquals(storiaDaInserire.getDescrizione(), storiaRecuperata.getDescrizione());
+		assertEquals(storiaDaInserire.getAmbientazione(), storiaRecuperata.getAmbientazione());
 		
 	}
 	
@@ -134,6 +136,9 @@ public class StoryManagerTest extends TestCase{
 		storiaRecuperata = storyManager.getStoriaDelPG(personaggio);
 		
 		assertNotNull(storiaRecuperata);
-		assertEquals("testTitolo", storiaRecuperata.getTitolo());
+		assertEquals(storiaDaInserire.getTitolo(), storiaRecuperata.getTitolo());
+		assertEquals(storiaDaInserire.getDescrizione(), storiaRecuperata.getDescrizione());
+		assertEquals(storiaDaInserire.getAmbientazione(), storiaRecuperata.getAmbientazione());
+		
 	}
 }
