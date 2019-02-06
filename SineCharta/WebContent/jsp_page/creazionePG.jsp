@@ -103,9 +103,9 @@
 						class="form-control" id="etaPG" placeholder="Età" name="eta">
 				</div>
 			</div>
-			<button class="btn btn-dark float-right"
-				style="background-color: #212529; border-color: red;" id="confGen">Conferma</button>
 		</form>
+		<button class="btn btn-dark float-right"
+				style="background-color: #212529; border-color: red;" id="confGen">Conferma</button>
 	</div>
 
 	<br>

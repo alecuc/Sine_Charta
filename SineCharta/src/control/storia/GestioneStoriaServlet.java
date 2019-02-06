@@ -258,9 +258,10 @@ public class GestioneStoriaServlet extends HttpServlet {
 			} 
 		}catch (SQLException e) {
 			e.printStackTrace();
+			response.sendRedirect("jsp_page/error/error.jsp");
 
 		}catch (NullPointerException e) {
-	//		response.sendRedirect("jsp_page/error/error.jsp");
+			response.sendRedirect("jsp_page/error/error.jsp");
 			e.printStackTrace();
 		}
 	}	
