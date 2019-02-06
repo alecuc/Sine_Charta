@@ -1,13 +1,22 @@
-function validateTitle(form) {
 
+console.log("loaded v0.6");
+
+function validate(){
+	
 	//define storia form regular expression
-	var titleRX = /^(\w+[\._\-\?\!\+\*\']?(...)?){5,}$/;
-	var descrRX = /^(\w+[\._\-\?\!\+\*\']?(...)?){5,}$/;
+	var titleRX = /^\w+(\w*[\._\-\?\!\+\*\"\']?)$/;
+	var descrRX = /^\w+(\w*[\._\-\?\!\+\*\"\']?)$/;
 
-	var titleOK = form.titolo.value.match(titleRX);
-	var descOK = form.descrizione.value.match(descrRX);
+	var titolo = $('#titolo').val();
+	var titoloOK= titolo.match(titleRX);
+	
+	var desc= $('#descrizione').val();
+	var descOK = desc.match(descrRX);
 
-	if(!titleOK){ //check titolo
+	console.log(descOK);
+	console.log(titoloOK);
+	
+	if(!titoloOK){ //check titolo
 		alert("Il campo titolo non è corretto");
 		return false;
 	}else if(!descOK){ // check descrizione
@@ -15,6 +24,7 @@ function validateTitle(form) {
 		return false;
 	}else
 		return true;
+	
 }
 
 $(document).ready(function(){
@@ -80,7 +90,7 @@ $(document).ready(function(){
 
 	$('#salvaStoria').click(function(){
 
-		if(validateTitle($("#form"))){
+		if(validate()) {
 
 
 			if(utenti.length == 0) {
@@ -102,6 +112,7 @@ $(document).ready(function(){
 				$('#form').attr('action', value);
 			}
 		}
+		else (alert('Niente caratteri speciali nella storia!'));
 	});
 
 });

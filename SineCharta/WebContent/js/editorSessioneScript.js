@@ -1,15 +1,17 @@
-function validateCont(form){
+function validate(){
+	
+	//define storia form regular expression
+	var contRX = /^\w+(\w*[\"\'\._\-\?\!\+\*\']?)$/;
 
-	//espressioni regolari per i campi del form
-	var contRX = /^(\w+[\._\-\?\!\+\*\']?(...)?){5,}$/;
-
-	var contenutoOK = form.contenuto.value.match(contRX);
-
-	if(!contenutoOK) {
-		alert("Il contenuto della sessione non è corretto");
+	var contenuto = $('#contenuto').val();
+	var contOK= contenuto.match(contRX);
+	
+	
+	if(!contOK){ //check titolo
 		return false;
-	}
-	return true;
+	}else
+		return true;
+	
 }
 
 $(document).ready(function(){	
@@ -20,7 +22,7 @@ $(document).ready(function(){
 
 	$('#salvaSessione').click(function(){
 
-		if(validateCont($("#form"))){
+		if(validate()){
 
 			var tagCont= $('#contenuto');
 			var cont= tagCont.val();
@@ -28,6 +30,8 @@ $(document).ready(function(){
 			var value= '../GestioneSessioneServlet?action=inserisciSessione&Contenuto='+cont;
 
 			$('#form').attr('action', value);
+		} else{
+			alert('Niente caratteri speciali nella sessione!');
 		}
 	});
 
