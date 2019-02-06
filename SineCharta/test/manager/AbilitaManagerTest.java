@@ -2,62 +2,59 @@ package manager;
 
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
-import beans.Oggetto;
+import beans.Abilita;
 import beans.Personaggio;
 import beans.Storia;
 import beans.User;
 import junit.framework.TestCase;
 
-public class EquipManagerTest extends TestCase{
+public class AbilitaManagerTest extends TestCase {
 
-	private EquipManager managerEq;
+	private AbilitaManager managerAbilita;
 	private UsersManager managerUs;
 	private StoryManager managerStory;
 	private PersonaggioManager managerPg;
-	private Oggetto oggettoTest;
-	private Oggetto oggettoRecuperato;
+	
+	private Abilita abilitaDaInserire;
+	private Abilita abilitaDaRecuperare;
+	private Collection<Abilita> listaAb;
 	private User utenteTest;
 	private Storia storiaTest;
 	private Personaggio personaggioTest;
-	private Personaggio pg2;
 	private int idStory;
+
 	
 	@Before
 	public void setUp() throws Exception {
 		System.out.println("\n Running setUp: \n");
-		managerEq = new EquipManager();
 		managerUs = new UsersManager();
+		managerAbilita = new AbilitaManager();
 		managerStory = new StoryManager();
 		managerPg = new PersonaggioManager();
-		oggettoTest = new Oggetto();
-		oggettoRecuperato = new Oggetto();
 		utenteTest = new User();
 		storiaTest = new Storia();
-		personaggioTest = new Personaggio(); 
-		pg2 = new Personaggio();
+		personaggioTest = new Personaggio();
+		abilitaDaInserire = new Abilita();
+		abilitaDaRecuperare = new Abilita();
+		listaAb = new ArrayList<Abilita>();
 		idStory = 0;
-		oggettoTest.setNome("testNome");
-		oggettoTest.setCosto(10);
-		oggettoTest.setPeso(10);
-		oggettoTest.setQuantita(1);
-		
-		utenteTest.setUsername("testPG");
+		utenteTest.setUsername("testPGAbilty");
 		utenteTest.setName("testName");
 		utenteTest.setSurname("testSurn");
-		utenteTest.setEmail("testEquip@test");
+		utenteTest.setEmail("testAbility@test");
 		utenteTest.setPassword("test");
 		utenteTest.setRuolo("utenteGiocatore");
 		
-		storiaTest.setTitolo("testPGStoria");
+		storiaTest.setTitolo("testAbilitaStory");
 		storiaTest.setDescrizione("test test test");
 		storiaTest.setAmbientazione("Sanctum Imperum");
 		
-		personaggioTest.setNome("testPG");
+		personaggioTest.setNome("testPGAbil");
 		personaggioTest.setCognome("testCogn");
 		personaggioTest.setAge(50);
 		personaggioTest.setNazionalita("testNati");
@@ -86,54 +83,69 @@ public class EquipManagerTest extends TestCase{
 		personaggioTest.setFeritaGambe("+");
 		personaggioTest.setUsername(utenteTest.getUsername());
 		
+		abilitaDaInserire.setNome("TestAbilita");
+		abilitaDaInserire.setValore(10);
+		
+		
+		
+		
 		managerUs.doSave(utenteTest);
 		managerStory.aggiungiStoria(storiaTest);
 		managerStory.aggiungiATable(utenteTest, 0);
 		idStory = managerStory.selectLastId();
 		personaggioTest.setIdStoria(idStory);
-		personaggioTest.setUsername(utenteTest.getUsername());
-		oggettoTest.setIdStoria(idStory);
+		abilitaDaInserire.setPersonaggio(personaggioTest);
 		managerPg.creaPersonaggio(personaggioTest, idStory);
-		managerEq.inserisciOggetto(oggettoTest, personaggioTest);
-		
+		managerAbilita.aggiungiAbilita(abilitaDaInserire, personaggioTest);
 	}
+	
 
 	@After
 	public void tearDown() throws Exception {
 		System.out.println("\n Running tearDown: \n");
-		managerEq.rimuoviOggetto(oggettoTest, personaggioTest);
+		
+		managerAbilita.eliminaAbilita(personaggioTest);
 		managerPg.eliminaPG(personaggioTest);
-		managerStory.eliminaStoria(managerStory.selectLastId());
-		managerStory.eliminaRiferimentoHaTable(utenteTest.getUsername(), managerStory.selectLastId());
+		managerStory.eliminaStoria(idStory);
+		managerStory.eliminaRiferimentoHaTable(utenteTest.getUsername(), idStory);
 		managerUs.eliminaUtente(utenteTest.getUsername());
 		
-		managerEq = null;
-		managerUs = null;
-		managerStory = null;
+		managerAbilita = null;
 		managerPg = null;
-		oggettoTest = null;
-		oggettoRecuperato = null;
-		utenteTest = null;
-		storiaTest = null;
+		managerStory = null;
+		managerUs = null;
+		abilitaDaInserire = null;
+		abilitaDaRecuperare = null;
 		personaggioTest = null;
+		storiaTest = null;
+		utenteTest = null;
+		idStory = 0;
+		listaAb.clear();
 		
 		
-		
-
 	}
 
 	@Test
-	public void testGetOggettoPersonaggioById() throws SQLException {
-		System.out.println("\n Running getOggettoPersonaggioById TEST: \n");
+	public void testGetAbilitaByName() throws SQLException {
+		System.out.println("\n Running getAbilitaByName TEST: \n");
 		
-		pg2 = managerPg.getSimplePGByStory(utenteTest, idStory);
-		assertNotNull(pg2);
-		oggettoRecuperato = managerEq.getOggettoPersonaggioById(pg2, idStory);
-		assertNotNull(oggettoRecuperato);
-		System.out.println(oggettoRecuperato.getNome());
-		assertEquals(oggettoTest.getNome(), oggettoRecuperato.getNome());
+		abilitaDaRecuperare = managerAbilita.getAbilitaByName(personaggioTest, abilitaDaInserire.getNome());
+		assertNotNull(abilitaDaInserire);
+		assertNotNull(personaggioTest);
+		assertNotNull(abilitaDaRecuperare);
+		assertEquals(abilitaDaInserire.getNome(), abilitaDaRecuperare.getNome());
+		assertEquals(abilitaDaInserire.getValore(), abilitaDaRecuperare.getValore());
+	
 	}
 
-	
-}
+	@Test
+	public void testGetListaAbilitaByPG() throws SQLException {
+		System.out.println("\n Running getListaAbilitaByPg TEST: \n");
+		
+		listaAb = managerAbilita.getListaAbilitaByPG(personaggioTest);
+		assertNotNull(personaggioTest);
+		assertFalse(listaAb.isEmpty());
+		
+	}
 
+}

@@ -1,7 +1,7 @@
 function validate(){
 	
 	//define storia form regular expression
-	var contRX = /^\w+(\w*[\"\'\._\-\?\!\+\*\']?)$/;
+	var contRX = /^\w+(\w*[\s\"\'\._\-\?\!\+\*\']?)*$/;
 
 	var contenuto = $('#contenuto').val();
 	var contOK= contenuto.match(contRX);

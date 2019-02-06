@@ -73,8 +73,11 @@ public class RegistrazioneServlet extends HttpServlet {
 			 */ 
 			 response.sendRedirect("jsp_page/error/campiGiaPresenti.jsp");
 		 } catch (UserNullException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			response.sendRedirect("jsp_page/error/error503.jsp");
 		}
 	}
 

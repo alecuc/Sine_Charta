@@ -170,7 +170,8 @@ public class PersonaggioManagerTest extends TestCase{
 		pgDaRecuperare = managerPg.getSimplePGByStory(utenteRecuperato, managerStory.selectLastId());
 		System.out.println(pgDaRecuperare.toString());
 		assertNotNull(pgDaRecuperare);
-		assertEquals("testPersonaggio", pgDaRecuperare.getUsername());
+		assertEquals(personaggioTest.getUsername(), pgDaRecuperare.getUsername());
+		assertEquals(personaggioTest.getNome(), pgDaRecuperare.getNome());
 	}
 
 	
