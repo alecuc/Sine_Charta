@@ -25,10 +25,12 @@
 
 							<div class="col-6">
 								<input type="text" class="form-control" id="titolo"
+
 									placeholder="Inserisci qui il titolo..." name="titolo" required>
 							</div>
 							<div class="col-6">
 								<select class="form-control" name="ambientazione" id="ambientazione" required>
+
 									<option>Seleziona un'ambientazione</option>
 									<option>Sanctum Imperum</option>
 									<option>Terre Perdute</option>
@@ -39,9 +41,9 @@
 						</div>
 						<textarea class="form-control" aria-label="With textarea" id="descrizione"
 							placeholder="Scrivi qui l'introduzione della tua storia..."
-							style="resize: none; height: 400px;" name="descrizione" required></textarea>
-						<button class="btn btn-dark" id="salvaStoria"
-							onclick="return validateTitle(this.form)">Salva storia</button>
+
+							style="resize: none; height: 400px;" name="descrizione" required="required"></textarea>
+						<button class="btn btn-dark" id="salvaStoria">Salva storia</button>
 					</form>
 				</div>
 			</div>

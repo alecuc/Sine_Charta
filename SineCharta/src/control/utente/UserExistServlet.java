@@ -20,34 +20,34 @@ import manager.UsersManager;
 @WebServlet("/UserExistServlet")
 public class UserExistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UserExistServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public UserExistServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+
 		/*
 		 * 		Questa servlet è creata per controllare tramite AJAX
 		 * 		l'esistenza degli username inseriti dall'utente durante l'invio degli 
 		 * 		inviti ad una storia da parte di un UTENTE MODERATORE.
 		 * 
 		 */
-		
-		
+
+
 		response.setContentType("text/plain");
 		HttpSession session= request.getSession();
 		UsersManager um= new UsersManager();
 		String username= request.getParameter("usr");
 		User utente= (User) session.getAttribute("user");
-		
+
 		boolean check=false;
 		try {
 			check= um.checkUser(username);
@@ -57,13 +57,13 @@ public class UserExistServlet extends HttpServlet {
 		}
 
 		System.out.println("Username: "+username+"\n status check: "+check);
-		
-		if(check) {
-			response.getWriter().write(username);
-			
-		} else if(username.equals(utente.getUsername())) {
+
+		if(username.equals(utente.getUsername())) {
 			response.getWriter().write("TU");		
-			
+
+		}else if(check) {
+			response.getWriter().write(username);
+
 		} else response.getWriter().write("NO");		
 	}
 

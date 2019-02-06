@@ -77,7 +77,6 @@ public class LoginServlet extends HttpServlet {
 				Mazzo mazzo = new Mazzo();
 				session.setAttribute("Mazzo", mazzo);
 				session.setAttribute("storieGiocatore", listaStoria);
-				System.out.println("if password");;
 					if(utenteLogin.getRuolo().equalsIgnoreCase("utenteModeratore")) {
 						Collection<Storia> listaStorieMod = str.getStoriaByFlag(utenteLogin, 1);
 						session.setAttribute("storieModeratore", listaStorieMod);
