@@ -52,6 +52,7 @@
 				out.print("</table>");
 			}
 %>
+<h3>Inizia una nuova avventura</h3>
 <table class="table table-dark">
 	<tr>
 		<td><a href="editorStoria.jsp" class="btn btn-dark">Nuova

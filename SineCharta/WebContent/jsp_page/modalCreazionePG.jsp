@@ -1,18 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-  <script src="../js/bootstrap.min.js"></script>
-</head>
-<body>
-<button type="button" class="btn btn-primary btn-dark"
-						data-toggle="modal" data-target="#helpDom">Serve aiuto?</button>
 <div class="modal fade" id="helpDom" tabindex="-1" role="dialog"
 	aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
@@ -25,11 +10,12 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">Cliccando su "Estrai" potrai scoprire
-				il Tarocco Dominante del tuo Personaggio, il punto di partenza per
-				sviluppare la sua personalit√† e il suo passato. Puoi cambiare la
-				carta estratta se non ti piace, ma fa' attenzione: puoi estrarne al
-				massimo tre.</div>
+			<div class="modal-body">
+				Cliccando su "Estrai" potrai scoprire il Tarocco Dominante del tuo
+				Personaggio, il punto di partenza per sviluppare la sua personalit‡
+				e il suo passato. <br>Puoi cambiare la carta estratta se non ti
+				piace, ma fa' attenzione: puoi estrarne al massimo tre.
+			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
@@ -49,14 +35,16 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">In Sine Requie le caratteristiche sono
-				suddivise in quattro categorie: Mentali (Cuori), Sociali (Quadri),
-				Fisiche (Fiori) e Spirituali (Picche). I punti caratteristica
-				vengono generati attraverso i Tarocchi. Ognuno di essi ha un
-				punteggio che va da 8 a 24 per ogni seme delle carte da Poker. Come
-				per il Tarocco Dominante, puoi estrarre al massimo tre carte per
-				ogni seme. Inoltre, maggiore √® la somma dei quattro punteggi,
-				maggiore √® l'ammontare dei punti abilit√†.</div>
+			<div class="modal-body">
+				In Sine Requie le caratteristiche sono suddivise in quattro
+				categorie: Mentali (Cuori), Sociali (Quadri), Fisiche (Fiori) e
+				Spirituali (Picche). I punti caratteristica vengono generati
+				attraverso i Tarocchi. <br>Ognuno di essi ha un punteggio che
+				va da 8 a 24 per ogni seme delle carte da Poker. Come per il Tarocco
+				Dominante, puoi estrarre al massimo tre carte per ogni seme.
+				Inoltre, maggiore Ë la somma dei quattro punteggi, maggiore Ë
+				l'ammontare dei punti abilit‡.
+			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
@@ -76,13 +64,14 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">In questa sezione puoi assegnare i
-				punti caratteristica del tuo Personaggio. Per ogni caratteristica, i
-				punti assegnati devono essere non pi√π di 6 e non meno di 1.
-
-				Attenzione: le caratteristiche con un solo punto sono tipiche di
-				personaggi con seri problemi. Ad esempio, un personaggio con un solo
-				punto in Aspetto √® particolarmente brutto.</div>
+			<div class="modal-body">
+				In questa sezione puoi assegnare i punti caratteristica del tuo
+				Personaggio. Per ogni caratteristica, i punti assegnati devono
+				essere non pi˘ di 6 e non meno di 1. <br> Attenzione: le
+				caratteristiche con un solo punto sono tipiche di personaggi con
+				seri problemi. Ad esempio, un personaggio con un solo punto in
+				Aspetto Ë particolarmente brutto.
+			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
@@ -95,21 +84,21 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Le abilit√†</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Le abilit‡</h5>
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">Le abilit√† del Personaggio
-				rappresentano le competenze in differenti ambiti: battaglia, utilit√†
-				eccetera. Il punteggio totale √® determinato dalla somma dei punti
-				abilit√† con la caratteristica corrispondente.</div>
+			<div class="modal-body">
+				Le abilit‡ del Personaggio rappresentano le competenze in differenti
+				ambiti: battaglia, utilit‡ eccetera.<br>Il punteggio totale Ë
+				determinato dalla somma dei punti abilit‡ con la caratteristica
+				corrispondente.
+			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>
 </div>
-</body>	
-</html>

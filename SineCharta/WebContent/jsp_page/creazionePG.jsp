@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<jsp:include page="head.jsp"></jsp:include>
+<jsp:include page="head.jsp" />
+<jsp:include page="modalCreazionePG.jsp" />
 <script src="../js/creazioneAction.js"></script>
 <title>Crea personaggio</title>
 </head>
@@ -18,7 +19,7 @@
 
 
 
-	<jsp:include page="navigationbar.jsp"></jsp:include>
+	<jsp:include page="navigationbar.jsp" />
 
 	<%
 		//Utente non è loggato
@@ -62,19 +63,6 @@
 	%>
 
 	<h1 class="card-title">Crea il tuo personaggio</h1>
-
-	<!-- TASTI ANNULLA E AIUTO 
-
-	<div class="position-fixed">
-		<form action="homeUser.jsp">
-			<button class="btn btn-dark mb-2 mx-1"
-				style="background-color: #212529; border-color: red;">Annulla</button>
-		</form>
-		<br>
-		<button class="btn btn-dark mx-2"
-			style="background-color: #212529; border-color: red;">Aiuto</button>
-	</div>		-->
-
 
 	<!-- FORM GENERALITÀ -->
 
@@ -147,9 +135,11 @@
 					<br>
 					<button class="btn btn-dark"
 						style="background-color: #212529; border-color: red;" id="confDom"
-						disabled>Conferma</button>
+						disabled>Conferma tarocco</button>
 				</div>
 			</div>
+			<button type="button" class="btn btn-primary btn-dark mx-3"
+				data-toggle="modal" data-target="#helpDom">Serve aiuto?</button>
 		</div>
 	</div>
 
@@ -177,6 +167,9 @@
 						<button class="btn btn-dark mb-2"
 							style="background-color: #212529; border-color: red;"
 							id="dealCuori" disabled>Estrai</button>
+						<br>
+						<button type="button" class="btn btn-primary btn-dark"
+							data-toggle="modal" data-target="#helpCar">Serve aiuto?</button>
 					</div>
 				</div>
 			</div>
@@ -391,6 +384,8 @@
 			</table>
 
 		</fieldset>
+		<button type="button" class="btn btn-primary btn-dark"
+			data-toggle="modal" data-target="#helpPunti">Serve aiuto?</button>
 		<button class="btn btn-dark mb-2 mx-1 float-right"
 			style="background-color: #212529; border-color: red;" id="confCar"
 			disabled>Conferma caratteristiche</button>
@@ -498,7 +493,8 @@
 			</table>
 
 		</fieldset>
-
+		<button type="button" class="btn btn-primary btn-dark"
+			data-toggle="modal" data-target="#helpAbi">Serve aiuto?</button>
 		<button class="btn btn-dark mb-2 mx-1 float-right"
 			style="background-color: #212529; border-color: red;" id="completa"
 			disabled>Completa il tuo PG</button>
@@ -508,5 +504,6 @@
 	<br>
 	<br>
 	<br>
+
 </body>
 </html>

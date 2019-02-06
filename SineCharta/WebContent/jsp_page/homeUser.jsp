@@ -150,10 +150,14 @@
 							out.print("</table>");
 							out.print("</div>");
 						}
-					}
+					} else{
 				%>
-
-
+					
+				<div class="row">
+					<h3>Non partecipi ad alcuna storia! Fatti invitare da qualcuno.</h3>
+				</div>	
+				
+				<%}%>
 			</div>
 		</div>
 	</div>
