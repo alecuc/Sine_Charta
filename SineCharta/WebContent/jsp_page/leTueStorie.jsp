@@ -4,6 +4,7 @@
 <html>
 <head>
 <jsp:include page="head.jsp"></jsp:include>
+<script src="../js/leTueStorieScript.js"></script>
 <title>Le tue storie</title>
 </head>
 <body>
@@ -24,7 +25,9 @@
 
 
 
-			<div class="col-7 card"></div>
+			<div class="col-7 card">
+				<div class="row"><h4 id="desc"></h4></div>
+			</div>
 		</div>
 	</div>
 </body>

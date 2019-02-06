@@ -19,7 +19,7 @@
 	
 				System.out.println("NUMERO DI SESSIONI NELLA STORIA CORRENTE: "+ st.getListaSessioni().size());
 				
-				out.print("<table class=\"table table-dark\" id=\"tabellaStorie\">");
+				out.print("<table class=\"table table-dark sTable\" id=\""+st.getId()+"\">");
 				out.print("<thead>");
 				out.print("<tr>");
 				out.print("<th scope=\"col\">" + st.getTitolo() + "</th>");

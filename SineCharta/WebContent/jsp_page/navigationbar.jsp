@@ -1,5 +1,9 @@
-
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<div class="jumbotron text-center"
+		style="margin-bottom: auto; background-color: white;">
+		<img alt="logo" src="../images/logo-scritta.png"
+			style="width: 15rem;">
+	</div>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
 
 	<%@page import="beans.User"%>
 

@@ -42,14 +42,14 @@ public class RegistrazioneServlet extends HttpServlet {
 
 		String action = request.getParameter("action");
 
+		String username = request.getParameter("username");
+		String name = request.getParameter("name");
+		String surname = request.getParameter("surname");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
 		try {
 				if(action.equalsIgnoreCase("register")) {
 					
-					String username = request.getParameter("username");
-					String name = request.getParameter("name");
-					String surname = request.getParameter("surname");
-					String email = request.getParameter("email");
-					String password = request.getParameter("password");
 					
 					usr.setUsername(username);
 					usr.setPassword(password);

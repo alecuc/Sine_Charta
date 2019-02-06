@@ -57,7 +57,20 @@ public class GestioneStoriaServlet extends HttpServlet {
 			 * Questo metodo permette di completare la creazione del personaggio
 			 * */
 			
-			if(action.equalsIgnoreCase("inserisciPg")) {
+			if(action.equalsIgnoreCase("caricaStoria")) {
+				
+				Storia storia = new Storia();
+				StoryManager str = new StoryManager();
+				String param= request.getParameter("id"); 
+				int idStory= Integer.parseInt(param);
+				
+				
+				storia= str.getSimpleStory(idStory);
+
+				response.setContentType("text/plain");
+				response.getWriter().write(storia.getDescrizione());
+				
+			}else if(action.equalsIgnoreCase("inserisciPg")) {
 				
 				Storia storia = new Storia();
 				StoryManager str = new StoryManager();
