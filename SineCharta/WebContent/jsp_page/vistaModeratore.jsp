@@ -23,17 +23,19 @@
 	%>
 
 
-	<ul class="nav flex-column float-right mt-5">
-		<li class="active"><button class="btn btn-dark my-5 mr-2"
-				style="transform: rotate(90deg)" id="sessionebutton">Sessione</button></li>
-		<li><button class="btn btn-dark my-5"
-				style="transform: rotate(90deg)" id="mazzibutton">Mazzi</button></li>
-		<li><button class="btn btn-dark my-5"
-				style="transform: rotate(90deg)" id="guidabutton">Guida</button></li>
-	</ul>
+	<nav>
+		<ul class="nav nav-tabs flex-column float-right mt-5">
+			<li class="nav-item active"><button
+					class="btn btn-dark my-5 ml-2" style="transform: rotate(90deg)"
+					id="sessionebutton">Sessione</button></li>
+			<li class="nav-item"><button class="btn btn-dark my-5"
+					style="transform: rotate(90deg)" id="mazzibutton">Mazzi</button></li>
+			<li class="nav-item"><button class="btn btn-dark my-5"
+					style="transform: rotate(90deg)" id="guidabutton">Guida</button></li>
+		</ul>
+	</nav>
 
-	<div class="container card position-absolute" id="sessione"
-		style="z-index: -1">
+	<div class="container card position-absolute" id="sessione">
 		<div class="row">
 			<div class="col-8 card">
 				<h4>Sessione</h4>
@@ -53,11 +55,10 @@
 			</div>
 		</div>
 	</div>
+	<br>
 
-	<div class="container card position-absolute" id="mazzi"
-		style="z-index: auto">
+	<div class="container card position-absolute ml-3" id="mazzi">
 		<div class="row">
-
 			<div class="col-6">
 				<h3>ARCANI MAGGIORI</h3>
 				<div class="row">
@@ -103,8 +104,7 @@
 		</div>
 
 	</div>
-	<div class="container card position-absolute" id="guida"
-		style="z-index: -2">
+	<div class="container card position-absolute" id="guida">
 
 		<div class="row">
 

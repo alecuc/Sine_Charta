@@ -15,8 +15,8 @@ $(document).ready(function(){
 	
 	
 	$('#pgbutton').click(function(){
-		if(!pgbutton){
-			pgbutton=true;
+		if(!pgbool){
+			pgbool=true;
 			$('#pg').fadeToggle();
 
 			
@@ -41,9 +41,9 @@ $(document).ready(function(){
 			mazzibool=true;
 			$('#mazzi').fadeToggle();
 			
-			if (!pgbutton);
+			if (!pgbool);
 			else {
-				pgbutton=false;
+				pgbool=false;
 				$('#pg').fadeToggle();
 			}
 			
@@ -68,9 +68,9 @@ $(document).ready(function(){
 				$('#mazzi').fadeToggle();
 			}
 			
-			if(!pgbutton);
+			if(!pgbool);
 			else {
-				pgbutton=false;
+				pgbool=false;
 				$('#pg').fadeToggle();
 			}
 			

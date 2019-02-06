@@ -201,7 +201,7 @@
 		</div>
 
 
-		<div class="container card position-absolute" id="mazzi"
+		<div class="container card position-absolute  ml-3" id="mazzi"
 			style="z-index: auto">
 			<div class="row">
 

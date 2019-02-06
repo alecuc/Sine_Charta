@@ -3,7 +3,7 @@ $(document).ready(function(){
 	var tarocchiRimasti=22;
 	var pokerRimaste= 52;
 	
-	var pgbool=true;
+	var sessionebool=true;
 	var mazzibool=false;
 	var guidabool=false;
 	var JTDom=		'{"nome":"", "numero":"", "descrizione":"", "descrizioneDominante":"", "valoreCuori":"", "valoreQuadri":"", "valoreFiori":"", "valorePicche":""}';
@@ -15,8 +15,8 @@ $(document).ready(function(){
 	
 	
 	$('#sessionebutton').click(function(){
-		if(!pgbutton){
-			pgbutton=true;
+		if(!sessionebool){
+			sessionebool=true;
 			$('#sessione').fadeToggle();
 
 			
@@ -41,9 +41,9 @@ $(document).ready(function(){
 			mazzibool=true;
 			$('#mazzi').fadeToggle();
 			
-			if (!pgbutton);
+			if (!sessionebool);
 			else {
-				pgbutton=false;
+				sessionebool=false;
 				$('#sessione').fadeToggle();
 			}
 			
@@ -68,9 +68,9 @@ $(document).ready(function(){
 				$('#mazzi').fadeToggle();
 			}
 			
-			if(!pgbutton);
+			if(!sessionebool);
 			else {
-				pgbutton=false;
+				sessionebool=false;
 				$('#sessione').fadeToggle();
 			}
 			

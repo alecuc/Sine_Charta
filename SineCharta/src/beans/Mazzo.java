@@ -40,7 +40,7 @@ public class Mazzo implements Deckable{
 		
 	  	for (int i = 0 ; i < RANKS.length; i++) {
     		for (int j = 0; j < SUITS.length; j++) {
-    			deckPoker[SUITS.length * i + j] = RANKS[i] + "of" + SUITS[j];
+    			deckPoker[SUITS.length * i + j] = RANKS[i] + " di " + SUITS[j];
     		}
     	}
     	

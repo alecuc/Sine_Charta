@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.User;
-import exception.UserNotFoundException;
 import manager.UsersManager;
 
 /**

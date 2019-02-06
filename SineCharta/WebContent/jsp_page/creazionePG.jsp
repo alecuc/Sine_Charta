@@ -22,6 +22,7 @@
 	<jsp:include page="navigationbar.jsp" />
 
 	<%
+
 		//Utente non è loggato
 		if (session.getAttribute("user") == null || session.getAttribute("idStory") == null) {
 			response.sendRedirect("error/error.jsp");
@@ -29,7 +30,7 @@
 		} else {
 
 			User utente = (User) session.getAttribute("user");
-			Collection<Storia> stListGioc = (Collection) session.getAttribute("storieGiocatore");
+			Collection<Storia> stListGioc = (Collection<Storia>) session.getAttribute("storieGiocatore");
 
 			if (utente.getPersonaggiUtente().isEmpty()) {
 

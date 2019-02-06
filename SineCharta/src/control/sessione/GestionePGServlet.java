@@ -2,7 +2,6 @@ package control.sessione;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.servlet.ServletException;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import beans.Oggetto;
 import beans.Personaggio;
 import manager.EquipManager;
-import manager.PersonaggioManager;
 
 /**
  * Servlet implementation class GestionePGServlet
@@ -46,6 +44,7 @@ public class GestionePGServlet extends HttpServlet {
 		
 		
 		HttpSession session = request.getSession();
+		@SuppressWarnings("unchecked")
 		Collection<Oggetto> listaOggetti = (Collection<Oggetto>) session.getAttribute("listaOggettiPG");
 		String action = request.getParameter("action");
 		Personaggio pg = (Personaggio)session.getAttribute("pg");
@@ -61,7 +60,6 @@ public class GestionePGServlet extends HttpServlet {
 				oggetto.setPeso(Double.parseDouble(peso));
 				oggetto.setCosto(Double.parseDouble(costo));
 				oggetto.setQuantita(Integer.parseInt(quantita));
-				PersonaggioManager pgM = new PersonaggioManager();
 
 				equipaggiamento.inserisciOggetto(oggetto, pg);
 				System.out.println("Oggetto inserito.");

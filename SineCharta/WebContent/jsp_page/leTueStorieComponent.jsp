@@ -35,6 +35,7 @@
 					out.print("<td>");
 					out.print("Sessione numero: "+sdg.getIdNumeroSessione());
 					out.print("</td>");
+					out.print("<td> </td>");
 					out.print(
 							"<td><button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Gioca</button></td>");
 					out.print("</form>");

@@ -7,7 +7,6 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.Collection;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

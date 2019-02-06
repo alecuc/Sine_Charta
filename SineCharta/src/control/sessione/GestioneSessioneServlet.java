@@ -3,7 +3,6 @@ package control.sessione;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -93,6 +92,7 @@ public class GestioneSessioneServlet extends HttpServlet {
 				
 				
 				Collection<Storia> listaStorieMod = stManager.getStoriaByFlag(user, 1);
+				session.removeAttribute("storieModeratore");
 				session.setAttribute("storieModeratore", listaStorieMod);
 				
 				System.out.println("successfully inserted");
