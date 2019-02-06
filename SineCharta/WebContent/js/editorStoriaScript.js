@@ -4,8 +4,8 @@ console.log("loaded v0.6");
 function validate(){
 	
 	//define storia form regular expression
-	var titleRX = /^\w+(\w*[\._\-\?\!\+\*\"\']?)$/;
-	var descrRX = /^\w+(\w*[\._\-\?\!\+\*\"\']?)$/;
+	var titleRX = /^\w+(\w*[\s\._\-\?\!\+\*\"\']?)*$/;
+	var descrRX = /^\w+(\w*[\s\._\-\?\!\+\*\"\']?)*$/;
 
 	var titolo = $('#titolo').val();
 	var titoloOK= titolo.match(titleRX);
