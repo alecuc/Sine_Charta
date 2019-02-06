@@ -1449,21 +1449,21 @@
     "id": "4714f489-85bd-47a8-8b78-7a8ed1e327bd",
     "name": "TC_2.11",
     "commands": [{
-      "id": "e8bfc9d3-99e9-4bd4-993d-09907a57e68e",
+      "id": "2a87505d-7562-4747-bcfe-8a06c7293693",
       "comment": "",
       "command": "open",
       "target": "http://localhost:8080/SineCharta/jsp_page/index.jsp",
       "targets": [],
       "value": ""
     }, {
-      "id": "062b4db6-56e9-476d-96c0-9f10cfda8f26",
+      "id": "b45f7da3-79fd-4d79-a67a-20e91aba59ea",
       "comment": "",
       "command": "setWindowSize",
       "target": "1050x708",
       "targets": [],
       "value": ""
     }, {
-      "id": "4adc50ec-9cb6-4a0c-b669-8b82f1978bf8",
+      "id": "06e7203a-14b5-48a1-a005-8b3eb9f2449c",
       "comment": "",
       "command": "click",
       "target": "id=username",
@@ -1476,7 +1476,7 @@
       ],
       "value": ""
     }, {
-      "id": "fbf9a300-c391-43b5-9c8d-8049f8379d7b",
+      "id": "2b1cd0b1-2ce0-467e-851a-481cfffeb1cb",
       "comment": "",
       "command": "type",
       "target": "id=username",
@@ -1487,9 +1487,9 @@
         ["xpath=//input[@id='username']", "xpath:attributes"],
         ["xpath=//div[2]/div/form/div[2]/div[2]/div/div/input", "xpath:position"]
       ],
-      "value": "Francescog"
+      "value": "francescoghi"
     }, {
-      "id": "11411b42-e5fd-4e46-a3b7-6ef11bf3da79",
+      "id": "48082bbe-e819-4295-bca9-0cf2beaf5250",
       "comment": "",
       "command": "type",
       "target": "id=name",
@@ -1503,7 +1503,7 @@
       ],
       "value": "francesco"
     }, {
-      "id": "6c0cf52d-b3aa-44ff-a36e-597e692ae277",
+      "id": "61a10a4a-eaea-47bf-80fd-c6de5996b6f9",
       "comment": "",
       "command": "type",
       "target": "id=surname",
@@ -1515,9 +1515,9 @@
         ["xpath=//input[@id='surname']", "xpath:attributes"],
         ["xpath=//div[4]/div[2]/div/div/input", "xpath:position"]
       ],
-      "value": "Giuliano"
+      "value": "g"
     }, {
-      "id": "1de1dd8c-d687-41b3-bd96-3741253eb908",
+      "id": "af3efe4a-9f82-4951-974a-1c5884d0b5ec",
       "comment": "",
       "command": "type",
       "target": "id=email",
@@ -1529,9 +1529,9 @@
         ["xpath=//input[@id='email']", "xpath:attributes"],
         ["xpath=//div[5]/div[2]/div/div/input", "xpath:position"]
       ],
-      "value": "ciccio@live.it"
+      "value": "franch@live.it"
     }, {
-      "id": "f0e0fa42-73b9-4bbd-921d-60fade7abc79",
+      "id": "413a5a90-fbd8-4bb3-836e-a6e4f6e143e2",
       "comment": "",
       "command": "type",
       "target": "id=password",
@@ -1544,7 +1544,7 @@
       ],
       "value": "fr4ncesc0"
     }, {
-      "id": "3bc6d294-47e0-49b4-bab6-c55d60549bb8",
+      "id": "6f14f426-d639-4e93-b3f1-7d07feddb6a7",
       "comment": "",
       "command": "type",
       "target": "id=passConfirm",
@@ -1558,7 +1558,7 @@
       ],
       "value": "fr4ncesc0"
     }, {
-      "id": "5d8cbc51-3e41-4968-ac7e-011985be17fa",
+      "id": "500f7064-3b88-43da-a245-248f20a9de27",
       "comment": "",
       "command": "click",
       "target": "css=.text-center:nth-child(9) > .btn",
@@ -1568,6 +1568,13 @@
         ["xpath=//button[@value='Register']", "xpath:attributes"],
         ["xpath=//div[8]/button", "xpath:position"]
       ],
+      "value": ""
+    }, {
+      "id": "7c47e724-4406-4720-80ef-e8911d567e54",
+      "comment": "",
+      "command": "assertAlert",
+      "target": "Il cognome non può terminare con uno spazio oppure un apostrofo\ne non può contenere numeri o simboli",
+      "targets": [],
       "value": ""
     }]
   }],

@@ -1,11 +1,11 @@
-quando un user non è presente lancia una eccezione di tipo : "IllegalStateException",Risolto
-Registrazione, il sitema non fa controlli sulla lunghezza dei campi
-Registrazione, se viene inserito una mail o un user gia presente stampa gli errori, inserire una pagina di errore adeguata;risolto
-Inserire storia, se clicco su inserisci storia con il titolo vuoto esegue la creazione ma da errore SQLException
-Inserimento storia, il sitema permette di aggiungere se stesso alla storia,risolto
-Inserimento storia, non c'è la validazione del form, risolto
+quando un user non è presente lancia una eccezione di tipo : "IllegalStateException",Risolto(fatto)
+Registrazione, il sitema non fa controlli sulla lunghezza dei campi,risolto(fatto)
+Registrazione, se viene inserito una mail o un user gia presente stampa gli errori, inserire una pagina di errore adeguata;risolto(fatto)
+Inserire storia, se clicco su inserisci storia con il titolo vuoto esegue la creazione ma da errore SQLException,Risolto(fatto)
+Inserimento storia, il sitema permette di aggiungere se stesso alla storia,risolto(fatto)
+Inserimento storia, non c'è la validazione del form, risolto(fatto)
 Inserimento sessione, viene preso il numero sessione ma non viene incrementato
-Inserimento sessione, non funziona la validazione del form, risolto
+Inserimento sessione, non funziona la validazione del form, risolto(fatto)
 
 
 
