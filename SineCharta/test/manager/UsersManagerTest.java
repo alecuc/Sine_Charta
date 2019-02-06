@@ -59,6 +59,8 @@ public class UsersManagerTest extends TestCase{
 		assertNotNull(userTest);
 		assertNotNull(userTestRetrieve);
 		assertEquals(userTest.getUsername(), userTestRetrieve.getUsername());
+		assertEquals(userTest.getEmail(), userTestRetrieve.getEmail());
+		assertEquals(userTest.getName(), userTestRetrieve.getName());
 	}
 
 	@Test

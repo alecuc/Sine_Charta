@@ -27,7 +27,7 @@ public class AbilitaManager {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		Abilita bean = new Abilita();
-		String selectSQL = "SELECT * FROM " + AbilitaManager.TABLE_NAME_ABILITA + " WHERE NOME = ? AND USENRNAME = ? AND IDSTORY = ?";
+		String selectSQL = "SELECT * FROM " + AbilitaManager.TABLE_NAME_ABILITA + " WHERE NOME = ? AND USERNAME = ? AND IDSTORY = ?";
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
