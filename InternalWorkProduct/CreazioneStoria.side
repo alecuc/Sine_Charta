@@ -254,67 +254,21 @@
     "id": "5f26547b-7c4c-43e8-b19d-40871e06e398",
     "name": "TC_3.4",
     "commands": [{
-      "id": "69127f26-209e-46ee-a76b-249e749cfbf3",
+      "id": "2262caee-f7de-40c8-93aa-342c01f2f507",
       "comment": "",
       "command": "open",
-      "target": "",
+      "target": "http://localhost:8080/SineCharta/jsp_page/index.jsp",
       "targets": [],
       "value": ""
     }, {
-      "id": "ffec8d9f-61c0-48ae-a5b5-f19164b0653f",
+      "id": "a68041d0-d775-4bbe-bcb7-cdcaeaed6f9e",
       "comment": "",
       "command": "setWindowSize",
-      "target": "",
+      "target": "1050x708",
       "targets": [],
       "value": ""
     }, {
-      "id": "2ccd2079-96b0-4df0-854a-13ab2792e9c8",
-      "comment": "",
-      "command": "close",
-      "target": "",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "e82da784-58ff-46a3-ad2b-03707a2bcd72",
-      "comment": "",
-      "command": "close",
-      "target": "",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "cce8070d-c25f-46d6-8c56-de031cde5bfc",
-      "comment": "",
-      "command": "close",
-      "target": "",
-      "targets": [],
-      "value": ""
-    }, {
-      "id": "c0e520da-6cde-483f-9806-851fcb9d209b",
-      "comment": "",
-      "command": "click",
-      "target": "css=.jumbotron",
-      "targets": [
-        ["css=.jumbotron", "css:finder"],
-        ["css=div.jumbotron.text-center", "css"],
-        ["xpath=//div", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "8722a87e-c6ae-4e49-9cc1-89d1829a9e56",
-      "comment": "",
-      "command": "click",
-      "target": "id=us",
-      "targets": [
-        ["id=us", "id"],
-        ["name=username", "name"],
-        ["css=#us", "css:finder"],
-        ["css=#us", "css"],
-        ["xpath=//input[@id='us']", "xpath:attributes"],
-        ["xpath=//input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "d0783d73-66eb-4a37-bcca-bff47a311eb2",
+      "id": "1501601a-9724-4fcb-981e-d84385f013fc",
       "comment": "",
       "command": "type",
       "target": "id=us",
@@ -328,7 +282,7 @@
       ],
       "value": "Raziel"
     }, {
-      "id": "d7964002-9ea3-4ba4-9d30-893665897ac9",
+      "id": "00e4bd69-ddc1-471f-be33-db947a39c4b4",
       "comment": "",
       "command": "type",
       "target": "id=pwd",
@@ -342,19 +296,21 @@
       ],
       "value": "1234"
     }, {
-      "id": "7e694e6d-fcd5-496c-bb22-58164338a37c",
+      "id": "6b592d53-ea5a-4b99-a221-73d7a251ab79",
       "comment": "",
-      "command": "click",
-      "target": "css=.text-center:nth-child(4) > .btn",
+      "command": "sendKeys",
+      "target": "id=pwd",
       "targets": [
-        ["css=.text-center:nth-child(4) > .btn", "css:finder"],
-        ["css=button.btn.btn-success", "css"],
-        ["xpath=//button[@type='submit']", "xpath:attributes"],
-        ["xpath=//button", "xpath:position"]
+        ["id=pwd", "id"],
+        ["name=password", "name"],
+        ["css=#pwd", "css:finder"],
+        ["css=#pwd", "css"],
+        ["xpath=//input[@id='pwd']", "xpath:attributes"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
       ],
-      "value": ""
+      "value": "${KEY_ENTER}"
     }, {
-      "id": "f8ef6c98-a940-41d6-a4b3-16ca1427d55a",
+      "id": "83c18402-6a90-4a89-a792-283acd286768",
       "comment": "",
       "command": "click",
       "target": "css=.navbar-nav > .nav-item:nth-child(4) > .nav-link",
@@ -367,7 +323,7 @@
       ],
       "value": ""
     }, {
-      "id": "15d2de87-c32c-49d5-8bba-752ff93a2959",
+      "id": "36ebbb38-c749-4a14-b824-4fc9d38033a4",
       "comment": "",
       "command": "click",
       "target": "css=td:nth-child(1) > .btn",
@@ -380,7 +336,7 @@
       ],
       "value": ""
     }, {
-      "id": "23f3d413-eb2e-47e2-8775-e540ef855fe9",
+      "id": "8950cbb1-f13a-4663-9e69-c1bbf15a460c",
       "comment": "",
       "command": "click",
       "target": "id=titolo",
@@ -395,7 +351,7 @@
       ],
       "value": ""
     }, {
-      "id": "6fd564ad-369e-4cc6-b345-3104ef5bf3a6",
+      "id": "6dbda996-fad2-4148-8ad4-6a6aa2640ea1",
       "comment": "",
       "command": "type",
       "target": "id=titolo",
@@ -408,23 +364,16 @@
         ["xpath=//form[@id='form']/div/div/input", "xpath:idRelative"],
         ["xpath=//input", "xpath:position"]
       ],
-      "value": "Ciao"
+      "value": "bonnanan"
     }, {
-      "id": "2a1dc200-367a-4e8d-9ecb-2287e9758991",
+      "id": "f1f32fbb-260a-43eb-8244-8589c2914bbc",
       "comment": "",
       "command": "select",
       "target": "id=ambientazione",
       "targets": [],
       "value": "label=Sanctum Imperum"
     }, {
-      "id": "4ed2a06d-fff5-46e8-a3df-dccc2904e46b",
-      "comment": "",
-      "command": "select",
-      "target": "id=ambientazione",
-      "targets": [],
-      "value": "label=Terre Perdute"
-    }, {
-      "id": "aa94e0b5-1c4f-463a-a896-4952229c1645",
+      "id": "52f2a37e-4439-4ba6-899d-7f50ec2ca6ca",
       "comment": "",
       "command": "type",
       "target": "id=descrizione",
@@ -437,9 +386,9 @@
         ["xpath=//form[@id='form']/textarea", "xpath:idRelative"],
         ["xpath=//textarea", "xpath:position"]
       ],
-      "value": "Ciao sono una storia di prova"
+      "value": "ciao sono la tua seconda storia"
     }, {
-      "id": "b4f24f8a-6ea4-449b-9c2b-fbf3d3760b3c",
+      "id": "02d016b8-29e7-48de-bba3-ab7d689c2c87",
       "comment": "",
       "command": "click",
       "target": "id=user",
@@ -453,7 +402,7 @@
       ],
       "value": ""
     }, {
-      "id": "372826f8-5825-4a46-bc76-28d33b08e7f8",
+      "id": "85485947-84cf-4fba-99b0-307a5d93f1f8",
       "comment": "",
       "command": "type",
       "target": "id=user",
@@ -467,18 +416,7 @@
       ],
       "value": "Gaetano"
     }, {
-      "id": "99fd40d3-8685-46e6-a4e6-afc2e626f97b",
-      "comment": "",
-      "command": "click",
-      "target": "css=.col-4",
-      "targets": [
-        ["css=.col-4", "css:finder"],
-        ["css=div.col-4.card", "css"],
-        ["xpath=//div/div/div[2]", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "32efc5c1-3a9d-4f0e-b8f8-394de173cdf3",
+      "id": "e5e5e418-0ddf-47ce-9ad4-bd5b173affcd",
       "comment": "",
       "command": "click",
       "target": "id=aggiungiUtente",
@@ -491,7 +429,7 @@
       ],
       "value": ""
     }, {
-      "id": "4eb0c9de-e1e5-4e32-a153-25a1ab8ad8a1",
+      "id": "ad97894c-4f50-484f-bea2-9beb87584ce5",
       "comment": "",
       "command": "click",
       "target": "id=salvaStoria",
@@ -504,6 +442,20 @@
         ["xpath=//div/form/button", "xpath:position"]
       ],
       "value": ""
+    }, {
+      "id": "d339c81a-a8f3-4688-a997-f7713b9e0ca0",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=qui",
+      "targets": [
+        ["linkText=qui", "linkText"],
+        ["css=a", "css:finder"],
+        ["css=a", "css"],
+        ["xpath=//a[contains(text(),'qui')]", "xpath:link"],
+        ["xpath=//a[contains(@href, 'leTueStorie.jsp')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"]
+      ],
+      "value": ""
     }]
   }],
   "suites": [{
@@ -514,6 +466,6 @@
     "timeout": 300,
     "tests": ["c95260a4-a792-40ad-9d37-2f5e9d775f7d"]
   }],
-  "urls": ["http://localhost:8080/"],
+  "urls": ["http://localhost:8080/", "http://localhost:8080/SineCharta/jsp_page/index.jsp"],
   "plugins": []
 }
