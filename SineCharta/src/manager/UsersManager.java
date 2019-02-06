@@ -163,7 +163,7 @@ public class UsersManager implements UserModelI<User>{
 		PreparedStatement preparedStatement = null;
 		
 		String insertSQL = "INSERT INTO " + UsersManager.TABLE_NAME
-				+ " (USERNAME, PASSWORD, EMAIL, NOME, COGNOME, RUOLO) VALUES (?, md5(?), ?, ?, ?, 'utenteModeratore')";
+				+ " (USERNAME, PASSWORD, EMAIL, NOME, COGNOME, RUOLO) VALUES (?, md5(?), ?, ?, ?, 'utenteGiocatore')";
 		
 		try {
 			connection = DriverManagerConnectionPool.getConnection();
