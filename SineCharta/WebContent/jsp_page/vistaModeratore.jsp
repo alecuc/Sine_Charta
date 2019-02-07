@@ -26,7 +26,7 @@
 	<nav>
 		<ul class="nav nav-tabs flex-column float-right mt-5">
 			<li class="nav-item active"><button
-					class="btn btn-dark my-5 ml-2" style="transform: rotate(90deg)"
+					class="btn btn-dark my-5" style="transform: rotate(90deg)"
 					id="sessionebutton">Sessione</button></li>
 			<li class="nav-item"><button class="btn btn-dark my-5"
 					style="transform: rotate(90deg)" id="mazzibutton">Mazzi</button></li>
@@ -35,7 +35,7 @@
 		</ul>
 	</nav>
 
-	<div class="container card position-absolute" id="sessione">
+	<div class="container card position-absolute ml-3 my-3" id="sessione">
 		<div class="row">
 			<div class="col-8 card">
 				<h4>Sessione</h4>
@@ -75,8 +75,8 @@
 						id="shuffMaj">Mischia</button>
 				</div>
 				<div class="row">
-					<p>Hai estratto:</p>
-					<p id="taroccoEstratto"></p>
+					<p>Hai estratto: <span id="taroccoEstratto"></span></p>
+					<br>
 					<p id="desc"></p>
 				</div>
 			</div>
@@ -95,16 +95,17 @@
 						style="background-color: #212529; border-color: red;"
 						id="shuffleMin">Mischia</button>
 					<br>
-					<p>Hai estratto:</p>
-					<p id="pokerEstratta"></p>
+					<br> 
 				</div>
+					<p>Hai estratto: <span id="pokerEstratta"></span></p>
+					
 
 
 			</div>
 		</div>
 
 	</div>
-	<div class="container card position-absolute" id="guida">
+	<div class="container card position-absolute ml-2" id="guida">
 
 		<div class="row">
 
