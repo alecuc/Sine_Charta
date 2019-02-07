@@ -88,9 +88,10 @@ public class LoginServlet extends HttpServlet {
 
 		} catch (IllegalStateException e) { 
 			e.printStackTrace();
-			response.sendRedirect("jps_page/error/utenteNonTrovato.jsp");
+			response.sendRedirect("jsp_page/error/utenteNonTrovato.jsp");
 	    } catch (SQLException e) {
 			e.printStackTrace();
+			response.sendRedirect("jsp_page/error/utenteNonTrovato.jsp");
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (NullPointerException e) {
