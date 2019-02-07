@@ -286,6 +286,7 @@ public class GestioneStoriaServlet extends HttpServlet {
 					res.concat(pg.getUsername()+": "+pg.getNome()+" "+pg.getCognome()+"\n");
 				}
 				
+				System.out.println(res);
 				response.getWriter().write(res);
 			} 
 		}catch (SQLException e) {
