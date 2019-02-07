@@ -55,6 +55,10 @@ public class Storia implements Serializable{
 		pg.setStoria(null);
 	}
 	
+	public Set<Personaggio> getListaPG(){
+		return this.personaggi;
+	}
+	
 	public void setUtenteModeratore(User nuovoModeratore) {
 		if(utenteModeratore!= nuovoModeratore) {
 			User oldModeratore = utenteModeratore;

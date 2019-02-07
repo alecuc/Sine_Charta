@@ -270,6 +270,23 @@ public class GestioneStoriaServlet extends HttpServlet {
 				response.sendRedirect("jsp_page/creazionePG.jsp");
 				
 				//questo if permette di inserire un pg	
+			} else if(action.equalsIgnoreCase("caricaPG")) {
+
+				Storia storia = new Storia();
+				StoryManager str = new StoryManager();
+				String param= request.getParameter("id"); 
+				int idStory= Integer.parseInt(param);
+				
+				
+				storia= str.getSimpleStory(idStory);
+
+				response.setContentType("text/plain");
+				String res= "";
+				for(Personaggio pg: storia.getListaPG()) {
+					res.concat(pg.getUsername()+": "+pg.getNome()+" "+pg.getCognome()+"\n");
+				}
+				
+				response.getWriter().write(res);
 			} 
 		}catch (SQLException e) {
 			e.printStackTrace();

@@ -121,34 +121,36 @@
 		<div class="row">
 			<div class="col-12">
 				<table class="table table-dark">
-					<tbody>
-						<tr>
-							<%
-								Collection<Abilita> abList = pg.getListaAbilita();
+						<tbody>
+							<tr>
+								<%
+									Collection<Abilita> abList = pg.getListaAbilita();
 
-								out.print("<div class=\"table-responsive\">");
+									out.print("<div class=\"table-responsive\">");
 
-								out.print("<table class=\"table table-dark\" id=\"tabellaAbilita\">");
-								out.print("<thead>");
-								out.print("<tr>");
-								out.print("<th scope=\"col\">Abilità</th>");
-								out.print("<th scope=\"col\">Totale</th>");
-								out.print("</tr>");
-								out.print("</thead>");
-								out.print("<tbody>");
-
-								for (Abilita ab : abList) {
-
+									out.print("<table class=\"table table-dark\" id=\"tabellaAbilita\">");
+									out.print("<thead>");
 									out.print("<tr>");
-									out.print("<td>" + ab.getNome() + "</td>");
-									out.print("<td>" + ab.getValore() + "</td>");
+									out.print("<th scope=\"col\">Abilità</th>");
+									out.print("<th scope=\"col\">Punti abilità</th>");
+									out.print("<th scope=\"col\">Totale</th>");
 									out.print("</tr>");
+									out.print("</thead>");
+									out.print("<tbody>");
 
-								}
-							%>
-						
-					</tbody>
-				</table>
+									for (Abilita ab : abList) {
+
+										out.print("<tr>");
+										out.print("<td>" + ab.getNome() + "</td>");
+										out.print("<td>" + ab.getValore() + "</td>");
+										out.print("<td>" + "</td>");
+										out.print("</tr>");
+
+									} // */
+								%>
+							
+						</tbody>
+					</table>
 			</div>
 		</div>
 		<br>
