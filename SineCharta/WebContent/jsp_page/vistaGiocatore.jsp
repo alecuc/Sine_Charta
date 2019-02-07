@@ -38,7 +38,7 @@
 
 
 	<div>
-		<div class="container card position-absolute" id="pg">
+		<div class="container card position-absolute ml-3 my-3" id="pg">
 			<br>
 			<h2 class="card-title text-center">IL TUO PERSONAGGIO</h2>
 			<br>
@@ -201,8 +201,7 @@
 		</div>
 
 
-		<div class="container card position-absolute  ml-3" id="mazzi"
-			style="z-index: auto">
+		<div class="container card position-absolute ml-3 my-3" id="mazzi">
 			<div class="row">
 
 				<div class="col-6">
@@ -252,8 +251,7 @@
 			</div>
 
 		</div>
-		<div class="container card position-absolute" id="guida"
-			style="z-index: -2">
+		<div class="container card position-absolute ml-3 my-3" id="guida">
 
 			<div class="row">
 

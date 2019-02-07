@@ -29,111 +29,112 @@
 				%>
 				<h2 class="text-center"><%=utente.getUsername()%></h2>
 
-				
+
 
 
 				<div class="fakeimg text-center">
 					<img src="../images/mini_logo.jpg" style="width: 50%;">
 				</div>
 
-			<br>
-			
-			<div class="card container-card">
-			
-			<ul class="list-group">
-  <li class="list-group-item">Nome:  <%=utente.getName()%></li>
-  <li class="list-group-item">Cognome: <%=utente.getSurname()%> </li>
-  <li class="list-group-item">Grado: <%=utente.getRuolo()%></li> 
-  <li class="list-group-item">Numero di storie: <%=utente.getStorieUtente().size()%></li>
-  <li class="list-group-item">Numero di PG: <%=utente.getPersonaggiUtente().size()%></li>
-</ul>
-			
-			</div>					
+				<br>
+
+				<div class="card container-card">
+
+					<ul class="list-group">
+						<li class="list-group-item">Nome: <%=utente.getName()%></li>
+						<li class="list-group-item">Cognome: <%=utente.getSurname()%>
+						</li>
+						<li class="list-group-item">Grado: <%=utente.getRuolo()%></li>
+					</ul>
+
+				</div>
 
 
 			</div>
 			<div class="col-8">
 
+
+
 				<%
 					Collection<Storia> stList = (Collection<Storia>) session.getAttribute("storieGiocatore");
-					Set<Personaggio> pgList = utente.getPersonaggiUtente();
+						Set<Personaggio> pgList = utente.getPersonaggiUtente();
 
-					if (!stList.isEmpty()) {
-						ArrayList<Storia> stNoPG = new ArrayList<Storia>();
+						if (!stList.isEmpty()) {
+							ArrayList<Storia> stNoPG = new ArrayList<Storia>();
 
-						out.print("<div class=\"row\">");
-						out.print("<table class=\"table table-dark\" id=\"tabellaStorie\">");
-						out.print("<thead>");
-						out.print("<tr>");
-						out.print("<th scope=\"col\">Nome Storia</th>");
-						out.print("<th scope=\"col\" colspan=\"2\">Nome PG</th>");
-						out.print("</tr>");
-						out.print("</thead>");
-						out.print("<tbody>");
-
-						for (Storia st : stList) {
-
-							boolean pgFound = false;
-							for (Personaggio pg : pgList) {
-
-								if (pg.getIdStoria() == st.getId()) {
-
-									out.print("<tr>");
-									out.print("<form method=\"post\" action=\"../GestioneSessioneServlet?action=gioca&idStoria="
-											+ st.getId() + "\">");
-									out.print("<td class=\"td-prod\">" + st.getTitolo() + "</td>");
-									out.print("<td class=\"td-prod\">" + pg.getNome() + " " + pg.getCognome() + "</td>");
-									//	out.print("<td>  </td>");
-									out.print(
-											"<td><button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Gioca</button></td>");
-									out.print("</form>");
-									out.print("</tr>");
-									pgFound = true;
-									break;
-								}
-
-							}
-							if (!pgFound) {
-								stNoPG.add(st);
-							}
-						}
-						out.print("</tbody>");
-						out.print("</table>");
-						out.print("</div>");
-						/*CHIUDI TABELLA "GIOCA"*/
-
-						System.out.println("Qui le storie a cui partecipi, senza pg");
-						for (Storia st : stNoPG) {
-							System.out.println(st.toString());
-						}
-
-						if (!stNoPG.isEmpty()) {
-							//APRI TABELLA "CREA"
 							out.print("<div class=\"row\">");
-							out.print("<table class=\"table table-responsive table-dark\" id=\"tabellaNoPG\">");
+							out.print("<table class=\"table table-dark ml-2\" id=\"tabellaStorie\">");
 							out.print("<thead>");
 							out.print("<tr>");
-							out.print("<th>Nome Storia</th>");
-							out.print("<th>.</th>");
+							out.print("<th scope=\"col\">Nome Storia</th>");
+							out.print("<th scope=\"col\" colspan=\"2\">Nome PG</th>");
 							out.print("</tr>");
 							out.print("</thead>");
 							out.print("<tbody>");
 
-							for (Storia st : stNoPG) {
-								out.print("<tr>");
-								out.print("<form method=\"post\" action=\"../GestioneStoriaServlet?action=creaPG&idStoria="
-										+ st.getId() + "\">");
-								out.print("<td class=\"td-prod\">" + st.getTitolo() + "</td>");
-								out.print(
-										"<td><button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Crea PG</button></td>");
-								out.print("</form>");
-								out.print("</tr>");
+							for (Storia st : stList) {
+
+								boolean pgFound = false;
+								for (Personaggio pg : pgList) {
+
+									if (pg.getIdStoria() == st.getId()) {
+
+										out.print("<tr>");
+										out.print(
+												"<form method=\"post\" action=\"../GestioneSessioneServlet?action=gioca&idStoria="
+														+ st.getId() + "\">");
+										out.print("<td class=\"td-prod\">" + st.getTitolo() + "</td>");
+										out.print("<td class=\"td-prod\">" + pg.getNome() + " " + pg.getCognome() + "</td>");
+										out.print(
+												"<td><button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Gioca</button></td>");
+										out.print("</form>");
+										out.print("</tr>");
+										pgFound = true;
+										break;
+									}
+
+								}
+								if (!pgFound) {
+									stNoPG.add(st);
+								}
 							}
 							out.print("</tbody>");
 							out.print("</table>");
 							out.print("</div>");
-						}
-					} else {
+							/*CHIUDI TABELLA "GIOCA"*/
+
+							System.out.println("Qui le storie a cui partecipi, senza pg");
+							for (Storia st : stNoPG) {
+								System.out.println(st.toString());
+							}
+
+							if (!stNoPG.isEmpty()) {
+								//APRI TABELLA "CREA"
+								out.print("<div class=\"row\">");
+								out.print("<table class=\"table table-responsive table-dark\" id=\"tabellaNoPG\">");
+								out.print("<thead>");
+								out.print("<tr>");
+								out.print("<th>Nome Storia</th>");
+								out.print("<th>.</th>");
+								out.print("</tr>");
+								out.print("</thead>");
+								out.print("<tbody>");
+
+								for (Storia st : stNoPG) {
+									out.print("<tr>");
+									out.print("<form method=\"post\" action=\"../GestioneStoriaServlet?action=creaPG&idStoria="
+											+ st.getId() + "\">");
+									out.print("<td class=\"td-prod\">" + st.getTitolo() + "</td>");
+									out.print(
+											"<td><button type=\"submit\" class=\"btn btn-dark\" style=\"background-color: #212529; border-color: red;\">Crea PG</button></td>");
+									out.print("</form>");
+									out.print("</tr>");
+								}
+								out.print("</tbody>");
+								out.print("</table>");
+								out.print("</div>");
+							}
+						} else {
 				%>
 
 				<div class="row">
@@ -147,8 +148,8 @@
 			</div>
 		</div>
 	</div>
-<%
-					}
-				%>
+	<%
+		}
+	%>
 </body>
 </html>
