@@ -156,5 +156,6 @@
 				Per tornare alla tua pagina personale, clicca <a href="homeUser.jsp">qui.</a>
 			</h3>
 	</div>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

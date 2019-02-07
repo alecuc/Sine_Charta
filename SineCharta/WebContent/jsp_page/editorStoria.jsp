@@ -14,7 +14,7 @@
 
 	<div class="container">
 
-		<div class="row">
+		<div class="row my-3">
 
 			<div class="col-8 card">
 				<h3 class="card-title">DESCRIVI LA TUA STORIA</h3>
@@ -72,5 +72,6 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>

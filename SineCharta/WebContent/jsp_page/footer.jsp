@@ -62,11 +62,14 @@
 			</div>
 			<!-- Modal body -->
 			<div class="modal-body">
-				<p>
-					Contattaci: <a
-						href="mailto:SineCharta@mail.com?subject=Oggetto%20del%20messaggio">Invia
-						una mail!!</a>
-				</p>
+				
+					Contattaci: 
+				<ul>
+					<li>Vitiello Raffaele: <a href="https://t.me/RaffoV">Telegram</a>, <a href="https://it.linkedin.com/in/raffaele-vitiello-32761a161">Linkedin</a></li>
+					<li>Cuccurullo Alessio: <a href="https://t.me/AIessio">Telegram</a>, <a href="https://twitter.com/AlessioXamun">Twitter</a></li>
+					<li>Giuliano Francesco: <a href="https://t.me/Fra_Raziel87">Telegram</a></li>
+				</ul>
+				
 			</div>
 			<!-- Modal footer -->
 			<div class="modal-footer">
