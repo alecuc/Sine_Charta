@@ -23,7 +23,7 @@ public class AbilitaManager {
 	 * @param nome= nome dell'abilita'															*
 	 * @return abilita' del personaggio 														*
 	 ********************************************************************************************/
-	public Abilita getAbilitaByName(Personaggio pg, String nome) throws SQLException {
+	public synchronized Abilita getAbilitaByName(Personaggio pg, String nome) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		Abilita bean = new Abilita();
@@ -60,7 +60,7 @@ public class AbilitaManager {
 	 * @param pg= personaggio che possiede le abilità												*
 	 * @return lista abilita del pg																	*
 	 ************************************************************************************************/
-	public Collection<Abilita> getListaAbilitaByPG(Personaggio pg) throws SQLException{
+	public synchronized Collection<Abilita> getListaAbilitaByPG(Personaggio pg) throws SQLException{
 		Connection connection = null;
 		PreparedStatement ps = null;
 		Collection<Abilita> listaAbilita = new LinkedList<Abilita>();
@@ -95,7 +95,7 @@ public class AbilitaManager {
 	 * @param ability= abilita' da aggiunger										*
 	 * @param pg= personaggio a cui è associata l'abilita'							*
 	 ********************************************************************************/
-	public void aggiungiAbilita(Abilita ability, Personaggio pg)throws SQLException{
+	public synchronized void aggiungiAbilita(Abilita ability, Personaggio pg)throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		String nuovoAbilita = "INSERT INTO " + TABLE_NAME_ABILITA + " (NOME, VALORE, USERNAME, IDSTORY) VALUES (?, ?, ?, ?)";
@@ -123,7 +123,7 @@ public class AbilitaManager {
 	 * @param pg= personaggio associato all'abilità										*
 	 * @return conferma dell'eliminazione avvenuta										*
 	 ************************************************************************************/
-	public boolean eliminaAbilita(Personaggio pg) throws SQLException{
+	public synchronized boolean eliminaAbilita(Personaggio pg) throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;

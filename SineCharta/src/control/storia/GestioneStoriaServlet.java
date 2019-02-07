@@ -227,14 +227,17 @@ public class GestioneStoriaServlet extends HttpServlet {
 				
 				String[] inviti = data.split(",");
 
-				storia.setTitolo(titolo);
-				storia.setDescrizione(descrizione);
-				storia.setAmbientazione(ambientazione);
-
-				str.aggiungiStoria(storia);
-				user.aggiungiStoria(storia);
-				storia.setUtenteModeratore(user);
-				storia.setUsername(user.getUsername());
+				
+				synchronized (storia) {
+					storia.setTitolo(titolo);
+					storia.setDescrizione(descrizione);
+					storia.setAmbientazione(ambientazione);
+					str.aggiungiStoria(storia);
+					user.aggiungiStoria(storia);
+					storia.setUtenteModeratore(user);
+					storia.setUsername(user.getUsername());
+				}
+				
 				
 				str.aggiungiATable(user, 1);
 				

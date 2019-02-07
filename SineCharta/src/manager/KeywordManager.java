@@ -16,7 +16,7 @@ public class KeywordManager {
 	 * @param idKeyword l'id della keyword 											*
 	 * @return il bean che rappresenta la keyword									*
 	 ********************************************************************************/
-	public Keyword prendereKeyword(SessioneDiGioco sessione, String chiave) throws SQLException {
+	public synchronized Keyword prendereKeyword(SessioneDiGioco sessione, String chiave) throws SQLException {
 		
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -59,7 +59,7 @@ public class KeywordManager {
 	 * @param session la sessione in cui su vuole recuperare la lista						*
 	 * @return la lista di keyword															*
 	 ****************************************************************************************/
-	public Collection<Keyword> listaKeyword(SessioneDiGioco session) throws SQLException {
+	public synchronized Collection<Keyword> listaKeyword(SessioneDiGioco session) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		Collection<Keyword> listaKeyword = new LinkedList<Keyword>();
@@ -97,7 +97,7 @@ public class KeywordManager {
 	 * @param numero= numero della sessione a cui appartiene la keyword				*
 	 * @return valore conferma eliminazione											*
 	 ********************************************************************************/
-	public boolean eliminaKeyword(int idKeyWord, int numero)throws SQLException {
+	public synchronized boolean eliminaKeyword(int idKeyWord, int numero)throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
