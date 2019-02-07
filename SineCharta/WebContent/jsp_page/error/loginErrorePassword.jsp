@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <jsp:include page="../head.jsp"></jsp:include>
+		<meta http-equiv="refresh" content="5; url=../index.jsp" />
+
 <title>OOPS</title>
 </head>
 <body>
