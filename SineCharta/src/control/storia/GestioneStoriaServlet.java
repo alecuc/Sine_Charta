@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -232,6 +233,11 @@ public class GestioneStoriaServlet extends HttpServlet {
 				storia.setAmbientazione(ambientazione);
 
 				str.aggiungiStoria(storia);
+
+				
+				TimeUnit.SECONDS.sleep(4);
+
+				
 				user.aggiungiStoria(storia);
 				storia.setUtenteModeratore(user);
 				storia.setUsername(user.getUsername());
@@ -274,6 +280,9 @@ public class GestioneStoriaServlet extends HttpServlet {
 
 		}catch (NullPointerException e) {
 			response.sendRedirect("jsp_page/error/error.jsp");
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}	

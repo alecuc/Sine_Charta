@@ -61,3 +61,8 @@ $(document).ready(function(){
 		}
 	});
 });
+
+
+$(window).bind('beforeunload', function(){
+	  return 'Attenzione: ogni operazione non sarà salvata. Sei sicuro di voler uscire?';
+	});
