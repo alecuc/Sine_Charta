@@ -14,7 +14,6 @@ import beans.Personaggio;
 import beans.SessioneDiGioco;
 import beans.Storia;
 import beans.User;
-import exception.UserNotFoundException;
 
 public class StoryManager {
 
@@ -27,7 +26,7 @@ public class StoryManager {
 	 * @param username= identificativo dell'utente									*
 	 * @return la storia a cui si riferisce idStoria								*
 	 ********************************************************************************/
-	public Collection<Storia> getStoria(User user) throws SQLException{
+	public synchronized Collection<Storia> getStoria(User user) throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		Collection<Storia> storieutente = new LinkedList<Storia>();
@@ -77,7 +76,7 @@ public class StoryManager {
 	 * Metodo per selezionare l'ultima storia inserita							*
 	 * @return id dell'ultima storia inserita									*
 	 ****************************************************************************/
-	public int selectLastId()throws SQLException{
+	public synchronized int selectLastId()throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		int id = 0;
@@ -107,7 +106,7 @@ public class StoryManager {
 	 * @param flag= identificativo di un utente Moderatore rispetto ad un utente giocatore			*
 	 * @return la storia a cui si riferisce idStoria												*
 	 ************************************************************************************************/
-	public Collection<Storia> getStoriaByFlag(User user, int flag) throws SQLException{
+	public synchronized Collection<Storia> getStoriaByFlag(User user, int flag) throws SQLException{
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -159,7 +158,7 @@ public class StoryManager {
 	 * @param utente= utente a cui � associato il personaggio									*
 	 * @return un personaggio																	*
 	 ********************************************************************************************/
-	private Personaggio getPersonaggioForStory(User utente, int idStory)throws SQLException {
+	private synchronized Personaggio getPersonaggioForStory(User utente, int idStory)throws SQLException {
 		PersonaggioManager manager = new PersonaggioManager();
 		Personaggio pg = manager.getSimplePGByStory(utente, idStory);
 		return pg;
@@ -170,7 +169,7 @@ public class StoryManager {
 	 * @param idStory= identificativo della storia								*
 	 * @return una storia														*
 	 ****************************************************************************/
-	public Storia getSimpleStory(int idStory)throws SQLException {
+	public synchronized Storia getSimpleStory(int idStory)throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		Storia storia = new Storia();
@@ -200,25 +199,13 @@ public class StoryManager {
 	}
 
 
-	/********************************************************************
-	 * Metodo per recuperare un utente da UserManager					*
-	 * @param username= utente da recuperare							*
-	 * @return un utente
-	 * @throws UserNotFoundException *
-	 ********************************************************************/
-	@SuppressWarnings("unused")
-	private User getUtente(String username)throws SQLException, UserNotFoundException {
-		UsersManager manager = new UsersManager();
-		User utente = manager.doRetrieveByKey(username);
-		return utente;
-	}
 
 	/****************************************************************************
 	 * Metodo per recuperare la lista delle sessioni di una storia				*
 	 * @param idStory= identificativo della storia								*
 	 * @return lista di sessioni appartenenti alla storia						*
 	 ****************************************************************************/
-	private Set<SessioneDiGioco> aggiungiSessioniById(int idStory)throws SQLException{
+	private synchronized Set<SessioneDiGioco> aggiungiSessioniById(int idStory)throws SQLException{
 		SessioneManager manager = new SessioneManager();
 		Collection<SessioneDiGioco> se = manager.recuperoSessioni(idStory);
 		if(se!= null) {
@@ -233,7 +220,7 @@ public class StoryManager {
 	 * @param utenteMod= utente a cui � associata la storia						*
 	 * @return una lista di sessioni											*
 	 ****************************************************************************/
-	private Set<SessioneDiGioco> aggiungiSessioniAllaStoria(Storia storia, User utenteMod)throws SQLException{
+	private synchronized Set<SessioneDiGioco> aggiungiSessioniAllaStoria(Storia storia, User utenteMod)throws SQLException{
 		SessioneManager manager = new SessioneManager();
 		Collection<SessioneDiGioco> listaSessione = manager.recuperoTutteLeSessioni(storia, utenteMod);
 		if(listaSessione!=null) {
@@ -247,7 +234,7 @@ public class StoryManager {
 	 * @param pg= personaggio a cui � associata la storia 									*
 	 * @return una storia del personaggio													*
 	 ****************************************************************************************/
-	public Storia getStoriaDelPG(Personaggio pg)throws SQLException {
+	public synchronized Storia getStoriaDelPG(Personaggio pg)throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		Storia storia = new Storia();
@@ -283,7 +270,7 @@ public class StoryManager {
 	 * @param storia= un oggetto di tipo storia 												*
 	 * @param username= utente che inserisce la storia											*
 	 ********************************************************************************************/
-	public void aggiungiStoria(Storia storia)throws SQLException{
+	public synchronized void aggiungiStoria(Storia storia)throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		String creaStoria = "INSERT INTO "+ TABLE_NAME_STORIA
@@ -312,7 +299,7 @@ public class StoryManager {
 	 * @param utente= utente da aggiungere														*
 	 * @param flag= identifica il tipo di utente												*
 	 ********************************************************************************************/
-	public void aggiungiATable(User utente, int flag) throws SQLException{
+	public synchronized void aggiungiATable(User utente, int flag) throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		String aggiungiHaTable = "INSERT INTO ha (USERNAME, IDSTORY, FLAG) VALUES(?, ?, ?)";
@@ -339,7 +326,7 @@ public class StoryManager {
 	 * @param idStoria= identificativo della storia da eliminare						*
 	 * @return risultato dell'avvenuta eliminazione										*
 	 ************************************************************************************/
-	public boolean eliminaStoria(int idStoria) throws SQLException{
+	public synchronized boolean eliminaStoria(int idStoria) throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
@@ -368,7 +355,7 @@ public class StoryManager {
 	 * @param idStory= identificativo della storia 									*
 	 * @return valore di conferma eliminazione										*
 	 ********************************************************************************/
-	public boolean eliminaRiferimentoHaTable(String username, int idStory)throws SQLException{
+	public synchronized boolean eliminaRiferimentoHaTable(String username, int idStory)throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;

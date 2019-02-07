@@ -23,7 +23,7 @@ public class SessioneManager {
 	 * @param numSessione= numero della sessione da recuperare										*
 	 * @return la sessione																			*
 	 ************************************************************************************************/
-	public SessioneDiGioco recuperoSessioneStoria(Storia storia, User utente, int numSessione) throws SQLException {
+	public synchronized SessioneDiGioco recuperoSessioneStoria(Storia storia, User utente, int numSessione) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		SessioneDiGioco bean = new SessioneDiGioco();
@@ -65,7 +65,7 @@ public class SessioneManager {
 	 * @param utente= utente moderatore a cui appartengono le sessioni					*
 	 * @return la lista delle sessioni di una storia									*
 	 ************************************************************************************/
-	public Collection<SessioneDiGioco> recuperoTutteLeSessioni(Storia storia, User utente) throws SQLException {
+	public synchronized Collection<SessioneDiGioco> recuperoTutteLeSessioni(Storia storia, User utente) throws SQLException {
 		
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -109,7 +109,7 @@ public class SessioneManager {
 	 * @param idStoria= identificativo della storia						*
 	 * @return una storia 												*
 	 ********************************************************************/
-	private Storia getAnStory(int idStoria) throws SQLException{
+	private synchronized Storia getAnStory(int idStoria) throws SQLException{
 		StoryManager manager = new StoryManager();
 		Storia sto = manager.getSimpleStory(idStoria);
 		return sto;
@@ -121,7 +121,7 @@ public class SessioneManager {
 	 * @return una lista di keyword										*
 	 * @throws SQLException												*
 	 ********************************************************************/
-	private Set<Keyword> aggiungiListaKeyword(SessioneDiGioco sessione)throws SQLException{
+	private synchronized Set<Keyword> aggiungiListaKeyword(SessioneDiGioco sessione)throws SQLException{
 		KeywordManager manager = new KeywordManager();
 		Collection<Keyword> listaKeyword = manager.listaKeyword(sessione);
 		if(listaKeyword!=null) {
@@ -134,7 +134,7 @@ public class SessioneManager {
 	 * Metodo che salva le sessioni nel database								*
 	 * @param sessioneDiGioco la sessione di Gioco da salvare					*
 	 ****************************************************************************/
-	public void salvareSessioni(SessioneDiGioco sessioneDiGioco) throws SQLException {
+	public synchronized void salvareSessioni(SessioneDiGioco sessioneDiGioco) throws SQLException {
 	
 		Connection con = null;
 		PreparedStatement preparedStatement = null;
@@ -170,7 +170,7 @@ public class SessioneManager {
 	 * @param sessioneDiGioco la sessione di gioco										*
 	 * @param nuovoContenuto il nuovo contenuto della sessione							*
 	 ************************************************************************************/
-	public void aggiornareSessioni(SessioneDiGioco sessioneDiGioco, String nuovoContenuto) throws SQLException {
+	public synchronized void aggiornareSessioni(SessioneDiGioco sessioneDiGioco, String nuovoContenuto) throws SQLException {
 		
 		Connection con = null;
 		PreparedStatement preparedStatement = null;
@@ -208,7 +208,7 @@ public class SessioneManager {
 	 * @param username= utente a cui si riferisce la sessione					*
 	 * @return valore di avvenuta eliminazione									*	
 	 ****************************************************************************/
-	public boolean eliminaSingolaSessione(int numero, int IdStory, String username)throws SQLException{
+	public synchronized boolean eliminaSingolaSessione(int numero, int IdStory, String username)throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
@@ -240,7 +240,7 @@ public class SessioneManager {
 	 * @param username= utente a cui si riferiscono le sessioni					*
 	 * @return valore di avvenuta eliminazione									*	
 	 ****************************************************************************/
-	public boolean eliminaSessioni(int IdStory, String username)throws SQLException{
+	public synchronized boolean eliminaSessioni(int IdStory, String username)throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
@@ -265,7 +265,7 @@ public class SessioneManager {
 	}
 	
 	
-	public Collection<SessioneDiGioco> recuperoSessioni(int idStory)throws SQLException{
+	public synchronized Collection<SessioneDiGioco> recuperoSessioni(int idStory)throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		Collection<SessioneDiGioco> sessioni = new LinkedList<SessioneDiGioco>();
@@ -306,7 +306,7 @@ public class SessioneManager {
 	   * @param storia= a cui appartengono le sessioni          *
 	   * @return numero delle sessioni                  *
 	   ********************************************************************/
-	  public int getNumeroSessioniStoria(Storia storia) throws SQLException{
+	  public synchronized int getNumeroSessioniStoria(Storia storia) throws SQLException{
 	    Connection con = null;
 	    PreparedStatement ps = null;
 	    int count = 0;

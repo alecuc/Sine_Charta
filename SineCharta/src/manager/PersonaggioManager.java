@@ -29,7 +29,7 @@ public class PersonaggioManager {
 	 * @param idStory= identificativo della storia										*
 	 * @return un personaggio dell'utente in base alla storia							*
 	 ************************************************************************************/
-	public Personaggio getSimplePGByStory(User utente, int idStory)throws SQLException {
+	public synchronized Personaggio getSimplePGByStory(User utente, int idStory)throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		Personaggio personaggio = new Personaggio();
@@ -90,7 +90,7 @@ public class PersonaggioManager {
 	 * @param pg= personaggio a cui sono associate le abilita'					*
 	 * @return la lista di abilita'												*
 	 ****************************************************************************/
-	private Set<Abilita> aggiungiListaAbilitaPG(Personaggio pg)throws SQLException{
+	private synchronized Set<Abilita> aggiungiListaAbilitaPG(Personaggio pg)throws SQLException{
 		AbilitaManager ability = new AbilitaManager();
 		Collection<Abilita> listaAbilita = ability.getListaAbilitaByPG(pg);
 		if(listaAbilita!=null) {
@@ -104,7 +104,7 @@ public class PersonaggioManager {
 	 * @param pg= personaggio a cui associare la storia									*
 	 * @return la storia a cui partecipa il personaggio 								*
 	 ************************************************************************************/
-	private Storia setStoriaPersonaggio(Personaggio pg)throws SQLException {
+	private synchronized Storia setStoriaPersonaggio(Personaggio pg)throws SQLException {
 		StoryManager storyManager = new StoryManager();
 		Storia storia = storyManager.getStoriaDelPG(pg);
 		return storia;
@@ -115,7 +115,7 @@ public class PersonaggioManager {
 	 * @param pg= personaggio a cui sono associati gli oggetti									*
 	 * @return lista degli oggetti																*
 	 ********************************************************************************************/
-	private Set<Oggetto> aggiungiListaOggettiPG(Personaggio pg)throws SQLException{
+	private synchronized Set<Oggetto> aggiungiListaOggettiPG(Personaggio pg)throws SQLException{
 		EquipManager manager = new EquipManager();
 		Collection<Oggetto> listaOggetti = manager.getListaOggettiPG(pg);
 		if(listaOggetti!=null) {
@@ -131,7 +131,7 @@ public class PersonaggioManager {
 	 * @param pg = personaggio a cui associare la storia 										   *
 	 * @return id della storia del personaggio													   *
 	 ***********************************************************************************************/
-	public int getStoriaPersonaggioById(Personaggio pg) throws SQLException{
+	public synchronized int getStoriaPersonaggioById(Personaggio pg) throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		int idStoria = 0;
@@ -161,7 +161,7 @@ public class PersonaggioManager {
 	 * @param storia= la storia a cui fanno riferimento i personaggi				*
 	 * @return lista dei personaggi della storia									*
 	 ********************************************************************************/
-	public Collection<Personaggio> getAllPgByStory(Storia storia)throws SQLException, UserNotFoundException{
+	public synchronized Collection<Personaggio> getAllPgByStory(Storia storia)throws SQLException, UserNotFoundException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		Collection<Personaggio> listaPG = new LinkedList<Personaggio>();
@@ -225,7 +225,7 @@ public class PersonaggioManager {
 	 * @param pg= personaggio da cui recuperare la storia					*
 	 * @return un utente associato alla storia								*
 	 ************************************************************************/
-	private User getUserByPG(Personaggio pg)throws SQLException , UserNotFoundException{
+	private synchronized User getUserByPG(Personaggio pg)throws SQLException , UserNotFoundException{
 		String username = pg.getUsername();
 		UsersManager userMa = new UsersManager();
 		User utente = userMa.doRetrieveByKey(username);
@@ -237,7 +237,7 @@ public class PersonaggioManager {
 	 * @return una lista di PG													  *
 	 * @throws SQLException														  *
 	 ******************************************************************************/
-	public Collection<Personaggio> listaPG(User user) throws SQLException{
+	public synchronized Collection<Personaggio> listaPG(User user) throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		
@@ -307,7 +307,7 @@ public class PersonaggioManager {
 	 * @param idPG= id del giocatore a cui è associato								  *
 	 **********************************************************************************/
 	
-	public void creaPersonaggio(Personaggio pg, int idStoria) throws SQLException{
+	public synchronized void creaPersonaggio(Personaggio pg, int idStoria) throws SQLException{
 		
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -388,7 +388,7 @@ public class PersonaggioManager {
 	 * @param areaFerita= parte del corpo a cui aggiungere la ferita							*
 	 * @param danno= valore della ferita														*
 	 ********************************************************************************************/
-	public void updateFeritePg(int idPG, String areaFerita, int danno) throws SQLException{
+	public synchronized void updateFeritePg(int idPG, String areaFerita, int danno) throws SQLException{
 		
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -421,7 +421,7 @@ public class PersonaggioManager {
 	 * @param pg = personaggio da eliminare										*
 	 * @return un valore che conferma l'avvenuta eliminazione					*
 	 ****************************************************************************/
-	public boolean eliminaPG(Personaggio pg) throws SQLException{
+	public synchronized boolean eliminaPG(Personaggio pg) throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;

@@ -26,7 +26,7 @@ public class UsersManager implements UserModelI<User>{
 	 * @see interfaces.UserModelI#doRetrieveByKey(java.lang.String)			*
 	 ************************************************************************/
 	@Override
-	public User doRetrieveByKey(String user) throws SQLException, UserNotFoundException {
+	public synchronized User doRetrieveByKey(String user) throws SQLException, UserNotFoundException {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -79,7 +79,7 @@ public class UsersManager implements UserModelI<User>{
 	 * @param username= identificativo dell'utente								                          *
 	 * @return				Lista dei personaggi associati all'utente			                          *
 	 ******************************************************************************************************/
-	private Set<Personaggio> aggiungiListaPGUser(User user)throws SQLException {
+	private synchronized Set<Personaggio> aggiungiListaPGUser(User user)throws SQLException {
 			
 			PersonaggioManager pgM = new PersonaggioManager();
 			Collection<Personaggio> listaPG = pgM.listaPG(user);
@@ -95,7 +95,7 @@ public class UsersManager implements UserModelI<User>{
 	 * @param idStoria= identificativo della storia da aggiungere							*
 	 * @param username= utente a cui viene inserita una storia.								*
 	 ***************************************************************************************/
-	private Set<Storia> aggiungiStorieUser(User user) throws SQLException{
+	private synchronized Set<Storia> aggiungiStorieUser(User user) throws SQLException{
 		
 		StoryManager storyM = new StoryManager();
 		Collection<Storia> listaStorie = storyM.getStoria(user);//Da aggiustare!
@@ -112,7 +112,7 @@ public class UsersManager implements UserModelI<User>{
 	 * @see interfaces.UserModelI#doRetrieveAll(java.lang.String)
 	 */
 	@Override
-	public Collection<User> doRetrieveAll(String order) throws SQLException {
+	public synchronized Collection<User> doRetrieveAll(String order) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		Collection<User> utenti;
@@ -157,7 +157,7 @@ public class UsersManager implements UserModelI<User>{
 	 * @see interfaces.UserModelI#doSave(java.lang.Object)
 	 */
 	@Override
-	public void doSave(User user) throws SQLException, UserNullException{
+	public synchronized void doSave(User user) throws SQLException, UserNullException{
 		if(user==null) throw new UserNullException("Utente NULL");
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -193,7 +193,7 @@ public class UsersManager implements UserModelI<User>{
 	 * @param username= identificativo dell'utente							*
 	 * @return conferma dell'eliminazione									*
 	 ************************************************************************/
-	public boolean eliminaUtente(String username)throws SQLException{
+	public synchronized boolean eliminaUtente(String username)throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		int result = 0;
@@ -222,7 +222,7 @@ public class UsersManager implements UserModelI<User>{
 	 * @return conferma del controllo										*
 	 ************************************************************************/
 	
-	public boolean checkUser(String username)throws SQLException{
+	public synchronized boolean checkUser(String username)throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		String check = "SELECT USERNAME FROM "+ TABLE_NAME+ " WHERE USERNAME = ?";

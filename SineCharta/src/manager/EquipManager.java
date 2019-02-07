@@ -21,7 +21,7 @@ public class EquipManager {
 	 * @param pg= personaggio a cui appartiene l'oggetto									*
 	 * @return un oggetto selezionato														*
 	 ****************************************************************************************/
-	public Oggetto getOggettoPersonaggioById(Personaggio pg, int idStory) throws SQLException {
+	public synchronized Oggetto getOggettoPersonaggioById(Personaggio pg, int idStory) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		Oggetto bean = new Oggetto();
@@ -60,7 +60,7 @@ public class EquipManager {
 	 * @param pg= personaggio a cui appartiene la lista di oggetti								*		
 	 * @return una collezione di oggetti del personaggio										*
 	 ********************************************************************************************/
-	public Collection<Oggetto> getListaOggettiPG(Personaggio pg) throws SQLException{
+	public synchronized Collection<Oggetto> getListaOggettiPG(Personaggio pg) throws SQLException{
 		Connection connection = null;
 		PreparedStatement ps = null;
 		Collection<Oggetto> oggetti = new LinkedList<Oggetto>();
@@ -101,7 +101,7 @@ public class EquipManager {
 	 * @param pg= il personaggio a cui aggiungere l'oggetto.									*
 	 * @throws SQLException= eccezione per eventuale query di inserimento errata.				*
 	 ********************************************************************************************/
-	public void inserisciOggetto(Oggetto oggetto, Personaggio pg) throws SQLException {
+	public synchronized void inserisciOggetto(Oggetto oggetto, Personaggio pg) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		String insertSQL = "INSERT INTO " + EquipManager.TABLE_NAME_OGGETTI
@@ -134,7 +134,7 @@ public class EquipManager {
 	 * @param oggetto= oggetto da rimuovere al personaggio										*
 	 * @return un valore diverso da 0 per conferma dell'avvenuta eliminazione					*
 	 ********************************************************************************************/
-	public boolean rimuoviOggetto(Oggetto oggetto, Personaggio pg) throws SQLException {
+	public synchronized boolean rimuoviOggetto(Oggetto oggetto, Personaggio pg) throws SQLException {
 		Connection connection = null;
 		PreparedStatement ps = null;
 		int result = 0;
@@ -164,7 +164,7 @@ public class EquipManager {
 	 * @param pg= personaggio a cui appartiene l'ogggeto									*
 	 * @param newQuantity= quantita da inserire 											*
 	 ****************************************************************************************/
-	public void updateQuantitaOggetto(Oggetto oggetto, Personaggio pg, int newQuantity)throws SQLException{
+	public synchronized void updateQuantitaOggetto(Oggetto oggetto, Personaggio pg, int newQuantity)throws SQLException{
 		Connection con = null;
 		PreparedStatement ps = null;
 		String updateOgg = "UPDATE " + TABLE_NAME_OGGETTI + " SET QUANTITA = ? WHERE IDOGGETTO = ? AND USERNAME = ? AND IDSTORY = ?";
