@@ -28,16 +28,16 @@ public class DriverManagerConnectionPool {
 		
 		/*local DB*/
 		
-		//String username = "root";
-		//String password = "password";
-		//String url = "jdbc:mysql://localhost:3306/dbsinecharta?useLegacyDatetimeCode=false&serverTimezone=UTC";
-		
-		
+		String username = "root";
+		String password = "12345";
+		String url = "jdbc:mysql://localhost:3306/dbsinecharta?useLegacyDatetimeCode=false&serverTimezone=UTC";
+		newConnection = DriverManager.getConnection(url, username, password);
+		/*
 		String username = "sql7277168";
 		String password = "vLrF71CFKY";
 		String url = "jdbc:mysql://sql7.freesqldatabase.com:3306/sql7277168";
 		newConnection = DriverManager.getConnection(url, username, password);
-	
+	*/
 		newConnection.setAutoCommit(false);
 		return newConnection;
 	}
