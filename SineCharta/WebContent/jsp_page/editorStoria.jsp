@@ -42,9 +42,9 @@
 						<textarea class="form-control" aria-label="With textarea" id="descrizione"
 							placeholder="Scrivi qui l'introduzione della tua storia..."
 							style="resize: none; height: 400px;" name="descrizione" required></textarea>
-						<button class="btn btn-dark" id="salvaStoria">Salva storia</button>
-						<a class="btn btn-dark mx-2" id="annulla" href="leTueStorie.jsp">Annulla</a>
 					</form>
+						<button type="submit"class="btn btn-dark my-2" id="salvaStoria" onclick="return validate()">Salva storia</button>
+						<a class="btn btn-dark mx-2" id="annulla" href="leTueStorie.jsp">Annulla</a>
 				</div>
 			</div>
 

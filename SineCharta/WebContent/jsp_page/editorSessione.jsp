@@ -32,7 +32,7 @@
 							<textarea class="form-control" aria-label="With textarea"
 								placeholder="Descrivi la sessione qui..." id="contenuto"
 								style="resize: none; height: 400px;" name="descrizione" required></textarea>
-							<button class="btn btn-dark" id="salvaSessione">Salva sessione</button>
+							<button class="btn btn-dark" id="salvaSessione" onclick="return validate()">Salva sessione</button>
 							<a class="btn btn-dark mx-2" id="annulla" href="leTueStorie.jsp">Annulla</a>
 				</form>
 				</div>

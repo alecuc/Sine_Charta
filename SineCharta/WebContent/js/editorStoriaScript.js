@@ -90,7 +90,6 @@ $(document).ready(function(){
 
 	$('#salvaStoria').click(function(){
 
-		if(validate()) {
 
 
 			if(utenti.length == 0) {
@@ -111,8 +110,7 @@ $(document).ready(function(){
 
 				$('#form').attr('action', value);
 			}
-		}
-		else (alert('Niente caratteri speciali nella storia!'));
+		
 	});
 
 });

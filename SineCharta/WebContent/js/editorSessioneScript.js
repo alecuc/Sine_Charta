@@ -7,7 +7,9 @@ function validate(){
 	var contOK= contenuto.match(contRX);
 	
 	
-	if(!contOK){ //check titolo
+	if(!contOK){ //check contenuto
+		
+		alert('Niente caratteri speciali, per favore.');
 		return false;
 	}else
 		return true;
@@ -21,18 +23,14 @@ $(document).ready(function(){
 	 * */
 
 	$('#salvaSessione').click(function(){
-
-		if(validate()){
-
+		
 			var tagCont= $('#contenuto');
 			var cont= tagCont.val();
 
 			var value= '../GestioneSessioneServlet?action=inserisciSessione&Contenuto='+cont;
 
 			$('#form').attr('action', value);
-		} else{
-			alert('Niente caratteri speciali nella sessione!');
-		}
+		
 	});
 
 	/*

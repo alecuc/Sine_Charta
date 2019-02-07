@@ -103,11 +103,6 @@
 							out.print("</div>");
 							/*CHIUDI TABELLA "GIOCA"*/
 
-							System.out.println("Qui le storie a cui partecipi, senza pg");
-							for (Storia st : stNoPG) {
-								System.out.println(st.toString());
-							}
-
 							if (!stNoPG.isEmpty()) {
 								//APRI TABELLA "CREA"
 								out.print("<div class=\"row\">");
