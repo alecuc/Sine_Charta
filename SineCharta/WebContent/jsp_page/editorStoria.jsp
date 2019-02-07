@@ -43,6 +43,7 @@
 							placeholder="Scrivi qui l'introduzione della tua storia..."
 							style="resize: none; height: 400px;" name="descrizione" required></textarea>
 						<button class="btn btn-dark" id="salvaStoria">Salva storia</button>
+						<a class="btn btn-dark mx-2" id="annulla" href="leTueStorie.jsp">Annulla</a>
 					</form>
 				</div>
 			</div>
