@@ -1,0 +1,266 @@
+{
+  "id": "5deb8fe2-5703-442b-a1d7-5f2a9825d011",
+  "version": "2.0",
+  "name": "CreazioneSessione",
+  "url": "http://localhost:8080/SineCharta/jsp_page/index.jsp",
+  "tests": [{
+    "id": "031a6aca-4f03-4689-85b6-3c3a726ceca1",
+    "name": "TC_4.1",
+    "commands": [{
+      "id": "d66d130c-2d34-4dbf-a585-e4928c52eadb",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/SineCharta/jsp_page/index.jsp",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6b8320c4-7164-4264-ad60-7307975ca222",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1050x708",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a516d298-98c1-4bf6-a635-3be1e8056772",
+      "comment": "",
+      "command": "type",
+      "target": "id=us",
+      "targets": [
+        ["id=us", "id"],
+        ["name=username", "name"],
+        ["css=#us", "css:finder"],
+        ["css=#us", "css"],
+        ["xpath=//input[@id='us']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Raziel"
+    }, {
+      "id": "a4cb670e-1a03-4ea5-ace4-e261655aefd1",
+      "comment": "",
+      "command": "type",
+      "target": "id=pwd",
+      "targets": [
+        ["id=pwd", "id"],
+        ["name=password", "name"],
+        ["css=#pwd", "css:finder"],
+        ["css=#pwd", "css"],
+        ["xpath=//input[@id='pwd']", "xpath:attributes"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "1234"
+    }, {
+      "id": "c2be52d2-c498-4149-a99c-1fe7b4768d05",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=pwd",
+      "targets": [
+        ["id=pwd", "id"],
+        ["name=password", "name"],
+        ["css=#pwd", "css:finder"],
+        ["css=#pwd", "css"],
+        ["xpath=//input[@id='pwd']", "xpath:attributes"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "7c4da628-71b2-4f66-8592-30a00206ba2e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.navbar-nav > .nav-item:nth-child(4) > .nav-link",
+      "targets": [
+        ["css=.navbar-nav > .nav-item:nth-child(4) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Le tue\n\t\t\t\t\tstorie')]", "xpath:link"],
+        ["xpath=//div[@id='collapsibleNavbar']/ul/li[4]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'leTueStorie.jsp')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b1adcb79-8952-406a-9400-1b14032c865f",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(2) .btn",
+      "targets": [
+        ["css=tr:nth-child(2) .btn", "css:finder"],
+        ["xpath=(//button[@type='submit'])[3]", "xpath:attributes"],
+        ["xpath=//table[@id='tabellaStorie']/tbody/tr[2]/td[3]/button", "xpath:idRelative"],
+        ["xpath=//td[3]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "05e700a4-983d-41c4-8efa-a0032203247b",
+      "comment": "",
+      "command": "click",
+      "target": "id=salvaSessione",
+      "targets": [
+        ["id=salvaSessione", "id"],
+        ["css=#salvaSessione", "css:finder"],
+        ["css=#salvaSessione", "css"],
+        ["xpath=//button[@id='salvaSessione']", "xpath:attributes"],
+        ["xpath=//form[@id='form']/button", "xpath:idRelative"],
+        ["xpath=//div/form/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0976a72e-d166-41d5-8fc6-e4cdd5ad87fe",
+      "comment": "",
+      "command": "assertAlert",
+      "target": "Niente caratteri speciali nella sessione!",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "abae3867-e772-4600-b8ee-6bfdecaae652",
+    "name": "TC_4.2",
+    "commands": [{
+      "id": "fde1fc95-dc2f-49cf-b5fa-061a69dec893",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/SineCharta/jsp_page/index.jsp",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "286fc7fa-688c-490f-aca8-ba6ccdd5d0aa",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1050x708",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e042bf87-133b-4874-8deb-897b91881eb9",
+      "comment": "",
+      "command": "type",
+      "target": "id=us",
+      "targets": [
+        ["id=us", "id"],
+        ["name=username", "name"],
+        ["css=#us", "css:finder"],
+        ["css=#us", "css"],
+        ["xpath=//input[@id='us']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Raziel"
+    }, {
+      "id": "296855c0-12db-4b4a-ad28-3d4ad50b3318",
+      "comment": "",
+      "command": "type",
+      "target": "id=pwd",
+      "targets": [
+        ["id=pwd", "id"],
+        ["name=password", "name"],
+        ["css=#pwd", "css:finder"],
+        ["css=#pwd", "css"],
+        ["xpath=//input[@id='pwd']", "xpath:attributes"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "1234"
+    }, {
+      "id": "35a6e1d0-639d-4480-ae44-bd47e2c0d0d3",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=pwd",
+      "targets": [
+        ["id=pwd", "id"],
+        ["name=password", "name"],
+        ["css=#pwd", "css:finder"],
+        ["css=#pwd", "css"],
+        ["xpath=//input[@id='pwd']", "xpath:attributes"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "00279394-b655-40ef-a482-5713a5325251",
+      "comment": "",
+      "command": "click",
+      "target": "css=.navbar-nav > .nav-item:nth-child(4) > .nav-link",
+      "targets": [
+        ["css=.navbar-nav > .nav-item:nth-child(4) > .nav-link", "css:finder"],
+        ["xpath=//a[contains(text(),'Le tue\n\t\t\t\t\tstorie')]", "xpath:link"],
+        ["xpath=//div[@id='collapsibleNavbar']/ul/li[4]/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, 'leTueStorie.jsp')]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "4fbd8467-b61f-4af2-82cd-c32a0a7abc14",
+      "comment": "",
+      "command": "click",
+      "target": "css=tr:nth-child(3) .btn",
+      "targets": [
+        ["css=tr:nth-child(3) .btn", "css:finder"],
+        ["xpath=(//button[@type='submit'])[4]", "xpath:attributes"],
+        ["xpath=//table[@id='tabellaStorie']/tbody/tr[3]/td[3]/button", "xpath:idRelative"],
+        ["xpath=//td[3]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "47bb91cc-fdf2-4f71-9dbc-1806e3734f2f",
+      "comment": "",
+      "command": "click",
+      "target": "id=contenuto",
+      "targets": [
+        ["id=contenuto", "id"],
+        ["name=descrizione", "name"],
+        ["css=#contenuto", "css:finder"],
+        ["css=#contenuto", "css"],
+        ["xpath=//textarea[@id='contenuto']", "xpath:attributes"],
+        ["xpath=//form[@id='form']/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "92ca89d0-6d06-452f-bb8c-36608fc69748",
+      "comment": "",
+      "command": "type",
+      "target": "id=contenuto",
+      "targets": [
+        ["id=contenuto", "id"],
+        ["name=descrizione", "name"],
+        ["css=#contenuto", "css:finder"],
+        ["css=#contenuto", "css"],
+        ["xpath=//textarea[@id='contenuto']", "xpath:attributes"],
+        ["xpath=//form[@id='form']/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "ciao sono una sessione di gioco\\n"
+    }, {
+      "id": "a64d12a3-371b-458e-8351-635feb9b34d5",
+      "comment": "",
+      "command": "click",
+      "target": "id=salvaSessione",
+      "targets": [
+        ["id=salvaSessione", "id"],
+        ["css=#salvaSessione", "css:finder"],
+        ["css=#salvaSessione", "css"],
+        ["xpath=//button[@id='salvaSessione']", "xpath:attributes"],
+        ["xpath=//form[@id='form']/button", "xpath:idRelative"],
+        ["xpath=//div/form/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f334a3e7-c53a-45b2-94bb-c63495d4694a",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=qui",
+      "targets": [
+        ["linkText=qui", "linkText"],
+        ["css=a", "css:finder"],
+        ["css=a", "css"],
+        ["xpath=//a[contains(text(),'qui')]", "xpath:link"],
+        ["xpath=//a[contains(@href, 'leTueStorie.jsp')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "383be8c9-c9bd-4e0d-b94e-0e8e178bebef",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["031a6aca-4f03-4689-85b6-3c3a726ceca1"]
+  }],
+  "urls": ["http://localhost:8080/SineCharta/jsp_page/index.jsp"],
+  "plugins": []
+}

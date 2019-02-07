@@ -17,7 +17,7 @@ create table utenteRegistrato(
 drop table if exists Storia;
 create table Storia(
 	IdStory int auto_increment,
-	Nome varchar(50),
+	Titolo varchar(50),
     Descrizione varchar(500),
     Ambientazione enum('Terre Perdute','Quarto Reich','Soviet','Sanctum Imperum'),
 	primary key(IdStory)
@@ -108,12 +108,15 @@ create table Oggetti(
 );
 
 
-drop table if exists listaStoria;
+drop table if exists ha;
 create table ha(
 	Username varchar(15) binary not null ,
     IdStory int,
-    flag boolean,
+    flag int,
     primary key (Username, IdStory),
     foreign key(Username) references utenteRegistrato(Username) on delete cascade,
     foreign key(IdStory) references Storia(IdStory) on delete cascade
     );
+    
+
+

@@ -1,0 +1,105 @@
+{
+  "id": "a517ed95-6beb-42a7-8d4a-a55d221b604f",
+  "version": "2.0",
+  "name": "DBNonRaggiungibile",
+  "url": "http://localhost:8080/SineCharta/jsp_page/index.jsp",
+  "tests": [{
+    "id": "3c3ad48c-56a7-49e2-ab64-429a5a6776cd",
+    "name": "TC_5.0",
+    "commands": [{
+      "id": "0fa855e3-abf3-458b-be7a-f7be7a796b0c",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/SineCharta/jsp_page/index.jsp",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1dc9668d-68f9-44b4-9f60-2d61fdf52962",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1050x708",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1bf61bae-e3c7-40c9-8fc7-de283e6e735c",
+      "comment": "",
+      "command": "click",
+      "target": "id=us",
+      "targets": [
+        ["id=us", "id"],
+        ["name=username", "name"],
+        ["css=#us", "css:finder"],
+        ["css=#us", "css"],
+        ["xpath=//input[@id='us']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8a2e10bd-d531-4ffd-9de6-a6af05243151",
+      "comment": "",
+      "command": "type",
+      "target": "id=us",
+      "targets": [
+        ["id=us", "id"],
+        ["name=username", "name"],
+        ["css=#us", "css:finder"],
+        ["css=#us", "css"],
+        ["xpath=//input[@id='us']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Raziel"
+    }, {
+      "id": "44594279-1fd4-411f-81e4-004f0f5ee7c4",
+      "comment": "",
+      "command": "type",
+      "target": "id=pwd",
+      "targets": [
+        ["id=pwd", "id"],
+        ["name=password", "name"],
+        ["css=#pwd", "css:finder"],
+        ["css=#pwd", "css"],
+        ["xpath=//input[@id='pwd']", "xpath:attributes"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "1234"
+    }, {
+      "id": "6f412485-49ee-46b3-ab56-279f39a664ae",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=pwd",
+      "targets": [
+        ["id=pwd", "id"],
+        ["name=password", "name"],
+        ["css=#pwd", "css:finder"],
+        ["css=#pwd", "css"],
+        ["xpath=//input[@id='pwd']", "xpath:attributes"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "95a6101d-5ef4-4335-8926-6837ee3fea71",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=qui",
+      "targets": [
+        ["linkText=qui", "linkText"],
+        ["css=a", "css:finder"],
+        ["css=a", "css"],
+        ["xpath=//a[contains(text(),'qui')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '../index.jsp')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "a7b852db-674e-4bea-a10c-ac9e28ac240f",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["3c3ad48c-56a7-49e2-ab64-429a5a6776cd"]
+  }],
+  "urls": ["http://localhost:8080/SineCharta/jsp_page/index.jsp"],
+  "plugins": []
+}

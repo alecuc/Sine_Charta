@@ -1,0 +1,343 @@
+{
+  "id": "3ea8cc33-8348-40de-a95f-4c42749ffab4",
+  "version": "2.0",
+  "name": "LogIn",
+  "url": "http://localhost:8080/SineCharta/jsp_page/index.jsp",
+  "tests": [{
+    "id": "ec233683-61bf-41c2-9033-3537731ce2ba",
+    "name": "TC_1.1",
+    "commands": [{
+      "id": "14e34b92-f0be-49e3-a984-0101854470ff",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/SineCharta/jsp_page/index.jsp",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5f2abb6b-b5ee-49b1-8bb8-82b65d7480cd",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1050x708",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7fd94048-43ec-4e7a-ab65-bb95e90a8dff",
+      "comment": "",
+      "command": "type",
+      "target": "id=us",
+      "targets": [
+        ["id=us", "id"],
+        ["name=username", "name"],
+        ["css=#us", "css:finder"],
+        ["css=#us", "css"],
+        ["xpath=//input[@id='us']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Raziel"
+    }, {
+      "id": "642c0fcc-6bd7-4127-a6a9-b20e08f2a483",
+      "comment": "",
+      "command": "click",
+      "target": "css=.row:nth-child(1) > .col-md-3",
+      "targets": [
+        ["css=.row:nth-child(1) > .col-md-3", "css:finder"],
+        ["css=div.col-md-3.field-label-responsive", "css"],
+        ["xpath=//form/div/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1c6a4230-84c8-4b8c-9277-02460713cdda",
+      "comment": "",
+      "command": "click",
+      "target": "id=pwd",
+      "targets": [
+        ["id=pwd", "id"],
+        ["name=password", "name"],
+        ["css=#pwd", "css:finder"],
+        ["css=#pwd", "css"],
+        ["xpath=//input[@id='pwd']", "xpath:attributes"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "00f02243-c0cb-466a-ad3e-a30c985288e5",
+      "comment": "",
+      "command": "type",
+      "target": "id=pwd",
+      "targets": [
+        ["id=pwd", "id"],
+        ["name=password", "name"],
+        ["css=#pwd", "css:finder"],
+        ["css=#pwd", "css"],
+        ["xpath=//input[@id='pwd']", "xpath:attributes"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "1234"
+    }, {
+      "id": "b5e903af-26ac-4ea2-ace9-e5c801f9e439",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(4) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(4) > .btn", "css:finder"],
+        ["css=button.btn.btn-success", "css"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "a33e3ea9-a163-46c2-b439-5e4b37699d61",
+    "name": "TC_1.2",
+    "commands": [{
+      "id": "bd4f894d-d585-48c2-9e4d-c2708a394777",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/SineCharta/jsp_page/index.jsp",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f9e49510-bd43-4d51-b76c-12d6741acb2d",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1050x708",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "43dfb803-1839-4ed8-8cfe-4ce4d3651bfa",
+      "comment": "",
+      "command": "type",
+      "target": "id=us",
+      "targets": [
+        ["id=us", "id"],
+        ["name=username", "name"],
+        ["css=#us", "css:finder"],
+        ["css=#us", "css"],
+        ["xpath=//input[@id='us']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Ciao"
+    }, {
+      "id": "1c24b2bf-9e65-42f8-9659-82ada33809cd",
+      "comment": "",
+      "command": "type",
+      "target": "id=pwd",
+      "targets": [
+        ["id=pwd", "id"],
+        ["name=password", "name"],
+        ["css=#pwd", "css:finder"],
+        ["css=#pwd", "css"],
+        ["xpath=//input[@id='pwd']", "xpath:attributes"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "1234"
+    }, {
+      "id": "77f91091-49f8-4be1-9513-db5345783b38",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(4) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(4) > .btn", "css:finder"],
+        ["css=button.btn.btn-success", "css"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "38a17331-af75-48db-a51b-fe2db52102c9",
+    "name": "TC_1.3",
+    "commands": [{
+      "id": "8eb33730-42b6-485a-9873-2d17d4debc73",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/SineCharta/jsp_page/index.jsp",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5c74e1e4-4248-4b44-86e3-43f6bb52add0",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1050x708",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "dfc991e3-c33a-4009-a627-4689e82e2475",
+      "comment": "",
+      "command": "type",
+      "target": "id=us",
+      "targets": [
+        ["id=us", "id"],
+        ["name=username", "name"],
+        ["css=#us", "css:finder"],
+        ["css=#us", "css"],
+        ["xpath=//input[@id='us']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Raziel"
+    }, {
+      "id": "d0457621-f6c6-4f95-9a88-a251334000c1",
+      "comment": "",
+      "command": "type",
+      "target": "id=pwd",
+      "targets": [
+        ["id=pwd", "id"],
+        ["name=password", "name"],
+        ["css=#pwd", "css:finder"],
+        ["css=#pwd", "css"],
+        ["xpath=//input[@id='pwd']", "xpath:attributes"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "5659"
+    }, {
+      "id": "a1a3c3b7-1274-4f63-be78-d676f6ace34a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(4) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(4) > .btn", "css:finder"],
+        ["css=button.btn.btn-success", "css"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cf653a0a-7dcc-4bf2-aba8-2f6bc52bd6bc",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=qui",
+      "targets": [
+        ["linkText=qui", "linkText"],
+        ["css=a", "css:finder"],
+        ["css=a", "css"],
+        ["xpath=//a[contains(text(),'qui')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '../index.jsp')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "bfcb8a07-e440-4247-92ea-366d21720445",
+    "name": "TC_1.4",
+    "commands": [{
+      "id": "96f0bfa7-8b14-433e-989f-710672dceb70",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/SineCharta/jsp_page/index.jsp",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "09b5ff47-f4bf-45fb-ae9e-3a2dac24fa53",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1050x708",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9bfac783-a586-43cc-8994-d3dcfadfd917",
+      "comment": "",
+      "command": "type",
+      "target": "id=us",
+      "targets": [
+        ["id=us", "id"],
+        ["name=username", "name"],
+        ["css=#us", "css:finder"],
+        ["css=#us", "css"],
+        ["xpath=//input[@id='us']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Raziel"
+    }, {
+      "id": "b41567db-2440-4669-b0c8-6636d124bd8a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.form-signin > .row:nth-child(1)",
+      "targets": [
+        ["css=.form-signin > .row:nth-child(1)", "css:finder"],
+        ["css=form.form-signin > div.row", "css"],
+        ["xpath=//form/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "5ee84ce2-d28e-4056-b4a1-37d0ce8836ce",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(4) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(4) > .btn", "css:finder"],
+        ["css=button.btn.btn-success", "css"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "3ad6feed-1d2b-41ce-bee5-6b9ae288b848",
+    "name": "TC_1.5",
+    "commands": [{
+      "id": "c909adaa-3f38-4f80-bee7-9d3d59213bef",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:8080/SineCharta/jsp_page/index.jsp",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "23332777-2eee-40bb-a59d-b00eb760d766",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1050x708",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ce996ebd-4bb9-48d6-911e-a5fa92078467",
+      "comment": "",
+      "command": "click",
+      "target": "id=pwd",
+      "targets": [
+        ["id=pwd", "id"],
+        ["name=password", "name"],
+        ["css=#pwd", "css:finder"],
+        ["css=#pwd", "css"],
+        ["xpath=//input[@id='pwd']", "xpath:attributes"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fd38eae8-b428-4418-ac2c-7418491b69de",
+      "comment": "",
+      "command": "type",
+      "target": "id=pwd",
+      "targets": [
+        ["id=pwd", "id"],
+        ["name=password", "name"],
+        ["css=#pwd", "css:finder"],
+        ["css=#pwd", "css"],
+        ["xpath=//input[@id='pwd']", "xpath:attributes"],
+        ["xpath=//div[2]/div[2]/div/div/input", "xpath:position"]
+      ],
+      "value": "1234"
+    }, {
+      "id": "0596b149-86b6-4813-8420-13928602a3e8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.text-center:nth-child(4) > .btn",
+      "targets": [
+        ["css=.text-center:nth-child(4) > .btn", "css:finder"],
+        ["css=button.btn.btn-success", "css"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9f6a3b4e-59e9-411a-8943-d78e2c4144bb",
+      "comment": "",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [],
+  "urls": ["http://localhost:8080/", "http://localhost:8080/SineCharta/jsp_page/index.jsp", "http://localhost:8080/SineCharta/jsp_page/homeUser.jsp"],
+  "plugins": []
+}
