@@ -3,8 +3,8 @@ function validateRegistration(formRegistration) {
 	//Define registration regExp validators
 	var usrValidator = /^(\w+[_\.\-]*\w*){4,}$/;
 	var pswValidator = /^[a-zA-Z 0-9 \@\._\!\?\-]{8,}$/;
-	var nameValidator = /^[a-zA-Z]{2,}([\s\-]?[A-Za-z]+)*$/;
-	var surnameValidator = /^[A-Za-z]{2,}([\s\'\-]?[A-Za-z]+)*$/;
+	var nameValidator = /^[a-zA-Z]+([\s\-]?[A-Za-z]+)*$/;
+	var surnameValidator = /^[A-Za-z]+([\s\'\-]?[A-Za-z]+)*$/;
 	var mailValidator = /^\w+([\._\-]?\w+)*@\w+([\.\-]?\w+)*(\.\w+)+$/;
 
 	//Save all matches in a variable

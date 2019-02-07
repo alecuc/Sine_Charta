@@ -111,7 +111,7 @@
 							if (!stNoPG.isEmpty()) {
 								//APRI TABELLA "CREA"
 								out.print("<div class=\"row\">");
-								out.print("<table class=\"table table-responsive table-dark\" id=\"tabellaNoPG\">");
+								out.print("<table class=\"table table-responsive table-dark ml-2\" id=\"tabellaNoPG\">");
 								out.print("<thead>");
 								out.print("<tr>");
 								out.print("<th>Nome Storia</th>");

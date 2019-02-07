@@ -62,15 +62,16 @@
 		}
 	%>
 
+
+
+	<h1 class="card-title text-center">Crea il tuo personaggio</h1>
+
 	<div class="position-fixed">
 		<form action="homeUser.jsp">
 			<button class="btn btn-dark mb-2 mx-1"
 				style="background-color: #212529; border-color: red;">Annulla</button>
 		</form>
 	</div>
-
-
-	<h1 class="card-title">Crea il tuo personaggio</h1>
 
 	<!-- FORM GENERALITÀ -->
 
@@ -99,9 +100,9 @@
 						class="form-control" id="etaPG" placeholder="Età" name="eta">
 				</div>
 			</div>
-		</form>
 		<button class="btn btn-dark float-right"
 			style="background-color: #212529; border-color: red;" id="confGen">Conferma</button>
+		</form>
 	</div>
 
 	<br>
