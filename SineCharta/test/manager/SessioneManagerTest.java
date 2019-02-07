@@ -3,6 +3,8 @@ package manager;
 import java.sql.SQLException;
 
 import org.junit.*;
+import org.junit.Test;
+
 
 import beans.SessioneDiGioco;
 import beans.Storia;

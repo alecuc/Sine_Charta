@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.junit.*;
-
+import org.junit.Test;
 import beans.Abilita;
 import beans.Personaggio;
 import beans.Storia;
